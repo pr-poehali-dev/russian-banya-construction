@@ -97,29 +97,19 @@ const Index = () => {
               <h2 className="text-4xl font-bold mb-6">Почему именно русская баня?</h2>
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                    <Icon name="Leaf" size={20} className="text-primary" />
-                    Вековые традиции
-                  </h3>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">Многовековые традиции</h3>
                   <p className="text-muted-foreground">В отличии от финских саун и турецких хамамов, русская баня во все времена была приоритетным выбором для  русского человека. </p>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                    <Icon name="Zap" size={20} className="text-primary" />
-                    Современные технологии
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Применяем инновационные методы строительства: каркасно-щитовые технологии, энергоэффективные системы утепления, экологичные пропитки для защиты древесины.
-                  </p>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">Польза для организма человека</h3>
+                  <p className="text-muted-foreground">Только эффект русской бани создает полезное тепловое, механическое и психологическое воздействие на тело человека.</p>
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
                     <Icon name="Hammer" size={20} className="text-primary" />
                     Традиционное мастерство
                   </h3>
-                  <p className="text-muted-foreground">
-                    Сочетаем вековые традиции русского зодчества с современными стандартами качества. Наши мастера имеют многолетний опыт работы с деревом.
-                  </p>
+                  <p className="text-muted-foreground">Сочетание традиции русского зодчества с современными качественными материалами, дают возможность превратить русскую баню в приятный и полезный процесс отдыха и восстановления сил.</p>
                 </div>
               </div>
             </div>
