@@ -90,7 +90,7 @@ const Index = () => {
               <img 
                 src="https://cdn.poehali.dev/files/fc416752-82eb-400e-999b-154b1184a5d9.jpg"
                 alt="Банщик парит вениками в русской бане"
-                className="rounded-lg shadow-xl"
+                className="rounded-lg shadow-xl scale-130"
               />
             </div>
             <div>
