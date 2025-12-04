@@ -17,7 +17,10 @@ const Index = () => {
       <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b border-yellow-500">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-black">Пермский Пар</div>
+            <div className="flex items-center gap-3">
+              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/879f7b75-d1e0-413e-b9b1-1e7fa70348db.jpg" alt="Пермский Пар" className="h-12 w-12 object-contain" />
+              <div className="text-2xl font-bold text-black">Пермский Пар</div>
+            </div>
             <div className="hidden md:flex gap-8 items-center">
               <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
               <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
