@@ -94,7 +94,7 @@ const OrderForm = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="banjaType">Тип бани *</Label>
+                <Label htmlFor="banjaType">Тип бани </Label>
                 <Input
                   id="banjaType"
                   name="banjaType"
