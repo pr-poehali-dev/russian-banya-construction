@@ -17,7 +17,7 @@ const Index = () => {
       <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b border-yellow-500">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-black">Русская Баня</div>
+            <div className="text-2xl font-bold text-black">Пермский Пар</div>
             <div className="hidden md:flex gap-8">
               <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
               <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
