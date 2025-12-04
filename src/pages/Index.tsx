@@ -29,28 +29,25 @@ const Index = () => {
         </nav>
       </header>
 
-      <section id="hero" className="pt-32 pb-20 px-6">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-foreground leading-tight">
-                Строительство<br />русских бань
-              </h1>
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Современные технологии и традиционные материалы для создания вашей идеальной бани
-              </p>
-              <Button size="lg" onClick={() => scrollToSection("contact")} className="text-lg px-8">
-                Получить консультацию
-              </Button>
-            </div>
-            <div className="animate-scale-in">
-              <img 
-                src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/360ca454-6718-407a-9b2a-e1496cb693cd.jpg"
-                alt="Современная русская баня"
-                className="rounded-lg shadow-2xl w-full"
-              />
-            </div>
-          </div>
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/f86e6077-0129-48b8-937c-7bc167722513.jpg"
+            alt="Парная русской бани"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+        <div className="relative z-10 container mx-auto px-6 text-center text-white animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            Строительство<br />русских бань
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
+            Современные технологии и традиционные материалы для создания вашей идеальной бани
+          </p>
+          <Button size="lg" onClick={() => scrollToSection("contact")} className="text-lg px-8">
+            Получить консультацию
+          </Button>
         </div>
       </section>
 
