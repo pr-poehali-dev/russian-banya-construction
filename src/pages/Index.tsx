@@ -54,7 +54,7 @@ const Index = () => {
             Современные технологии и традиционные материалы для создания вашей идеальной бани
           </p>
           <Button size="lg" onClick={() => scrollToSection("contact")} className="text-lg px-8 bg-yellow-400 hover:bg-yellow-500 text-black font-bold">
-            Получить расчет бесплатно
+            Получить расчет стоимости бани бесплатно
           </Button>
         </div>
       </section>
