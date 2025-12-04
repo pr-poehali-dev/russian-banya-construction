@@ -88,8 +88,8 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img 
-                src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/62ad4a24-dc5e-412f-8d37-6c9d9b6a30aa.jpg"
-                alt="Качественная древесина"
+                src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/be349652-e795-44ac-971c-0c7a45c62f49.jpg"
+                alt="Парная с банщиком и вениками"
                 className="rounded-lg shadow-xl"
               />
             </div>
