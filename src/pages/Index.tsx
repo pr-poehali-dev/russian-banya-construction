@@ -18,7 +18,7 @@ const Index = () => {
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/303d96b4-4f5c-4289-adf1-da3a8f718fba.jpg" alt="Пермский Пар" className="h-12 w-12 object-contain" />
+              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e9a0f064-dcc9-48fb-b00a-8b36a3a70863.jpg" alt="Пермский Пар" className="h-12 w-12 object-contain" />
               <div className="flex flex-col items-center">
                 <div className="text-2xl font-bold text-black leading-tight">Пермский Пар</div>
                 <div className="text-xs text-black/70 -mt-0.5">строительная компания</div>
