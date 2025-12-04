@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
+  const navigate = useNavigate();
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -53,7 +55,7 @@ const Index = () => {
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
             Современные технологии и традиционные материалы для создания вашей идеальной бани
           </p>
-          <Button size="lg" onClick={() => scrollToSection("contact")} className="text-lg px-8 bg-yellow-400 hover:bg-lime-400 text-black font-bold transition-colors">
+          <Button size="lg" onClick={() => navigate("/order")} className="text-lg px-8 bg-yellow-400 hover:bg-lime-400 text-black font-bold transition-colors">
             Получить расчет стоимости бани бесплатно
           </Button>
         </div>
