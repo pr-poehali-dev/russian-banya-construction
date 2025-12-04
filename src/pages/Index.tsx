@@ -98,7 +98,7 @@ const Index = () => {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                    <Icon name="Trees" size={20} className="text-primary" />
+                    <Icon name="Leaf" size={20} className="text-primary" />
                     Древесина премиум-класса
                   </h3>
                   <p className="text-muted-foreground">
