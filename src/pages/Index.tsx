@@ -53,8 +53,8 @@ const Index = () => {
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
             Современные технологии и традиционные материалы для создания вашей идеальной бани
           </p>
-          <Button size="lg" onClick={() => scrollToSection("contact")} className="text-lg px-8">
-            Получить консультацию
+          <Button size="lg" onClick={() => scrollToSection("contact")} className="text-lg px-8 bg-yellow-400 hover:bg-yellow-500 text-black font-bold">
+            Получить расчет бесплатно
           </Button>
         </div>
       </section>
