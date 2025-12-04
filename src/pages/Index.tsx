@@ -101,9 +101,7 @@ const Index = () => {
                     <Icon name="Leaf" size={20} className="text-primary" />
                     Вековые традиции
                   </h3>
-                  <p className="text-muted-foreground">
-                    Работаем с северной сосной, кедром и липой. Каждое бревно проходит тщательный отбор и обработку по современным технологиям, сохраняя при этом все природные свойства древесины.
-                  </p>
+                  <p className="text-muted-foreground">В отличии от финских саун и турецких хамамов, русская баня во все времена была приоритетным выбором для  русского человека. </p>
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
