@@ -97,7 +97,10 @@ const Index = () => {
               <h2 className="text-4xl font-bold mb-6">Почему именно русская баня?</h2>
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">Вековые традиции</h3>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                    <Icon name="Trees" size={20} className="text-primary" />
+                    Древесина премиум-класса
+                  </h3>
                   <p className="text-muted-foreground">
                     Работаем с северной сосной, кедром и липой. Каждое бревно проходит тщательный отбор и обработку по современным технологиям, сохраняя при этом все природные свойства древесины.
                   </p>
