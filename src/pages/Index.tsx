@@ -94,7 +94,7 @@ const Index = () => {
               />
             </div>
             <div>
-              <h2 className="text-4xl font-bold mb-6">О материалах и технологиях</h2>
+              <h2 className="text-4xl font-bold mb-6">Почему именно русская баня?</h2>
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
