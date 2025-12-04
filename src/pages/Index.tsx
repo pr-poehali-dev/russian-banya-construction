@@ -97,11 +97,17 @@ const Index = () => {
               <h2 className="text-4xl font-bold mb-6">Почему именно русская баня?</h2>
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">Многовековые традиции</h3>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                    <Icon name="History" size={20} className="text-primary" />
+                    Многовековые традиции
+                  </h3>
                   <p className="text-muted-foreground">В отличии от финских саун и турецких хамамов, русская баня во все времена была приоритетным выбором для  русского человека. </p>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">Польза для организма человека</h3>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                    <Icon name="Heart" size={20} className="text-primary" />
+                    Польза для организма человека
+                  </h3>
                   <p className="text-muted-foreground">Только эффект русской бани создает полезное тепловое, механическое и психологическое воздействие на тело человека.</p>
                 </div>
                 <div>
