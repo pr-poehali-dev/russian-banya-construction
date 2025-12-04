@@ -32,8 +32,8 @@ const Index = () => {
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/c4a36af6-45fd-4bf0-9085-7d31f4811720.jpg"
-            alt="Традиционная парная с банной печью"
+            src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/11fe0fbb-6904-4083-ad8d-1ee21b7d2ee3.jpg"
+            alt="Традиционная парная с каменной печью"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40"></div>
