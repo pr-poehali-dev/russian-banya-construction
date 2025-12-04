@@ -85,12 +85,12 @@ const Index = () => {
 
       <section id="about" className="py-20 px-6">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="overflow-hidden">
               <img 
                 src="https://cdn.poehali.dev/files/fc416752-82eb-400e-999b-154b1184a5d9.jpg"
                 alt="Банщик парит вениками в русской бане"
-                className="rounded-lg shadow-xl scale-130"
+                className="rounded-lg shadow-xl scale-[1.8] origin-top"
               />
             </div>
             <div>
