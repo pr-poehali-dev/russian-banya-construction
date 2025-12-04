@@ -95,6 +95,15 @@ const Index = () => {
             </div>
             <div>
               <h2 className="text-4xl font-bold mb-6">Почему именно русская баня?</h2>
+              
+              <div className="mb-8">
+                <img 
+                  src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/5bb40c64-8112-47c4-bd38-c2556c692b9c.jpg"
+                  alt="История русской бани"
+                  className="rounded-lg w-full"
+                />
+              </div>
+
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">Вековые традиции</h3>
