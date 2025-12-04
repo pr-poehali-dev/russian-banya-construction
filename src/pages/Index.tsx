@@ -14,16 +14,16 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 border-b border-border">
+      <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b border-yellow-500">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-primary">Русская Баня</div>
+            <div className="text-2xl font-bold text-black">Русская Баня</div>
             <div className="hidden md:flex gap-8">
-              <button onClick={() => scrollToSection("hero")} className="text-foreground hover:text-primary transition-colors">Главная</button>
-              <button onClick={() => scrollToSection("about")} className="text-foreground hover:text-primary transition-colors">О бане</button>
-              <button onClick={() => scrollToSection("services")} className="text-foreground hover:text-primary transition-colors">Услуги</button>
-              <button onClick={() => scrollToSection("gallery")} className="text-foreground hover:text-primary transition-colors">Галерея</button>
-              <button onClick={() => scrollToSection("contact")} className="text-foreground hover:text-primary transition-colors">Контакты</button>
+              <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
+              <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
+              <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
+              <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
+              <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
             </div>
           </div>
         </nav>
