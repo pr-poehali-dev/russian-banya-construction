@@ -329,28 +329,6 @@ const OrderForm = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="budget">Бюджет</Label>
-                <Input
-                  id="budget"
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  placeholder="Примерный бюджет"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="timeline">Сроки реализации</Label>
-                <Input
-                  id="timeline"
-                  name="timeline"
-                  value={formData.timeline}
-                  onChange={handleChange}
-                  placeholder="Когда планируете начать строительство?"
-                />
-              </div>
-
-              <div className="space-y-2">
                 <Label htmlFor="additionalInfo">Дополнительная информация</Label>
                 <Textarea
                   id="additionalInfo"
