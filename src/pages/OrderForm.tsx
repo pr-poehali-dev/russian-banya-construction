@@ -4,11 +4,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const OrderForm = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -51,13 +53,24 @@ const OrderForm = () => {
       });
       
       if (response.ok) {
-        alert("Спасибо за заявку! Специалисты компании \"Пермский Пар\" свяжутся с вами в ближайшее время.");
-        navigate("/");
+        toast({
+          title: "Заявка отправлена!",
+          description: "Специалисты компании \"Пермский Пар\" свяжутся с вами в ближайшее время.",
+        });
+        setTimeout(() => navigate("/"), 2000);
       } else {
-        alert("Произошла ошибка при отправке. Пожалуйста, попробуйте позже или позвоните нам по телефону +7 982 490-09-00.");
+        toast({
+          title: "Ошибка отправки",
+          description: "Пожалуйста, попробуйте позже или позвоните нам по телефону +7 982 490-09-00.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
-      alert("Произошла ошибка при отправке. Пожалуйста, попробуйте позже или позвоните нам по телефону +7 982 490-09-00.");
+      toast({
+        title: "Ошибка отправки",
+        description: "Пожалуйста, попробуйте позже или позвоните нам по телефону +7 982 490-09-00.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
