@@ -232,7 +232,8 @@ const OrderForm = () => {
                         setLength(value);
                         if (value !== 'custom') {
                           setCustomLength('');
-                          setFormData({...formData, size: `${value}x${width || customWidth || ''}`});
+                          const widthValue = width !== 'custom' ? width : customWidth;
+                          setFormData({...formData, size: `${value}x${widthValue || ''}`});
                         }
                       }}
                     >
@@ -258,7 +259,8 @@ const OrderForm = () => {
                         value={customLength}
                         onChange={(e) => {
                           setCustomLength(e.target.value);
-                          setFormData({...formData, size: `${e.target.value}x${width || customWidth || ''}`});
+                          const widthValue = width !== 'custom' ? width : customWidth;
+                          setFormData({...formData, size: `${e.target.value}x${widthValue || ''}`});
                         }}
                         placeholder="Введите длину"
                       />
@@ -273,7 +275,8 @@ const OrderForm = () => {
                         setWidth(value);
                         if (value !== 'custom') {
                           setCustomWidth('');
-                          setFormData({...formData, size: `${length || customLength || ''}x${value}`});
+                          const lengthValue = length !== 'custom' ? length : customLength;
+                          setFormData({...formData, size: `${lengthValue || ''}x${value}`});
                         }
                       }}
                     >
@@ -299,7 +302,8 @@ const OrderForm = () => {
                         value={customWidth}
                         onChange={(e) => {
                           setCustomWidth(e.target.value);
-                          setFormData({...formData, size: `${length || customLength || ''}x${e.target.value}`});
+                          const lengthValue = length !== 'custom' ? length : customLength;
+                          setFormData({...formData, size: `${lengthValue || ''}x${e.target.value}`});
                         }}
                         placeholder="Введите ширину"
                       />
