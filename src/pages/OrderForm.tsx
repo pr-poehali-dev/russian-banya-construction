@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +24,10 @@ const OrderForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [contactMethod, setContactMethod] = useState<'email' | 'whatsapp' | 'telegram'>('email');
   const [alternativePhone, setAlternativePhone] = useState("");
+  const [length, setLength] = useState("");
+  const [width, setWidth] = useState("");
+  const [customLength, setCustomLength] = useState("");
+  const [customWidth, setCustomWidth] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -216,15 +221,96 @@ const OrderForm = () => {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="size">Примерный размер (м²)</Label>
-                <Input
-                  id="size"
-                  name="size"
-                  value={formData.size}
-                  onChange={handleChange}
-                  placeholder="Например: 6x4"
-                />
+              <div className="space-y-3">
+                <Label>Размер бани (м) *</Label>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="length" className="text-sm">Длина (м)</Label>
+                    <Select 
+                      value={length} 
+                      onValueChange={(value) => {
+                        setLength(value);
+                        if (value !== 'custom') {
+                          setCustomLength('');
+                          setFormData({...formData, size: `${value}x${width || customWidth || ''}`});
+                        }
+                      }}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="3">3 м</SelectItem>
+                        <SelectItem value="4">4 м</SelectItem>
+                        <SelectItem value="5">5 м</SelectItem>
+                        <SelectItem value="6">6 м</SelectItem>
+                        <SelectItem value="7">7 м</SelectItem>
+                        <SelectItem value="8">8 м</SelectItem>
+                        <SelectItem value="9">9 м</SelectItem>
+                        <SelectItem value="10">10 м</SelectItem>
+                        <SelectItem value="custom">Другое</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {length === 'custom' && (
+                      <Input
+                        type="number"
+                        step="0.1"
+                        value={customLength}
+                        onChange={(e) => {
+                          setCustomLength(e.target.value);
+                          setFormData({...formData, size: `${e.target.value}x${width || customWidth || ''}`});
+                        }}
+                        placeholder="Введите длину"
+                      />
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="width" className="text-sm">Ширина (м)</Label>
+                    <Select 
+                      value={width} 
+                      onValueChange={(value) => {
+                        setWidth(value);
+                        if (value !== 'custom') {
+                          setCustomWidth('');
+                          setFormData({...formData, size: `${length || customLength || ''}x${value}`});
+                        }
+                      }}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Выберите" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="3">3 м</SelectItem>
+                        <SelectItem value="4">4 м</SelectItem>
+                        <SelectItem value="5">5 м</SelectItem>
+                        <SelectItem value="6">6 м</SelectItem>
+                        <SelectItem value="7">7 м</SelectItem>
+                        <SelectItem value="8">8 м</SelectItem>
+                        <SelectItem value="9">9 м</SelectItem>
+                        <SelectItem value="10">10 м</SelectItem>
+                        <SelectItem value="custom">Другое</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {width === 'custom' && (
+                      <Input
+                        type="number"
+                        step="0.1"
+                        value={customWidth}
+                        onChange={(e) => {
+                          setCustomWidth(e.target.value);
+                          setFormData({...formData, size: `${length || customLength || ''}x${e.target.value}`});
+                        }}
+                        placeholder="Введите ширину"
+                      />
+                    )}
+                  </div>
+                </div>
+                {formData.size && (
+                  <p className="text-sm text-muted-foreground">
+                    Размер бани: {formData.size} м
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
