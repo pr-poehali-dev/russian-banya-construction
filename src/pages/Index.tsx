@@ -183,15 +183,9 @@ const Index = () => {
             Свяжитесь с нами для бесплатной консультации и расчёта стоимости вашего проекта
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="tel:+79001234567" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">
-              <Icon name="Phone" size={20} />
-              +7 (900) 123-45-67
-            </a>
+            <a href="tel:+79001234567" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">+7 9824900900</a>
             <span className="hidden sm:inline">•</span>
-            <a href="mailto:info@banya.ru" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">
-              <Icon name="Mail" size={20} />
-              info@banya.ru
-            </a>
+            <a href="mailto:info@banya.ru" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">t.ugol59@mail.ru</a>
           </div>
         </div>
       </section>
