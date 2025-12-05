@@ -27,12 +27,17 @@ const OrderForm = () => {
     setIsSubmitting(true);
     
     try {
+      const dataToSend = {
+        ...formData,
+        phone: `+7${formData.phone}`
+      };
+      
       const response = await fetch('https://functions.poehali.dev/7d6acc0a-c6ca-4197-a5e2-4ed6321a1af5', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(dataToSend)
       });
       
       if (response.ok) {
@@ -49,10 +54,23 @@ const OrderForm = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    
+    if (name === 'phone') {
+      const digits = value.replace(/\D/g, '');
+      const phoneDigits = digits.startsWith('7') ? digits.slice(1) : digits;
+      const formatted = phoneDigits.slice(0, 10);
+      
+      setFormData({
+        ...formData,
+        phone: formatted
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   return (
@@ -91,15 +109,22 @@ const OrderForm = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="phone">Телефон *</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  placeholder="+7 (___) ___-__-__"
-                />
+                <div className="flex">
+                  <span className="inline-flex items-center px-3 text-sm bg-muted border border-r-0 border-input rounded-l-md">
+                    +7
+                  </span>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    placeholder="9001234567"
+                    maxLength={10}
+                    className="rounded-l-none"
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">
