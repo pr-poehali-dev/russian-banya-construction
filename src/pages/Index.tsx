@@ -206,7 +206,7 @@ const Index = () => {
 
       <footer className="py-8 border-t border-border px-6">
         <div className="container mx-auto text-center text-muted-foreground">
-          <p>© 2024 Русская Баня. Все права защищены.</p>
+          <p>© 2020г Пермский пар. Все права защищены.</p>
         </div>
       </footer>
     </div>
