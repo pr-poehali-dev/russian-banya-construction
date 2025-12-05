@@ -138,21 +138,21 @@ const OrderForm = () => {
                   <Button
                     type="button"
                     onClick={() => setContactMethod('email')}
-                    className={`flex-1 ${contactMethod === 'email' ? 'bg-yellow-400 hover:bg-lime-400 text-black' : 'bg-gray-200 hover:bg-gray-300 text-black'}`}
+                    className={`flex-1 hover:bg-lime-400 text-black ${contactMethod === 'email' ? 'bg-yellow-400' : 'bg-gray-200'}`}
                   >
                     Email
                   </Button>
                   <Button
                     type="button"
                     onClick={() => setContactMethod('whatsapp')}
-                    className={`flex-1 ${contactMethod === 'whatsapp' ? 'bg-yellow-400 hover:bg-lime-400 text-black' : 'bg-gray-200 hover:bg-gray-300 text-black'}`}
+                    className={`flex-1 hover:bg-lime-400 text-black ${contactMethod === 'whatsapp' ? 'bg-yellow-400' : 'bg-gray-200'}`}
                   >
                     WhatsApp
                   </Button>
                   <Button
                     type="button"
                     onClick={() => setContactMethod('telegram')}
-                    className={`flex-1 ${contactMethod === 'telegram' ? 'bg-yellow-400 hover:bg-lime-400 text-black' : 'bg-gray-200 hover:bg-gray-300 text-black'}`}
+                    className={`flex-1 hover:bg-lime-400 text-black ${contactMethod === 'telegram' ? 'bg-yellow-400' : 'bg-gray-200'}`}
                   >
                     Telegram
                   </Button>
