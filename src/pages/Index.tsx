@@ -29,9 +29,11 @@ const Index = () => {
       "https://cdn.poehali.dev/files/e9474b80-69ae-4a00-8574-c27200bb57ba.jpg"
     ],
     [
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/633c9042-bf90-4025-87c1-126072f6d674.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/f34b3ed2-0f2c-4737-9065-8ce96b11e3a1.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/5424ff8c-8e12-4944-827b-decac922dc0a.jpg"
+      "https://cdn.poehali.dev/files/0c49f489-1f6b-4479-8142-3603d899660a.png",
+      "https://cdn.poehali.dev/files/9a264058-2d14-4695-bd33-455d0d97aad9.png",
+      "https://cdn.poehali.dev/files/5b94e280-3e52-4724-9d15-ffe56a2b6bad.png",
+      "https://cdn.poehali.dev/files/84798a93-dd08-41eb-b20d-1a3611acf1be.png",
+      "https://cdn.poehali.dev/files/cca216a7-9b9e-425b-b0e4-d352cea5b6a4.png"
     ],
     [
       "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e278da1b-3b8d-48f4-8caf-a5547d0cb2ea.jpg",
@@ -236,11 +238,11 @@ const Index = () => {
                 location: "д. Скобелевка, Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/633c9042-bf90-4025-87c1-126072f6d674.jpg",
-                title: "Баня «Компакт»",
-                size: "4×5 м",
-                material: "Оцилиндрованное бревно",
-                location: "д. Кондратово"
+                img: "https://cdn.poehali.dev/files/0c49f489-1f6b-4479-8142-3603d899660a.png",
+                title: "Баня из бруса 6×6",
+                size: "6×6 м",
+                material: "Профилированный брус",
+                location: "д. Красная Слудка, Пермский край"
               },
               {
                 img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e278da1b-3b8d-48f4-8caf-a5547d0cb2ea.jpg",
