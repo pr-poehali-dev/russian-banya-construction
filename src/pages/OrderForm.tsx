@@ -21,15 +21,20 @@ const OrderForm = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [contactMethod, setContactMethod] = useState<'email' | 'whatsapp' | 'telegram'>('email');
+  const [alternativePhone, setAlternativePhone] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
+      const contactPhone = alternativePhone || formData.phone;
       const dataToSend = {
         ...formData,
-        phone: `+7${formData.phone}`
+        phone: `+7${formData.phone}`,
+        contactMethod,
+        contactPhone: contactMethod !== 'email' ? `+7${contactPhone}` : undefined
       };
       
       const response = await fetch('https://functions.poehali.dev/7d6acc0a-c6ca-4197-a5e2-4ed6321a1af5', {
@@ -127,16 +132,71 @@ const OrderForm = () => {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="example@mail.ru"
-                />
+              <div className="space-y-3">
+                <Label>Куда отправить расчет? *</Label>
+                <div className="flex gap-3">
+                  <Button
+                    type="button"
+                    variant={contactMethod === 'email' ? 'default' : 'outline'}
+                    onClick={() => setContactMethod('email')}
+                    className="flex-1"
+                  >
+                    Email
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={contactMethod === 'whatsapp' ? 'default' : 'outline'}
+                    onClick={() => setContactMethod('whatsapp')}
+                    className="flex-1"
+                  >
+                    WhatsApp
+                  </Button>
+                  <Button
+                    type="button"
+                    variant={contactMethod === 'telegram' ? 'default' : 'outline'}
+                    onClick={() => setContactMethod('telegram')}
+                    className="flex-1"
+                  >
+                    Telegram
+                  </Button>
+                </div>
+
+                {contactMethod === 'email' && (
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="example@mail.ru"
+                    required
+                  />
+                )}
+
+                {(contactMethod === 'whatsapp' || contactMethod === 'telegram') && (
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">
+                      Использовать основной телефон ({formData.phone ? `+7${formData.phone}` : 'не указан'}) или указать другой?
+                    </Label>
+                    <div className="flex">
+                      <span className="inline-flex items-center px-3 text-sm bg-muted border border-r-0 border-input rounded-l-md">
+                        +7
+                      </span>
+                      <Input
+                        type="tel"
+                        value={alternativePhone}
+                        onChange={(e) => {
+                          const digits = e.target.value.replace(/\D/g, '');
+                          const phoneDigits = digits.startsWith('7') ? digits.slice(1) : digits;
+                          setAlternativePhone(phoneDigits.slice(0, 10));
+                        }}
+                        placeholder="Оставьте пустым, если совпадает с основным"
+                        maxLength={10}
+                        className="rounded-l-none"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="space-y-2">
