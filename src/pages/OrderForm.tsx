@@ -20,11 +20,32 @@ const OrderForm = () => {
     additionalInfo: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
-    navigate("/");
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/7d6acc0a-c6ca-4197-a5e2-4ed6321a1af5', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
+        navigate("/");
+      } else {
+        alert("Произошла ошибка при отправке. Пожалуйста, попробуйте позже или позвоните нам.");
+      }
+    } catch (error) {
+      alert("Произошла ошибка при отправке. Пожалуйста, попробуйте позже или позвоните нам.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -165,8 +186,9 @@ const OrderForm = () => {
                 type="submit" 
                 size="lg" 
                 className="w-full bg-yellow-400 hover:bg-lime-400 text-black font-bold text-lg"
+                disabled={isSubmitting}
               >
-                Отправить заявку
+                {isSubmitting ? "Отправка..." : "Отправить заявку"}
               </Button>
             </form>
           </CardContent>
