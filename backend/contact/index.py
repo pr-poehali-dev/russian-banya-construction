@@ -54,6 +54,15 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     msg['From'] = smtp_user
     msg['To'] = smtp_user
     
+    contact_method = body_data.get('contactMethod', 'email')
+    contact_method_text = {
+        'email': 'Email',
+        'whatsapp': 'WhatsApp',
+        'telegram': 'Telegram'
+    }.get(contact_method, 'Email')
+    
+    contact_phone = body_data.get('contactPhone', body_data.get('phone', ''))
+    
     html_content = f"""
     <html>
       <body style="font-family: Arial, sans-serif; line-height: 1.6;">
@@ -68,30 +77,29 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             <td style="padding: 10px; border: 1px solid #ddd;">{body_data.get('phone', '')}</td>
           </tr>
           <tr style="background-color: #f8f9fa;">
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Куда отправить расчет:</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">{contact_method_text}</td>
+          </tr>
+          {f'''<tr>
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Телефон для {contact_method_text}:</td>
+            <td style="padding: 10px; border: 1px solid #ddd;">{contact_phone}</td>
+          </tr>''' if contact_method != 'email' else f'''<tr>
             <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Email:</td>
             <td style="padding: 10px; border: 1px solid #ddd;">{body_data.get('email', '')}</td>
-          </tr>
-          <tr>
-            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Тип бани:</td>
+          </tr>'''}
+          <tr style="background-color: #f8f9fa;">
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Материал стен:</td>
             <td style="padding: 10px; border: 1px solid #ddd;">{body_data.get('banjaType', '')}</td>
           </tr>
-          <tr style="background-color: #f8f9fa;">
+          <tr>
             <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Размер:</td>
             <td style="padding: 10px; border: 1px solid #ddd;">{body_data.get('size', '')}</td>
           </tr>
-          <tr>
+          <tr style="background-color: #f8f9fa;">
             <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Местоположение:</td>
             <td style="padding: 10px; border: 1px solid #ddd;">{body_data.get('location', '')}</td>
           </tr>
-          <tr style="background-color: #f8f9fa;">
-            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Бюджет:</td>
-            <td style="padding: 10px; border: 1px solid #ddd;">{body_data.get('budget', '')}</td>
-          </tr>
           <tr>
-            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Сроки:</td>
-            <td style="padding: 10px; border: 1px solid #ddd;">{body_data.get('timeline', '')}</td>
-          </tr>
-          <tr style="background-color: #f8f9fa;">
             <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Доп. информация:</td>
             <td style="padding: 10px; border: 1px solid #ddd;">{body_data.get('additionalInfo', '')}</td>
           </tr>
