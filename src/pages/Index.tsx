@@ -22,9 +22,11 @@ const Index = () => {
       "https://cdn.poehali.dev/files/6c712b7d-0a01-41fe-89c1-29ec45bad1dd.jpg"
     ],
     [
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/0c011709-5a10-4cd1-90a3-4a82fc78f84f.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/4c1b7d5d-375e-4d60-a83b-96dd66f8c48c.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/b8fdff4c-0059-4f2f-8bdb-67a019c34280.jpg"
+      "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
+      "https://cdn.poehali.dev/files/2451e998-d599-4eeb-8bf3-8585ffab4342.jpg",
+      "https://cdn.poehali.dev/files/48198ca6-3425-4781-aba7-849426247fc4.jpg",
+      "https://cdn.poehali.dev/files/1f94dc5e-69ba-4805-8f4b-ca5bbf6a404c.jpg",
+      "https://cdn.poehali.dev/files/e9474b80-69ae-4a00-8574-c27200bb57ba.jpg"
     ],
     [
       "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/633c9042-bf90-4025-87c1-126072f6d674.jpg",
@@ -227,11 +229,11 @@ const Index = () => {
                 location: "д. Гамы, Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/0c011709-5a10-4cd1-90a3-4a82fc78f84f.jpg",
-                title: "Баня «Премиум»",
-                size: "8×10 м",
-                material: "Профилированный брус",
-                location: "г. Пермь"
+                img: "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
+                title: "Баня из бревна 6×6",
+                size: "6×6 м",
+                material: "Оцилиндрованное бревно",
+                location: "д. Скобелевка, Пермский край"
               },
               {
                 img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/633c9042-bf90-4025-87c1-126072f6d674.jpg",
