@@ -137,25 +137,22 @@ const OrderForm = () => {
                 <div className="flex gap-3">
                   <Button
                     type="button"
-                    variant={contactMethod === 'email' ? 'default' : 'outline'}
                     onClick={() => setContactMethod('email')}
-                    className="flex-1"
+                    className={`flex-1 ${contactMethod === 'email' ? 'bg-yellow-400 hover:bg-lime-400 text-black' : 'bg-gray-200 hover:bg-gray-300 text-black'}`}
                   >
                     Email
                   </Button>
                   <Button
                     type="button"
-                    variant={contactMethod === 'whatsapp' ? 'default' : 'outline'}
                     onClick={() => setContactMethod('whatsapp')}
-                    className="flex-1"
+                    className={`flex-1 ${contactMethod === 'whatsapp' ? 'bg-yellow-400 hover:bg-lime-400 text-black' : 'bg-gray-200 hover:bg-gray-300 text-black'}`}
                   >
                     WhatsApp
                   </Button>
                   <Button
                     type="button"
-                    variant={contactMethod === 'telegram' ? 'default' : 'outline'}
                     onClick={() => setContactMethod('telegram')}
-                    className="flex-1"
+                    className={`flex-1 ${contactMethod === 'telegram' ? 'bg-yellow-400 hover:bg-lime-400 text-black' : 'bg-gray-200 hover:bg-gray-300 text-black'}`}
                   >
                     Telegram
                   </Button>
