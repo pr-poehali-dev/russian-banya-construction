@@ -1,6 +1,7 @@
 import json
 import os
 import smtplib
+import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Dict, Any
@@ -35,12 +36,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     body_data = json.loads(event.get('body', '{}'))
     
-    smtp_host = os.environ.get('SMTP_HOST')
-    smtp_port = int(os.environ.get('SMTP_PORT', 587))
+    smtp_host = os.environ.get('SMTP_HOST', 'smtp.mail.ru')
+    smtp_port = int(os.environ.get('SMTP_PORT', 465))
     smtp_user = os.environ.get('SMTP_USER')
     smtp_password = os.environ.get('SMTP_PASSWORD')
     
-    if not all([smtp_host, smtp_user, smtp_password]):
+    if not all([smtp_user, smtp_password]):
         return {
             'statusCode': 500,
             'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
@@ -102,8 +103,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     html_part = MIMEText(html_content, 'html')
     msg.attach(html_part)
     
-    server = smtplib.SMTP(smtp_host, smtp_port, timeout=10)
-    server.starttls()
+    context = ssl.create_default_context()
+    server = smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=10, context=context)
     server.login(smtp_user, smtp_password)
     server.send_message(msg)
     server.quit()
