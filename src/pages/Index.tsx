@@ -225,7 +225,7 @@ const Index = () => {
             {[
               {
                 img: "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
-                title: "Баня 3×6",
+                title: "Баня из бревна 3×6",
                 size: "3×6 м",
                 material: "Оцилиндрованное бревно",
                 location: "д. Гамы, Пермский край"
