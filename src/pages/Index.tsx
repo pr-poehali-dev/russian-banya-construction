@@ -19,11 +19,33 @@ const Index = () => {
       "https://cdn.poehali.dev/files/cfa7f22e-7434-41a8-83cb-57c58472a187.jpg",
       "https://cdn.poehali.dev/files/0d1e0e9b-67ef-4b9f-8a21-913de4d4c829.jpg"
     ],
-    [],
-    [],
-    [],
-    [],
-    []
+    [
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/0c011709-5a10-4cd1-90a3-4a82fc78f84f.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/4c1b7d5d-375e-4d60-a83b-96dd66f8c48c.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/b8fdff4c-0059-4f2f-8bdb-67a019c34280.jpg"
+    ],
+    [
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/633c9042-bf90-4025-87c1-126072f6d674.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/f34b3ed2-0f2c-4737-9065-8ce96b11e3a1.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/5424ff8c-8e12-4944-827b-decac922dc0a.jpg"
+    ],
+    [
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e278da1b-3b8d-48f4-8caf-a5547d0cb2ea.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/8bf6935f-27ae-44b8-985f-ee3fc41e3e65.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/62ad4a24-dc5e-412f-8d37-6c9d9b6a30aa.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/2b80b273-881a-45e4-a9ba-60507cce938d.jpg"
+    ],
+    [
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/9614f8ff-a336-43b5-903d-0c8f3b60b43e.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/b8fdff4c-0059-4f2f-8bdb-67a019c34280.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/4c1b7d5d-375e-4d60-a83b-96dd66f8c48c.jpg"
+    ],
+    [
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/588c3540-c8e5-4bda-8ed2-1a7310330dd1.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/8cf8f03b-2e77-43c3-8723-1f9621dd54f8.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/a040c8be-e5e8-4069-a009-40bf4ef7c865.jpg",
+      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/02b72ce5-c227-4d11-9961-e4766d044f51.jpg"
+    ]
   ];
 
   const openGallery = (projectIndex: number) => {
