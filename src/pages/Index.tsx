@@ -182,10 +182,24 @@ const Index = () => {
           <p className="text-xl mb-8 opacity-90">
             Свяжитесь с нами для бесплатной консультации и расчёта стоимости вашего проекта
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="tel:+79001234567" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">+7 9824900900</a>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex items-center gap-4">
+              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <Icon name="MessageCircle" size={28} />
+              </a>
+              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <Icon name="Send" size={28} />
+              </a>
+              <a href="tel:+79824900900" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">
+                <Icon name="Phone" size={24} />
+                +7 982 490-09-00
+              </a>
+            </div>
             <span className="hidden sm:inline">•</span>
-            <a href="mailto:info@banya.ru" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">t.ugol59@mail.ru</a>
+            <a href="mailto:t.ugol59@mail.ru" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">
+              <Icon name="Mail" size={24} />
+              t.ugol59@mail.ru
+            </a>
           </div>
         </div>
       </section>
