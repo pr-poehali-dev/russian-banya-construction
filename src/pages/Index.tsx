@@ -149,28 +149,79 @@ const Index = () => {
 
       <section id="gallery" className="py-20 px-6">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">Галерея проектов</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <h2 className="text-4xl font-bold text-center mb-4">Галерея проектов</h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">Реализованные проекты наших клиентов</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/a040c8be-e5e8-4069-a009-40bf4ef7c865.jpg",
-              "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/2b80b273-881a-45e4-a9ba-60507cce938d.jpg",
-              "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/62ad4a24-dc5e-412f-8d37-6c9d9b6a30aa.jpg",
-              "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/a040c8be-e5e8-4069-a009-40bf4ef7c865.jpg",
-              "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/2b80b273-881a-45e4-a9ba-60507cce938d.jpg",
-              "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/62ad4a24-dc5e-412f-8d37-6c9d9b6a30aa.jpg"
-            ].map((img, idx) => (
-              <div key={idx} className="group relative overflow-hidden rounded-lg aspect-[4/3] hover:shadow-xl transition-all">
-                <img 
-                  src={img}
-                  alt={`Проект ${idx + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <p className="font-semibold">Проект {idx + 1}</p>
-                  </div>
+              {
+                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/02b72ce5-c227-4d11-9961-e4766d044f51.jpg",
+                title: "Баня «Зимний Сад»",
+                size: "6×6 м",
+                material: "Оцилиндрованное бревно",
+                location: "Пермский край"
+              },
+              {
+                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/0c011709-5a10-4cd1-90a3-4a82fc78f84f.jpg",
+                title: "Баня «Премиум»",
+                size: "8×10 м",
+                material: "Профилированный брус",
+                location: "г. Пермь"
+              },
+              {
+                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/633c9042-bf90-4025-87c1-126072f6d674.jpg",
+                title: "Баня «Компакт»",
+                size: "4×5 м",
+                material: "Оцилиндрованное бревно",
+                location: "д. Кондратово"
+              },
+              {
+                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e278da1b-3b8d-48f4-8caf-a5547d0cb2ea.jpg",
+                title: "Баня «Семейная»",
+                size: "10×12 м",
+                material: "Клееный брус",
+                location: "КП Лесная поляна"
+              },
+              {
+                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/9614f8ff-a336-43b5-903d-0c8f3b60b43e.jpg",
+                title: "Баня «Модерн»",
+                size: "7×8 м",
+                material: "Профилированный брус",
+                location: "г. Березники"
+              },
+              {
+                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/588c3540-c8e5-4bda-8ed2-1a7310330dd1.jpg",
+                title: "Баня «Классика»",
+                size: "6×8 м",
+                material: "Оцилиндрованное бревно",
+                location: "с. Култаево"
+              }
+            ].map((project, idx) => (
+              <Card key={idx} className="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2">
+                <div className="overflow-hidden">
+                  <img 
+                    src={project.img} 
+                    alt={project.title} 
+                    className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500" 
+                  />
                 </div>
-              </div>
+                <CardContent className="pt-6">
+                  <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+                  <div className="space-y-2 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <Icon name="Ruler" size={16} className="text-primary" />
+                      <span>Размер: {project.size}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="TreePine" size={16} className="text-primary" />
+                      <span>{project.material}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="MapPin" size={16} className="text-primary" />
+                      <span>{project.location}</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
