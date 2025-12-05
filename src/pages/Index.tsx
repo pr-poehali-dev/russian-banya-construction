@@ -176,10 +176,10 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="contact" className="py-20 bg-primary text-primary-foreground px-6">
+      <section id="contact" className="py-20 bg-yellow-400 text-black px-6">
         <div className="container mx-auto max-w-2xl text-center">
           <h2 className="text-4xl font-bold mb-6">Готовы начать строительство?</h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-8">
             Свяжитесь с нами для бесплатной консультации и расчёта стоимости вашего проекта
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
