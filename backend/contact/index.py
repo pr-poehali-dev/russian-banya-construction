@@ -102,7 +102,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     html_part = MIMEText(html_content, 'html')
     msg.attach(html_part)
     
-    server = smtplib.SMTP(smtp_host, smtp_port)
+    server = smtplib.SMTP(smtp_host, smtp_port, timeout=10)
     server.starttls()
     server.login(smtp_user, smtp_password)
     server.send_message(msg)
