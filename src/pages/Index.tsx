@@ -3,10 +3,52 @@ import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const navigate = useNavigate();
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const projectGalleries = [
+    [
+      "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
+      "https://cdn.poehali.dev/files/44a34322-94c4-4927-b372-e632bd76e8c3.png",
+      "https://cdn.poehali.dev/files/7c45af13-f389-40c5-a0ec-e0bed1884fef.jpg",
+      "https://cdn.poehali.dev/files/cfa7f22e-7434-41a8-83cb-57c58472a187.jpg",
+      "https://cdn.poehali.dev/files/0d1e0e9b-67ef-4b9f-8a21-913de4d4c829.jpg"
+    ],
+    [],
+    [],
+    [],
+    [],
+    []
+  ];
+
+  const openGallery = (projectIndex: number) => {
+    if (projectGalleries[projectIndex].length > 0) {
+      setSelectedProject(projectIndex);
+      setCurrentImageIndex(0);
+    }
+  };
+
+  const closeGallery = () => {
+    setSelectedProject(null);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (selectedProject !== null) {
+      setCurrentImageIndex((prev) => 
+        prev < projectGalleries[selectedProject].length - 1 ? prev + 1 : prev
+      );
+    }
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => prev > 0 ? prev - 1 : prev);
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -154,11 +196,11 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/02b72ce5-c227-4d11-9961-e4766d044f51.jpg",
-                title: "Баня «Зимний Сад»",
-                size: "6×6 м",
+                img: "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
+                title: "Баня 3×6",
+                size: "3×6 м",
                 material: "Оцилиндрованное бревно",
-                location: "Пермский край"
+                location: "д. Гамы, Пермский край"
               },
               {
                 img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/0c011709-5a10-4cd1-90a3-4a82fc78f84f.jpg",
@@ -196,13 +238,25 @@ const Index = () => {
                 location: "с. Култаево"
               }
             ].map((project, idx) => (
-              <Card key={idx} className="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2">
-                <div className="overflow-hidden">
+              <Card 
+                key={idx} 
+                className="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2 cursor-pointer"
+                onClick={() => openGallery(idx)}
+              >
+                <div className="overflow-hidden relative group">
                   <img 
                     src={project.img} 
                     alt={project.title} 
                     className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500" 
                   />
+                  {projectGalleries[idx].length > 0 && (
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <Icon name="Images" size={40} className="mx-auto mb-2" />
+                        <p className="text-lg font-semibold">{projectGalleries[idx].length} фото</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-bold mb-3">{project.title}</h3>
@@ -226,6 +280,57 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <Dialog open={selectedProject !== null} onOpenChange={closeGallery}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Галерея проекта</DialogTitle>
+          </DialogHeader>
+          {selectedProject !== null && (
+            <div className="relative">
+              <img 
+                src={projectGalleries[selectedProject][currentImageIndex]} 
+                alt={`Фото ${currentImageIndex + 1}`}
+                className="w-full h-auto max-h-[70vh] object-contain rounded-lg"
+              />
+              <div className="flex items-center justify-between mt-4">
+                <Button 
+                  variant="outline" 
+                  onClick={prevImage} 
+                  disabled={currentImageIndex === 0}
+                  size="icon"
+                >
+                  <Icon name="ChevronLeft" size={24} />
+                </Button>
+                <span className="text-sm text-muted-foreground">
+                  {currentImageIndex + 1} / {projectGalleries[selectedProject].length}
+                </span>
+                <Button 
+                  variant="outline" 
+                  onClick={nextImage} 
+                  disabled={currentImageIndex === projectGalleries[selectedProject].length - 1}
+                  size="icon"
+                >
+                  <Icon name="ChevronRight" size={24} />
+                </Button>
+              </div>
+              <div className="grid grid-cols-5 gap-2 mt-4">
+                {projectGalleries[selectedProject].map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`Миниатюра ${idx + 1}`}
+                    className={`w-full h-20 object-cover rounded cursor-pointer border-2 transition-all ${
+                      idx === currentImageIndex ? 'border-primary' : 'border-transparent hover:border-primary/50'
+                    }`}
+                    onClick={() => setCurrentImageIndex(idx)}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <section id="contact" className="py-20 bg-yellow-400 text-black px-6">
         <div className="container mx-auto max-w-2xl text-center">
