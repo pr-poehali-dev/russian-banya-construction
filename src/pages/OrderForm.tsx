@@ -196,16 +196,24 @@ const OrderForm = () => {
                 )}
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="banjaType">Тип бани </Label>
-                <Input
-                  id="banjaType"
-                  name="banjaType"
-                  value={formData.banjaType}
-                  onChange={handleChange}
-                  required
-                  placeholder="Из бревна / из бруса"
-                />
+              <div className="space-y-3">
+                <Label>Материал стен бани *</Label>
+                <div className="flex gap-3">
+                  <Button
+                    type="button"
+                    onClick={() => setFormData({...formData, banjaType: 'Бревно'})}
+                    className={`flex-1 hover:bg-lime-400 text-black ${formData.banjaType === 'Бревно' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                  >
+                    Бревно
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => setFormData({...formData, banjaType: 'Брус'})}
+                    className={`flex-1 hover:bg-lime-400 text-black ${formData.banjaType === 'Брус' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                  >
+                    Брус
+                  </Button>
+                </div>
               </div>
 
               <div className="space-y-2">
