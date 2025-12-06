@@ -224,7 +224,7 @@ const Index = () => {
               { icon: "Hammer", title: "Технологичное строительство", desc: "Строим парные с эффектом русской бани, с учетом традиций и современных тенденций в эстетическом и практическом использовании бани" },
               { icon: "Shield", title: "Гарантия качества", desc: "Опыт строительства более 15 лет. 5 лет гарантии на работы по договору, твердая смета, поэтапная оплата" }
             ].map((item, idx) => (
-              <Card key={idx} className="hover:shadow-lg transition-shadow">
+              <Card key={idx}>
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-semibold mb-2 flex items-start gap-2">
                     <Icon name={item.icon} className="text-primary flex-shrink-0 mt-1" size={48} />
@@ -295,7 +295,7 @@ const Index = () => {
               { icon: "Wrench", title: "Инженерные системы", desc: "Установка печи, водоснабжения, водоотведения, вентиляции, полков, электрики, отопления и т.д." },
               { icon: "Sparkles", title: "Дополнительно", desc: "Ремонт и модернизация существующих бань, террасы, банные чаны, купели" }
             ].map((service, idx) => (
-              <Card key={idx} className="hover:shadow-xl transition-all hover:-translate-y-1">
+              <Card key={idx}>
                 <CardContent className="pt-6">
                   <div className="w-14 h-14 bg-secondary/10 rounded-lg flex items-center justify-center mb-4 mx-auto">
                     <Icon name={service.icon} className="text-secondary" size={28} />
