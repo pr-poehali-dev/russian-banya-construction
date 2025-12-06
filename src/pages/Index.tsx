@@ -366,7 +366,7 @@ const Index = () => {
             <div className="relative">
               <button
                 onClick={closeGallery}
-                className="absolute -right-2 -top-2 rounded-full bg-red-500 hover:bg-red-600 p-3 transition-all z-50 shadow-lg"
+                className="absolute right-4 top-4 rounded-full bg-red-500 hover:bg-red-600 p-3 transition-all z-50 shadow-lg"
                 title="Закрыть галерею"
               >
                 <Icon name="X" className="h-5 w-5 text-white" />
