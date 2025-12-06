@@ -390,13 +390,13 @@ const Index = () => {
                   <Icon name="ChevronRight" size={24} />
                 </Button>
               </div>
-              <div className="grid grid-cols-6 gap-2 mt-3">
+              <div className="grid grid-cols-7 gap-1.5 mt-3">
                 {projectGalleries[selectedProject].map((img, idx) => (
                   <img
                     key={idx}
                     src={img}
                     alt={`Миниатюра ${idx + 1}`}
-                    className={`w-full h-16 object-cover rounded cursor-pointer border-2 transition-all ${
+                    className={`w-full h-12 object-cover rounded cursor-pointer border-2 transition-all ${
                       idx === currentImageIndex ? 'border-primary' : 'border-transparent hover:border-primary/50'
                     }`}
                     onClick={() => setCurrentImageIndex(idx)}
