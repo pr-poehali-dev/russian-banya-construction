@@ -74,9 +74,11 @@ const Index = () => {
       "https://cdn.poehali.dev/files/7f87c675-ab58-4042-8cec-6640cc6ab8fe.JPG"
     ],
     [
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/9614f8ff-a336-43b5-903d-0c8f3b60b43e.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/b8fdff4c-0059-4f2f-8bdb-67a019c34280.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/4c1b7d5d-375e-4d60-a83b-96dd66f8c48c.jpg"
+      "https://cdn.poehali.dev/files/475d1fc5-71db-4437-8990-d067b0a25d0c.jpg",
+      "https://cdn.poehali.dev/files/7928a4f1-9c7c-43fd-ab17-6babb6e37be7.JPG",
+      "https://cdn.poehali.dev/files/bf9bc314-777a-43f3-899a-456db9b32f19.JPG",
+      "https://cdn.poehali.dev/files/a468393d-98fc-4692-934b-115e4be196ad.JPG",
+      "https://cdn.poehali.dev/files/ce713e72-983e-416c-bc45-d51e637013a5.JPG"
     ],
     [
       "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/588c3540-c8e5-4bda-8ed2-1a7310330dd1.jpg",
@@ -309,11 +311,11 @@ const Index = () => {
                 location: "г. Добрянка, Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/9614f8ff-a336-43b5-903d-0c8f3b60b43e.jpg",
-                title: "Баня «Модерн»",
-                size: "7×8 м",
-                material: "Профилированный брус",
-                location: "г. Березники"
+                img: "https://cdn.poehali.dev/files/475d1fc5-71db-4437-8990-d067b0a25d0c.jpg",
+                title: "Баня из бревна 5×5",
+                size: "5×5 м",
+                material: "Оцилиндрованное бревно",
+                location: "п. Усть-Качка, Пермский край"
               },
               {
                 img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/588c3540-c8e5-4bda-8ed2-1a7310330dd1.jpg",
