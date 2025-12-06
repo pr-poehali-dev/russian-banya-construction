@@ -361,15 +361,15 @@ const Index = () => {
       </section>
 
       <Dialog open={selectedProject !== null} onOpenChange={closeGallery}>
-        <DialogContent className="max-w-6xl p-4" hideClose>
+        <DialogContent className="max-w-5xl max-h-[90vh] overflow-auto" hideClose>
           {selectedProject !== null && (
-            <div className="flex flex-col h-[85vh]">
+            <div className="relative">
               <img 
                 src={projectGalleries[selectedProject][currentImageIndex]} 
                 alt={`Фото ${currentImageIndex + 1}`}
-                className="w-full h-auto max-h-[55vh] object-contain rounded-lg mb-3"
+                className="w-full h-auto max-h-[60vh] object-contain rounded-lg"
               />
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mt-4">
                 <Button 
                   variant="outline" 
                   onClick={prevImage} 
@@ -390,20 +390,18 @@ const Index = () => {
                   <Icon name="ChevronRight" size={24} />
                 </Button>
               </div>
-              <div className="overflow-x-auto">
-                <div className="flex gap-2 pb-2">
-                  {projectGalleries[selectedProject].map((img, idx) => (
-                    <img
-                      key={idx}
-                      src={img}
-                      alt={`Миниатюра ${idx + 1}`}
-                      className={`flex-shrink-0 w-24 h-24 object-cover rounded cursor-pointer border-2 transition-all ${
-                        idx === currentImageIndex ? 'border-primary' : 'border-transparent hover:border-primary/50'
-                      }`}
-                      onClick={() => setCurrentImageIndex(idx)}
-                    />
-                  ))}
-                </div>
+              <div className="grid grid-cols-5 gap-2 mt-4">
+                {projectGalleries[selectedProject].map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`Миниатюра ${idx + 1}`}
+                    className={`w-full h-20 object-cover rounded cursor-pointer border-2 transition-all ${
+                      idx === currentImageIndex ? 'border-primary' : 'border-transparent hover:border-primary/50'
+                    }`}
+                    onClick={() => setCurrentImageIndex(idx)}
+                  />
+                ))}
               </div>
             </div>
           )}
