@@ -236,6 +236,13 @@ const Index = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                    <Icon name="Flame" size={20} className="text-primary" />
+                    Эффект русской бани
+                  </h3>
+                  <p className="text-muted-foreground">Эффект русской бани - это правильное соотношение температуры и влажности в парной. А так же, правильная конфигурация парной, выбор печи, устройство полков для парения, вентиляция. Для достижения такого эффекта, мы применяем опыт и знания физических процессов в парной и физиологии организма, современные материалы и технологии, а так же, собственный опыт и практику в парении.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
                     <Icon name="Hammer" size={20} className="text-primary" />
                     Традиционное мастерство
                   </h3>
