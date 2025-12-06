@@ -164,7 +164,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 onClick={() => navigate("/order")} 
-                className="absolute left-1/2 -translate-x-1/2 -bottom-20 text-lg px-8 bg-lime-400 hover:bg-yellow-400 text-black font-bold transition-all shadow-lg animate-fade-in"
+                className="absolute left-1/2 -translate-x-1/2 -bottom-20 text-lg px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in"
               >
                 Получить расчет стоимости бани бесплатно
               </Button>
@@ -208,7 +208,7 @@ const Index = () => {
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
             Современные технологии и традиционные материалы для создания вашей идеальной бани
           </p>
-          <Button size="lg" onClick={() => navigate("/order")} className="text-lg px-8 bg-yellow-400 hover:bg-lime-400 text-black font-bold transition-colors">
+          <Button size="lg" onClick={() => navigate("/order")} className="text-lg px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95">
             Получить расчет стоимости бани бесплатно
           </Button>
         </div>
