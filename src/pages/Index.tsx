@@ -361,39 +361,47 @@ const Index = () => {
       </section>
 
       <Dialog open={selectedProject !== null} onOpenChange={closeGallery}>
-        <DialogContent className="max-w-6xl h-[85vh] p-0" hideClose>
+        <DialogContent className="max-w-5xl max-h-[90vh] overflow-auto" hideClose>
           {selectedProject !== null && (
-            <div className="relative w-full h-full flex items-center justify-center bg-black">
-              <Button 
-                variant="ghost" 
-                onClick={prevImage} 
-                disabled={currentImageIndex === 0}
-                size="icon"
-                className="absolute left-4 z-10 bg-black/50 hover:bg-black/70 text-white h-12 w-12"
-              >
-                <Icon name="ChevronLeft" size={32} />
-              </Button>
-              
-              <div className="w-full h-full flex items-center justify-center p-8">
-                <img 
-                  src={projectGalleries[selectedProject][currentImageIndex]} 
-                  alt={`Фото ${currentImageIndex + 1}`}
-                  className="max-w-full max-h-full object-contain"
-                />
+            <div className="relative">
+              <img 
+                src={projectGalleries[selectedProject][currentImageIndex]} 
+                alt={`Фото ${currentImageIndex + 1}`}
+                className="w-full h-auto max-h-[60vh] object-contain rounded-lg"
+              />
+              <div className="flex items-center justify-between mt-4">
+                <Button 
+                  variant="outline" 
+                  onClick={prevImage} 
+                  disabled={currentImageIndex === 0}
+                  size="icon"
+                >
+                  <Icon name="ChevronLeft" size={24} />
+                </Button>
+                <span className="text-sm text-muted-foreground">
+                  {currentImageIndex + 1} / {projectGalleries[selectedProject].length}
+                </span>
+                <Button 
+                  variant="outline" 
+                  onClick={nextImage} 
+                  disabled={currentImageIndex === projectGalleries[selectedProject].length - 1}
+                  size="icon"
+                >
+                  <Icon name="ChevronRight" size={24} />
+                </Button>
               </div>
-
-              <Button 
-                variant="ghost" 
-                onClick={nextImage} 
-                disabled={currentImageIndex === projectGalleries[selectedProject].length - 1}
-                size="icon"
-                className="absolute right-4 z-10 bg-black/50 hover:bg-black/70 text-white h-12 w-12"
-              >
-                <Icon name="ChevronRight" size={32} />
-              </Button>
-
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm">
-                {currentImageIndex + 1} / {projectGalleries[selectedProject].length}
+              <div className="grid grid-cols-5 gap-2 mt-4">
+                {projectGalleries[selectedProject].map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`Миниатюра ${idx + 1}`}
+                    className={`w-full h-20 object-cover rounded cursor-pointer border-2 transition-all ${
+                      idx === currentImageIndex ? 'border-primary' : 'border-transparent hover:border-primary/50'
+                    }`}
+                    onClick={() => setCurrentImageIndex(idx)}
+                  />
+                ))}
               </div>
             </div>
           )}
