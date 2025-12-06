@@ -13,6 +13,11 @@ const Index = () => {
 
   const projectGalleries = [
     [
+      "https://cdn.poehali.dev/files/cbdcfe42-acc1-4c89-a5ef-b520aeba8a5a.JPG",
+      "https://cdn.poehali.dev/files/78e017d0-94d9-48df-b735-60691d16e3bf.JPG",
+      "https://cdn.poehali.dev/files/23008c34-d19b-452f-a0e6-66eec97b9478.JPG",
+      "https://cdn.poehali.dev/files/31e4e0d0-9bd1-4bd3-a994-85f15eca9c7c.JPG",
+      "https://cdn.poehali.dev/files/77269409-5e2d-4d4f-8673-a8616f43e49e.JPG",
       "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
       "https://cdn.poehali.dev/files/44a34322-94c4-4927-b372-e632bd76e8c3.png",
       "https://cdn.poehali.dev/files/7c45af13-f389-40c5-a0ec-e0bed1884fef.jpg",
@@ -229,11 +234,11 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                img: "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
-                title: "Баня из бревна 3×6",
-                size: "3×6 м",
+                img: "https://cdn.poehali.dev/files/cbdcfe42-acc1-4c89-a5ef-b520aeba8a5a.JPG",
+                title: "Баня из бревна 6×12",
+                size: "6×12 м",
                 material: "Оцилиндрованное бревно",
-                location: "д. Гамы, Пермский край"
+                location: "Резиденция \"Веретье\", Пермский край"
               },
               {
                 img: "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
