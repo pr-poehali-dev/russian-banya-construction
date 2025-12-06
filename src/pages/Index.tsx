@@ -361,7 +361,7 @@ const Index = () => {
       </section>
 
       <Dialog open={selectedProject !== null} onOpenChange={closeGallery}>
-        <DialogContent className="max-w-7xl h-[95vh] p-0" hideClose>
+        <DialogContent className="max-w-6xl h-[85vh] p-0" hideClose>
           {selectedProject !== null && (
             <div className="relative w-full h-full flex items-center justify-center bg-black">
               <Button 
@@ -374,7 +374,7 @@ const Index = () => {
                 <Icon name="ChevronLeft" size={32} />
               </Button>
               
-              <div className="w-full h-full flex items-center justify-center p-4">
+              <div className="w-full h-full flex items-center justify-center p-8">
                 <img 
                   src={projectGalleries[selectedProject][currentImageIndex]} 
                   alt={`Фото ${currentImageIndex + 1}`}
