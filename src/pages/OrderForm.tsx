@@ -53,6 +53,9 @@ const OrderForm = () => {
       });
       
       if (response.ok) {
+        if (typeof window !== 'undefined' && (window as any).ym) {
+          (window as any).ym(105711132, 'reachGoal', 'form_submit');
+        }
         toast({
           title: "Заявка отправлена!",
           description: "Специалисты компании \"Пермский Пар\" свяжутся с вами в ближайшее время.",
