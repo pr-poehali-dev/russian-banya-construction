@@ -10,6 +10,7 @@ const Index = () => {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isButtonSticky, setIsButtonSticky] = useState(false);
 
   const projectGalleries = [
     [
@@ -126,6 +127,19 @@ const Index = () => {
     }
   }, [selectedProject, currentImageIndex]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.getElementById('hero');
+      if (heroSection) {
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
+        setIsButtonSticky(heroBottom <= 80);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -136,7 +150,16 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b border-yellow-500">
         <nav className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between relative">
+            {isButtonSticky && (
+              <Button 
+                size="sm" 
+                onClick={() => navigate("/order")} 
+                className="absolute left-1/2 -translate-x-1/2 -bottom-12 text-sm px-4 bg-yellow-400 hover:bg-lime-400 text-black font-bold transition-all shadow-lg animate-fade-in"
+              >
+                Получить расчет стоимости
+              </Button>
+            )}
             <div className="flex items-center gap-3">
               <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-12 w-12 object-contain bg-yellow-400 rounded" />
               <div className="flex flex-col items-center">
