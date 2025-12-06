@@ -176,6 +176,9 @@ const Index = () => {
               <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-lg">+7 (342) 298-40-30</a>
             </div>
           </div>
+          <div className="text-center mt-2">
+            <p className="text-sm text-black/80 font-medium italic">Русская баня — это не помещение, это процесс!</p>
+          </div>
         </nav>
       </header>
 
