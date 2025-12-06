@@ -13,6 +13,13 @@ const Index = () => {
 
   const projectGalleries = [
     [
+      "https://cdn.poehali.dev/files/5b0fe7be-c717-42ee-907a-f2c4b99914e5.JPG",
+      "https://cdn.poehali.dev/files/fd3c3beb-58e6-4d41-8f1c-16c4e6f576ac.JPG",
+      "https://cdn.poehali.dev/files/9db95649-86f2-4493-be39-4d7acb47ba14.JPG",
+      "https://cdn.poehali.dev/files/242e8fc2-f9ba-46fc-9bc3-657aa6915553.JPG",
+      "https://cdn.poehali.dev/files/f92cf9b3-fcf2-45e8-942d-4af9154f1760.JPG"
+    ],
+    [
       "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
       "https://cdn.poehali.dev/files/44a34322-94c4-4927-b372-e632bd76e8c3.png",
       "https://cdn.poehali.dev/files/7c45af13-f389-40c5-a0ec-e0bed1884fef.jpg",
@@ -56,13 +63,6 @@ const Index = () => {
       "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/8cf8f03b-2e77-43c3-8723-1f9621dd54f8.jpg",
       "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/a040c8be-e5e8-4069-a009-40bf4ef7c865.jpg",
       "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/02b72ce5-c227-4d11-9961-e4766d044f51.jpg"
-    ],
-    [
-      "https://cdn.poehali.dev/files/5b0fe7be-c717-42ee-907a-f2c4b99914e5.JPG",
-      "https://cdn.poehali.dev/files/fd3c3beb-58e6-4d41-8f1c-16c4e6f576ac.JPG",
-      "https://cdn.poehali.dev/files/9db95649-86f2-4493-be39-4d7acb47ba14.JPG",
-      "https://cdn.poehali.dev/files/242e8fc2-f9ba-46fc-9bc3-657aa6915553.JPG",
-      "https://cdn.poehali.dev/files/f92cf9b3-fcf2-45e8-942d-4af9154f1760.JPG"
     ]
   ];
 
@@ -236,6 +236,13 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
+                img: "https://cdn.poehali.dev/files/5b0fe7be-c717-42ee-907a-f2c4b99914e5.JPG",
+                title: "Баня из бревна 6×12",
+                size: "6×12 м",
+                material: "Оцилиндрованное бревно",
+                location: "Резиденция \"Веретье\", Пермский край"
+              },
+              {
                 img: "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
                 title: "Баня из бревна 3×6",
                 size: "3×6 м",
@@ -276,13 +283,6 @@ const Index = () => {
                 size: "6×8 м",
                 material: "Оцилиндрованное бревно",
                 location: "с. Култаево"
-              },
-              {
-                img: "https://cdn.poehali.dev/files/5b0fe7be-c717-42ee-907a-f2c4b99914e5.JPG",
-                title: "Баня из бревна 6×12",
-                size: "6×12 м",
-                material: "Оцилиндрованное бревно",
-                location: "Резиденция \"Веретье\", Пермский край"
               }
             ].map((project, idx) => (
               <Card 
