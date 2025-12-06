@@ -308,7 +308,7 @@ const Index = () => {
                   <img 
                     src={project.img} 
                     alt={project.title} 
-                    className={`w-full h-64 object-cover hover:scale-110 transition-transform duration-500 ${idx === 0 ? 'object-[60%_center]' : ''}`}
+                    className={`w-full h-64 object-cover hover:scale-110 transition-transform duration-500 ${idx === 0 ? 'object-[70%_center]' : ''}`}
                   />
                   {projectGalleries[idx].length > 0 && (
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
