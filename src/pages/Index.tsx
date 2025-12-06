@@ -319,13 +319,6 @@ const Index = () => {
                 size: "5×5 м",
                 material: "Оцилиндрованное бревно",
                 location: "п. Усть-Качка, Пермский край"
-              },
-              {
-                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/588c3540-c8e5-4bda-8ed2-1a7310330dd1.jpg",
-                title: "Баня «Классика»",
-                size: "6×8 м",
-                material: "Оцилиндрованное бревно",
-                location: "с. Култаево"
               }
             ].map((project, idx) => (
               <Card 
