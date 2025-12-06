@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
@@ -103,6 +103,24 @@ const Index = () => {
   const prevImage = () => {
     setCurrentImageIndex((prev) => prev > 0 ? prev - 1 : prev);
   };
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (selectedProject !== null) {
+        e.preventDefault();
+        if (e.deltaY > 0) {
+          nextImage();
+        } else if (e.deltaY < 0) {
+          prevImage();
+        }
+      }
+    };
+
+    if (selectedProject !== null) {
+      window.addEventListener('wheel', handleWheel, { passive: false });
+      return () => window.removeEventListener('wheel', handleWheel);
+    }
+  }, [selectedProject, currentImageIndex]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -344,6 +362,13 @@ const Index = () => {
 
       <Dialog open={selectedProject !== null} onOpenChange={closeGallery}>
         <DialogContent className="max-w-4xl">
+          <button
+            onClick={closeGallery}
+            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground z-50"
+          >
+            <Icon name="X" className="h-4 w-4" />
+            <span className="sr-only">Закрыть</span>
+          </button>
           <DialogHeader>
             <DialogTitle>Галерея проекта</DialogTitle>
           </DialogHeader>
