@@ -286,7 +286,7 @@ const Index = () => {
                 img: "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
                 title: "Баня из бревна 6×6",
                 size: "6×6 м",
-                material: "Оцилиндрованное бревно",
+                material: "Рубленное бревно",
                 location: "д. Скобелевка, Пермский край"
               },
               {
