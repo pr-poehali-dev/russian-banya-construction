@@ -367,7 +367,7 @@ const Index = () => {
               <img 
                 src={projectGalleries[selectedProject][currentImageIndex]} 
                 alt={`Фото ${currentImageIndex + 1}`}
-                className="w-full h-auto max-h-[60vh] object-contain rounded-lg"
+                className="w-full h-auto max-h-[50vh] object-contain rounded-lg"
               />
               <div className="flex items-center justify-between mt-4">
                 <Button 
@@ -390,13 +390,13 @@ const Index = () => {
                   <Icon name="ChevronRight" size={24} />
                 </Button>
               </div>
-              <div className="grid grid-cols-5 gap-2 mt-4">
+              <div className="grid grid-cols-6 gap-2 mt-3">
                 {projectGalleries[selectedProject].map((img, idx) => (
                   <img
                     key={idx}
                     src={img}
                     alt={`Миниатюра ${idx + 1}`}
-                    className={`w-full h-20 object-cover rounded cursor-pointer border-2 transition-all ${
+                    className={`w-full h-16 object-cover rounded cursor-pointer border-2 transition-all ${
                       idx === currentImageIndex ? 'border-primary' : 'border-transparent hover:border-primary/50'
                     }`}
                     onClick={() => setCurrentImageIndex(idx)}
