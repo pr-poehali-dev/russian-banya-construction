@@ -62,10 +62,11 @@ const Index = () => {
       "https://cdn.poehali.dev/files/35c2929b-6726-4db3-aa64-52835d7f9c45.jpg"
     ],
     [
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e278da1b-3b8d-48f4-8caf-a5547d0cb2ea.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/8bf6935f-27ae-44b8-985f-ee3fc41e3e65.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/62ad4a24-dc5e-412f-8d37-6c9d9b6a30aa.jpg",
-      "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/2b80b273-881a-45e4-a9ba-60507cce938d.jpg"
+      "https://cdn.poehali.dev/files/cdfc8af5-e7bc-49ee-96c8-0b9b3dced3af.JPG",
+      "https://cdn.poehali.dev/files/f919fd01-44da-4352-a059-ce1887970b68.JPG",
+      "https://cdn.poehali.dev/files/0d341b86-5a44-457e-8b25-aed527fa0319.JPG",
+      "https://cdn.poehali.dev/files/6985144b-f603-4f7c-8c6a-4f5621ba2438.JPG",
+      "https://cdn.poehali.dev/files/ff9e85d0-683d-48ed-b9d8-ada1dc2b48c5.JPG"
     ],
     [
       "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/9614f8ff-a336-43b5-903d-0c8f3b60b43e.jpg",
@@ -296,11 +297,11 @@ const Index = () => {
                 location: "д. Красная Слудка, Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e278da1b-3b8d-48f4-8caf-a5547d0cb2ea.jpg",
-                title: "Баня «Семейная»",
-                size: "10×12 м",
-                material: "Клееный брус",
-                location: "КП Лесная поляна"
+                img: "https://cdn.poehali.dev/files/cdfc8af5-e7bc-49ee-96c8-0b9b3dced3af.JPG",
+                title: "Баня из бруса 6×8",
+                size: "6×8 м",
+                material: "Брус естественной влажности",
+                location: "г. Добрянка, Пермский край"
               },
               {
                 img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/9614f8ff-a336-43b5-903d-0c8f3b60b43e.jpg",
