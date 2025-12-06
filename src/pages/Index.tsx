@@ -76,7 +76,6 @@ const Index = () => {
     [
       "https://cdn.poehali.dev/files/475d1fc5-71db-4437-8990-d067b0a25d0c.jpg",
       "https://cdn.poehali.dev/files/7928a4f1-9c7c-43fd-ab17-6babb6e37be7.JPG",
-      "https://cdn.poehali.dev/files/bf9bc314-777a-43f3-899a-456db9b32f19.JPG",
       "https://cdn.poehali.dev/files/a468393d-98fc-4692-934b-115e4be196ad.JPG",
       "https://cdn.poehali.dev/files/ce713e72-983e-416c-bc45-d51e637013a5.JPG"
     ],
