@@ -112,8 +112,11 @@ const OrderForm = () => {
             <CardTitle className="text-3xl text-black text-center">
               Анкета заказчика
             </CardTitle>
-            <p className="text-center text-black/80 mt-2">
+            <p className="text-center text-black/80 mt-2 text-base">
               Заполните форму, и мы рассчитаем стоимость вашей бани бесплатно
+            </p>
+            <p className="text-center text-black/60 mt-3 text-xs">
+              Мы уважаем вопрос конфиденциальности и не используем личные данные для рекламных целей и навязывания каких-либо услуг
             </p>
           </CardHeader>
           <CardContent className="pt-6">
