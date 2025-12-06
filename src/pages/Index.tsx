@@ -364,17 +364,10 @@ const Index = () => {
         <DialogContent className="max-w-5xl max-h-[90vh] overflow-auto" hideClose>
           {selectedProject !== null && (
             <div className="relative">
-              <button
-                onClick={closeGallery}
-                className="sticky right-4 top-4 ml-auto rounded-full bg-red-500 hover:bg-red-600 p-3 transition-all z-50 shadow-lg mb-2 float-right"
-                title="Закрыть галерею"
-              >
-                <Icon name="X" className="h-5 w-5 text-white" />
-              </button>
               <img 
                 src={projectGalleries[selectedProject][currentImageIndex]} 
                 alt={`Фото ${currentImageIndex + 1}`}
-                className="w-full h-auto max-h-[60vh] object-contain rounded-lg clear-both"
+                className="w-full h-auto max-h-[60vh] object-contain rounded-lg"
               />
               <div className="flex items-center justify-between mt-4">
                 <Button 
