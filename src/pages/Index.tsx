@@ -13,7 +13,7 @@ const Index = () => {
 
   const projectGalleries = [
     [
-      "https://cdn.poehali.dev/files/5b0fe7be-c717-42ee-907a-f2c4b99914e5.JPG",
+      "https://cdn.poehali.dev/files/21891db6-8b5a-49ef-85a8-c1986de51d44.JPG",
       "https://cdn.poehali.dev/files/fd3c3beb-58e6-4d41-8f1c-16c4e6f576ac.JPG",
       "https://cdn.poehali.dev/files/9db95649-86f2-4493-be39-4d7acb47ba14.JPG",
       "https://cdn.poehali.dev/files/f92cf9b3-fcf2-45e8-942d-4af9154f1760.JPG",
@@ -268,7 +268,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                img: "https://cdn.poehali.dev/files/5b0fe7be-c717-42ee-907a-f2c4b99914e5.JPG",
+                img: "https://cdn.poehali.dev/files/21891db6-8b5a-49ef-85a8-c1986de51d44.JPG",
                 title: "Баня из бревна 6×12",
                 size: "6×12 м",
                 material: "Оцилиндрованное бревно",
