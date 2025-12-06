@@ -159,16 +159,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b border-yellow-500">
         <nav className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between relative">
-            {isButtonSticky && (
-              <Button 
-                size="lg" 
-                onClick={() => navigate("/order")} 
-                className="absolute left-1/2 -translate-x-1/2 -bottom-20 text-lg px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in"
-              >
-                Получить расчет стоимости бани бесплатно
-              </Button>
-            )}
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-12 w-12 object-contain bg-yellow-400 rounded" />
               <div className="flex flex-col items-center">
@@ -189,6 +180,17 @@ const Index = () => {
             <p className="text-sm text-black font-bold italic">Русская баня — это не помещение, это процесс!</p>
           </div>
         </nav>
+        {isButtonSticky && (
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full py-3">
+            <Button 
+              size="lg" 
+              onClick={() => navigate("/order")} 
+              className="text-lg px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-nowrap"
+            >
+              Получить расчет стоимости бани бесплатно
+            </Button>
+          </div>
+        )}
       </header>
 
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
