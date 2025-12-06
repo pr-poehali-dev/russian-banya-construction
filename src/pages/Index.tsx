@@ -361,18 +361,16 @@ const Index = () => {
       </section>
 
       <Dialog open={selectedProject !== null} onOpenChange={closeGallery}>
-        <DialogContent className="max-w-4xl">
-          <DialogHeader>
-            <DialogTitle>Галерея проекта</DialogTitle>
-          </DialogHeader>
-          <button
-            onClick={closeGallery}
-            className="absolute right-6 top-6 rounded-full bg-black/50 hover:bg-black/70 p-2 transition-all z-50"
-          >
-            <Icon name="X" className="h-6 w-6 text-white" />
-          </button>
+        <DialogContent className="max-w-4xl" hideClose>
           {selectedProject !== null && (
             <div className="relative">
+              <button
+                onClick={closeGallery}
+                className="absolute -right-2 -top-2 rounded-full bg-red-500 hover:bg-red-600 p-3 transition-all z-50 shadow-lg"
+                title="Закрыть галерею"
+              >
+                <Icon name="X" className="h-5 w-5 text-white" />
+              </button>
               <img 
                 src={projectGalleries[selectedProject][currentImageIndex]} 
                 alt={`Фото ${currentImageIndex + 1}`}
