@@ -212,8 +212,8 @@ const Index = () => {
             ].map((item, idx) => (
               <Card key={idx} className="hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                    <Icon name={item.icon} className="text-primary" size={24} />
+                  <h3 className="text-xl font-semibold mb-2 flex items-start gap-2">
+                    <Icon name={item.icon} className="text-primary flex-shrink-0 mt-1" size={48} />
                     {item.title}
                   </h3>
                   <p className="text-muted-foreground">{item.desc}</p>
