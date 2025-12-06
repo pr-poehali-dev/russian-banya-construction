@@ -153,11 +153,11 @@ const Index = () => {
           <div className="flex items-center justify-between relative">
             {isButtonSticky && (
               <Button 
-                size="sm" 
+                size="lg" 
                 onClick={() => navigate("/order")} 
-                className="absolute left-1/2 -translate-x-1/2 -bottom-12 text-sm px-4 bg-yellow-400 hover:bg-lime-400 text-black font-bold transition-all shadow-lg animate-fade-in"
+                className="absolute left-1/2 -translate-x-1/2 -bottom-14 text-lg px-8 bg-lime-400 hover:bg-yellow-400 text-black font-bold transition-all shadow-lg animate-fade-in"
               >
-                Получить расчет стоимости
+                Получить расчет стоимости бани бесплатно
               </Button>
             )}
             <div className="flex items-center gap-3">
