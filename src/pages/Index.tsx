@@ -207,8 +207,8 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { icon: "TreePine", title: "Натуральные современные материалы", desc: "Мы используем только отборную древесину, натуральные масла и воски, природный камень и современные высокоэффективные печи" },
-              { icon: "Shield", title: "Гарантия качества", desc: "10 лет гарантии на все виды работ" },
-              { icon: "Clock", title: "Быстрое строительство", desc: "Завершим проект в согласованные сроки" }
+              { icon: "Clock", title: "Быстрое строительство", desc: "Завершим проект в согласованные сроки" },
+              { icon: "Shield", title: "Гарантия качества", desc: "5 лет гарантии на работы по договору, твердая смета, поэтапная оплата" }
             ].map((item, idx) => (
               <Card key={idx} className="hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
