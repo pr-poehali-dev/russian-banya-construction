@@ -177,7 +177,7 @@ const Index = () => {
             </div>
           </div>
           <div className="text-left mt-2">
-            <p className="text-sm text-white font-medium italic">Русская баня — это не помещение, это процесс!</p>
+            <p className="text-sm text-black font-bold italic">Русская баня — это не помещение, это процесс!</p>
           </div>
         </nav>
       </header>
