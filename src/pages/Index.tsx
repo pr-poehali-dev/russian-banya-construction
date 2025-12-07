@@ -234,7 +234,7 @@ const Index = () => {
           <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-2 leading-tight">
             Строительство<br />русских бань
           </h1>
-          <p className="text-lg sm:text-xl md:text-3xl mb-4 font-medium">из бревна и бруса</p>
+          <p className="text-lg sm:text-xl md:text-3xl mb-4 font-medium">из бревна и бруса в Перми и Пермском крае</p>
           <p className="text-base sm:text-lg md:text-2xl mb-6 max-w-2xl mx-auto leading-relaxed px-2">
             Современные технологии и традиционные материалы для создания вашей идеальной бани
           </p>
