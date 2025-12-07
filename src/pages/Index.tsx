@@ -1,11 +1,13 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import Icon from "@/components/ui/icon";
 import { useState, useEffect } from "react";
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { ContentSections } from "@/components/ContentSections";
-import { GallerySection } from "@/components/GallerySection";
+import { useNavigate } from "react-router-dom";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
+  const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isButtonSticky, setIsButtonSticky] = useState(false);
@@ -109,6 +111,24 @@ const Index = () => {
   };
 
   useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (selectedProject !== null) {
+        e.preventDefault();
+        if (e.deltaY > 0) {
+          nextImage();
+        } else if (e.deltaY < 0) {
+          prevImage();
+        }
+      }
+    };
+
+    if (selectedProject !== null) {
+      window.addEventListener('wheel', handleWheel, { passive: false });
+      return () => window.removeEventListener('wheel', handleWheel);
+    }
+  }, [selectedProject, currentImageIndex]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const heroSection = document.getElementById('hero');
       if (heroSection) {
@@ -138,26 +158,358 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header 
-        isButtonSticky={isButtonSticky}
-        isMobileMenuOpen={isMobileMenuOpen}
-        setIsMobileMenuOpen={setIsMobileMenuOpen}
-        scrollToSection={scrollToSection}
-      />
-      
-      <Hero />
-      
-      <ContentSections />
-      
-      <GallerySection 
-        projectGalleries={projectGalleries}
-        selectedProject={selectedProject}
-        currentImageIndex={currentImageIndex}
-        openGallery={openGallery}
-        closeGallery={closeGallery}
-        nextImage={nextImage}
-        prevImage={prevImage}
-      />
+      <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b border-yellow-500">
+        <nav className="container mx-auto px-3 sm:px-6 py-2 sm:py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-yellow-400 rounded" />
+              <div className="flex flex-col items-start">
+                <div className="text-lg sm:text-2xl font-bold text-black leading-tight">Пермский Пар</div>
+                <div className="text-[10px] sm:text-xs text-black/70 -mt-0.5">строительная компания</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <a href="tel:+73422984030" className="md:hidden text-black hover:text-black/70 transition-colors">
+                <Icon name="Phone" size={24} />
+              </a>
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+                className="md:hidden text-black hover:text-black/70 transition-colors"
+                aria-label="Меню"
+              >
+                <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={28} />
+              </button>
+              <div className="hidden md:flex gap-8 items-center">
+                <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
+                <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
+                <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
+                <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
+                <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
+                <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-lg">+7 (342) 298-40-30</a>
+              </div>
+            </div>
+          </div>
+          <div className="text-left mt-1 sm:mt-2 px-1">
+            <p className="text-xs sm:text-sm text-black font-bold italic">Русская баня — это не помещение, это процесс!</p>
+          </div>
+          {isMobileMenuOpen && (
+            <div className="md:hidden absolute top-full left-0 w-full bg-yellow-400 border-t border-yellow-500 shadow-lg">
+              <div className="flex flex-col py-2">
+                <button onClick={() => { scrollToSection("hero"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Главная</button>
+                <button onClick={() => { scrollToSection("about"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">О бане</button>
+                <button onClick={() => { scrollToSection("services"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Услуги</button>
+                <button onClick={() => { scrollToSection("gallery"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Галерея</button>
+                <button onClick={() => { scrollToSection("contact"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Контакты</button>
+                <a href="tel:+73422984030" className="text-black hover:bg-yellow-500 transition-colors font-bold py-3 px-4 text-left flex items-center gap-2">
+                  <Icon name="Phone" size={20} />
+                  +7 (342) 298-40-30
+                </a>
+              </div>
+            </div>
+          )}
+        </nav>
+        {isButtonSticky && (
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full py-2 px-2 w-full flex justify-center">
+            <Button 
+              size="lg" 
+              onClick={() => navigate("/order")} 
+              className="text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw]"
+            >
+              Получить расчет стоимости бани бесплатно
+            </Button>
+          </div>
+        )}
+      </header>
+
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e5212274-23cb-48e3-a724-60171be466b0.jpg"
+            alt="Парная с прямоугольной печью в облицовке камнем"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+        <div className="relative z-10 container mx-auto px-4 text-center text-white animate-fade-in max-w-full">
+          <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-2 leading-tight">
+            Строительство<br />русских бань
+          </h1>
+          <p className="text-lg sm:text-xl md:text-3xl mb-4 font-medium">из бревна и бруса</p>
+          <p className="text-base sm:text-lg md:text-2xl mb-6 max-w-2xl mx-auto leading-relaxed px-2">
+            Современные технологии и традиционные материалы для создания вашей идеальной бани
+          </p>
+          <Button size="lg" onClick={() => navigate("/order")} className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw]">
+            Получить расчет стоимости бани бесплатно
+          </Button>
+        </div>
+      </section>
+
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { icon: "TreePine", title: "Натуральные современные материалы", desc: "Мы используем только отборную древесину, натуральные масла и воски, природный камень и современные высокоэффективные печи" },
+              { icon: "Hammer", title: "Технологичное строительство", desc: "Строим парные с эффектом русской бани, с учетом традиций и современных тенденций в эстетическом и практическом использовании бани" },
+              { icon: "Shield", title: "Гарантия качества", desc: "Опыт строительства более 15 лет. 5 лет гарантии на работы по договору, твердая смета, поэтапная оплата" }
+            ].map((item, idx) => (
+              <Card key={idx}>
+                <CardContent className="pt-6">
+                  <h3 className="text-xl font-semibold mb-2 flex items-start gap-2">
+                    <Icon name={item.icon} className="text-primary flex-shrink-0 mt-1" size={48} />
+                    {item.title}
+                  </h3>
+                  <p className="text-muted-foreground">{item.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="py-20 px-6">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div>
+              <img 
+                src="https://cdn.poehali.dev/files/fc416752-82eb-400e-999b-154b1184a5d9.jpg"
+                alt="Банщик парит вениками в русской бане"
+                className="rounded-lg shadow-xl mb-6"
+              />
+              <div>
+                <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                  <Icon name="Flame" size={20} className="text-primary" />
+                  Эффект русской бани
+                </h3>
+                <p className="text-muted-foreground"><strong>Эффект русской бани</strong> - это правильное соотношение <strong>температуры</strong> и <strong>влажности</strong> в парной. А так же, правильная конфигурация парной, выбор печи, устройство полков для парения, вентиляция. Для достижения такого эффекта, мы применяем опыт и знания физических процессов в парной и физиологии организма, современные материалы и технологии, а так же, собственный опыт и практику в парении.</p>
+              </div>
+            </div>
+            <div>
+              <h2 className="text-4xl font-bold mb-6">Почему именно русская баня?</h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                    <Icon name="History" size={20} className="text-primary" />
+                    Многовековые традиции
+                  </h3>
+                  <p className="text-muted-foreground">В отличии от финских саун и турецких хамамов, русская баня во все времена была приоритетным выбором для  русского человека. </p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                    <Icon name="Heart" size={20} className="text-primary" />
+                    Польза для организма человека
+                  </h3>
+                  <p className="text-muted-foreground">Только эффект русской бани создает полезное тепловое, механическое и психологическое воздействие на тело человека.</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                    <Icon name="Hammer" size={20} className="text-primary" />
+                    Традиционное мастерство
+                  </h3>
+                  <p className="text-muted-foreground">Сочетание традиции русского зодчества с современными качественными материалами, дают возможность превратить русскую баню в приятный и полезный процесс отдыха и восстановления сил.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-20 bg-muted/30 px-6">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12">Наши услуги</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: "FileText", title: "Консультации", desc: "Перед началом строительства проводим полноценные бесплатные консультации по процессам парения, устройства бани, материалам, размерам и прочим очень важным вопросам." },
+              { icon: "HardHat", title: "Строительство", desc: "Полный цикл строительных работ, внутренняя и внешняя отделка материалами премиум класса." },
+              { icon: "Wrench", title: "Инженерные системы", desc: "Установка печи, водоснабжения, водоотведения, вентиляции, полков, электрики, отопления и т.д." },
+              { icon: "Sparkles", title: "Дополнительно", desc: "Ремонт и модернизация существующих бань, террасы, банные чаны, купели" }
+            ].map((service, idx) => (
+              <Card key={idx}>
+                <CardContent className="pt-6">
+                  <div className="w-14 h-14 bg-secondary/10 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                    <Icon name={service.icon} className="text-secondary" size={28} />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-center">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm text-center">{service.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" className="py-20 px-6">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4">Галерея проектов</h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">Реализованные проекты наших клиентов</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                img: "https://cdn.poehali.dev/files/21891db6-8b5a-49ef-85a8-c1986de51d44.JPG",
+                title: "Баня из бревна 6×12",
+                size: "6×12 м",
+                material: "Оцилиндрованное бревно",
+                location: "Резиденция \"Веретье\", Пермский край"
+              },
+              {
+                img: "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
+                title: "Баня из бревна 3×6",
+                size: "3×6 м",
+                material: "Оцилиндрованное бревно",
+                location: "д. Гамы, Пермский край"
+              },
+              {
+                img: "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
+                title: "Баня из бревна 6×6",
+                size: "6×6 м",
+                material: "Рубленное бревно",
+                location: "д. Скобелевка, Пермский край"
+              },
+              {
+                img: "https://cdn.poehali.dev/files/0c49f489-1f6b-4479-8142-3603d899660a.png",
+                title: "Баня из бруса 6×6",
+                size: "6×6 м",
+                material: "Профилированный брус",
+                location: "д. Красная Слудка, Пермский край"
+              },
+              {
+                img: "https://cdn.poehali.dev/files/cdfc8af5-e7bc-49ee-96c8-0b9b3dced3af.JPG",
+                title: "Баня из бруса 6×8",
+                size: "6×8 м",
+                material: "Брус естественной влажности",
+                location: "г. Добрянка, Пермский край"
+              },
+              {
+                img: "https://cdn.poehali.dev/files/475d1fc5-71db-4437-8990-d067b0a25d0c.jpg",
+                title: "Баня из бревна 5×5",
+                size: "5×5 м",
+                material: "Оцилиндрованное бревно",
+                location: "п. Усть-Качка, Пермский край"
+              }
+            ].map((project, idx) => (
+              <Card 
+                key={idx} 
+                className="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2 cursor-pointer"
+                onClick={() => openGallery(idx)}
+              >
+                <div className="overflow-hidden relative group">
+                  <img 
+                    src={project.img} 
+                    alt={project.title} 
+                    className={`w-full h-64 object-cover hover:scale-110 transition-transform duration-500 ${idx === 0 ? 'object-[70%_center]' : ''}`}
+                  />
+                  {projectGalleries[idx].length > 0 && (
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <Icon name="Images" size={40} className="mx-auto mb-2" />
+                        <p className="text-lg font-semibold">{projectGalleries[idx].length} фото</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <CardContent className="pt-6">
+                  <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+                  <div className="space-y-2 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <Icon name="Ruler" size={16} className="text-primary" />
+                      <span>Размер: {project.size}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="TreePine" size={16} className="text-primary" />
+                      <span>{project.material}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="MapPin" size={16} className="text-primary" />
+                      <span>{project.location}</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Dialog open={selectedProject !== null} onOpenChange={closeGallery}>
+        <DialogContent className="max-w-5xl max-h-[90vh] overflow-auto" hideClose>
+          {selectedProject !== null && (
+            <div className="relative">
+              <img 
+                src={projectGalleries[selectedProject][currentImageIndex]} 
+                alt={`Фото ${currentImageIndex + 1}`}
+                className="w-full h-auto max-h-[50vh] object-contain rounded-lg"
+              />
+              <div className="flex items-center justify-between mt-4">
+                <Button 
+                  variant="outline" 
+                  onClick={prevImage} 
+                  disabled={currentImageIndex === 0}
+                  size="icon"
+                >
+                  <Icon name="ChevronLeft" size={24} />
+                </Button>
+                <span className="text-sm text-muted-foreground">
+                  {currentImageIndex + 1} / {projectGalleries[selectedProject].length}
+                </span>
+                <Button 
+                  variant="outline" 
+                  onClick={nextImage} 
+                  disabled={currentImageIndex === projectGalleries[selectedProject].length - 1}
+                  size="icon"
+                >
+                  <Icon name="ChevronRight" size={24} />
+                </Button>
+              </div>
+              <div className="grid grid-cols-7 gap-1.5 mt-3">
+                {projectGalleries[selectedProject].map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`Миниатюра ${idx + 1}`}
+                    className={`w-full h-12 object-cover rounded cursor-pointer border-2 transition-all ${
+                      idx === currentImageIndex ? 'border-primary' : 'border-transparent hover:border-primary/50'
+                    }`}
+                    onClick={() => setCurrentImageIndex(idx)}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <section id="contact" className="py-20 bg-yellow-400 text-black px-6">
+        <div className="container mx-auto max-w-2xl text-center">
+          <h2 className="text-4xl font-bold mb-6">Готовы начать строительство?</h2>
+          <p className="text-xl mb-8">
+            Свяжитесь с нами для бесплатной консультации и расчёта стоимости вашего проекта
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex items-center gap-4">
+              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <Icon name="MessageCircle" size={28} />
+              </a>
+              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <Icon name="Send" size={28} />
+              </a>
+              <a href="tel:+79824900900" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">
+                <Icon name="Phone" size={24} />
+                +7 982 490-09-00
+              </a>
+            </div>
+            <span className="hidden sm:inline">•</span>
+            <a href="mailto:t.ugol59@mail.ru" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">
+              <Icon name="Mail" size={24} />
+              t.ugol59@mail.ru
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-8 border-t border-border px-6">
+        <div className="container mx-auto text-center text-muted-foreground">
+          <p>© 2020г Пермский Пар. Все права защищены.</p>
+        </div>
+      </footer>
     </div>
   );
 };
