@@ -94,28 +94,36 @@ export const ContentSections = () => {
         </div>
       </section>
 
-      <section id="contact" className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Свяжитесь с нами</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Готовы ответить на ваши вопросы и рассчитать стоимость строительства бани
-            </p>
-            <div className="space-y-4">
-              <a href="tel:+73422984030" className="flex items-center justify-center gap-3 text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
-                <Icon name="Phone" size={32} />
-                +7 (342) 298-40-30
+      <section id="contact" className="py-12 sm:py-20 bg-yellow-400 text-black px-4 sm:px-6">
+        <div className="container mx-auto max-w-2xl text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Готовы начать строительство?</h2>
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8">
+            Свяжитесь с нами для бесплатной консультации и расчёта стоимости вашего проекта
+          </p>
+          <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <Icon name="MessageCircle" size={28} />
               </a>
-              <p className="text-muted-foreground">Звоните с 9:00 до 20:00 ежедневно</p>
+              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <Icon name="Send" size={28} />
+              </a>
+              <a href="tel:+79824900900" className="flex items-center gap-2 text-base sm:text-lg hover:opacity-80 transition-opacity">
+                <Icon name="Phone" size={24} />
+                <span className="whitespace-nowrap">+7 982 490-09-00</span>
+              </a>
             </div>
+            <a href="mailto:t.ugol59@mail.ru" className="flex items-center gap-2 text-base sm:text-lg hover:opacity-80 transition-opacity break-all">
+              <Icon name="Mail" size={24} />
+              <span className="break-all">t.ugol59@mail.ru</span>
+            </a>
           </div>
         </div>
       </section>
 
-      <footer className="bg-secondary text-secondary-foreground py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-sm">© 2024 Пермский Пар. Строительство русских бань под ключ в Перми и Пермском крае.</p>
-          <p className="text-xs mt-2 opacity-80">ИП Иванов И.И. | ИНН 123456789012</p>
+      <footer className="py-8 border-t border-border px-6">
+        <div className="container mx-auto text-center text-muted-foreground">
+          <p>© 2020г Пермский Пар. Все права защищены.</p>
         </div>
       </footer>
     </>
