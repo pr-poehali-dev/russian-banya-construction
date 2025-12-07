@@ -158,13 +158,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b border-yellow-500">
-        <nav className="container mx-auto px-6 py-4">
+        <nav className="container mx-auto px-3 sm:px-6 py-2 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-12 w-12 object-contain bg-yellow-400 rounded" />
-              <div className="flex flex-col items-center">
-                <div className="text-2xl font-bold text-black leading-tight">Пермский Пар</div>
-                <div className="text-xs text-black/70 -mt-0.5">строительная компания</div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-yellow-400 rounded" />
+              <div className="flex flex-col items-start">
+                <div className="text-lg sm:text-2xl font-bold text-black leading-tight">Пермский Пар</div>
+                <div className="text-[10px] sm:text-xs text-black/70 -mt-0.5">строительная компания</div>
               </div>
             </div>
             <div className="hidden md:flex gap-8 items-center">
@@ -176,16 +176,16 @@ const Index = () => {
               <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-lg">+7 (342) 298-40-30</a>
             </div>
           </div>
-          <div className="text-left mt-2">
-            <p className="text-sm text-black font-bold italic">Русская баня — это не помещение, это процесс!</p>
+          <div className="text-left mt-1 sm:mt-2 px-1">
+            <p className="text-xs sm:text-sm text-black font-bold italic">Русская баня — это не помещение, это процесс!</p>
           </div>
         </nav>
         {isButtonSticky && (
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full py-3">
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full py-2 px-2 w-full flex justify-center">
             <Button 
               size="lg" 
               onClick={() => navigate("/order")} 
-              className="text-lg px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-nowrap"
+              className="text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw]"
             >
               Получить расчет стоимости бани бесплатно
             </Button>
@@ -202,15 +202,15 @@ const Index = () => {
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-6 text-center text-white animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-2 leading-tight">
+        <div className="relative z-10 container mx-auto px-4 text-center text-white animate-fade-in max-w-full">
+          <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-2 leading-tight">
             Строительство<br />русских бань
           </h1>
-          <p className="text-2xl md:text-3xl mb-6 font-medium">из бревна и бруса</p>
-          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-3xl mb-4 font-medium">из бревна и бруса</p>
+          <p className="text-base sm:text-lg md:text-2xl mb-6 max-w-2xl mx-auto leading-relaxed px-2">
             Современные технологии и традиционные материалы для создания вашей идеальной бани
           </p>
-          <Button size="lg" onClick={() => navigate("/order")} className="text-lg px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95">
+          <Button size="lg" onClick={() => navigate("/order")} className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw]">
             Получить расчет стоимости бани бесплатно
           </Button>
         </div>
