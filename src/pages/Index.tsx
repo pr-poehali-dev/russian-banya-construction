@@ -209,11 +209,11 @@ const Index = () => {
           )}
         </nav>
         {isButtonSticky && (
-          <div className="fixed left-0 right-0 bottom-4 px-4 flex justify-center z-40 pointer-events-none">
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full py-2 px-2 w-full flex justify-center">
             <Button 
               size="lg" 
               onClick={() => navigate("/order")} 
-              className="pointer-events-auto text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw] w-full sm:w-auto"
+              className="text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw]"
             >
               Получить расчет стоимости бани бесплатно
             </Button>
