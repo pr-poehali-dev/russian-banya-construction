@@ -111,11 +111,11 @@ const OrderForm = () => {
         </Button>
 
         <Card>
-          <CardHeader className="bg-yellow-400">
-            <CardTitle className="text-3xl text-black text-center">
+          <CardHeader className="bg-yellow-400 px-4 sm:px-6">
+            <CardTitle className="text-xl sm:text-2xl md:text-3xl text-black text-center">
               Анкета заказчика
             </CardTitle>
-            <p className="text-center text-black/80 mt-2 text-base">
+            <p className="text-center text-black/80 mt-2 text-sm sm:text-base">
               Заполните форму, и мы рассчитаем стоимость вашей бани бесплатно
             </p>
             <p className="text-center text-black/60 mt-3 text-xs">
@@ -158,25 +158,25 @@ const OrderForm = () => {
 
               <div className="space-y-3">
                 <Label>Куда отправить расчет? *</Label>
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <Button
                     type="button"
                     onClick={() => setContactMethod('email')}
-                    className={`flex-1 hover:bg-lime-400 text-black ${contactMethod === 'email' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'email' ? 'bg-yellow-400' : 'bg-gray-200'}`}
                   >
                     Email
                   </Button>
                   <Button
                     type="button"
                     onClick={() => setContactMethod('whatsapp')}
-                    className={`flex-1 hover:bg-lime-400 text-black ${contactMethod === 'whatsapp' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'whatsapp' ? 'bg-yellow-400' : 'bg-gray-200'}`}
                   >
                     WhatsApp
                   </Button>
                   <Button
                     type="button"
                     onClick={() => setContactMethod('telegram')}
-                    className={`flex-1 hover:bg-lime-400 text-black ${contactMethod === 'telegram' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'telegram' ? 'bg-yellow-400' : 'bg-gray-200'}`}
                   >
                     Telegram
                   </Button>
@@ -222,18 +222,18 @@ const OrderForm = () => {
 
               <div className="space-y-3">
                 <Label>Материал стен бани *</Label>
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <Button
                     type="button"
                     onClick={() => setFormData({...formData, banjaType: 'Бревно'})}
-                    className={`flex-1 hover:bg-lime-400 text-black ${formData.banjaType === 'Бревно' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${formData.banjaType === 'Бревно' ? 'bg-yellow-400' : 'bg-gray-200'}`}
                   >
                     Бревно
                   </Button>
                   <Button
                     type="button"
                     onClick={() => setFormData({...formData, banjaType: 'Брус'})}
-                    className={`flex-1 hover:bg-lime-400 text-black ${formData.banjaType === 'Брус' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${formData.banjaType === 'Брус' ? 'bg-yellow-400' : 'bg-gray-200'}`}
                   >
                     Брус
                   </Button>
