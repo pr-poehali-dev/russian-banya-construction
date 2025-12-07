@@ -11,6 +11,7 @@ const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isButtonSticky, setIsButtonSticky] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const projectGalleries = [
     [
@@ -167,18 +168,45 @@ const Index = () => {
                 <div className="text-[10px] sm:text-xs text-black/70 -mt-0.5">строительная компания</div>
               </div>
             </div>
-            <div className="hidden md:flex gap-8 items-center">
-              <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
-              <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
-              <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
-              <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
-              <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
-              <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-lg">+7 (342) 298-40-30</a>
+            <div className="flex items-center gap-3">
+              <a href="tel:+73422984030" className="md:hidden text-black hover:text-black/70 transition-colors">
+                <Icon name="Phone" size={24} />
+              </a>
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+                className="md:hidden text-black hover:text-black/70 transition-colors"
+                aria-label="Меню"
+              >
+                <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={28} />
+              </button>
+              <div className="hidden md:flex gap-8 items-center">
+                <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
+                <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
+                <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
+                <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
+                <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
+                <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-lg">+7 (342) 298-40-30</a>
+              </div>
             </div>
           </div>
           <div className="text-left mt-1 sm:mt-2 px-1">
             <p className="text-xs sm:text-sm text-black font-bold italic">Русская баня — это не помещение, это процесс!</p>
           </div>
+          {isMobileMenuOpen && (
+            <div className="md:hidden absolute top-full left-0 w-full bg-yellow-400 border-t border-yellow-500 shadow-lg">
+              <div className="flex flex-col py-2">
+                <button onClick={() => { scrollToSection("hero"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Главная</button>
+                <button onClick={() => { scrollToSection("about"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">О бане</button>
+                <button onClick={() => { scrollToSection("services"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Услуги</button>
+                <button onClick={() => { scrollToSection("gallery"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Галерея</button>
+                <button onClick={() => { scrollToSection("contact"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Контакты</button>
+                <a href="tel:+73422984030" className="text-black hover:bg-yellow-500 transition-colors font-bold py-3 px-4 text-left flex items-center gap-2">
+                  <Icon name="Phone" size={20} />
+                  +7 (342) 298-40-30
+                </a>
+              </div>
+            </div>
+          )}
         </nav>
         {isButtonSticky && (
           <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full py-2 px-2 w-full flex justify-center">
