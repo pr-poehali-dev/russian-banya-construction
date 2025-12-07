@@ -193,7 +193,7 @@ const Index = () => {
             <p className="text-xs sm:text-sm text-black font-bold italic">Русская баня — это не помещение, это процесс!</p>
           </div>
           {isMobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 w-full bg-yellow-400 border-t border-yellow-500 shadow-lg">
+            <div className="md:hidden fixed top-[100px] left-0 right-0 bg-yellow-400 border-t border-yellow-500 shadow-lg max-h-[calc(100vh-100px)] overflow-y-auto">
               <div className="flex flex-col py-2">
                 <button onClick={() => { scrollToSection("hero"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Главная</button>
                 <button onClick={() => { scrollToSection("about"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">О бане</button>
@@ -209,11 +209,11 @@ const Index = () => {
           )}
         </nav>
         {isButtonSticky && (
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full py-2 px-2 w-full flex justify-center">
+          <div className="fixed left-0 right-0 bottom-4 px-4 flex justify-center z-40 pointer-events-none">
             <Button 
               size="lg" 
               onClick={() => navigate("/order")} 
-              className="text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw]"
+              className="pointer-events-auto text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw] w-full sm:w-auto"
             >
               Получить расчет стоимости бани бесплатно
             </Button>
@@ -477,29 +477,28 @@ const Index = () => {
         </DialogContent>
       </Dialog>
 
-      <section id="contact" className="py-20 bg-yellow-400 text-black px-6">
+      <section id="contact" className="py-12 sm:py-20 bg-yellow-400 text-black px-4 sm:px-6">
         <div className="container mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-bold mb-6">Готовы начать строительство?</h2>
-          <p className="text-xl mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Готовы начать строительство?</h2>
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8">
             Свяжитесь с нами для бесплатной консультации и расчёта стоимости вашего проекта
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
                 <Icon name="MessageCircle" size={28} />
               </a>
               <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
                 <Icon name="Send" size={28} />
               </a>
-              <a href="tel:+79824900900" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">
+              <a href="tel:+79824900900" className="flex items-center gap-2 text-base sm:text-lg hover:opacity-80 transition-opacity">
                 <Icon name="Phone" size={24} />
-                +7 982 490-09-00
+                <span className="whitespace-nowrap">+7 982 490-09-00</span>
               </a>
             </div>
-            <span className="hidden sm:inline">•</span>
-            <a href="mailto:t.ugol59@mail.ru" className="flex items-center gap-2 text-lg hover:opacity-80 transition-opacity">
+            <a href="mailto:t.ugol59@mail.ru" className="flex items-center gap-2 text-base sm:text-lg hover:opacity-80 transition-opacity break-all">
               <Icon name="Mail" size={24} />
-              t.ugol59@mail.ru
+              <span className="break-all">t.ugol59@mail.ru</span>
             </a>
           </div>
         </div>
