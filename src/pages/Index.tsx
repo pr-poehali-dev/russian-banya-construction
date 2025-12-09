@@ -372,7 +372,7 @@ const Index = () => {
                 location: "д. Скобелевка, Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/files/0c49f489-1f6b-4479-8142-3603d899660a.png",
+                img: "https://cdn.poehali.dev/files/cca216a7-9b9e-425b-b0e4-d352cea5b6a4.png",
                 title: "Баня из бруса 6×6",
                 size: "6×6 м",
                 material: "Профилированный брус",
@@ -386,7 +386,7 @@ const Index = () => {
                 location: "г. Добрянка, Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/files/475d1fc5-71db-4437-8990-d067b0a25d0c.jpg",
+                img: "https://cdn.poehali.dev/files/a468393d-98fc-4692-934b-115e4be196ad.JPG",
                 title: "Баня из бревна 5×5",
                 size: "5×5 м",
                 material: "Оцилиндрованное бревно",
