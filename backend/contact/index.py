@@ -50,10 +50,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
     
+    recipient_email = os.environ.get('RECIPIENT_EMAIL', 'pereboeva2010@mail.ru')
+    
     msg = MIMEMultipart('alternative')
     msg['Subject'] = f"Новая заявка от {body_data.get('name', 'Клиента')}"
     msg['From'] = smtp_user
-    msg['To'] = smtp_user
+    msg['To'] = recipient_email
     
     contact_method = body_data.get('contactMethod', 'email')
     contact_method_text = {
