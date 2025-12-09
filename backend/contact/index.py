@@ -10,6 +10,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
     Отправка заявок с анкеты заказчика на email
     Принимает данные формы и отправляет их на указанную почту
+    Обновлено: использует актуальные SMTP настройки из секретов
     '''
     method: str = event.get('httpMethod', 'GET')
     
