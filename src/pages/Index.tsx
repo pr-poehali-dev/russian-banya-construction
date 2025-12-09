@@ -52,11 +52,11 @@ const Index = () => {
       "https://cdn.poehali.dev/files/e9474b80-69ae-4a00-8574-c27200bb57ba.jpg"
     ],
     [
-      "https://cdn.poehali.dev/files/0c49f489-1f6b-4479-8142-3603d899660a.png",
+      "https://cdn.poehali.dev/files/cca216a7-9b9e-425b-b0e4-d352cea5b6a4.png",
       "https://cdn.poehali.dev/files/9a264058-2d14-4695-bd33-455d0d97aad9.png",
       "https://cdn.poehali.dev/files/5b94e280-3e52-4724-9d15-ffe56a2b6bad.png",
       "https://cdn.poehali.dev/files/84798a93-dd08-41eb-b20d-1a3611acf1be.png",
-      "https://cdn.poehali.dev/files/cca216a7-9b9e-425b-b0e4-d352cea5b6a4.png",
+      "https://cdn.poehali.dev/files/0c49f489-1f6b-4479-8142-3603d899660a.png",
       "https://cdn.poehali.dev/files/7062d1f4-7309-472d-bc60-6819f57dbd2f.png",
       "https://cdn.poehali.dev/files/aec4a2ca-0cc4-45f5-8a1f-76001cdb8530.png",
       "https://cdn.poehali.dev/files/61280d11-4eee-40f4-9105-3a20b63619e0.jpg",
@@ -76,9 +76,9 @@ const Index = () => {
       "https://cdn.poehali.dev/files/7f87c675-ab58-4042-8cec-6640cc6ab8fe.JPG"
     ],
     [
-      "https://cdn.poehali.dev/files/475d1fc5-71db-4437-8990-d067b0a25d0c.jpg",
-      "https://cdn.poehali.dev/files/7928a4f1-9c7c-43fd-ab17-6babb6e37be7.JPG",
       "https://cdn.poehali.dev/files/a468393d-98fc-4692-934b-115e4be196ad.JPG",
+      "https://cdn.poehali.dev/files/7928a4f1-9c7c-43fd-ab17-6babb6e37be7.JPG",
+      "https://cdn.poehali.dev/files/475d1fc5-71db-4437-8990-d067b0a25d0c.jpg",
       "https://cdn.poehali.dev/files/ce713e72-983e-416c-bc45-d51e637013a5.JPG",
       "https://cdn.poehali.dev/files/5dc59788-ab7e-495e-97d4-952d49b7306f.JPG",
       "https://cdn.poehali.dev/files/22192856-ed5b-412f-9622-18c712999ffa.JPG",
