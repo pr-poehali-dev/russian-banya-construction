@@ -113,9 +113,9 @@ export const ContentSections = () => {
                 <span className="whitespace-nowrap">+7 982 490-09-00</span>
               </a>
             </div>
-            <a href="mailto:t.ugol59@mail.ru" className="flex items-center gap-2 text-base sm:text-lg hover:opacity-80 transition-opacity break-all">
+            <a href="mailto:perm-par@mail.ru" className="flex items-center gap-2 text-base sm:text-lg hover:opacity-80 transition-opacity break-all">
               <Icon name="Mail" size={24} />
-              <span className="break-all">t.ugol59@mail.ru</span>
+              <span className="break-all">perm-par@mail.ru</span>
             </a>
           </div>
         </div>
