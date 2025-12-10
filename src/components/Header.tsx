@@ -68,9 +68,9 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
           <Button 
             size="lg" 
             onClick={() => navigate("/order")} 
-            className="pointer-events-auto text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-lime-400 hover:bg-lime-400 text-black font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw] w-full sm:w-auto"
+            className="pointer-events-auto text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-red-600 hover:bg-red-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw] w-full sm:w-auto"
           >
-            Получить расчет стоимости бани бесплатно
+            Получить подробный расчет стоимости бани
           </Button>
         </div>
       )}
