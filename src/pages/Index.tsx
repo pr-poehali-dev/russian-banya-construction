@@ -193,7 +193,7 @@ const Index = () => {
             </div>
           </div>
           <div className="text-left mt-1 sm:mt-2 px-1">
-            <p className="text-xs sm:text-sm text-black font-bold italic">Русская баня — это не помещение, это процесс!</p>
+            <p className="text-xs sm:text-sm text-black font-medium">Русская баня — это не помещение, это процесс!</p>
           </div>
           {isMobileMenuOpen && (
             <div className="md:hidden fixed top-[100px] left-0 right-0 bg-yellow-400 border-t border-yellow-500 shadow-lg max-h-[calc(100vh-100px)] overflow-y-auto">
