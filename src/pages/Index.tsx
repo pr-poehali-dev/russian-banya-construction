@@ -346,8 +346,7 @@ const Index = () => {
 
       <section id="gallery" className="py-20 px-6">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">Несколько примеров построенных бань</h2>
-          <p className="text-center text-muted-foreground mb-12 text-lg">Реализованные проекты наших клиентов</p>
+          <h2 className="text-4xl font-bold text-center mb-12">Несколько примеров построенных бань</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
