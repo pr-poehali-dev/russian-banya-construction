@@ -15,7 +15,7 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
   return (
     <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
       <nav className="container mx-auto px-3 sm:px-6 py-1">
-        <div className="flex items-start justify-between max-w-7xl mx-auto">
+        <div className="flex items-start justify-between w-full">
           <div className="flex items-start gap-2 sm:gap-3">
             <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-yellow-400 rounded" />
             <div className="flex flex-col items-start">
@@ -34,7 +34,7 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
             >
               <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={28} />
             </button>
-            <div className="hidden md:flex gap-6 items-center">
+            <div className="hidden md:flex gap-6 items-center flex-1 justify-center">
               <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
               <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
               <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
