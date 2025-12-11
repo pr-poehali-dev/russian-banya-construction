@@ -265,7 +265,7 @@ const Index = () => {
               <img 
                 src="https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg"
                 alt="Мастер банных дел"
-                className="rounded-lg shadow-xl w-full h-auto object-contain"
+                className="rounded-lg shadow-xl w-full h-[500px] object-cover object-center"
               />
               <div className="flex justify-center">
                 <Button 
