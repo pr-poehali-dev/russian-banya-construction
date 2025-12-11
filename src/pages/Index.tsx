@@ -179,27 +179,32 @@ const Index = () => {
               >
                 <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={28} />
               </button>
-              <div className="hidden md:flex gap-6 items-center flex-1 justify-center">
-                <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
-                <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
-                <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
-                <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
-                <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
-                <div className="flex flex-col items-start gap-1">
-                  <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight flex items-center gap-2">
-                    <Icon name="Phone" size={18} />
-                    +7 (342) 298-40-30
-                  </a>
-                  <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight flex items-center gap-2">
-                    <Icon name="Phone" size={18} />
-                    +7 (982) 490-09-00
-                  </a>
-                  <div className="flex items-center gap-2 text-black/70 text-[11px] mt-1">
-                    <Icon name="Clock" size={14} />
-                    <div className="flex gap-3">
-                      <span>Пн-Пт 08.00-20.00</span>
-                      <span>Сб-Вс 10.00-15.00</span>
-                    </div>
+            </div>
+          </div>
+          <div className="hidden md:flex items-center justify-between w-full mt-2">
+            <div className="flex-1"></div>
+            <div className="flex gap-6 items-center">
+              <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
+              <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
+              <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
+              <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
+              <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
+            </div>
+            <div className="flex-1 flex justify-end">
+              <div className="flex flex-col items-start gap-1">
+                <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight flex items-center gap-2">
+                  <Icon name="Phone" size={18} />
+                  +7 (342) 298-40-30
+                </a>
+                <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight flex items-center gap-2">
+                  <Icon name="Phone" size={18} />
+                  +7 (982) 490-09-00
+                </a>
+                <div className="flex items-center gap-2 text-black/70 text-[11px] mt-1">
+                  <Icon name="Clock" size={14} />
+                  <div className="flex gap-3">
+                    <span>Пн-Пт 08.00-20.00</span>
+                    <span>Сб-Вс 10.00-15.00</span>
                   </div>
                 </div>
               </div>
