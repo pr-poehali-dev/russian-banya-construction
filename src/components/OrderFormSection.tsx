@@ -118,7 +118,7 @@ const OrderFormSection = () => {
         <Card>
           <CardHeader className="bg-yellow-400 px-4 sm:px-6">
             <CardTitle className="text-xl sm:text-2xl md:text-3xl text-black text-center">
-              Анкета заказчика
+              Калькулятор стоимости бани
             </CardTitle>
             <p className="text-center text-black/80 mt-2 text-sm sm:text-base">
               Заполните форму, и мы рассчитаем стоимость вашей бани бесплатно
