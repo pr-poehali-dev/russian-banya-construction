@@ -239,7 +239,7 @@ const Index = () => {
           <p className="text-base sm:text-lg md:text-2xl mb-6 max-w-2xl mx-auto leading-relaxed px-2">
             Современные парные с эффектом "русской бани"
           </p>
-          <Button size="lg" onClick={() => navigate("/order")} className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw]">
+          <Button size="lg" onClick={() => scrollToSection("order")} className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw]">
             Получить подробный расчет стоимости бани
           </Button>
         </div>
