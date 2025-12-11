@@ -165,7 +165,7 @@ const Index = () => {
               <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-yellow-400 rounded" />
               <div className="flex flex-col items-start">
                 <div className="text-lg sm:text-2xl font-bold text-black leading-tight">Пермский Пар</div>
-                <div className="text-[10px] sm:text-xs text-black/70 -mt-0.5">строительная компания</div>
+                <div className="text-[10px] sm:text-xs text-black/70 -mt-0.5">строительная компания г.Пермь</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -185,9 +185,11 @@ const Index = () => {
                 <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
                 <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
                 <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
-                <div className="flex flex-col items-end gap-0.5">
-                  <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-lg">+7 (342) 298-40-30</a>
-                  <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-base">+7 (982) 490-09-00</a>
+                <div className="flex flex-col items-end gap-1">
+                  <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight">+7 (342) 298-40-30</a>
+                  <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight">+7 (982) 490-09-00</a>
+                  <span className="text-black/70 text-[11px] mt-1">Пн-Пт 08.00-20.00</span>
+                  <span className="text-black/70 text-[11px]">Сб-Вс 10.00-15.00</span>
                 </div>
               </div>
             </div>
@@ -203,14 +205,18 @@ const Index = () => {
                 <button onClick={() => { scrollToSection("services"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Услуги</button>
                 <button onClick={() => { scrollToSection("gallery"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Галерея</button>
                 <button onClick={() => { scrollToSection("contact"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Контакты</button>
-                <a href="tel:+73422984030" className="text-black hover:bg-yellow-500 transition-colors font-bold py-3 px-4 text-left flex items-center gap-2">
+                <a href="tel:+73422984030" className="text-black hover:bg-yellow-500 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
                   <Icon name="Phone" size={20} />
                   +7 (342) 298-40-30
                 </a>
-                <a href="tel:+79824900900" className="text-black hover:bg-yellow-500 transition-colors font-bold py-3 px-4 text-left flex items-center gap-2">
+                <a href="tel:+79824900900" className="text-black hover:bg-yellow-500 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
                   <Icon name="Phone" size={20} />
                   +7 (982) 490-09-00
                 </a>
+                <div className="px-4 py-2 text-black/70 text-sm">
+                  <div>Пн-Пт 08.00-20.00</div>
+                  <div>Сб-Вс 10.00-15.00</div>
+                </div>
               </div>
             </div>
           )}
