@@ -280,8 +280,8 @@ const Index = () => {
             </div>
             <div>
               <img 
-                src="https://cdn.poehali.dev/files/IMG_20251211_114328 (2).jpg"
-                alt="Банщик в русской бане"
+                src="https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg"
+                alt="Мастер банных дел"
                 className="rounded-lg shadow-xl w-full h-auto"
               />
             </div>
