@@ -148,11 +148,11 @@ const Index = () => {
       <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
         <nav className="container mx-auto px-3 sm:px-6 py-1 relative">
           <div className="flex items-start justify-between w-full">
-            <div className="flex items-start gap-2 sm:gap-3 mt-1">
-              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-yellow-400 rounded" />
+            <div className="flex items-start gap-2 mt-1">
+              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-8 w-8 md:h-10 md:w-10 object-contain bg-yellow-400 rounded" />
               <div className="flex flex-col items-start">
-                <div className="text-lg sm:text-2xl font-bold text-black leading-tight">Пермский Пар</div>
-                <div className="text-[10px] sm:text-xs text-black/70 -mt-0.5">строительная компания г.Пермь</div>
+                <div className="text-base md:text-lg font-bold text-black leading-tight">Пермский Пар</div>
+                <div className="text-[9px] md:text-[10px] text-black/70 -mt-0.5">строительная компания г.Пермь</div>
               </div>
             </div>
             <div className="flex items-start gap-3 mt-1">
