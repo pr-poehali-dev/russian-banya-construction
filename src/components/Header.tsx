@@ -60,11 +60,11 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
               <button onClick={() => { scrollToSection("services"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Услуги</button>
               <button onClick={() => { scrollToSection("gallery"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Галерея</button>
               <button onClick={() => { scrollToSection("contact"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Контакты</button>
-              <a href="tel:+73422984030" className="text-black hover:bg-yellow-500 transition-colors font-bold py-3 px-4 text-left flex items-center gap-2">
+              <a href="tel:+73422984030" className="text-black hover:bg-yellow-500 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
                 <Icon name="Phone" size={20} />
                 +7 (342) 298-40-30
               </a>
-              <a href="tel:+79824900900" className="text-black hover:bg-yellow-500 transition-colors font-bold py-3 px-4 text-left flex items-center gap-2">
+              <a href="tel:+79824900900" className="text-black hover:bg-yellow-500 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
                 <Icon name="Phone" size={20} />
                 +7 (982) 490-09-00
               </a>
