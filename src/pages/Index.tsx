@@ -15,7 +15,7 @@ const Index = () => {
 
   const projectGalleries = [
     [
-      "https://cdn.poehali.dev/files/21891db6-8b5a-49ef-85a8-c1986de51d44.JPG",
+      "https://cdn.poehali.dev/files/photo_2025-12-11_22-03-04.jpg",
       "https://cdn.poehali.dev/files/fd3c3beb-58e6-4d41-8f1c-16c4e6f576ac.JPG",
       "https://cdn.poehali.dev/files/9db95649-86f2-4493-be39-4d7acb47ba14.JPG",
       "https://cdn.poehali.dev/files/55a193e7-ac59-4782-9e54-0776e338f0af.JPG",
