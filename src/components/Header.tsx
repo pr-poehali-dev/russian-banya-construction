@@ -43,9 +43,9 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
                 <Icon name="Phone" size={18} />
                 +7 (982) 490-09-00
               </a>
-              <div className="flex items-center gap-2 text-black/70 text-[11px] mt-1">
+              <div className="flex items-start gap-2 text-black/70 text-[11px] mt-1">
                 <Icon name="Clock" size={14} />
-                <div className="flex gap-3">
+                <div className="flex flex-col items-end">
                   <span>Пн-Пт 08.00-20.00</span>
                   <span>Сб-Вс 10.00-15.00</span>
                 </div>
@@ -60,7 +60,7 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
           <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
           <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
         </div>
-        <div className="text-center px-1 mt-1">
+        <div className="text-center px-1">
           <p className="text-xs sm:text-sm text-black font-medium">Русская баня — это не помещение, это процесс!</p>
         </div>
         {isMobileMenuOpen && (
