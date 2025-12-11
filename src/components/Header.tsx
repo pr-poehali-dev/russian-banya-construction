@@ -36,9 +36,9 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
             </button>
           </div>
         </div>
-        <div className="hidden md:flex items-center justify-between w-full mt-2">
+        <div className="hidden md:flex items-start justify-between w-full mt-0">
           <div className="flex-1"></div>
-          <div className="flex gap-6 items-center">
+          <div className="flex gap-6 items-start mt-0">
             <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
             <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
             <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
@@ -65,7 +65,7 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
             </div>
           </div>
         </div>
-        <div className="text-left px-1">
+        <div className="text-center px-1 mt-1">
           <p className="text-xs sm:text-sm text-black font-medium">Русская баня — это не помещение, это процесс!</p>
         </div>
         {isMobileMenuOpen && (
