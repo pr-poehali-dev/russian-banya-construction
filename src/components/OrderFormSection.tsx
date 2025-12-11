@@ -129,102 +129,6 @@ const OrderFormSection = () => {
           </CardHeader>
           <CardContent className="pt-6">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name">Имя *</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Введите ваше имя"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="phone">Телефон *</Label>
-                <div className="flex">
-                  <span className="inline-flex items-center px-3 text-sm bg-muted border border-r-0 border-input rounded-l-md">
-                    +7
-                  </span>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    placeholder="9001234567"
-                    maxLength={10}
-                    className="rounded-l-none"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <Label>Куда отправить расчет? *</Label>
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                  <Button
-                    type="button"
-                    onClick={() => setContactMethod('email')}
-                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'email' ? 'bg-yellow-400' : 'bg-gray-200'}`}
-                  >
-                    Email
-                  </Button>
-                  <Button
-                    type="button"
-                    onClick={() => setContactMethod('whatsapp')}
-                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'whatsapp' ? 'bg-yellow-400' : 'bg-gray-200'}`}
-                  >
-                    WhatsApp
-                  </Button>
-                  <Button
-                    type="button"
-                    onClick={() => setContactMethod('telegram')}
-                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'telegram' ? 'bg-yellow-400' : 'bg-gray-200'}`}
-                  >
-                    Telegram
-                  </Button>
-                </div>
-
-                {contactMethod === 'email' && (
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="example@mail.ru"
-                    required
-                  />
-                )}
-
-                {(contactMethod === 'whatsapp' || contactMethod === 'telegram') && (
-                  <div className="space-y-2">
-                    <Label className="text-sm text-muted-foreground">
-                      Использовать основной телефон ({formData.phone ? `+7${formData.phone}` : 'не указан'}) или указать другой?
-                    </Label>
-                    <div className="flex">
-                      <span className="inline-flex items-center px-3 text-sm bg-muted border border-r-0 border-input rounded-l-md">
-                        +7
-                      </span>
-                      <Input
-                        type="tel"
-                        value={alternativePhone}
-                        onChange={(e) => {
-                          const digits = e.target.value.replace(/\D/g, '');
-                          const phoneDigits = digits.startsWith('7') ? digits.slice(1) : digits;
-                          setAlternativePhone(phoneDigits.slice(0, 10));
-                        }}
-                        placeholder="Оставьте пустым, если совпадает с основным"
-                        maxLength={10}
-                        className="rounded-l-none"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-
               <div className="space-y-3">
                 <Label>Материал стен бани *</Label>
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
@@ -389,6 +293,102 @@ const OrderFormSection = () => {
                   placeholder="Опишите ваши пожелания, особенности участка и другие важные детали"
                   rows={4}
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="name">Имя *</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Введите ваше имя"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="phone">Телефон *</Label>
+                <div className="flex">
+                  <span className="inline-flex items-center px-3 text-sm bg-muted border border-r-0 border-input rounded-l-md">
+                    +7
+                  </span>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    placeholder="9001234567"
+                    maxLength={10}
+                    className="rounded-l-none"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <Label>Куда отправить расчет? *</Label>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                  <Button
+                    type="button"
+                    onClick={() => setContactMethod('email')}
+                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'email' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                  >
+                    Email
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => setContactMethod('whatsapp')}
+                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'whatsapp' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                  >
+                    WhatsApp
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => setContactMethod('telegram')}
+                    className={`flex-1 hover:bg-lime-400 text-black text-sm sm:text-base ${contactMethod === 'telegram' ? 'bg-yellow-400' : 'bg-gray-200'}`}
+                  >
+                    Telegram
+                  </Button>
+                </div>
+
+                {contactMethod === 'email' && (
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="example@mail.ru"
+                    required
+                  />
+                )}
+
+                {(contactMethod === 'whatsapp' || contactMethod === 'telegram') && (
+                  <div className="space-y-2">
+                    <Label className="text-sm text-muted-foreground">
+                      Использовать основной телефон ({formData.phone ? `+7${formData.phone}` : 'не указан'}) или указать другой?
+                    </Label>
+                    <div className="flex">
+                      <span className="inline-flex items-center px-3 text-sm bg-muted border border-r-0 border-input rounded-l-md">
+                        +7
+                      </span>
+                      <Input
+                        type="tel"
+                        value={alternativePhone}
+                        onChange={(e) => {
+                          const digits = e.target.value.replace(/\D/g, '');
+                          const phoneDigits = digits.startsWith('7') ? digits.slice(1) : digits;
+                          setAlternativePhone(phoneDigits.slice(0, 10));
+                        }}
+                        placeholder="Оставьте пустым, если совпадает с основным"
+                        maxLength={10}
+                        className="rounded-l-none"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
               <Button 
