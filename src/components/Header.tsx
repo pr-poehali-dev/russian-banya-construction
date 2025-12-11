@@ -34,19 +34,14 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
             >
               <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={28} />
             </button>
-          </div>
-        </div>
-        <div className="hidden md:flex items-start justify-between w-full mt-0">
-          <div className="flex-1"></div>
-          <div className="flex gap-6 items-start mt-0">
-            <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
-            <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
-            <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
-            <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
-            <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
-          </div>
-          <div className="flex-1 flex justify-end">
-            <div className="flex flex-col items-start gap-1">
+            <div className="hidden md:flex gap-6 items-start flex-1 justify-center">
+              <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
+              <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
+              <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
+              <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
+              <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
+            </div>
+            <div className="hidden md:flex flex-col items-start gap-1">
               <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight flex items-center gap-2">
                 <Icon name="Phone" size={18} />
                 +7 (342) 298-40-30
