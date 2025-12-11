@@ -253,21 +253,14 @@ const Index = () => {
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">Обо мне</h2>
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div>
+            <div className="space-y-6">
               <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
                 <p>Меня зовут Александр. Я — специалист по строительству русских бань с огромным стажем и любовью к своему делу.</p>
                 <p>Моя цель — чтобы вы не просто получили баню, а открыли для себя настоящее удовольствие от живого пара, тепла дерева и уюта, в котором хочется остаться надолго.</p>
                 <p>Обладаю глубоким знанием традиционных технологий и нюансов настоящего русского парения. Подхожу к каждому проекту с душой: помогаю с выбором материалов, продумываю планировку до мелочей и слежу за каждым этапом строительства.</p>
                 <p>За моими плечами больше 15 лет опыта, десятки успешных проектов и довольных клиентов.</p>
               </div>
-            </div>
-            <div className="space-y-6">
-              <img 
-                src="https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg"
-                alt="Мастер банных дел"
-                className="rounded-lg shadow-xl w-full h-[500px] md:h-[600px] object-cover object-[center_20%]"
-              />
-              <div className="flex justify-center">
+              <div className="flex justify-center md:justify-start">
                 <Button 
                   size="lg" 
                   onClick={() => scrollToSection("order")} 
@@ -276,6 +269,13 @@ const Index = () => {
                   Получить подробный расчет стоимости бани
                 </Button>
               </div>
+            </div>
+            <div>
+              <img 
+                src="https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg"
+                alt="Мастер банных дел"
+                className="rounded-lg shadow-xl w-full h-[500px] md:h-[600px] object-cover object-[center_20%]"
+              />
             </div>
           </div>
         </div>
