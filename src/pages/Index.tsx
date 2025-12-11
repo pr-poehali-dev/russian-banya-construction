@@ -290,18 +290,15 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="about" className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
-        <div className="absolute inset-0">
-          <img 
-            src="https://cdn.poehali.dev/files/IMG_20251211_114328 (2).jpg"
-            alt="Банщик в русской бане"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
-        <div className="container mx-auto relative z-10">
+      <section id="about" className="py-20 px-6">
+        <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div className="bg-white/95 p-6 rounded-lg shadow-xl">
+            <div>
+              <img 
+                src="https://cdn.poehali.dev/files/fc416752-82eb-400e-999b-154b1184a5d9.jpg"
+                alt="Банщик парит вениками в русской бане"
+                className="rounded-lg shadow-xl mb-6"
+              />
               <div>
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
                   <Icon name="Flame" size={20} className="text-primary" />
@@ -310,7 +307,7 @@ const Index = () => {
                 <p className="text-muted-foreground"><strong>Эффект русской бани</strong> - это правильное соотношение <strong>температуры</strong> и <strong>влажности</strong> в парной. А так же, правильная конфигурация парной, выбор печи, устройство полков для парения, вентиляция. Для достижения такого эффекта, мы применяем опыт и знания физических процессов в парной и физиологии организма, современные материалы и технологии, а так же, собственный опыт и практику в парении.</p>
               </div>
             </div>
-            <div className="bg-white/95 p-6 rounded-lg shadow-xl">
+            <div>
               <h2 className="text-4xl font-bold mb-6">Почему именно русская баня?</h2>
               <div className="space-y-6">
                 <div>
