@@ -205,7 +205,7 @@ const Index = () => {
             <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
             <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
           </div>
-          <div className="text-center px-1 absolute left-1/2 -translate-x-1/2 top-13">
+          <div className="text-center px-1 absolute left-1/2 -translate-x-1/2 top-12">
             <p className="text-xs sm:text-sm text-black font-medium whitespace-nowrap">Русская баня — это не помещение, это процесс!</p>
           </div>
           {isMobileMenuOpen && (
