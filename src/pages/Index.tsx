@@ -158,8 +158,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b border-yellow-500">
-        <nav className="container mx-auto px-3 sm:px-6 py-0.5 sm:py-1">
+      <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
+        <nav className="container mx-auto px-3 sm:px-6 py-1">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
               <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-yellow-400 rounded" />
