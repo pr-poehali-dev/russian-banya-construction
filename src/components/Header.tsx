@@ -14,7 +14,7 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
 
   return (
     <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
-      <nav className="container mx-auto px-3 sm:px-6 py-0.5">
+      <nav className="container mx-auto px-3 sm:px-6 py-1">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-2 sm:gap-3">
             <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-yellow-400 rounded" />
@@ -40,21 +40,16 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
               <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
               <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
               <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
-              <div className="flex flex-col items-end gap-0.5">
+              <div className="flex flex-col items-end gap-1">
                 <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight">+7 (342) 298-40-30</a>
                 <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight">+7 (982) 490-09-00</a>
+                <span className="text-black/70 text-[11px] mt-1">Пн-Пт 08.00-20.00</span>
+                <span className="text-black/70 text-[11px]">Сб-Вс 10.00-15.00</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex justify-between items-center px-1 hidden md:flex">
-          <p className="text-xs sm:text-sm text-black font-medium">Русская баня — это не помещение, это процесс!</p>
-          <div className="flex gap-4 text-black/70 text-[11px]">
-            <span>Пн-Пт 08.00-20.00</span>
-            <span>Сб-Вс 10.00-15.00</span>
-          </div>
-        </div>
-        <div className="text-left px-1 md:hidden">
+        <div className="text-left px-1">
           <p className="text-xs sm:text-sm text-black font-medium">Русская баня — это не помещение, это процесс!</p>
         </div>
         {isMobileMenuOpen && (
