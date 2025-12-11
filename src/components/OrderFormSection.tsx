@@ -273,7 +273,7 @@ const OrderFormSection = () => {
                   value={formData.location}
                   onChange={handleChange}
                   required
-                  placeholder="Город, район"
+                  placeholder="Населенный пункт"
                 />
               </div>
 
