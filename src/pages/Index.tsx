@@ -151,7 +151,7 @@ const Index = () => {
             <div className="flex items-start gap-2 mt-1">
               <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-8 w-8 md:h-10 md:w-10 object-contain bg-yellow-400 rounded" />
               <div className="flex flex-col items-start">
-                <div className="text-lg md:text-xl font-bold text-black leading-tight">Пермский Пар</div>
+                <div className="text-xl md:text-2xl font-bold text-black leading-tight">Пермский Пар</div>
                 <div className="text-[9px] md:text-[10px] text-black/70 -mt-0.5">строительная компания г.Пермь</div>
               </div>
             </div>
