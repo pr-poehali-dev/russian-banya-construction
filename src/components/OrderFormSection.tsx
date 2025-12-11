@@ -16,8 +16,6 @@ const OrderFormSection = () => {
     banjaType: "",
     size: "",
     location: "",
-    budget: "",
-    timeline: "",
     additionalInfo: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,8 +62,6 @@ const OrderFormSection = () => {
           banjaType: "",
           size: "",
           location: "",
-          budget: "",
-          timeline: "",
           additionalInfo: ""
         });
         setAlternativePhone("");
@@ -255,32 +251,6 @@ const OrderFormSection = () => {
                   required
                   placeholder="Город, район"
                 />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="budget">Планируемый бюджет</Label>
-                <Input
-                  id="budget"
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  placeholder="Укажите примерный бюджет"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="timeline">Сроки строительства</Label>
-                <Select value={formData.timeline} onValueChange={(value) => setFormData({...formData, timeline: value})}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Выберите срок" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Как можно скорее">Как можно скорее</SelectItem>
-                    <SelectItem value="1-2 месяца">1-2 месяца</SelectItem>
-                    <SelectItem value="3-6 месяцев">3-6 месяцев</SelectItem>
-                    <SelectItem value="Более 6 месяцев">Более 6 месяцев</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
 
               <div className="space-y-2">
