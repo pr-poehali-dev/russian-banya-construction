@@ -252,7 +252,7 @@ const Index = () => {
       <section id="about" className="py-20 px-6">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">Обо мне</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
                 <p>Меня зовут Александр. Я — специалист по строительству русских бань с огромным стажем и любовью к своему делу.</p>
