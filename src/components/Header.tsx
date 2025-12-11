@@ -40,11 +40,11 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
               <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
               <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
               <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
-              <div className="flex flex-col items-end gap-0.5">
-                <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-lg">+7 (342) 298-40-30</a>
-                <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-lg">+7 (982) 490-09-00</a>
-                <span className="text-black/70 text-xs">Пн-Пт 08.00-20.00</span>
-                <span className="text-black/70 text-xs">Сб-Вс 10.00-15.00</span>
+              <div className="flex flex-col items-end gap-1">
+                <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight">+7 (342) 298-40-30</a>
+                <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight">+7 (982) 490-09-00</a>
+                <span className="text-black/70 text-[11px] mt-1">Пн-Пт 08.00-20.00</span>
+                <span className="text-black/70 text-[11px]">Сб-Вс 10.00-15.00</span>
               </div>
             </div>
           </div>
