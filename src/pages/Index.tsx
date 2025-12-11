@@ -292,46 +292,18 @@ const Index = () => {
 
       <section id="about" className="py-20 px-6">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img 
-                src="https://cdn.poehali.dev/files/fc416752-82eb-400e-999b-154b1184a5d9.jpg"
-                alt="Банщик парит вениками в русской бане"
-                className="rounded-lg shadow-xl mb-6"
+                src="https://cdn.poehali.dev/files/IMG_20251211_114328 (2).jpg"
+                alt="Банщик в русской бане"
+                className="rounded-lg shadow-xl w-full h-auto"
               />
-              <div>
-                <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                  <Icon name="Flame" size={20} className="text-primary" />
-                  Эффект русской бани
-                </h3>
-                <p className="text-muted-foreground"><strong>Эффект русской бани</strong> - это правильное соотношение <strong>температуры</strong> и <strong>влажности</strong> в парной. А так же, правильная конфигурация парной, выбор печи, устройство полков для парения, вентиляция. Для достижения такого эффекта, мы применяем опыт и знания физических процессов в парной и физиологии организма, современные материалы и технологии, а так же, собственный опыт и практику в парении.</p>
-              </div>
             </div>
             <div>
-              <h2 className="text-4xl font-bold mb-6">Почему именно русская баня?</h2>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                    <Icon name="History" size={20} className="text-primary" />
-                    Многовековые традиции
-                  </h3>
-                  <p className="text-muted-foreground">В отличии от финских саун и турецких хамамов, русская баня во все времена была приоритетным выбором для  русского человека. </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                    <Icon name="Heart" size={20} className="text-primary" />
-                    Польза для организма человека
-                  </h3>
-                  <p className="text-muted-foreground">Только эффект русской бани создает полезное тепловое, механическое и психологическое воздействие на тело человека.</p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                    <Icon name="Hammer" size={20} className="text-primary" />
-                    Традиционное мастерство
-                  </h3>
-                  <p className="text-muted-foreground">Сочетание традиции русского зодчества с современными качественными материалами, дают возможность превратить русскую баню в приятный и полезный процесс отдыха и восстановления сил.</p>
-                </div>
-              </div>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Более 100 бань под ключ — и каждая как для себя. За плечами — годы практики, глубокое знание традиционных технологий и нюансов настоящего русского парения. Подхожу к каждому проекту с душой: помогаю с выбором материалов, продумываю планировку до мелочей и слежу за каждым этапом строительства. Моя цель — чтобы вы не просто получили баню, а открыли для себя настоящее удовольствие от живого пара, тепла дерева и уюта, в котором хочется остаться надолго.
+              </p>
             </div>
           </div>
         </div>
