@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import OrderFormSection from "@/components/OrderFormSection";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -126,8 +127,6 @@ const Index = () => {
       return () => window.removeEventListener('wheel', handleWheel);
     }
   }, [selectedProject, currentImageIndex]);
-
-
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -370,6 +369,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <OrderFormSection />
 
       <section id="services" className="py-20 px-6">
         <div className="container mx-auto">
