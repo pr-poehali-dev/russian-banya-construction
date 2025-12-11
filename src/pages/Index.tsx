@@ -268,27 +268,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { icon: "TreePine", title: "Натуральные современные материалы", desc: "Мы используем только отборную древесину, натуральные масла и воски, природный камень и современные высокоэффективные печи" },
-              { icon: "Hammer", title: "Технологичное строительство", desc: "Строим парные с эффектом русской бани, с учетом традиций и современных тенденций в эстетическом и практическом использовании бани" },
-              { icon: "Shield", title: "Гарантия качества", desc: "Опыт строительства более 15 лет. 5 лет гарантии на работы по договору, твердая смета, поэтапная оплата" }
-            ].map((item, idx) => (
-              <Card key={idx}>
-                <CardContent className="pt-6">
-                  <h3 className="text-xl font-semibold mb-2 flex items-start gap-2">
-                    <Icon name={item.icon} className="text-primary flex-shrink-0 mt-1" size={48} />
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground">{item.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       <section id="about" className="py-20 px-6">
         <div className="container mx-auto">
