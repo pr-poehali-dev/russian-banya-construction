@@ -179,7 +179,7 @@ const Index = () => {
               >
                 <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={28} />
               </button>
-              <div className="hidden md:flex flex-col items-end gap-1">
+              <div className="hidden md:flex flex-col items-start gap-1">
                 <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight flex items-center gap-2">
                   <Icon name="Phone" size={18} />
                   +7 (342) 298-40-30
@@ -190,7 +190,7 @@ const Index = () => {
                 </a>
                 <div className="flex items-start gap-2 text-black/70 text-[11px] mt-1">
                   <Icon name="Clock" size={14} />
-                  <div className="flex flex-col items-end">
+                  <div className="flex flex-col items-start">
                     <span>Пн-Пт 08.00-20.00</span>
                     <span>Сб-Вс 10.00-15.00</span>
                   </div>
@@ -205,8 +205,8 @@ const Index = () => {
             <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
             <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
           </div>
-          <div className="text-center px-1">
-            <p className="text-xs sm:text-sm text-black font-medium">Русская баня — это не помещение, это процесс!</p>
+          <div className="text-center px-1 absolute left-1/2 -translate-x-1/2 bottom-0">
+            <p className="text-xs sm:text-sm text-black font-medium whitespace-nowrap">Русская баня — это не помещение, это процесс!</p>
           </div>
           {isMobileMenuOpen && (
             <div className="md:hidden fixed top-[100px] left-0 right-0 bg-yellow-400 border-t border-yellow-500 shadow-lg max-h-[calc(100vh-100px)] overflow-y-auto">
