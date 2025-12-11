@@ -28,6 +28,28 @@ const OrderFormSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.banjaType) {
+      toast({
+        title: "Ошибка",
+        description: "Пожалуйста, выберите материал стен бани",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    const finalLength = length !== 'custom' ? length : customLength;
+    const finalWidth = width !== 'custom' ? width : customWidth;
+    
+    if (!finalLength || !finalWidth) {
+      toast({
+        title: "Ошибка",
+        description: "Пожалуйста, укажите длину и ширину бани",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
@@ -187,6 +209,7 @@ const OrderFormSection = () => {
                           setFormData({...formData, size: `${e.target.value}x${widthValue || ''}`});
                         }}
                         placeholder="Введите длину"
+                        required
                       />
                     )}
                   </div>
@@ -230,6 +253,7 @@ const OrderFormSection = () => {
                           setFormData({...formData, size: `${lengthValue || ''}x${e.target.value}`});
                         }}
                         placeholder="Введите ширину"
+                        required
                       />
                     )}
                   </div>
