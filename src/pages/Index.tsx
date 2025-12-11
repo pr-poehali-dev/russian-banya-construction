@@ -185,13 +185,13 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="hidden md:flex gap-6 items-start absolute left-1/2 -translate-x-1/2 top-1">
-            <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
-            <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">Обо мне</button>
-            <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
-            <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
-            <button onClick={() => scrollToSection("order")} className="text-black hover:text-black/70 transition-colors font-medium">Калькулятор</button>
-            <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
+          <div className="hidden md:flex gap-3 lg:gap-6 items-start absolute left-1/2 -translate-x-1/2 top-1 whitespace-nowrap">
+            <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Главная</button>
+            <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Обо мне</button>
+            <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Услуги</button>
+            <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Галерея</button>
+            <button onClick={() => scrollToSection("order")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Калькулятор</button>
+            <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Контакты</button>
           </div>
           <div className="text-center px-1 absolute left-1/2 -translate-x-1/2 top-14">
             <p className="text-xs sm:text-sm text-black font-medium whitespace-nowrap">Русская баня — это не помещение, это процесс!</p>
