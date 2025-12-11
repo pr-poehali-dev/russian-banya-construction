@@ -299,7 +299,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                img: "https://cdn.poehali.dev/files/21891db6-8b5a-49ef-85a8-c1986de51d44.JPG",
+                img: "https://cdn.poehali.dev/files/photo_2025-12-11_22-03-04.jpg",
                 title: "Баня из бревна 6×12",
                 size: "6×12 м",
                 material: "Оцилиндрованное бревно",
