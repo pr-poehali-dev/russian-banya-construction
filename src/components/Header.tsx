@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
-import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   isButtonSticky: boolean;
@@ -10,7 +9,6 @@ interface HeaderProps {
 }
 
 export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, scrollToSection }: HeaderProps) => {
-  const navigate = useNavigate();
 
   return (
     <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
@@ -91,7 +89,7 @@ export const Header = ({ isButtonSticky, isMobileMenuOpen, setIsMobileMenuOpen, 
         <div className="fixed left-0 right-0 bottom-4 px-4 flex justify-center z-40 pointer-events-none">
           <Button 
             size="lg" 
-            onClick={() => navigate("/order")} 
+            onClick={() => scrollToSection("order")} 
             className="pointer-events-auto text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw] w-full sm:w-auto"
           >
             Получить подробный расчет стоимости бани
