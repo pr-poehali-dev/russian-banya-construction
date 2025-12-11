@@ -293,31 +293,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="services" className="py-20 bg-muted/30 px-6">
-        <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">Наши услуги</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: "FileText", title: "Консультации", desc: "Перед началом строительства проводим полноценные бесплатные консультации по процессам парения, устройства бани, материалам, размерам и прочим очень важным вопросам." },
-              { icon: "HardHat", title: "Строительство", desc: "Полный цикл строительных работ, внутренняя и внешняя отделка материалами премиум класса." },
-              { icon: "Wrench", title: "Инженерные системы", desc: "Установка печи, водоснабжения, водоотведения, вентиляции, полков, электрики, отопления и т.д." },
-              { icon: "Sparkles", title: "Дополнительно", desc: "Ремонт и модернизация существующих бань, террасы, банные чаны, купели" }
-            ].map((service, idx) => (
-              <Card key={idx}>
-                <CardContent className="pt-6">
-                  <div className="w-14 h-14 bg-secondary/10 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                    <Icon name={service.icon} className="text-secondary" size={28} />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 text-center">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm text-center">{service.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="gallery" className="py-20 px-6">
+      <section id="gallery" className="py-20 bg-muted/30 px-6">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">Несколько примеров построенных бань</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -401,6 +377,30 @@ const Index = () => {
                       <span>{project.location}</span>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-20 px-6">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12">Наши услуги</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: "FileText", title: "Консультации", desc: "Перед началом строительства проводим полноценные бесплатные консультации по процессам парения, устройства бани, материалам, размерам и прочим очень важным вопросам." },
+              { icon: "HardHat", title: "Строительство", desc: "Полный цикл строительных работ, внутренняя и внешняя отделка материалами премиум класса." },
+              { icon: "Wrench", title: "Инженерные системы", desc: "Установка печи, водоснабжения, водоотведения, вентиляции, полков, электрики, отопления и т.д." },
+              { icon: "Sparkles", title: "Дополнительно", desc: "Ремонт и модернизация существующих бань, террасы, банные чаны, купели" }
+            ].map((service, idx) => (
+              <Card key={idx}>
+                <CardContent className="pt-6">
+                  <div className="w-14 h-14 bg-secondary/10 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                    <Icon name={service.icon} className="text-secondary" size={28} />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-center">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm text-center">{service.desc}</p>
                 </CardContent>
               </Card>
             ))}
