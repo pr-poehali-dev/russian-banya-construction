@@ -390,7 +390,7 @@ const OrderFormSection = () => {
                 className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-6"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Отправка..." : "Получить расчет стоимости"}
+                {isSubmitting ? "Отправка..." : "Получить расчет стоимости на ваш Email или мессенджер"}
               </Button>
             </form>
           </CardContent>
