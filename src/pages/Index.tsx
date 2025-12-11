@@ -10,7 +10,6 @@ const Index = () => {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isButtonSticky, setIsButtonSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const projectGalleries = [
@@ -128,18 +127,7 @@ const Index = () => {
     }
   }, [selectedProject, currentImageIndex]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const heroSection = document.getElementById('hero');
-      if (heroSection) {
-        const heroBottom = heroSection.getBoundingClientRect().bottom;
-        setIsButtonSticky(heroBottom <= 80);
-      }
-    };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -232,17 +220,7 @@ const Index = () => {
             </div>
           )}
         </nav>
-        {isButtonSticky && (
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full py-2 px-2 w-full flex justify-center">
-            <Button 
-              size="lg" 
-              onClick={() => navigate("/order")} 
-              className="text-xs sm:text-sm md:text-lg px-3 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg animate-fade-in whitespace-normal h-auto py-2 sm:py-3 leading-tight max-w-[95vw]"
-            >
-              Получить подробный расчет стоимости бани
-            </Button>
-          </div>
-        )}
+
       </header>
 
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -282,12 +260,21 @@ const Index = () => {
                 <p>За моими плечами больше 15 лет опыта, десятки успешных проектов и довольных клиентов.</p>
               </div>
             </div>
-            <div>
+            <div className="space-y-6">
               <img 
                 src="https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg"
                 alt="Мастер банных дел"
                 className="rounded-lg shadow-xl w-full h-auto max-h-[70vh] object-cover"
               />
+              <div className="flex justify-center">
+                <Button 
+                  size="lg" 
+                  onClick={() => navigate("/order")} 
+                  className="text-sm md:text-lg px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg w-full md:w-auto"
+                >
+                  Получить подробный расчет стоимости бани
+                </Button>
+              </div>
             </div>
           </div>
         </div>
