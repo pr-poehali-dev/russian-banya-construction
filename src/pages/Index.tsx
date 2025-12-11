@@ -160,7 +160,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
         <nav className="container mx-auto px-3 sm:px-6 py-1">
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between max-w-7xl mx-auto">
             <div className="flex items-start gap-2 sm:gap-3">
               <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-10 w-10 sm:h-12 sm:w-12 object-contain bg-yellow-400 rounded" />
               <div className="flex flex-col items-start">
@@ -179,17 +179,28 @@ const Index = () => {
               >
                 <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={28} />
               </button>
-              <div className="hidden md:flex gap-8 items-center">
+              <div className="hidden md:flex gap-6 items-center">
                 <button onClick={() => scrollToSection("hero")} className="text-black hover:text-black/70 transition-colors font-medium">Главная</button>
                 <button onClick={() => scrollToSection("about")} className="text-black hover:text-black/70 transition-colors font-medium">О бане</button>
                 <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium">Услуги</button>
                 <button onClick={() => scrollToSection("gallery")} className="text-black hover:text-black/70 transition-colors font-medium">Галерея</button>
                 <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium">Контакты</button>
-                <div className="flex flex-col items-end gap-1">
-                  <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight">+7 (342) 298-40-30</a>
-                  <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight">+7 (982) 490-09-00</a>
-                  <span className="text-black/70 text-[11px] mt-1">Пн-Пт 08.00-20.00</span>
-                  <span className="text-black/70 text-[11px]">Сб-Вс 10.00-15.00</span>
+                <div className="flex flex-col items-start gap-1">
+                  <a href="tel:+73422984030" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight flex items-center gap-2">
+                    <Icon name="Phone" size={18} />
+                    +7 (342) 298-40-30
+                  </a>
+                  <a href="tel:+79824900900" className="text-black hover:text-black/70 transition-colors font-bold text-[18px] leading-tight flex items-center gap-2">
+                    <Icon name="Phone" size={18} />
+                    +7 (982) 490-09-00
+                  </a>
+                  <div className="flex items-center gap-2 text-black/70 text-[11px] mt-1">
+                    <Icon name="Clock" size={14} />
+                    <div className="flex gap-3">
+                      <span>Пн-Пт 08.00-20.00</span>
+                      <span>Сб-Вс 10.00-15.00</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
