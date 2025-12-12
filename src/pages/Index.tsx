@@ -144,8 +144,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="fixed top-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      <header className="fixed top-0 left-0 right-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
         <nav className="container mx-auto px-3 sm:px-6 py-1 relative">
           <div className="flex items-start justify-between w-full">
             <div className="flex items-start gap-2 mt-1">
@@ -224,7 +224,7 @@ const Index = () => {
 
       </header>
 
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
         <div className="absolute inset-0">
           <img 
             src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e5212274-23cb-48e3-a724-60171be466b0.jpg"
@@ -233,7 +233,7 @@ const Index = () => {
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-4 text-center text-white animate-fade-in max-w-full">
+        <div className="relative z-10 container mx-auto px-4 text-center text-white animate-fade-in w-full">
           <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-2 leading-tight">
             Строим бани<br />из бревна и бруса
           </h1>
@@ -249,7 +249,7 @@ const Index = () => {
 
 
 
-      <section id="about" className="py-20 px-6">
+      <section id="about" className="py-20 px-4 sm:px-6 w-full overflow-hidden">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">Обо мне</h2>
           <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -281,7 +281,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="gallery" className="py-20 bg-muted/30 px-6">
+      <section id="gallery" className="py-20 bg-muted/30 px-4 sm:px-6 w-full overflow-hidden">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">Несколько примеров построенных бань и парных</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -374,7 +374,7 @@ const Index = () => {
 
       <OrderFormSection />
 
-      <section id="services" className="py-20 px-6">
+      <section id="services" className="py-20 px-4 sm:px-6 w-full overflow-hidden">
         <div className="container mx-auto">
           <h2 className="text-4xl font-bold text-center mb-12">Наши услуги</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -473,7 +473,7 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="py-8 border-t border-border px-6">
+      <footer className="py-8 border-t border-border px-4 sm:px-6 w-full overflow-hidden">
         <div className="container mx-auto text-center text-muted-foreground">
           <p>© 2020г Пермский Пар. Все права защищены.</p>
         </div>

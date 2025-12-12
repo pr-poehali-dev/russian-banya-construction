@@ -131,7 +131,7 @@ const OrderFormSection = () => {
   };
 
   return (
-    <section id="order" className="py-20 px-6">
+    <section id="order" className="py-20 px-4 sm:px-6 w-full overflow-hidden">
       <div className="container mx-auto max-w-3xl">
         <Card>
           <CardHeader className="bg-yellow-400 px-4 sm:px-6">
