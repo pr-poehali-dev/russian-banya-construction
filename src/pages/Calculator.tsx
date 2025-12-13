@@ -13,6 +13,7 @@ const Calculator = () => {
   const [length, setLength] = useState('');
   const [width, setWidth] = useState('');
   const [partitionsLength, setPartitionsLength] = useState('');
+  const [floors, setFloors] = useState('');
   const [foundation, setFoundation] = useState('');
   const [roof, setRoof] = useState('');
   const [stove, setStove] = useState(false);
@@ -279,14 +280,39 @@ const Calculator = () => {
                       <p className="text-sm text-gray-500">Суммарная длина всех внутренних перегородок</p>
                     </div>
 
-                    {length && width && (
-                      <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
-                        <div className="text-sm text-gray-600 mb-1">Общая площадь бани:</div>
-                        <div className="text-3xl font-bold text-blue-700">
-                          {(parseFloat(length) * parseFloat(width)).toFixed(1)} м²
-                        </div>
+                    <div className="space-y-3">
+                      <Label>Этажность *</Label>
+                      <div className="grid grid-cols-2 gap-3">
+                        <Button
+                          type="button"
+                          onClick={() => setFloors('1')}
+                          className={`h-auto py-6 text-left justify-start ${
+                            floors === '1' 
+                              ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                          }`}
+                        >
+                          <div>
+                            <div className="font-bold text-lg">1 этаж</div>
+                            <div className="text-sm opacity-80">Одноэтажная баня</div>
+                          </div>
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => setFloors('1.5')}
+                          className={`h-auto py-6 text-left justify-start ${
+                            floors === '1.5' 
+                              ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                          }`}
+                        >
+                          <div>
+                            <div className="font-bold text-lg">1,5 этажа</div>
+                            <div className="text-sm opacity-80">С мансардным этажом</div>
+                          </div>
+                        </Button>
                       </div>
-                    )}
+                    </div>
                   </div>
                 )}
 
@@ -392,7 +418,7 @@ const Calculator = () => {
                       disabled={
                         (step === 1 && !foundation) ||
                         (step === 2 && !material) ||
-                        (step === 3 && (!length || !width))
+                        (step === 3 && (!length || !width || !floors))
                       }
                     >
                       Далее
