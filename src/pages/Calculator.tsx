@@ -12,6 +12,7 @@ const Calculator = () => {
   const [material, setMaterial] = useState('');
   const [length, setLength] = useState('');
   const [width, setWidth] = useState('');
+  const [partitionsLength, setPartitionsLength] = useState('');
   const [foundation, setFoundation] = useState('');
   const [roof, setRoof] = useState('');
   const [stove, setStove] = useState(false);
@@ -70,22 +71,23 @@ const Calculator = () => {
         {/* Индикатор шагов */}
         <div className="mb-8">
           <div className="flex justify-center items-center space-x-4">
-            {[1, 2, 3, 4].map((s) => (
+            {[1, 2, 3, 4, 5].map((s) => (
               <div key={s} className="flex items-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
                   s === step ? 'bg-yellow-400 text-black' : s < step ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600'
                 }`}>
                   {s}
                 </div>
-                {s < 4 && <div className={`w-16 h-1 ${s < step ? 'bg-green-500' : 'bg-gray-300'}`} />}
+                {s < 5 && <div className={`w-16 h-1 ${s < step ? 'bg-green-500' : 'bg-gray-300'}`} />}
               </div>
             ))}
           </div>
           <div className="text-center mt-4 text-sm text-gray-600">
             {step === 1 && 'Шаг 1: Выбор фундамента'}
             {step === 2 && 'Шаг 2: Материал стен'}
-            {step === 3 && 'Шаг 3: Кровля'}
-            {step === 4 && 'Шаг 4: Дополнительные опции'}
+            {step === 3 && 'Шаг 3: Размеры бани'}
+            {step === 4 && 'Шаг 4: Кровля'}
+            {step === 5 && 'Шаг 5: Дополнительные опции'}
           </div>
         </div>
 
@@ -96,8 +98,9 @@ const Calculator = () => {
                 <CardTitle>
                   {step === 1 && 'Выберите тип фундамента'}
                   {step === 2 && 'Выберите материал стен'}
-                  {step === 3 && 'Выберите тип кровли'}
-                  {step === 4 && 'Дополнительные опции'}
+                  {step === 3 && 'Укажите размеры бани'}
+                  {step === 4 && 'Выберите тип кровли'}
+                  {step === 5 && 'Дополнительные опции'}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -230,6 +233,64 @@ const Calculator = () => {
                 )}
 
                 {step === 3 && (
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <Label>Длина бани (м) *</Label>
+                      <Input
+                        type="number"
+                        step="0.5"
+                        min="3"
+                        max="15"
+                        value={length}
+                        onChange={(e) => setLength(e.target.value)}
+                        placeholder="Например: 6"
+                        className="text-lg py-6"
+                      />
+                      <p className="text-sm text-gray-500">Укажите длину основной постройки</p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Ширина бани (м) *</Label>
+                      <Input
+                        type="number"
+                        step="0.5"
+                        min="3"
+                        max="15"
+                        value={width}
+                        onChange={(e) => setWidth(e.target.value)}
+                        placeholder="Например: 4"
+                        className="text-lg py-6"
+                      />
+                      <p className="text-sm text-gray-500">Укажите ширину основной постройки</p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Длина всех перегородок (м)</Label>
+                      <Input
+                        type="number"
+                        step="0.5"
+                        min="0"
+                        max="50"
+                        value={partitionsLength}
+                        onChange={(e) => setPartitionsLength(e.target.value)}
+                        placeholder="Например: 8"
+                        className="text-lg py-6"
+                      />
+                      <p className="text-sm text-gray-500">Суммарная длина всех внутренних перегородок</p>
+                    </div>
+
+                    {length && width && (
+                      <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+                        <div className="text-sm text-gray-600 mb-1">Общая площадь бани:</div>
+                        <div className="text-3xl font-bold text-blue-700">
+                          {(parseFloat(length) * parseFloat(width)).toFixed(1)} м²
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {step === 4 && (
                   <div className="space-y-4">
                     <Label>Тип кровли *</Label>
                     <div className="grid gap-3">
@@ -279,7 +340,7 @@ const Calculator = () => {
                   </div>
                 )}
 
-                {step === 4 && (
+                {step === 5 && (
                   <div className="space-y-4">
                     <Label>Дополнительные опции</Label>
                     <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-lg border-2 hover:bg-gray-50">
@@ -324,19 +385,20 @@ const Calculator = () => {
                       Назад
                     </Button>
                   )}
-                  {step < 4 && (
+                  {step < 5 && (
                     <Button
                       onClick={() => setStep(step + 1)}
                       className="ml-auto bg-green-600 hover:bg-green-700"
                       disabled={
                         (step === 1 && !foundation) ||
-                        (step === 2 && !material)
+                        (step === 2 && !material) ||
+                        (step === 3 && (!length || !width))
                       }
                     >
                       Далее
                     </Button>
                   )}
-                  {step === 4 && (
+                  {step === 5 && (
                     <Button
                       onClick={() => setShowEstimate(true)}
                       className="ml-auto bg-blue-600 hover:bg-blue-700"
