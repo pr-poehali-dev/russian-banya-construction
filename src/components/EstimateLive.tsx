@@ -9,8 +9,9 @@ interface EstimateLiveProps {
 const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiveProps) => {
   if (!length || !width || !material) {
     return (
-      <div className="text-center py-12 text-gray-400">
-        Заполните основные параметры для расчёта сметы
+      <div className="text-center py-12 text-gray-500">
+        <p className="text-lg font-medium mb-2">Заполните параметры калькулятора</p>
+        <p className="text-sm">Выберите материал стен, длину и ширину для расчёта сметы</p>
       </div>
     );
   }
