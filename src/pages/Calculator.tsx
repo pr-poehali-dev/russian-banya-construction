@@ -83,7 +83,7 @@ const Calculator = () => {
           </div>
           <div className="text-center mt-4 text-sm text-gray-600">
             {step === 1 && 'Шаг 1: Выбор фундамента'}
-            {step === 2 && 'Шаг 2: Материал и размеры'}
+            {step === 2 && 'Шаг 2: Материал стен'}
             {step === 3 && 'Шаг 3: Кровля'}
             {step === 4 && 'Шаг 4: Дополнительные опции'}
           </div>
@@ -95,7 +95,7 @@ const Calculator = () => {
               <CardHeader>
                 <CardTitle>
                   {step === 1 && 'Выберите тип фундамента'}
-                  {step === 2 && 'Материал стен и размеры бани'}
+                  {step === 2 && 'Выберите материал стен'}
                   {step === 3 && 'Выберите тип кровли'}
                   {step === 4 && 'Дополнительные опции'}
                 </CardTitle>
@@ -152,54 +152,81 @@ const Calculator = () => {
                 )}
 
                 {step === 2 && (
-                  <>
-                    <div className="space-y-3">
-                      <Label>Материал стен *</Label>
-                      <div className="grid grid-cols-2 gap-3">
-                        <Button
-                          type="button"
-                          onClick={() => setMaterial('bревно')}
-                          className={`h-auto py-4 ${material === 'bревно' ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-200 hover:bg-gray-300'} text-black`}
-                        >
-                          Бревно
-                        </Button>
-                        <Button
-                          type="button"
-                          onClick={() => setMaterial('brus')}
-                          className={`h-auto py-4 ${material === 'brus' ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-200 hover:bg-gray-300'} text-black`}
-                        >
-                          Брус
-                        </Button>
-                      </div>
+                  <div className="space-y-4">
+                    <Label>Материал стен *</Label>
+                    <div className="grid gap-3">
+                      <Button
+                        type="button"
+                        onClick={() => setMaterial('ocilindrovannoe-brevno')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          material === 'ocilindrovannoe-brevno' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Оцилиндрованное бревно</div>
+                          <div className="text-sm opacity-80">Экологично, классический вид, естественная текстура</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setMaterial('rublenoe-brevno')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          material === 'rublenoe-brevno' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Рубленое бревно</div>
+                          <div className="text-sm opacity-80">Ручная рубка, уникальность каждого элемента</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setMaterial('obychnyj-brus')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          material === 'obychnyj-brus' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Обычный брус</div>
+                          <div className="text-sm opacity-80">Доступная цена, проверенная технология</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setMaterial('kleenyj-brus')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          material === 'kleenyj-brus' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Клееный брус</div>
+                          <div className="text-sm opacity-80">Не дает усадку, минимальные деформации</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setMaterial('profilirovannyj-brus')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          material === 'profilirovannyj-brus' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Профилированный брус</div>
+                          <div className="text-sm opacity-80">Плотное соединение, отличная теплоизоляция</div>
+                        </div>
+                      </Button>
                     </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>Длина (м) *</Label>
-                        <Input
-                          type="number"
-                          step="0.5"
-                          min="3"
-                          max="15"
-                          value={length}
-                          onChange={(e) => setLength(e.target.value)}
-                          placeholder="6"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label>Ширина (м) *</Label>
-                        <Input
-                          type="number"
-                          step="0.5"
-                          min="3"
-                          max="15"
-                          value={width}
-                          onChange={(e) => setWidth(e.target.value)}
-                          placeholder="6"
-                        />
-                      </div>
-                    </div>
-                  </>
+                  </div>
                 )}
 
                 {step === 3 && (
@@ -303,7 +330,7 @@ const Calculator = () => {
                       className="ml-auto bg-green-600 hover:bg-green-700"
                       disabled={
                         (step === 1 && !foundation) ||
-                        (step === 2 && (!material || !length || !width))
+                        (step === 2 && !material)
                       }
                     >
                       Далее
