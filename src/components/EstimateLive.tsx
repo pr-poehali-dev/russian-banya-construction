@@ -25,6 +25,36 @@ const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiv
     return num.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
+  const calculateFoundationTotal = () => {
+    if (!foundation || foundation === 'net') return 0;
+    
+    if (foundation === 'lentochnyj') {
+      return 232510 + 9640 + 550 + 450 + 77 + 210 + 2000 + 44000;
+    }
+    if (foundation === 'stolbchatyj') {
+      return 72000 + 8640 + 550 + 450 + 77 + 210 + 2000 + 33000;
+    }
+    if (foundation === 'plitnyj') {
+      return area * 0.25 * 4500 + area * 15 * 55 + area * 800 + 8640 + 550 + 450 + 77 + 210 + 2000 + (area * 800);
+    }
+    return 0;
+  };
+
+  const calculateWallsTotal = () => {
+    const pricePerM3 = material === 'bревно' ? 27000 : 22000;
+    const wallPrice = wallVolume * pricePerM3;
+    const assemblyPrice = area * 7000;
+    return wallPrice + assemblyPrice + 8640 + 320 + 450 + 180 + 2000 + 3500 + 300 + 960 + 700 + 3200 + 550 + 180 + 960;
+  };
+
+  const calculateRoofTotal = () => {
+    if (!roof) return 0;
+    const roofMaterialPrice = roof === 'metallocherepica' ? 680 : roof === 'mjagkaja' ? 850 : 450;
+    return 15840 + area * 1.3 * roofMaterialPrice + area * 1.3 * 2500;
+  };
+
+  const grandTotal = calculateFoundationTotal() + calculateWallsTotal() + calculateRoofTotal();
+
   return (
     <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
       {foundation && foundation !== 'net' && (
@@ -450,6 +480,14 @@ const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiv
           </table>
         </div>
       )}
+
+      <div className="border-4 border-green-600 rounded-lg p-6 bg-gradient-to-br from-green-50 to-white sticky bottom-0 shadow-xl">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-gray-800">ИТОГО ПО СМЕТЕ:</h2>
+          <div className="text-3xl font-bold text-green-700">{formatNumber(grandTotal)} ₽</div>
+        </div>
+        <p className="text-sm text-gray-600 mt-2">Общая сумма всех разделов работ и материалов</p>
+      </div>
     </div>
   );
 };
