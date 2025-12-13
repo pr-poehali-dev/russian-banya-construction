@@ -15,22 +15,28 @@ const Calculator = () => {
   const [insulation, setInsulation] = useState(false);
   const [finishing, setFinishing] = useState(false);
 
-  const materialImages = {
-    'bревno': 'https://cdn.poehali.dev/projects/da5fbb35-3c86-46c2-a2f3-70acab9f4a94/bucket/bath-log.jpg',
-    'brus': 'https://cdn.poehali.dev/projects/da5fbb35-3c86-46c2-a2f3-70acab9f4a94/bucket/bath-timber.jpg'
-  };
-
-  const foundationImages = {
-    'lentochnyj': 'https://cdn.poehali.dev/projects/da5fbb35-3c86-46c2-a2f3-70acab9f4a94/bucket/foundation-strip.jpg',
-    'stolbchatyj': 'https://cdn.poehali.dev/projects/da5fbb35-3c86-46c2-a2f3-70acab9f4a94/bucket/foundation-pillar.jpg',
-    'plitnyj': 'https://cdn.poehali.dev/projects/da5fbb35-3c86-46c2-a2f3-70acab9f4a94/bucket/foundation-slab.jpg'
+  const bathParts = {
+    walls: {
+      'bревno': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/c1c40a1a-547c-4d07-9a66-37e80e99032e.jpg',
+      'brus': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/79369e04-b837-42cd-99d4-1061752cc246.jpg'
+    },
+    foundation: {
+      'lentochnyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/d92c6583-83b3-4081-afa2-4db1da12b948.jpg',
+      'stolbchatyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/d92c6583-83b3-4081-afa2-4db1da12b948.jpg',
+      'plitnyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/d92c6583-83b3-4081-afa2-4db1da12b948.jpg'
+    },
+    roof: {
+      'metallocherepica': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/7dc957de-1097-4d15-869c-13e71b6b6907.jpg',
+      'mjagkaja': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/7dc957de-1097-4d15-869c-13e71b6b6907.jpg',
+      'profnastil': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/7dc957de-1097-4d15-869c-13e71b6b6907.jpg'
+    }
   };
 
   const calculatePrice = () => {
     if (!length || !width || !material) return 0;
     
     const area = parseFloat(length) * parseFloat(width);
-    const pricePerM2 = material === 'bревno' ? 25000 : 22000;
+    const pricePerM2 = material === 'bревно' ? 25000 : 22000;
     let basePrice = area * pricePerM2;
 
     if (foundation === 'lentochnyj') basePrice += area * 3000;
@@ -69,8 +75,8 @@ const Calculator = () => {
                   <div className="grid grid-cols-2 gap-3">
                     <Button
                       type="button"
-                      onClick={() => setMaterial('bревno')}
-                      className={`h-auto py-4 ${material === 'bревno' ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-200 hover:bg-gray-300'} text-black`}
+                      onClick={() => setMaterial('bревно')}
+                      className={`h-auto py-4 ${material === 'bревно' ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-200 hover:bg-gray-300'} text-black`}
                     >
                       Бревно
                     </Button>
@@ -180,43 +186,51 @@ const Calculator = () => {
           </div>
 
           <div className="space-y-6">
-            {material && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Выбранный материал</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img
-                    src={materialImages[material as keyof typeof materialImages]}
-                    alt={material === 'bревno' ? 'Бревно' : 'Брус'}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                  <p className="mt-3 text-center font-medium">
-                    {material === 'bревno' ? 'Баня из бревна' : 'Баня из бруса'}
-                  </p>
-                </CardContent>
-              </Card>
-            )}
-
-            {foundation && (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Тип фундамента</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img
-                    src={foundationImages[foundation as keyof typeof foundationImages]}
-                    alt="Фундамент"
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                  <p className="mt-3 text-center font-medium">
-                    {foundation === 'lentochnyj' && 'Ленточный фундамент'}
-                    {foundation === 'stolbchatyj' && 'Столбчатый фундамент'}
-                    {foundation === 'plitnyj' && 'Плитный фундамент'}
-                  </p>
-                </CardContent>
-              </Card>
-            )}
+            <Card>
+              <CardHeader>
+                <CardTitle>Визуализация бани</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="relative w-full aspect-square bg-gradient-to-b from-sky-200 to-green-100 rounded-lg overflow-hidden">
+                  {foundation && (
+                    <img
+                      src={bathParts.foundation[foundation as keyof typeof bathParts.foundation]}
+                      alt="Фундамент"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-1/4 object-contain"
+                    />
+                  )}
+                  
+                  {material && (
+                    <img
+                      src={bathParts.walls[material as keyof typeof bathParts.walls]}
+                      alt="Стены"
+                      className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-3/4 h-2/5 object-contain"
+                    />
+                  )}
+                  
+                  {roof && (
+                    <img
+                      src={bathParts.roof[roof as keyof typeof bathParts.roof]}
+                      alt="Крыша"
+                      className="absolute top-[10%] left-1/2 -translate-x-1/2 w-4/5 h-2/5 object-contain"
+                    />
+                  )}
+                  
+                  {!material && !foundation && !roof && (
+                    <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-center p-8">
+                      Выберите параметры, чтобы увидеть визуализацию бани
+                    </div>
+                  )}
+                </div>
+                
+                <div className="mt-4 text-sm text-gray-600 space-y-1">
+                  {material && <p>✓ Материал: {material === 'bревно' ? 'Бревно' : 'Брус'}</p>}
+                  {foundation && <p>✓ Фундамент: {foundation === 'lentochnyj' ? 'Ленточный' : foundation === 'stolbchatyj' ? 'Столбчатый' : 'Плитный'}</p>}
+                  {roof && <p>✓ Кровля: {roof === 'metallocherepica' ? 'Металлочерепица' : roof === 'mjagkaja' ? 'Мягкая' : 'Профнастил'}</p>}
+                  {length && width && <p>✓ Площадь: {(parseFloat(length) * parseFloat(width)).toFixed(1)} м²</p>}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
