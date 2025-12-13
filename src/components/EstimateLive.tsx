@@ -116,7 +116,23 @@ const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiv
                     <td className="text-right py-1.5">800,00</td>
                     <td className="text-right py-1.5 font-medium">{formatNumber(area * 800)}</td>
                   </tr>
+                  <tr className="bg-blue-50">
+                    <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого основные работы:</td>
+                    <td className="text-right py-2 font-semibold text-blue-700">72 000,00</td>
+                  </tr>
                 </>
+              )}
+              {foundation === 'stolbchatyj' && (
+                <tr className="bg-blue-50">
+                  <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого основные работы:</td>
+                  <td className="text-right py-2 font-semibold text-blue-700">49 500,00</td>
+                </tr>
+              )}
+              {foundation === 'plitnyj' && (
+                <tr className="bg-blue-50">
+                  <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого основные работы:</td>
+                  <td className="text-right py-2 font-semibold text-blue-700">{formatNumber(area * 0.25 * 4500 + area * 15 * 55 + area * 800)}</td>
+                </tr>
               )}
               <tr className="border-b bg-gray-50">
                 <td colSpan={5} className="py-1.5 font-semibold text-xs">Обвязка фундамента</td>
@@ -163,6 +179,10 @@ const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiv
                 <td className="text-right py-1.5">7 500,00</td>
                 <td className="text-right py-1.5 font-medium">3 600,00</td>
               </tr>
+              <tr className="bg-blue-50">
+                <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого обвязка:</td>
+                <td className="text-right py-2 font-semibold text-blue-700">13 617,00</td>
+              </tr>
               <tr className="bg-yellow-50">
                 <td colSpan={4} className="py-2 font-bold text-right">Итого по разделу:</td>
                 <td className="text-right py-2 font-bold text-green-700">
@@ -199,6 +219,12 @@ const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiv
                   <td className="text-right py-1.5">1,70</td>
                   <td className="text-right py-1.5">17 500,00</td>
                   <td className="text-right py-1.5 font-medium">29 750,00</td>
+                </tr>
+                <tr className="bg-blue-50">
+                  <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого материалы сруба:</td>
+                  <td className="text-right py-2 font-semibold text-blue-700">
+                    {formatNumber(wallVolume * (material === 'bревно' ? 19500 : 17500) + 29750)}
+                  </td>
                 </tr>
                 <tr className="bg-yellow-50">
                   <td colSpan={4} className="py-2 font-bold text-right">Итого по разделу:</td>
@@ -241,6 +267,10 @@ const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiv
                   <td className="text-right py-1.5">31,00</td>
                   <td className="text-right py-1.5">50,00</td>
                   <td className="text-right py-1.5 font-medium">1 550,00</td>
+                </tr>
+                <tr className="bg-blue-50">
+                  <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого расходные материалы:</td>
+                  <td className="text-right py-2 font-semibold text-blue-700">17 400,00</td>
                 </tr>
                 <tr className="border-b">
                   <td className="py-1.5">Монтаж сруба</td>
@@ -292,6 +322,16 @@ const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiv
                 <td className="text-right py-1.5">{formatNumber(area * 1.3)}</td>
                 <td className="text-right py-1.5">2 500,00</td>
                 <td className="text-right py-1.5 font-medium">{formatNumber(area * 1.3 * 2500)}</td>
+              </tr>
+              <tr className="bg-blue-50">
+                <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого материалы крыши:</td>
+                <td className="text-right py-2 font-semibold text-blue-700">
+                  {formatNumber(15840 + area * 1.3 * (roof === 'metallocherepica' ? 680 : roof === 'mjagkaja' ? 850 : 450))}
+                </td>
+              </tr>
+              <tr className="bg-blue-50">
+                <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого монтаж:</td>
+                <td className="text-right py-2 font-semibold text-blue-700">{formatNumber(area * 1.3 * 2500)}</td>
               </tr>
               <tr className="bg-yellow-50">
                 <td colSpan={4} className="py-2 font-bold text-right">Итого по разделу:</td>
