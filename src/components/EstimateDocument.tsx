@@ -303,7 +303,7 @@ const EstimateDocument = ({
               <tr className="border-b">
                 <td className="py-2 px-3">Длина строения, м</td>
                 <td className="py-2 px-3 font-medium">{length}</td>
-                <td className="py-2 px-3 rowspan="4" className="align-top">
+                <td rowSpan={4} className="py-2 px-3 align-top">
                   <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/65ab4513-a8b8-422d-99fd-2ed5589fa26f.jpg" alt="Баня" className="w-32 h-auto" />
                 </td>
               </tr>
