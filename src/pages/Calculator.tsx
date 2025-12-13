@@ -17,18 +17,18 @@ const Calculator = () => {
 
   const bathParts = {
     walls: {
-      'bревno': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/c1c40a1a-547c-4d07-9a66-37e80e99032e.jpg',
-      'brus': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/79369e04-b837-42cd-99d4-1061752cc246.jpg'
+      'bревno': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/65ab4513-a8b8-422d-99fd-2ed5589fa26f.jpg',
+      'brus': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/0f343f45-7e46-4fa6-8f9f-b84065036b03.jpg'
     },
     foundation: {
-      'lentochnyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/d92c6583-83b3-4081-afa2-4db1da12b948.jpg',
-      'stolbchatyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/d92c6583-83b3-4081-afa2-4db1da12b948.jpg',
-      'plitnyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/d92c6583-83b3-4081-afa2-4db1da12b948.jpg'
+      'lentochnyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/3f84adff-6b68-4831-b84c-6550d10f06ae.jpg',
+      'stolbchatyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/df649a5f-4078-425d-ab78-e3363c9d84f8.jpg',
+      'plitnyj': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/a28893d6-2862-429c-8ab4-aa301777287e.jpg'
     },
     roof: {
-      'metallocherepica': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/7dc957de-1097-4d15-869c-13e71b6b6907.jpg',
-      'mjagkaja': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/7dc957de-1097-4d15-869c-13e71b6b6907.jpg',
-      'profnastil': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/7dc957de-1097-4d15-869c-13e71b6b6907.jpg'
+      'metallocherepica': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/8a896153-c118-4aa9-87d7-a37e355935bb.jpg',
+      'mjagkaja': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e29467f8-121a-4873-9aa7-cfa56371ebc7.jpg',
+      'profnastil': 'https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/8a896153-c118-4aa9-87d7-a37e355935bb.jpg'
     }
   };
 
