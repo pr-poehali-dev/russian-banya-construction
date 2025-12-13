@@ -8,6 +8,7 @@ import EstimateDocument from '@/components/EstimateDocument';
 import EstimateLive from '@/components/EstimateLive';
 
 const Calculator = () => {
+  const [step, setStep] = useState(1);
   const [material, setMaterial] = useState('');
   const [length, setLength] = useState('');
   const [width, setWidth] = useState('');
@@ -66,124 +67,257 @@ const Calculator = () => {
           Калькулятор стоимости бани
         </h1>
 
+        {/* Индикатор шагов */}
+        <div className="mb-8">
+          <div className="flex justify-center items-center space-x-4">
+            {[1, 2, 3, 4].map((s) => (
+              <div key={s} className="flex items-center">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
+                  s === step ? 'bg-yellow-400 text-black' : s < step ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600'
+                }`}>
+                  {s}
+                </div>
+                {s < 4 && <div className={`w-16 h-1 ${s < step ? 'bg-green-500' : 'bg-gray-300'}`} />}
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-4 text-sm text-gray-600">
+            {step === 1 && 'Шаг 1: Выбор фундамента'}
+            {step === 2 && 'Шаг 2: Материал и размеры'}
+            {step === 3 && 'Шаг 3: Кровля'}
+            {step === 4 && 'Шаг 4: Дополнительные опции'}
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Основные параметры</CardTitle>
+                <CardTitle>
+                  {step === 1 && 'Выберите тип фундамента'}
+                  {step === 2 && 'Материал стен и размеры бани'}
+                  {step === 3 && 'Выберите тип кровли'}
+                  {step === 4 && 'Дополнительные опции'}
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="space-y-3">
-                  <Label>Материал стен *</Label>
-                  <div className="grid grid-cols-2 gap-3">
+                {step === 1 && (
+                  <div className="space-y-4">
+                    <Label>Тип фундамента *</Label>
+                    <div className="grid gap-3">
+                      <Button
+                        type="button"
+                        onClick={() => setFoundation('lentochnyj')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          foundation === 'lentochnyj' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Ленточный фундамент</div>
+                          <div className="text-sm opacity-80">Бетонная лента по периметру</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setFoundation('stolbchatyj')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          foundation === 'stolbchatyj' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Винтовые сваи</div>
+                          <div className="text-sm opacity-80">Быстрый монтаж, подходит для любых грунтов</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setFoundation('net')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          foundation === 'net' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Фундамент уже есть</div>
+                          <div className="text-sm opacity-80">Использую существующий фундамент</div>
+                        </div>
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {step === 2 && (
+                  <>
+                    <div className="space-y-3">
+                      <Label>Материал стен *</Label>
+                      <div className="grid grid-cols-2 gap-3">
+                        <Button
+                          type="button"
+                          onClick={() => setMaterial('bревно')}
+                          className={`h-auto py-4 ${material === 'bревно' ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-200 hover:bg-gray-300'} text-black`}
+                        >
+                          Бревно
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => setMaterial('brus')}
+                          className={`h-auto py-4 ${material === 'brus' ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-200 hover:bg-gray-300'} text-black`}
+                        >
+                          Брус
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Длина (м) *</Label>
+                        <Input
+                          type="number"
+                          step="0.5"
+                          min="3"
+                          max="15"
+                          value={length}
+                          onChange={(e) => setLength(e.target.value)}
+                          placeholder="6"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Ширина (м) *</Label>
+                        <Input
+                          type="number"
+                          step="0.5"
+                          min="3"
+                          max="15"
+                          value={width}
+                          onChange={(e) => setWidth(e.target.value)}
+                          placeholder="6"
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {step === 3 && (
+                  <div className="space-y-4">
+                    <Label>Тип кровли *</Label>
+                    <div className="grid gap-3">
+                      <Button
+                        type="button"
+                        onClick={() => setRoof('metallocherepica')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          roof === 'metallocherepica' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Металлочерепица</div>
+                          <div className="text-sm opacity-80">Долговечная и надёжная</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setRoof('mjagkaja')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          roof === 'mjagkaja' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Мягкая кровля</div>
+                          <div className="text-sm opacity-80">Тихая и красивая</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => setRoof('profnastil')}
+                        className={`h-auto py-6 text-left justify-start ${
+                          roof === 'profnastil' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">Профнастил</div>
+                          <div className="text-sm opacity-80">Бюджетный вариант</div>
+                        </div>
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {step === 4 && (
+                  <div className="space-y-4">
+                    <Label>Дополнительные опции</Label>
+                    <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-lg border-2 hover:bg-gray-50">
+                      <input
+                        type="checkbox"
+                        checked={stove}
+                        onChange={(e) => setStove(e.target.checked)}
+                        className="w-5 h-5 rounded border-gray-300"
+                      />
+                      <span className="text-sm font-medium">Печь (+80 000 ₽)</span>
+                    </label>
+
+                    <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-lg border-2 hover:bg-gray-50">
+                      <input
+                        type="checkbox"
+                        checked={insulation}
+                        onChange={(e) => setInsulation(e.target.checked)}
+                        className="w-5 h-5 rounded border-gray-300"
+                      />
+                      <span className="text-sm font-medium">Утепление</span>
+                    </label>
+
+                    <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-lg border-2 hover:bg-gray-50">
+                      <input
+                        type="checkbox"
+                        checked={finishing}
+                        onChange={(e) => setFinishing(e.target.checked)}
+                        className="w-5 h-5 rounded border-gray-300"
+                      />
+                      <span className="text-sm font-medium">Внутренняя отделка</span>
+                    </label>
+                  </div>
+                )}
+
+                {/* Навигация */}
+                <div className="flex justify-between pt-4">
+                  {step > 1 && (
                     <Button
-                      type="button"
-                      onClick={() => setMaterial('bревно')}
-                      className={`h-auto py-4 ${material === 'bревно' ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-200 hover:bg-gray-300'} text-black`}
+                      onClick={() => setStep(step - 1)}
+                      variant="outline"
                     >
-                      Бревно
+                      Назад
                     </Button>
+                  )}
+                  {step < 4 && (
                     <Button
-                      type="button"
-                      onClick={() => setMaterial('brus')}
-                      className={`h-auto py-4 ${material === 'brus' ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-200 hover:bg-gray-300'} text-black`}
+                      onClick={() => setStep(step + 1)}
+                      className="ml-auto bg-green-600 hover:bg-green-700"
+                      disabled={
+                        (step === 1 && !foundation) ||
+                        (step === 2 && (!material || !length || !width))
+                      }
                     >
-                      Брус
+                      Далее
                     </Button>
-                  </div>
+                  )}
+                  {step === 4 && (
+                    <Button
+                      onClick={() => setShowEstimate(true)}
+                      className="ml-auto bg-blue-600 hover:bg-blue-700"
+                    >
+                      Показать смету
+                    </Button>
+                  )}
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label>Длина (м) *</Label>
-                    <Input
-                      type="number"
-                      step="0.5"
-                      min="3"
-                      max="15"
-                      value={length}
-                      onChange={(e) => setLength(e.target.value)}
-                      placeholder="6"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Ширина (м) *</Label>
-                    <Input
-                      type="number"
-                      step="0.5"
-                      min="3"
-                      max="15"
-                      value={width}
-                      onChange={(e) => setWidth(e.target.value)}
-                      placeholder="6"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Тип фундамента</Label>
-                  <Select value={foundation} onValueChange={setFoundation}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите тип" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="lentochnyj">Ленточный</SelectItem>
-                      <SelectItem value="stolbchatyj">Столбчатый</SelectItem>
-                      <SelectItem value="plitnyj">Плитный</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Тип кровли</Label>
-                  <Select value={roof} onValueChange={setRoof}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите тип" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="metallocherepica">Металлочерепица</SelectItem>
-                      <SelectItem value="mjagkaja">Мягкая кровля</SelectItem>
-                      <SelectItem value="profnastil">Профнастил</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Дополнительные опции</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={stove}
-                    onChange={(e) => setStove(e.target.checked)}
-                    className="w-5 h-5 rounded border-gray-300"
-                  />
-                  <span className="text-sm font-medium">Печь (+80 000 ₽)</span>
-                </label>
-
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={insulation}
-                    onChange={(e) => setInsulation(e.target.checked)}
-                    className="w-5 h-5 rounded border-gray-300"
-                  />
-                  <span className="text-sm font-medium">Утепление</span>
-                </label>
-
-                <label className="flex items-center space-x-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={finishing}
-                    onChange={(e) => setFinishing(e.target.checked)}
-                    className="w-5 h-5 rounded border-gray-300"
-                  />
-                  <span className="text-sm font-medium">Внутренняя отделка</span>
-                </label>
               </CardContent>
             </Card>
           </div>
