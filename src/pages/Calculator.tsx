@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import EstimateDocument from '@/components/EstimateDocument';
+import EstimateLive from '@/components/EstimateLive';
 
 const Calculator = () => {
   const [material, setMaterial] = useState('');
@@ -190,120 +191,16 @@ const Calculator = () => {
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Предварительная смета</CardTitle>
+                <CardTitle>Детальная смета</CardTitle>
               </CardHeader>
               <CardContent>
-                {!length || !width || !material ? (
-                  <div className="text-center py-12 text-gray-400">
-                    Заполните основные параметры для расчёта сметы
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h3 className="font-semibold mb-3 text-gray-700">Данные объекта</h3>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Площадь:</span>
-                          <span className="font-medium">{(parseFloat(length) * parseFloat(width)).toFixed(1)} м²</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Размеры:</span>
-                          <span className="font-medium">{length} × {width} м</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">Материал стен:</span>
-                          <span className="font-medium">{material === 'bревно' ? 'Бревно' : 'Брус'}</span>
-                        </div>
-                        {foundation && (
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Фундамент:</span>
-                            <span className="font-medium">
-                              {foundation === 'lentochnyj' ? 'Винтовые сваи' : foundation === 'stolbchatyj' ? 'Столбчатый' : 'Плитный'}
-                            </span>
-                          </div>
-                        )}
-                        {roof && (
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Кровля:</span>
-                            <span className="font-medium">
-                              {roof === 'metallocherepica' ? 'Металлочерепица' : roof === 'mjagkaja' ? 'Мягкая кровля' : 'Профнастил'}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="space-y-3">
-                      <h3 className="font-semibold text-gray-700">Расчёт по разделам</h3>
-                      
-                      {foundation && (
-                        <div className="flex justify-between items-center py-2 border-b">
-                          <span className="text-sm text-gray-600">Фундамент</span>
-                          <span className="font-medium">
-                            {Math.round(parseFloat(length) * parseFloat(width) * 
-                              (foundation === 'lentochnyj' ? 3000 : foundation === 'stolbchatyj' ? 2000 : 4000)
-                            ).toLocaleString()} ₽
-                          </span>
-                        </div>
-                      )}
-
-                      <div className="flex justify-between items-center py-2 border-b">
-                        <span className="text-sm text-gray-600">Стены и сруб</span>
-                        <span className="font-medium">
-                          {Math.round(parseFloat(length) * parseFloat(width) * (material === 'bревно' ? 25000 : 22000)).toLocaleString()} ₽
-                        </span>
-                      </div>
-
-                      {roof && (
-                        <div className="flex justify-between items-center py-2 border-b">
-                          <span className="text-sm text-gray-600">Кровля</span>
-                          <span className="font-medium">
-                            {Math.round(parseFloat(length) * parseFloat(width) * 
-                              (roof === 'metallocherepica' ? 1500 : roof === 'mjagkaja' ? 2000 : 1200)
-                            ).toLocaleString()} ₽
-                          </span>
-                        </div>
-                      )}
-
-                      {stove && (
-                        <div className="flex justify-between items-center py-2 border-b">
-                          <span className="text-sm text-gray-600">Печь и дымоход</span>
-                          <span className="font-medium">80 000 ₽</span>
-                        </div>
-                      )}
-
-                      {insulation && (
-                        <div className="flex justify-between items-center py-2 border-b">
-                          <span className="text-sm text-gray-600">Утепление</span>
-                          <span className="font-medium">
-                            {Math.round(parseFloat(length) * parseFloat(width) * 1500).toLocaleString()} ₽
-                          </span>
-                        </div>
-                      )}
-
-                      {finishing && (
-                        <div className="flex justify-between items-center py-2 border-b">
-                          <span className="text-sm text-gray-600">Внутренняя отделка</span>
-                          <span className="font-medium">
-                            {Math.round(parseFloat(length) * parseFloat(width) * 3000).toLocaleString()} ₽
-                          </span>
-                        </div>
-                      )}
-
-                      <div className="flex justify-between items-center pt-4 mt-4 border-t-2 border-gray-900">
-                        <span className="text-lg font-bold">ИТОГО:</span>
-                        <span className="text-2xl font-bold text-green-600">
-                          {totalPrice.toLocaleString()} ₽
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="text-xs text-gray-500 mt-4 space-y-1">
-                      <p>* Предварительный расчёт</p>
-                      <p>* Точная стоимость определяется после выезда специалиста</p>
-                    </div>
-                  </div>
-                )}
+                <EstimateLive 
+                  material={material}
+                  length={length}
+                  width={width}
+                  foundation={foundation}
+                  roof={roof}
+                />
               </CardContent>
             </Card>
           </div>
