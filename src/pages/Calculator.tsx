@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import EstimateDocument from '@/components/EstimateDocument';
 
 const Calculator = () => {
   const [material, setMaterial] = useState('');
@@ -14,6 +15,7 @@ const Calculator = () => {
   const [stove, setStove] = useState(false);
   const [insulation, setInsulation] = useState(false);
   const [finishing, setFinishing] = useState(false);
+  const [showEstimate, setShowEstimate] = useState(false);
 
   const bathParts = {
     walls: {
@@ -234,19 +236,56 @@ const Calculator = () => {
           </div>
         </div>
 
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Получить точный расчёт</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-600 mb-4">
-              Оставьте контакты, и мы отправим подробную смету с учётом всех особенностей вашего проекта
-            </p>
-            <Button className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-6">
-              Получить смету на Email
-            </Button>
-          </CardContent>
-        </Card>
+        {!showEstimate && totalPrice > 0 && (
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle>Получить подробную смету</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4">
+                Посмотрите детальный расчёт стоимости с разбивкой по материалам и работам
+              </p>
+              <Button 
+                onClick={() => setShowEstimate(true)}
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-6"
+              >
+                Показать подробную смету
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+
+        {showEstimate && (
+          <div className="mt-8 space-y-4">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold">Подробная смета</h2>
+              <Button 
+                onClick={() => setShowEstimate(false)}
+                variant="outline"
+              >
+                Вернуться к калькулятору
+              </Button>
+            </div>
+            <EstimateDocument 
+              material={material}
+              length={length}
+              width={width}
+              foundation={foundation}
+              roof={roof}
+              stove={stove}
+              insulation={insulation}
+              finishing={finishing}
+            />
+            <div className="text-center py-6">
+              <Button 
+                onClick={() => window.print()}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4"
+              >
+                Распечатать смету
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
