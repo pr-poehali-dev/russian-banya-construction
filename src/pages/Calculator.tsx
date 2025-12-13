@@ -180,22 +180,6 @@ const Calculator = () => {
           </div>
 
           <div className="space-y-6">
-            <Card className="bg-green-50 border-green-200">
-              <CardHeader>
-                <CardTitle className="text-2xl">Предварительная стоимость</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-5xl font-bold text-green-700 mb-4">
-                  {totalPrice > 0 ? `${totalPrice.toLocaleString('ru-RU')} ₽` : '—'}
-                </div>
-                {totalPrice > 0 && length && width && (
-                  <p className="text-sm text-gray-600">
-                    Площадь: {(parseFloat(length) * parseFloat(width)).toFixed(1)} м²
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-
             {material && (
               <Card>
                 <CardHeader>
