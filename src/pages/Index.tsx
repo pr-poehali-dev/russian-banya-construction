@@ -192,7 +192,6 @@ const Index = () => {
             <button onClick={() => scrollToSection("order")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Калькулятор</button>
             <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Услуги</button>
             <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Контакты</button>
-            <button onClick={() => navigate('/tour-guides')} className="text-black hover:bg-yellow-500 transition-colors font-medium text-sm lg:text-base bg-yellow-500 px-3 py-1 rounded-md">Гиды</button>
           </div>
           <div className="text-center px-1 absolute left-1/2 -translate-x-1/2 top-14">
             <p className="text-xs sm:text-sm text-black font-medium whitespace-nowrap">Русская баня — это не помещение, это процесс!</p>
@@ -206,7 +205,6 @@ const Index = () => {
                 <button onClick={() => { scrollToSection("order"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Калькулятор</button>
                 <button onClick={() => { scrollToSection("services"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Услуги</button>
                 <button onClick={() => { scrollToSection("contact"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Контакты</button>
-                <button onClick={() => { navigate('/tour-guides'); setIsMobileMenuOpen(false); }} className="text-black bg-yellow-500 hover:bg-yellow-600 transition-colors font-bold py-3 px-4 text-left">🗺️ Сайт гидов</button>
                 <a href="tel:+73422984030" className="text-black hover:bg-yellow-500 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
                   <Icon name="Phone" size={20} />
                   +7 (342) 298-40-30
