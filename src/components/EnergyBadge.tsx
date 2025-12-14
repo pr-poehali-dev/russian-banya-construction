@@ -3,7 +3,11 @@ import Icon from '@/components/ui/icon';
 
 const ENERGY_API = 'https://functions.poehali.dev/a0113d8f-a9b7-40ce-951c-c04f61976a1b';
 
-const EnergyBadge = () => {
+interface EnergyBadgeProps {
+  projectId?: string;
+}
+
+const EnergyBadge = ({ projectId = 'bath_calculator' }: EnergyBadgeProps) => {
   const [energy, setEnergy] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +15,7 @@ const EnergyBadge = () => {
 
   const fetchEnergy = async () => {
     try {
-      const response = await fetch(`${ENERGY_API}?user_id=${userId}`);
+      const response = await fetch(`${ENERGY_API}?user_id=${userId}&project_id=${projectId}`);
       const data = await response.json();
       setEnergy(data.energy);
     } catch (error) {
@@ -25,7 +29,7 @@ const EnergyBadge = () => {
     fetchEnergy();
     const interval = setInterval(fetchEnergy, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [projectId]);
 
   if (loading) {
     return (

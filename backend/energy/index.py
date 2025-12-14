@@ -12,11 +12,11 @@ def get_db_connection():
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     """
-    API для управления энергией пользователей
+    API для управления энергией пользователей по проектам
     
-    GET /energy?user_id=xxx - получить баланс энергии
+    GET /energy?user_id=xxx&project_id=yyy - получить баланс энергии для проекта
     POST /energy/spend - списать энергию (body: {user_id, project_id, amount, description})
-    POST /energy/refill - пополнить энергию (body: {user_id, amount})
+    POST /energy/refill - пополнить энергию (body: {user_id, project_id, amount})
     """
     method = event.get('httpMethod', 'GET')
     
@@ -40,6 +40,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         if method == 'GET':
             params = event.get('queryStringParameters', {}) or {}
             user_id = params.get('user_id')
+            project_id = params.get('project_id', 'default')
             
             if not user_id:
                 return {
@@ -49,18 +50,18 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'isBase64Encoded': False
                 }
             
-            # Получаем или создаём запись о энергии пользователя
+            # Получаем или создаём запись о энергии пользователя для проекта
             cur.execute(
-                "SELECT energy FROM user_energy WHERE user_id = %s",
-                (user_id,)
+                "SELECT energy FROM user_energy WHERE user_id = %s AND project_id = %s",
+                (user_id, project_id)
             )
             result = cur.fetchone()
             
             if not result:
-                # Создаём нового пользователя с начальной энергией 100
+                # Создаём нового пользователя с начальной энергией 100 для этого проекта
                 cur.execute(
-                    "INSERT INTO user_energy (user_id, energy) VALUES (%s, 100) RETURNING energy",
-                    (user_id,)
+                    "INSERT INTO user_energy (user_id, project_id, energy) VALUES (%s, %s, 100) RETURNING energy",
+                    (user_id, project_id)
                 )
                 conn.commit()
                 energy = 100
@@ -70,7 +71,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             return {
                 'statusCode': 200,
                 'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'user_id': user_id, 'energy': energy}),
+                'body': json.dumps({'user_id': user_id, 'project_id': project_id, 'energy': energy}),
                 'isBase64Encoded': False
             }
         
@@ -92,14 +93,14 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         'isBase64Encoded': False
                     }
                 
-                # Проверяем баланс
-                cur.execute("SELECT energy FROM user_energy WHERE user_id = %s", (user_id,))
+                # Проверяем баланс для конкретного проекта
+                cur.execute("SELECT energy FROM user_energy WHERE user_id = %s AND project_id = %s", (user_id, project_id))
                 result = cur.fetchone()
                 
                 if not result:
                     cur.execute(
-                        "INSERT INTO user_energy (user_id, energy) VALUES (%s, 100) RETURNING energy",
-                        (user_id,)
+                        "INSERT INTO user_energy (user_id, project_id, energy) VALUES (%s, %s, 100) RETURNING energy",
+                        (user_id, project_id)
                     )
                     conn.commit()
                     current_energy = 100
@@ -114,10 +115,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         'isBase64Encoded': False
                     }
                 
-                # Списываем энергию
+                # Списываем энергию для конкретного проекта
                 cur.execute(
-                    "UPDATE user_energy SET energy = energy - %s, updated_at = CURRENT_TIMESTAMP WHERE user_id = %s RETURNING energy",
-                    (amount, user_id)
+                    "UPDATE user_energy SET energy = energy - %s, updated_at = CURRENT_TIMESTAMP WHERE user_id = %s AND project_id = %s RETURNING energy",
+                    (amount, user_id, project_id)
                 )
                 new_energy = cur.fetchone()[0]
                 
@@ -137,6 +138,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             elif action == 'refill':
                 user_id = body.get('user_id')
+                project_id = body.get('project_id', 'default')
                 amount = body.get('amount', 50)
                 
                 if not user_id:
@@ -147,17 +149,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         'isBase64Encoded': False
                     }
                 
-                # Пополняем энергию
+                # Пополняем энергию для конкретного проекта
                 cur.execute(
-                    "INSERT INTO user_energy (user_id, energy) VALUES (%s, %s) ON CONFLICT (user_id) DO UPDATE SET energy = user_energy.energy + %s, updated_at = CURRENT_TIMESTAMP RETURNING energy",
-                    (user_id, amount, amount)
+                    "INSERT INTO user_energy (user_id, project_id, energy) VALUES (%s, %s, %s) ON CONFLICT (user_id, project_id) DO UPDATE SET energy = user_energy.energy + %s, updated_at = CURRENT_TIMESTAMP RETURNING energy",
+                    (user_id, project_id, amount, amount)
                 )
                 new_energy = cur.fetchone()[0]
                 
                 # Записываем транзакцию
                 cur.execute(
-                    "INSERT INTO energy_transactions (user_id, project_id, amount, type, description) VALUES (%s, NULL, %s, 'refill', 'Пополнение энергии')",
-                    (user_id, amount)
+                    "INSERT INTO energy_transactions (user_id, project_id, amount, type, description) VALUES (%s, %s, %s, 'refill', 'Пополнение энергии')",
+                    (user_id, project_id, amount)
                 )
                 conn.commit()
                 

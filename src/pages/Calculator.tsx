@@ -103,7 +103,7 @@ const Calculator = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white py-12 px-4">
-      <EnergyBadge />
+      <EnergyBadge projectId="bath_calculator" />
       <div className="container mx-auto max-w-6xl">
         <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
           Калькулятор стоимости бани

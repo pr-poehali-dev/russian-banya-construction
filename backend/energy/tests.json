@@ -3,10 +3,11 @@
     {
       "name": "Get energy balance for new user",
       "method": "GET",
-      "path": "/?user_id=test_user_123",
+      "path": "/?user_id=test_user_123&project_id=test_project",
       "expectedStatus": 200,
       "expectedBody": {
         "user_id": "test_user_123",
+        "project_id": "test_project",
         "energy": 100
       }
     },
@@ -35,6 +36,7 @@
       "body": {
         "action": "refill",
         "user_id": "test_user_789",
+        "project_id": "project_002",
         "amount": 50
       },
       "expectedStatus": 200,
