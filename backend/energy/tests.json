@@ -1,0 +1,48 @@
+{
+  "tests": [
+    {
+      "name": "Get energy balance for new user",
+      "method": "GET",
+      "path": "/?user_id=test_user_123",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "user_id": "test_user_123",
+        "energy": 100
+      }
+    },
+    {
+      "name": "Spend energy successfully",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "spend",
+        "user_id": "test_user_456",
+        "project_id": "project_001",
+        "amount": 10,
+        "description": "Расчёт сметы бани"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "spent": 10
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Refill energy",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "refill",
+        "user_id": "test_user_789",
+        "amount": 50
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "added": 50
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

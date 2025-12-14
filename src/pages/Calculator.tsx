@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import EstimateDocument from '@/components/EstimateDocument';
 import EstimateLive from '@/components/EstimateLive';
+import EnergyBadge from '@/components/EnergyBadge';
 
 const Calculator = () => {
   const [step, setStep] = useState(1);
@@ -20,6 +21,44 @@ const Calculator = () => {
   const [insulation, setInsulation] = useState(false);
   const [finishing, setFinishing] = useState(false);
   const [showEstimate, setShowEstimate] = useState(false);
+  const [energyLoading, setEnergyLoading] = useState(false);
+  const [energyError, setEnergyError] = useState('');
+
+  const ENERGY_API = 'https://functions.poehali.dev/a0113d8f-a9b7-40ce-951c-c04f61976a1b';
+  const userId = 'demo_user_001';
+
+  const handleShowEstimate = async () => {
+    setEnergyLoading(true);
+    setEnergyError('');
+
+    try {
+      const response = await fetch(ENERGY_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'spend',
+          user_id: userId,
+          project_id: 'bath_calculator',
+          amount: 10,
+          description: 'Расчёт сметы бани'
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || data.error) {
+        setEnergyError(data.error || 'Недостаточно энергии');
+        return;
+      }
+
+      setShowEstimate(true);
+    } catch (error) {
+      setEnergyError('Ошибка при списании энергии');
+      console.error('Energy spend error:', error);
+    } finally {
+      setEnergyLoading(false);
+    }
+  };
 
   const bathParts = {
     walls: {
@@ -64,6 +103,7 @@ const Calculator = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white py-12 px-4">
+      <EnergyBadge />
       <div className="container mx-auto max-w-6xl">
         <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
           Калькулятор стоимости бани
@@ -425,12 +465,18 @@ const Calculator = () => {
                     </Button>
                   )}
                   {step === 5 && (
-                    <Button
-                      onClick={() => setShowEstimate(true)}
-                      className="ml-auto bg-blue-600 hover:bg-blue-700"
-                    >
-                      Показать смету
-                    </Button>
+                    <div className="ml-auto space-y-2">
+                      <Button
+                        onClick={handleShowEstimate}
+                        className="w-full bg-blue-600 hover:bg-blue-700"
+                        disabled={energyLoading}
+                      >
+                        {energyLoading ? 'Списание энергии...' : 'Показать смету (-10 энергии)'}
+                      </Button>
+                      {energyError && (
+                        <p className="text-sm text-red-600 font-medium text-center">{energyError}</p>
+                      )}
+                    </div>
                   )}
                 </div>
               </CardContent>
