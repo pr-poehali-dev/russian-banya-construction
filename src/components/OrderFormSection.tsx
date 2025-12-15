@@ -11,6 +11,7 @@ const OrderFormSection = () => {
   const [material, setMaterial] = useState('');
   const [length, setLength] = useState('');
   const [width, setWidth] = useState('');
+  const [partitionsLength, setPartitionsLength] = useState('');
   const [floors, setFloors] = useState('');
   const [foundation, setFoundation] = useState('');
   const [location, setLocation] = useState('');
@@ -42,6 +43,7 @@ const OrderFormSection = () => {
           material,
           length,
           width,
+          partitionsLength,
           floors,
           foundation,
           location,
@@ -64,6 +66,7 @@ const OrderFormSection = () => {
         setMaterial('');
         setLength('');
         setWidth('');
+        setPartitionsLength('');
         setFloors('');
         setFoundation('');
         setLocation('');
@@ -271,6 +274,21 @@ const OrderFormSection = () => {
                     placeholder="Например: 4"
                     className="text-lg py-6"
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Длина всех перегородок (м)</Label>
+                  <Input
+                    type="number"
+                    step="0.5"
+                    min="0"
+                    max="50"
+                    value={partitionsLength}
+                    onChange={(e) => setPartitionsLength(e.target.value)}
+                    placeholder="Например: 8"
+                    className="text-lg py-6"
+                  />
+                  <p className="text-sm text-gray-500">Суммарная длина всех внутренних перегородок</p>
                 </div>
 
                 <div className="space-y-3">

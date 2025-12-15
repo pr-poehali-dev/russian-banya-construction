@@ -39,6 +39,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         material = body_data.get('material', '')
         length = body_data.get('length', '')
         width = body_data.get('width', '')
+        partitions_length = body_data.get('partitionsLength', '')
         floors = body_data.get('floors', '')
         foundation = body_data.get('foundation', '')
         location = body_data.get('location', '')
@@ -106,6 +107,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         <div class="field-label">Размеры:</div>
                         <div class="field-value">{length} x {width} м, этажность: {floors}</div>
                     </div>
+                    {f'<div class="field"><div class="field-label">Длина перегородок:</div><div class="field-value">{partitions_length} м</div></div>' if partitions_length else ''}
                     <div class="field">
                         <div class="field-label">Место строительства:</div>
                         <div class="field-value">{location_names.get(location, location)}</div>
