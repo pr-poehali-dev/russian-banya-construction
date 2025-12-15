@@ -224,6 +224,20 @@ const Index = () => {
 
       </header>
 
+      <div className="fixed top-[100px] md:top-[120px] left-0 right-0 bg-gradient-to-r from-red-600 via-red-500 to-red-600 z-40 animate-pulse">
+        <div className="container mx-auto px-4 py-3 md:py-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-white text-center">
+            <div className="flex items-center gap-2">
+              <Icon name="Gift" size={24} className="flex-shrink-0" />
+              <span className="text-lg md:text-2xl font-bold">НОВОГОДНЯЯ АКЦИЯ!</span>
+            </div>
+            <div className="text-base md:text-xl font-semibold">
+              При заказе строительства бани до <span className="font-bold underline">25.12.2025</span> — скидка <span className="text-2xl md:text-3xl font-black">10%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
         <div className="absolute inset-0">
           <img 
