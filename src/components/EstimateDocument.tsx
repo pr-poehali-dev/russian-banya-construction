@@ -19,7 +19,7 @@ interface EstimateDocumentProps {
   length: string;
   width: string;
   foundation: string;
-  roof: string;
+  location: string;
   stove: boolean;
   insulation: boolean;
   finishing: boolean;
@@ -30,7 +30,7 @@ const EstimateDocument = ({
   length, 
   width, 
   foundation, 
-  roof,
+  location,
   stove,
   insulation,
   finishing 
@@ -131,73 +131,26 @@ const EstimateDocument = ({
     sections.push(floorsSection);
   }
 
-  if (roof) {
-    const roofNames = {
-      metallocherepica: 'Металлочерепица',
-      mjagkaja: 'Мягкая кровля',
-      profnastil: 'Профнастил'
+  if (location) {
+    const locationNames = {
+      perm: 'Пермь',
+      'perm-30km': 'До 30 км от Перми',
+      'perm-50km': '30-50 км от Перми',
+      'perm-100km': '50-100 км от Перми'
     };
 
-    const roofSection: EstimateSection = {
-      title: 'Крыша',
-      items: [
-        { name: 'Доска 1-й сорт(50х150)мм', unit: 'м3', quantity: 0.88, price: 18000, total: 15840 },
-        { name: 'Доска 1-й сорт(40х100)мм', unit: 'м3', quantity: 1.14, price: 18000, total: 20520 },
-        { name: 'Брусок(50х50)мм', unit: 'м3', quantity: 0.18, price: 15000, total: 2700 },
-        { name: 'Пленка гидроизоляционная', unit: 'м2', quantity: 50, price: 60, total: 3000 },
-        { name: 'Шпилька резьбовая оцинкованная(10х1000)мм', unit: 'м', quantity: 8, price: 60, total: 480 }
-      ],
-      total: 0
-    };
+    let deliveryPrice = 0;
+    if (location === 'perm-30km') deliveryPrice = 5000;
+    if (location === 'perm-50km') deliveryPrice = 10000;
+    if (location === 'perm-100km') deliveryPrice = 20000;
 
-    if (roof === 'metallocherepica' || roof === 'profnastil') {
-      roofSection.items.push(
-        { name: roof === 'metallocherepica' ? 'Металлочерепица' : 'Профнастил', unit: 'м2', quantity: roofArea, price: roof === 'metallocherepica' ? 680 : 450, total: Math.round(roofArea * (roof === 'metallocherepica' ? 680 : 450)) },
-        { name: 'Конек простой(200х200)мм', unit: 'п.м', quantity: parseFloat(length), price: 140, total: Math.round(parseFloat(length) * 140) }
-      );
-    } else {
-      roofSection.items.push(
-        { name: 'Мягкая кровля (битумная черепица)', unit: 'м2', quantity: roofArea, price: 850, total: Math.round(roofArea * 850) },
-        { name: 'Подкладочный ковер', unit: 'м2', quantity: roofArea, price: 120, total: Math.round(roofArea * 120) }
-      );
+    if (deliveryPrice > 0) {
+      deliverySection.items = [
+        { name: `Доставка материалов и выезд бригады (${locationNames[location as keyof typeof locationNames]})`, unit: 'услуга', quantity: 1, price: deliveryPrice, total: deliveryPrice }
+      ];
+      deliverySection.total = deliveryPrice;
+      sections.push(deliverySection);
     }
-
-    roofSection.items.push(
-      { name: 'Гайка оцинкованная,(М10)', unit: 'шт', quantity: 78, price: 4, total: 312 },
-      { name: 'Шайба увеличенная оцинкованная,(М10)', unit: 'шт', quantity: 78, price: 4, total: 312 },
-      { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: 26, price: 10, total: 260 },
-      { name: 'Шуруп "глухарь"(8х40) 1кг/ми', unit: 'шт', quantity: 62, price: 3.5, total: 217 },
-      { name: 'Джут(150мм)', unit: 'п.м', quantity: 30, price: 21, total: 630 },
-      { name: 'Скобы для степлера(№10)', unit: 'шт', quantity: 1000, price: 0.15, total: 150 },
-      { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: 3, price: 180, total: 540 }
-    );
-
-    if (roof === 'metallocherepica' || roof === 'profnastil') {
-      roofSection.items.push(
-        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 5, price: 180, total: 900 },
-        { name: 'Саморезы черные(3,5х55)(2х90)мм', unit: 'шт', quantity: 250, price: 2.5, total: 625 }
-      );
-    }
-
-    roofSection.items.push(
-      { name: 'Ветровая планка', unit: 'п.м', quantity: 12, price: 90, total: 1080 },
-      { name: 'Карнизная планка', unit: 'п.м', quantity: 15, price: 90, total: 1350 }
-    );
-
-    if (roof === 'mjagkaja') {
-      roofSection.items.push(
-        { name: 'Коньково-карнизная черепица', unit: 'п.м', quantity: parseFloat(length) + 10, price: 180, total: Math.round((parseFloat(length) + 10) * 180) }
-      );
-    }
-
-    roofSection.items.push(
-      { name: 'Кровельные саморезы(4,8*35)', unit: 'шт', quantity: 370, price: 1.84, total: 681 },
-      { name: 'Кровельные саморезы(4,8*50)', unit: 'шт', quantity: 120, price: 2, total: 240 },
-      { name: 'Монтаж кровли', unit: 'м2', quantity: roofArea, price: 2500, total: Math.round(roofArea * 2500) }
-    );
-
-    roofSection.total = roofSection.items.reduce((sum, item) => sum + item.total, 0);
-    sections.push(roofSection);
   }
 
   if (stove) {

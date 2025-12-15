@@ -3,10 +3,10 @@ interface EstimateLiveProps {
   length: string;
   width: string;
   foundation: string;
-  roof: string;
+  location: string;
 }
 
-const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiveProps) => {
+const EstimateLive = ({ material, length, width, foundation, location }: EstimateLiveProps) => {
   if (!length || !width || !material) {
     return (
       <div className="text-center py-12 text-gray-500">
@@ -47,13 +47,16 @@ const EstimateLive = ({ material, length, width, foundation, roof }: EstimateLiv
     return wallPrice + assemblyPrice + 8640 + 320 + 450 + 180 + 2000 + 3500 + 300 + 960 + 700 + 3200 + 550 + 180 + 960;
   };
 
-  const calculateRoofTotal = () => {
-    if (!roof) return 0;
-    const roofMaterialPrice = roof === 'metallocherepica' ? 680 : roof === 'mjagkaja' ? 850 : 450;
-    return 15840 + area * 1.3 * roofMaterialPrice + area * 1.3 * 2500;
+  const calculateDeliveryTotal = () => {
+    if (!location) return 0;
+    if (location === 'perm') return 0;
+    if (location === 'perm-30km') return 5000;
+    if (location === 'perm-50km') return 10000;
+    if (location === 'perm-100km') return 20000;
+    return 0;
   };
 
-  const grandTotal = calculateFoundationTotal() + calculateWallsTotal() + calculateRoofTotal();
+  const grandTotal = calculateFoundationTotal() + calculateWallsTotal() + calculateDeliveryTotal();
 
   return (
     <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">

@@ -504,7 +504,7 @@ const Calculator = () => {
                   length={length}
                   width={width}
                   foundation={foundation}
-                  roof={roof}
+                  location={location}
                 />
               </CardContent>
             </Card>
@@ -546,7 +546,7 @@ const Calculator = () => {
               length={length}
               width={width}
               foundation={foundation}
-              roof={roof}
+              location={location}
               stove={stove}
               insulation={insulation}
               finishing={finishing}
