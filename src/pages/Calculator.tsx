@@ -15,7 +15,7 @@ const Calculator = () => {
   const [partitionsLength, setPartitionsLength] = useState('');
   const [floors, setFloors] = useState('');
   const [foundation, setFoundation] = useState('');
-  const [roof, setRoof] = useState('');
+  const [location, setLocation] = useState('');
   const [stove, setStove] = useState(false);
   const [insulation, setInsulation] = useState(false);
   const [finishing, setFinishing] = useState(false);
@@ -87,7 +87,7 @@ const Calculator = () => {
             {step === 1 && 'Шаг 1: Выбор фундамента'}
             {step === 2 && 'Шаг 2: Материал стен'}
             {step === 3 && 'Шаг 3: Размеры бани'}
-            {step === 4 && 'Шаг 4: Кровля'}
+            {step === 4 && 'Шаг 4: Место строительства'}
             {step === 5 && 'Шаг 5: Дополнительные опции'}
           </div>
         </div>
@@ -100,7 +100,7 @@ const Calculator = () => {
                   {step === 1 && 'Выберите тип фундамента'}
                   {step === 2 && 'Выберите материал стен'}
                   {step === 3 && 'Укажите размеры бани'}
-                  {step === 4 && 'Выберите тип кровли'}
+                  {step === 4 && 'Где будет строиться баня?'}
                   {step === 5 && 'Дополнительные опции'}
                 </CardTitle>
               </CardHeader>
@@ -348,57 +348,74 @@ const Calculator = () => {
 
                 {step === 4 && (
                   <div className="space-y-4">
-                    <Label>Тип кровли *</Label>
+                    <Label>Место строительства *</Label>
                     <div className="grid gap-3">
                       <Button
                         type="button"
                         onClick={() => {
-                          setRoof('metallocherepica');
+                          setLocation('perm');
                           setTimeout(() => setStep(5), 300);
                         }}
                         className={`h-auto py-6 text-left justify-start ${
-                          roof === 'metallocherepica' 
+                          location === 'perm' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
                             : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                         }`}
                       >
                         <div>
-                          <div className="font-bold text-lg">Металлочерепица</div>
-                          <div className="text-sm opacity-80">Долговечная и надёжная</div>
+                          <div className="font-bold text-lg">Пермь</div>
+                          <div className="text-sm opacity-80">В черте города</div>
                         </div>
                       </Button>
                       <Button
                         type="button"
                         onClick={() => {
-                          setRoof('mjagkaja');
+                          setLocation('perm-30km');
                           setTimeout(() => setStep(5), 300);
                         }}
                         className={`h-auto py-6 text-left justify-start ${
-                          roof === 'mjagkaja' 
+                          location === 'perm-30km' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
                             : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                         }`}
                       >
                         <div>
-                          <div className="font-bold text-lg">Мягкая кровля</div>
-                          <div className="text-sm opacity-80">Тихая и красивая</div>
+                          <div className="font-bold text-lg">До 30 км от Перми</div>
+                          <div className="text-sm opacity-80">Пригород и близлежащие населённые пункты</div>
                         </div>
                       </Button>
                       <Button
                         type="button"
                         onClick={() => {
-                          setRoof('profnastil');
+                          setLocation('perm-50km');
                           setTimeout(() => setStep(5), 300);
                         }}
                         className={`h-auto py-6 text-left justify-start ${
-                          roof === 'profnastil' 
+                          location === 'perm-50km' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
                             : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                         }`}
                       >
                         <div>
-                          <div className="font-bold text-lg">Профнастил</div>
-                          <div className="text-sm opacity-80">Бюджетный вариант</div>
+                          <div className="font-bold text-lg">30-50 км от Перми</div>
+                          <div className="text-sm opacity-80">Удалённые районы</div>
+                        </div>
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => {
+                          setLocation('perm-100km');
+                          setTimeout(() => setStep(5), 300);
+                        }}
+                        className={`h-auto py-6 text-left justify-start ${
+                          location === 'perm-100km' 
+                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                        }`}
+                      >
+                        <div>
+                          <div className="font-bold text-lg">50-100 км от Перми</div>
+                          <div className="text-sm opacity-80">Пермский край</div>
                         </div>
                       </Button>
                     </div>
