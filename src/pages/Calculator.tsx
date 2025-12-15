@@ -49,9 +49,9 @@ const Calculator = () => {
     if (foundation === 'stolbchatyj') basePrice += area * 2000;
     if (foundation === 'plitnyj') basePrice += area * 4000;
 
-    if (roof === 'metallocherepica') basePrice += area * 1500;
-    if (roof === 'mjagkaja') basePrice += area * 2000;
-    if (roof === 'profnastil') basePrice += area * 1200;
+    if (location === 'perm-30km') basePrice += 5000;
+    if (location === 'perm-50km') basePrice += 10000;
+    if (location === 'perm-100km') basePrice += 20000;
 
     if (stove) basePrice += 80000;
     if (insulation) basePrice += area * 1500;
