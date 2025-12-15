@@ -33,7 +33,7 @@ const OrderFormSection = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://functions.poehali.dev/d33cb4c1-0952-4afa-b115-887b4c7da346/send-order', {
+      const response = await fetch('https://functions.poehali.dev/cba76a16-6247-4333-9605-62ab8c813235', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

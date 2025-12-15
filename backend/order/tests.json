@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "name": "Test OPTIONS request",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Test POST order",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "material": "ocilindrovannoe-brevno",
+        "length": "6",
+        "width": "4",
+        "floors": "1",
+        "foundation": "lentochnyj",
+        "location": "perm",
+        "name": "Тест",
+        "phone": "+7 999 123-45-67",
+        "messenger": "whatsapp"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      }
+    }
+  ]
+}
