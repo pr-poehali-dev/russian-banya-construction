@@ -431,52 +431,24 @@ const EstimateLive = ({ material, length, width, foundation, location }: Estimat
         </>
       )}
 
-      {roof && (
+      {location && location !== 'perm' && (
         <div className="border rounded-lg p-4 bg-white">
-          <h3 className="font-bold text-sm mb-3 text-gray-800">Крыша</h3>
+          <h3 className="font-bold text-sm mb-3 text-gray-800">Доставка и выезд бригады</h3>
           <table className="w-full text-xs">
             <tbody>
               <tr className="border-b">
-                <td className="py-1.5">Доска 1-й сорт(50х150)мм</td>
-                <td className="text-center py-1.5">м3</td>
-                <td className="text-right py-1.5">0,88</td>
-                <td className="text-right py-1.5">18 000,00</td>
-                <td className="text-right py-1.5 font-medium">15 840,00</td>
-              </tr>
-              <tr className="border-b">
                 <td className="py-1.5">
-                  {roof === 'metallocherepica' ? 'Металлочерепица' : roof === 'mjagkaja' ? 'Мягкая кровля' : 'Профнастил'}
+                  Доставка материалов и выезд бригады ({location === 'perm-30km' ? 'до 30 км' : location === 'perm-50km' ? '30-50 км' : '50-100 км'} от Перми)
                 </td>
-                <td className="text-center py-1.5">м2</td>
-                <td className="text-right py-1.5">{formatNumber(area * 1.3)}</td>
-                <td className="text-right py-1.5">
-                  {roof === 'metallocherepica' ? '680,00' : roof === 'mjagkaja' ? '850,00' : '450,00'}
-                </td>
-                <td className="text-right py-1.5 font-medium">
-                  {formatNumber(area * 1.3 * (roof === 'metallocherepica' ? 680 : roof === 'mjagkaja' ? 850 : 450))}
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-1.5">Монтаж кровли</td>
-                <td className="text-center py-1.5">м2</td>
-                <td className="text-right py-1.5">{formatNumber(area * 1.3)}</td>
-                <td className="text-right py-1.5">2 500,00</td>
-                <td className="text-right py-1.5 font-medium">{formatNumber(area * 1.3 * 2500)}</td>
-              </tr>
-              <tr className="bg-blue-50">
-                <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого материалы крыши:</td>
-                <td className="text-right py-2 font-semibold text-blue-700">
-                  {formatNumber(15840 + area * 1.3 * (roof === 'metallocherepica' ? 680 : roof === 'mjagkaja' ? 850 : 450))}
-                </td>
-              </tr>
-              <tr className="bg-blue-50">
-                <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого монтаж:</td>
-                <td className="text-right py-2 font-semibold text-blue-700">{formatNumber(area * 1.3 * 2500)}</td>
+                <td className="text-center py-1.5">услуга</td>
+                <td className="text-right py-1.5">1</td>
+                <td className="text-right py-1.5">{formatNumber(calculateDeliveryTotal())}</td>
+                <td className="text-right py-1.5 font-medium">{formatNumber(calculateDeliveryTotal())}</td>
               </tr>
               <tr className="bg-yellow-50">
                 <td colSpan={4} className="py-2 font-bold text-right">Итого по разделу:</td>
                 <td className="text-right py-2 font-bold text-green-700">
-                  {formatNumber(15840 + area * 1.3 * (roof === 'metallocherepica' ? 680 : roof === 'mjagkaja' ? 850 : 450) + area * 1.3 * 2500)}
+                  {formatNumber(calculateDeliveryTotal())}
                 </td>
               </tr>
             </tbody>
