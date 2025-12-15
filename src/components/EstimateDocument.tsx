@@ -20,9 +20,9 @@ interface EstimateDocumentProps {
   width: string;
   foundation: string;
   location: string;
-  stove: boolean;
-  insulation: boolean;
-  finishing: boolean;
+  name: string;
+  phone: string;
+  email: string;
 }
 
 const EstimateDocument = ({ 
@@ -31,9 +31,9 @@ const EstimateDocument = ({
   width, 
   foundation, 
   location,
-  stove,
-  insulation,
-  finishing 
+  name,
+  phone,
+  email
 }: EstimateDocumentProps) => {
   const area = parseFloat(length) * parseFloat(width);
   const perimeter = (parseFloat(length) + parseFloat(width)) * 2;
@@ -153,41 +153,7 @@ const EstimateDocument = ({
     }
   }
 
-  if (stove) {
-    sections.push({
-      title: 'Печь и дымоход',
-      items: [
-        { name: 'Печь банная с баком', unit: 'шт', quantity: 1, price: 45000, total: 45000 },
-        { name: 'Дымоход из нержавейки (комплект)', unit: 'компл', quantity: 1, price: 25000, total: 25000 },
-        { name: 'Монтаж печи и дымохода', unit: 'услуга', quantity: 1, price: 10000, total: 10000 }
-      ],
-      total: 80000
-    });
-  }
 
-  if (insulation) {
-    sections.push({
-      title: 'Утепление',
-      items: [
-        { name: 'Утеплитель базальтовый 100мм', unit: 'м2', quantity: area * 2, price: 450, total: Math.round(area * 2 * 450) },
-        { name: 'Пароизоляция', unit: 'м2', quantity: area * 2, price: 35, total: Math.round(area * 2 * 35) },
-        { name: 'Монтаж утепления', unit: 'м2', quantity: area * 2, price: 250, total: Math.round(area * 2 * 250) }
-      ],
-      total: Math.round(area * 2 * 735)
-    });
-  }
-
-  if (finishing) {
-    sections.push({
-      title: 'Внутренняя отделка',
-      items: [
-        { name: 'Вагонка липа (класс А)', unit: 'м2', quantity: area * 2.5, price: 850, total: Math.round(area * 2.5 * 850) },
-        { name: 'Полок (липа)', unit: 'компл', quantity: 1, price: 18000, total: 18000 },
-        { name: 'Монтаж отделки', unit: 'м2', quantity: area * 2.5, price: 450, total: Math.round(area * 2.5 * 450) }
-      ],
-      total: Math.round(area * 2.5 * 1300 + 18000)
-    });
-  }
 
   const grandTotal = sections.reduce((sum, section) => sum + section.total, 0);
 
@@ -205,7 +171,9 @@ const EstimateDocument = ({
         <div className="flex justify-between items-start mb-6 pb-4 border-b-2 border-gray-900">
           <div>
             <h1 className="text-xl font-bold mb-2">Предварительная смета (расчет под крышу, без отделки)</h1>
-            <p className="text-sm text-gray-600">Заказчик: _______________________</p>
+            <p className="text-sm text-gray-600">Заказчик: <span className="font-medium">{name || '_______________________'}</span></p>
+            {phone && <p className="text-sm text-gray-600">Телефон: <span className="font-medium">{phone}</span></p>}
+            {email && <p className="text-sm text-gray-600">Email: <span className="font-medium">{email}</span></p>}
           </div>
           <div className="text-right text-xs text-gray-600">
             <p>www.пермский-пар.рф</p>

@@ -16,9 +16,10 @@ const Calculator = () => {
   const [floors, setFloors] = useState('');
   const [foundation, setFoundation] = useState('');
   const [location, setLocation] = useState('');
-  const [stove, setStove] = useState(false);
-  const [insulation, setInsulation] = useState(false);
-  const [finishing, setFinishing] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [messenger, setMessenger] = useState('');
   const [showEstimate, setShowEstimate] = useState(false);
 
   const bathParts = {
@@ -53,10 +54,6 @@ const Calculator = () => {
     if (location === 'perm-50km') basePrice += 10000;
     if (location === 'perm-100km') basePrice += 20000;
 
-    if (stove) basePrice += 80000;
-    if (insulation) basePrice += area * 1500;
-    if (finishing) basePrice += area * 3000;
-
     return Math.round(basePrice);
   };
 
@@ -88,7 +85,7 @@ const Calculator = () => {
             {step === 2 && 'Шаг 2: Материал стен'}
             {step === 3 && 'Шаг 3: Размеры бани'}
             {step === 4 && 'Шаг 4: Место строительства'}
-            {step === 5 && 'Шаг 5: Дополнительные опции'}
+            {step === 5 && 'Шаг 5: Контактные данные'}
           </div>
         </div>
 
@@ -101,7 +98,7 @@ const Calculator = () => {
                   {step === 2 && 'Выберите материал стен'}
                   {step === 3 && 'Укажите размеры бани'}
                   {step === 4 && 'Где будет строиться баня?'}
-                  {step === 5 && 'Дополнительные опции'}
+                  {step === 5 && 'Ваши контактные данные'}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -424,36 +421,77 @@ const Calculator = () => {
 
                 {step === 5 && (
                   <div className="space-y-4">
-                    <Label>Дополнительные опции</Label>
-                    <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-lg border-2 hover:bg-gray-50">
-                      <input
-                        type="checkbox"
-                        checked={stove}
-                        onChange={(e) => setStove(e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300"
+                    <div className="space-y-2">
+                      <Label>Ваше имя *</Label>
+                      <Input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Иван Иванов"
+                        className="text-lg py-6"
                       />
-                      <span className="text-sm font-medium">Печь (+80 000 ₽)</span>
-                    </label>
+                    </div>
 
-                    <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-lg border-2 hover:bg-gray-50">
-                      <input
-                        type="checkbox"
-                        checked={insulation}
-                        onChange={(e) => setInsulation(e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300"
+                    <div className="space-y-2">
+                      <Label>Телефон *</Label>
+                      <Input
+                        type="tel"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="+7 (999) 123-45-67"
+                        className="text-lg py-6"
                       />
-                      <span className="text-sm font-medium">Утепление</span>
-                    </label>
+                    </div>
 
-                    <label className="flex items-center space-x-3 cursor-pointer p-4 rounded-lg border-2 hover:bg-gray-50">
-                      <input
-                        type="checkbox"
-                        checked={finishing}
-                        onChange={(e) => setFinishing(e.target.checked)}
-                        className="w-5 h-5 rounded border-gray-300"
+                    <div className="space-y-2">
+                      <Label>Email</Label>
+                      <Input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="ivan@example.com"
+                        className="text-lg py-6"
                       />
-                      <span className="text-sm font-medium">Внутренняя отделка</span>
-                    </label>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Куда отправить смету? *</Label>
+                      <div className="grid gap-3">
+                        <Button
+                          type="button"
+                          onClick={() => setMessenger('whatsapp')}
+                          className={`h-auto py-4 text-left justify-start ${
+                            messenger === 'whatsapp' 
+                              ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                          }`}
+                        >
+                          WhatsApp
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => setMessenger('telegram')}
+                          className={`h-auto py-4 text-left justify-start ${
+                            messenger === 'telegram' 
+                              ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                          }`}
+                        >
+                          Telegram
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => setMessenger('email')}
+                          className={`h-auto py-4 text-left justify-start ${
+                            messenger === 'email' 
+                              ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                          }`}
+                        >
+                          Email
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 )}
 
@@ -484,8 +522,9 @@ const Calculator = () => {
                     <Button
                       onClick={() => setShowEstimate(true)}
                       className="ml-auto bg-blue-600 hover:bg-blue-700"
+                      disabled={!name || !phone || !messenger}
                     >
-                      Показать смету
+                      Получить смету
                     </Button>
                   )}
                 </div>
@@ -547,9 +586,9 @@ const Calculator = () => {
               width={width}
               foundation={foundation}
               location={location}
-              stove={stove}
-              insulation={insulation}
-              finishing={finishing}
+              name={name}
+              phone={phone}
+              email={email}
             />
             <div className="text-center py-6">
               <Button 
