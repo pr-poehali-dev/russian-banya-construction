@@ -111,7 +111,10 @@ const Calculator = () => {
                     <div className="grid gap-3">
                       <Button
                         type="button"
-                        onClick={() => setFoundation('lentochnyj')}
+                        onClick={() => {
+                          setFoundation('lentochnyj');
+                          setTimeout(() => setStep(2), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           foundation === 'lentochnyj' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -125,7 +128,10 @@ const Calculator = () => {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setFoundation('stolbchatyj')}
+                        onClick={() => {
+                          setFoundation('stolbchatyj');
+                          setTimeout(() => setStep(2), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           foundation === 'stolbchatyj' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -139,7 +145,10 @@ const Calculator = () => {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setFoundation('net')}
+                        onClick={() => {
+                          setFoundation('net');
+                          setTimeout(() => setStep(2), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           foundation === 'net' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -161,7 +170,10 @@ const Calculator = () => {
                     <div className="grid gap-3">
                       <Button
                         type="button"
-                        onClick={() => setMaterial('ocilindrovannoe-brevno')}
+                        onClick={() => {
+                          setMaterial('ocilindrovannoe-brevno');
+                          setTimeout(() => setStep(3), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           material === 'ocilindrovannoe-brevno' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -175,7 +187,10 @@ const Calculator = () => {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setMaterial('rublenoe-brevno')}
+                        onClick={() => {
+                          setMaterial('rublenoe-brevno');
+                          setTimeout(() => setStep(3), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           material === 'rublenoe-brevno' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -189,7 +204,10 @@ const Calculator = () => {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setMaterial('obychnyj-brus')}
+                        onClick={() => {
+                          setMaterial('obychnyj-brus');
+                          setTimeout(() => setStep(3), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           material === 'obychnyj-brus' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -203,7 +221,10 @@ const Calculator = () => {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setMaterial('kleenyj-brus')}
+                        onClick={() => {
+                          setMaterial('kleenyj-brus');
+                          setTimeout(() => setStep(3), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           material === 'kleenyj-brus' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -217,7 +238,10 @@ const Calculator = () => {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setMaterial('profilirovannyj-brus')}
+                        onClick={() => {
+                          setMaterial('profilirovannyj-brus');
+                          setTimeout(() => setStep(3), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           material === 'profilirovannyj-brus' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -285,7 +309,10 @@ const Calculator = () => {
                       <div className="grid grid-cols-2 gap-3">
                         <Button
                           type="button"
-                          onClick={() => setFloors('1')}
+                          onClick={() => {
+                            setFloors('1');
+                            if (length && width) setTimeout(() => setStep(4), 300);
+                          }}
                           className={`h-auto py-6 text-left justify-start ${
                             floors === '1' 
                               ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -299,7 +326,10 @@ const Calculator = () => {
                         </Button>
                         <Button
                           type="button"
-                          onClick={() => setFloors('1.5')}
+                          onClick={() => {
+                            setFloors('1.5');
+                            if (length && width) setTimeout(() => setStep(4), 300);
+                          }}
                           className={`h-auto py-6 text-left justify-start ${
                             floors === '1.5' 
                               ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -322,7 +352,10 @@ const Calculator = () => {
                     <div className="grid gap-3">
                       <Button
                         type="button"
-                        onClick={() => setRoof('metallocherepica')}
+                        onClick={() => {
+                          setRoof('metallocherepica');
+                          setTimeout(() => setStep(5), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           roof === 'metallocherepica' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -336,7 +369,10 @@ const Calculator = () => {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setRoof('mjagkaja')}
+                        onClick={() => {
+                          setRoof('mjagkaja');
+                          setTimeout(() => setStep(5), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           roof === 'mjagkaja' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
@@ -350,7 +386,10 @@ const Calculator = () => {
                       </Button>
                       <Button
                         type="button"
-                        onClick={() => setRoof('profnastil')}
+                        onClick={() => {
+                          setRoof('profnastil');
+                          setTimeout(() => setStep(5), 300);
+                        }}
                         className={`h-auto py-6 text-left justify-start ${
                           roof === 'profnastil' 
                             ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
