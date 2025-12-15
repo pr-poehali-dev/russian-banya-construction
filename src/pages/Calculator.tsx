@@ -185,23 +185,6 @@ const Calculator = () => {
                       <Button
                         type="button"
                         onClick={() => {
-                          setMaterial('rublenoe-brevno');
-                          setTimeout(() => setStep(3), 300);
-                        }}
-                        className={`h-auto py-6 text-left justify-start ${
-                          material === 'rublenoe-brevno' 
-                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
-                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                        }`}
-                      >
-                        <div>
-                          <div className="font-bold text-lg">Рубленое бревно</div>
-                          <div className="text-sm opacity-80">Ручная рубка, уникальность каждого элемента</div>
-                        </div>
-                      </Button>
-                      <Button
-                        type="button"
-                        onClick={() => {
                           setMaterial('obychnyj-brus');
                           setTimeout(() => setStep(3), 300);
                         }}
@@ -231,23 +214,6 @@ const Calculator = () => {
                         <div>
                           <div className="font-bold text-lg">Клееный брус</div>
                           <div className="text-sm opacity-80">Не дает усадку, минимальные деформации</div>
-                        </div>
-                      </Button>
-                      <Button
-                        type="button"
-                        onClick={() => {
-                          setMaterial('profilirovannyj-brus');
-                          setTimeout(() => setStep(3), 300);
-                        }}
-                        className={`h-auto py-6 text-left justify-start ${
-                          material === 'profilirovannyj-brus' 
-                            ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
-                            : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                        }`}
-                      >
-                        <div>
-                          <div className="font-bold text-lg">Профилированный брус</div>
-                          <div className="text-sm opacity-80">Плотное соединение, отличная теплоизоляция</div>
                         </div>
                       </Button>
                     </div>
