@@ -1,11 +1,9 @@
 """
-Отправка заявки с калькулятора бани на email
+Сохранение заявки с калькулятора бани в базу данных
 """
 import json
 import os
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import psycopg2
 from typing import Dict, Any
 
 
@@ -17,13 +15,49 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'statusCode': 200,
             'headers': {
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'POST, OPTIONS',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type',
                 'Access-Control-Max-Age': '86400'
             },
             'body': '',
             'isBase64Encoded': False
         }
+    
+    if method == 'GET':
+        try:
+            database_url = os.environ.get('DATABASE_URL')
+            conn = psycopg2.connect(database_url)
+            cursor = conn.cursor()
+            
+            cursor.execute("""
+                SELECT id, name, phone, email, messenger, material, length, width, 
+                       partitions_length, floors, foundation, location, created_at, status
+                FROM orders 
+                ORDER BY created_at DESC
+            """)
+            
+            columns = [desc[0] for desc in cursor.description]
+            orders = []
+            for row in cursor.fetchall():
+                orders.append(dict(zip(columns, row)))
+            
+            cursor.close()
+            conn.close()
+            
+            return {
+                'statusCode': 200,
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps({'orders': orders}, default=str),
+                'isBase64Encoded': False
+            }
+        except Exception as e:
+            print(f"ERROR getting orders: {type(e).__name__}: {str(e)}")
+            return {
+                'statusCode': 500,
+                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                'body': json.dumps({'error': str(e)}),
+                'isBase64Encoded': False
+            }
     
     if method != 'POST':
         return {
@@ -67,105 +101,39 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'perm-100km': '50-100 км от Перми'
         }
         
-        messenger_names = {
-            'whatsapp': 'WhatsApp',
-            'telegram': 'Telegram',
-            'email': 'Email'
-        }
+        database_url = os.environ.get('DATABASE_URL')
         
-        html_content = f"""
-        <html>
-        <head>
-            <style>
-                body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
-                .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
-                .header {{ background-color: #FBB040; padding: 20px; text-align: center; }}
-                .header h1 {{ margin: 0; color: #000; }}
-                .content {{ background-color: #f9f9f9; padding: 20px; }}
-                .field {{ margin-bottom: 15px; }}
-                .field-label {{ font-weight: bold; color: #555; }}
-                .field-value {{ color: #000; margin-top: 5px; }}
-                .footer {{ text-align: center; padding: 20px; font-size: 12px; color: #999; }}
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>🏡 Новая заявка с сайта</h1>
-                </div>
-                <div class="content">
-                    <h2>Параметры бани:</h2>
-                    <div class="field">
-                        <div class="field-label">Фундамент:</div>
-                        <div class="field-value">{foundation_names.get(foundation, foundation)}</div>
-                    </div>
-                    <div class="field">
-                        <div class="field-label">Материал стен:</div>
-                        <div class="field-value">{material_names.get(material, material)}</div>
-                    </div>
-                    <div class="field">
-                        <div class="field-label">Размеры:</div>
-                        <div class="field-value">{length} x {width} м, этажность: {floors}</div>
-                    </div>
-                    {f'<div class="field"><div class="field-label">Длина перегородок:</div><div class="field-value">{partitions_length} м</div></div>' if partitions_length else ''}
-                    <div class="field">
-                        <div class="field-label">Место строительства:</div>
-                        <div class="field-value">{location_names.get(location, location)}</div>
-                    </div>
-                    
-                    <h2>Контактные данные:</h2>
-                    <div class="field">
-                        <div class="field-label">Имя:</div>
-                        <div class="field-value">{name}</div>
-                    </div>
-                    <div class="field">
-                        <div class="field-label">Телефон:</div>
-                        <div class="field-value">{phone}</div>
-                    </div>
-                    {f'<div class="field"><div class="field-label">Email:</div><div class="field-value">{email_client}</div></div>' if email_client else ''}
-                    <div class="field">
-                        <div class="field-label">Предпочтительный способ связи:</div>
-                        <div class="field-value">{messenger_names.get(messenger, messenger)}</div>
-                    </div>
-                </div>
-                <div class="footer">
-                    <p>Заявка отправлена автоматически с сайта perm-par.ru</p>
-                </div>
-            </div>
-        </body>
-        </html>
-        """
+        conn = psycopg2.connect(database_url)
+        cursor = conn.cursor()
         
-        smtp_host = os.environ.get('SMTP_HOST')
-        smtp_port = int(os.environ.get('SMTP_PORT', '587'))
-        smtp_user = os.environ.get('SMTP_USER')
-        smtp_password = os.environ.get('SMTP_PASSWORD')
-        recipient_email = os.environ.get('RECIPIENT_EMAIL')
+        cursor.execute("""
+            INSERT INTO orders 
+            (name, phone, email, messenger, material, length, width, partitions_length, floors, foundation, location, status)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'new')
+            RETURNING id
+        """, (name, phone, email_client, messenger, material, length, width, partitions_length, floors, foundation, location))
         
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = f'Новая заявка: {name} - {material_names.get(material, material)} {length}x{width}м'
-        msg['From'] = smtp_user
-        msg['To'] = recipient_email
+        order_id = cursor.fetchone()[0]
+        conn.commit()
+        cursor.close()
+        conn.close()
         
-        html_part = MIMEText(html_content, 'html', 'utf-8')
-        msg.attach(html_part)
-        
-        with smtplib.SMTP(smtp_host, smtp_port) as server:
-            server.starttls()
-            server.login(smtp_user, smtp_password)
-            server.send_message(msg)
+        print(f"Order saved successfully with ID: {order_id}")
         
         return {
             'statusCode': 200,
             'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            'body': json.dumps({'success': True}),
+            'body': json.dumps({'success': True, 'order_id': order_id}),
             'isBase64Encoded': False
         }
         
     except Exception as e:
+        print(f"ERROR: {type(e).__name__}: {str(e)}")
+        import traceback
+        print(traceback.format_exc())
         return {
             'statusCode': 500,
             'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            'body': json.dumps({'error': str(e)}),
+            'body': json.dumps({'error': str(e), 'type': type(e).__name__}),
             'isBase64Encoded': False
         }

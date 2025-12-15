@@ -7,6 +7,12 @@
       "expectedStatus": 200
     },
     {
+      "name": "Test GET orders",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
       "name": "Test POST order",
       "method": "POST",
       "path": "/",
@@ -21,10 +27,7 @@
         "phone": "+7 999 123-45-67",
         "messenger": "whatsapp"
       },
-      "expectedStatus": 200,
-      "expectedBody": {
-        "success": true
-      }
+      "expectedStatus": 200
     }
   ]
 }
