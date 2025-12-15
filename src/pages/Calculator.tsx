@@ -437,7 +437,29 @@ const Calculator = () => {
                       <Input
                         type="tel"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={(e) => {
+                          let value = e.target.value.replace(/\D/g, '');
+                          if (!value.startsWith('7') && value.length > 0) {
+                            value = '7' + value;
+                          }
+                          if (value.length > 11) value = value.slice(0, 11);
+                          
+                          let formatted = '+7';
+                          if (value.length > 1) {
+                            formatted += ' (' + value.slice(1, 4);
+                          }
+                          if (value.length >= 5) {
+                            formatted += ') ' + value.slice(4, 7);
+                          }
+                          if (value.length >= 8) {
+                            formatted += '-' + value.slice(7, 9);
+                          }
+                          if (value.length >= 10) {
+                            formatted += '-' + value.slice(9, 11);
+                          }
+                          
+                          setPhone(formatted);
+                        }}
                         placeholder="+7 (999) 123-45-67"
                         className="text-lg py-6"
                       />
