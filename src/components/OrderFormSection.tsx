@@ -422,25 +422,39 @@ const OrderFormSection = () => {
                   <Input
                     type="tel"
                     value={phone}
-                    onChange={(e) => {
-                      let value = e.target.value.replace(/\D/g, '');
-                      if (!value.startsWith('7') && value.length > 0) {
-                        value = '7' + value;
+                    onFocus={(e) => {
+                      if (!phone) {
+                        setPhone('+7 ');
                       }
-                      if (value.length > 11) value = value.slice(0, 11);
+                    }}
+                    onChange={(e) => {
+                      const input = e.target.value;
+                      
+                      if (!input.startsWith('+7')) {
+                        setPhone('+7 ');
+                        return;
+                      }
+                      
+                      if (input.length < 3) {
+                        setPhone('+7 ');
+                        return;
+                      }
+                      
+                      let value = input.slice(2).replace(/\D/g, '');
+                      if (value.length > 10) value = value.slice(0, 10);
                       
                       let formatted = '+7';
-                      if (value.length > 1) {
-                        formatted += ' (' + value.slice(1, 4);
+                      if (value.length > 0) {
+                        formatted += ' (' + value.slice(0, 3);
                       }
-                      if (value.length >= 5) {
-                        formatted += ') ' + value.slice(4, 7);
+                      if (value.length >= 4) {
+                        formatted += ') ' + value.slice(3, 6);
                       }
-                      if (value.length >= 8) {
-                        formatted += '-' + value.slice(7, 9);
+                      if (value.length >= 7) {
+                        formatted += '-' + value.slice(6, 8);
                       }
-                      if (value.length >= 10) {
-                        formatted += '-' + value.slice(9, 11);
+                      if (value.length >= 9) {
+                        formatted += '-' + value.slice(8, 10);
                       }
                       
                       setPhone(formatted);
