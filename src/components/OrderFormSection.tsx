@@ -89,22 +89,22 @@ const OrderFormSection = () => {
   };
 
   return (
-    <section id="order" className="py-20 px-4 sm:px-6 w-full overflow-hidden bg-gradient-to-b from-amber-50 to-white">
+    <section id="order" className="py-20 px-4 sm:px-6 w-full overflow-x-hidden bg-gradient-to-b from-amber-50 to-white">
       <div className="container mx-auto max-w-4xl">
         <h2 className="text-4xl font-bold text-center mb-8 text-gray-900">
           Калькулятор стоимости бани
         </h2>
 
-        <div className="mb-8">
-          <div className="flex justify-center items-center space-x-2 md:space-x-4">
+        <div className="mb-8 overflow-x-hidden">
+          <div className="flex justify-center items-center space-x-1 md:space-x-4 px-2">
             {[1, 2, 3, 4, 5].map((s) => (
-              <div key={s} className="flex items-center">
-                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-sm md:text-base ${
+              <div key={s} className="flex items-center flex-shrink-0">
+                <div className={`w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs md:text-base flex-shrink-0 ${
                   s === step ? 'bg-yellow-400 text-black' : s < step ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-600'
                 }`}>
                   {s}
                 </div>
-                {s < 5 && <div className={`w-8 md:w-16 h-1 ${s < step ? 'bg-green-500' : 'bg-gray-300'}`} />}
+                {s < 5 && <div className={`w-6 md:w-16 h-1 flex-shrink-0 ${s < step ? 'bg-green-500' : 'bg-gray-300'}`} />}
               </div>
             ))}
           </div>
@@ -247,9 +247,9 @@ const OrderFormSection = () => {
             )}
 
             {step === 3 && (
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <Label>Длина бани (м) *</Label>
+              <div className="space-y-6 overflow-x-hidden">
+                <div className="space-y-2 overflow-x-hidden">
+                  <Label className="text-sm md:text-base">Длина бани (м) *</Label>
                   <Input
                     type="number"
                     step="0.5"
@@ -258,12 +258,12 @@ const OrderFormSection = () => {
                     value={length}
                     onChange={(e) => setLength(e.target.value)}
                     placeholder="Например: 6"
-                    className="text-lg py-6"
+                    className="text-lg py-6 w-full max-w-full"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Ширина бани (м) *</Label>
+                <div className="space-y-2 overflow-x-hidden">
+                  <Label className="text-sm md:text-base">Ширина бани (м) *</Label>
                   <Input
                     type="number"
                     step="0.5"
@@ -272,12 +272,12 @@ const OrderFormSection = () => {
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
                     placeholder="Например: 4"
-                    className="text-lg py-6"
+                    className="text-lg py-6 w-full max-w-full"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Длина всех перегородок (м)</Label>
+                <div className="space-y-2 overflow-x-hidden">
+                  <Label className="text-sm md:text-base">Длина всех перегородок (м)</Label>
                   <Input
                     type="number"
                     step="0.5"
@@ -286,9 +286,9 @@ const OrderFormSection = () => {
                     value={partitionsLength}
                     onChange={(e) => setPartitionsLength(e.target.value)}
                     placeholder="Например: 8"
-                    className="text-lg py-6"
+                    className="text-lg py-6 w-full max-w-full"
                   />
-                  <p className="text-sm text-gray-500">Суммарная длина всех внутренних перегородок</p>
+                  <p className="text-sm text-gray-500 break-words">Суммарная длина всех внутренних перегородок</p>
                 </div>
 
                 <div className="space-y-3">
@@ -405,20 +405,20 @@ const OrderFormSection = () => {
             )}
 
             {step === 5 && (
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label>Ваше имя *</Label>
+              <div className="space-y-4 overflow-x-hidden">
+                <div className="space-y-2 overflow-x-hidden">
+                  <Label className="text-sm md:text-base">Ваше имя *</Label>
                   <Input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Иван Иванов"
-                    className="text-lg py-6"
+                    className="text-lg py-6 w-full max-w-full"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Телефон *</Label>
+                <div className="space-y-2 overflow-x-hidden">
+                  <Label className="text-sm md:text-base">Телефон *</Label>
                   <Input
                     type="tel"
                     value={phone}
@@ -460,24 +460,24 @@ const OrderFormSection = () => {
                       setPhone(formatted);
                     }}
                     placeholder="+7 (999) 123-45-67"
-                    className="text-lg py-6"
+                    className="text-lg py-6 w-full max-w-full"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Email</Label>
+                <div className="space-y-2 overflow-x-hidden">
+                  <Label className="text-sm md:text-base">Email</Label>
                   <Input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="ivan@example.com"
-                    className="text-lg py-6"
+                    className="text-lg py-6 w-full max-w-full"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label>Куда отправить расчёт? *</Label>
-                  <div className="grid gap-3">
+                <div className="space-y-2 overflow-x-hidden">
+                  <Label className="text-sm md:text-base">Куда отправить расчёт? *</Label>
+                  <div className="grid gap-3 w-full">
                     <Button
                       type="button"
                       onClick={() => setMessenger('whatsapp')}
@@ -516,11 +516,12 @@ const OrderFormSection = () => {
               </div>
             )}
 
-            <div className="flex justify-between pt-4">
+            <div className="flex justify-between pt-4 overflow-x-hidden w-full">
               {step > 1 && (
                 <Button
                   onClick={() => setStep(step - 1)}
                   variant="outline"
+                  className="flex-shrink-0"
                 >
                   Назад
                 </Button>
@@ -528,7 +529,7 @@ const OrderFormSection = () => {
               {step < 5 && (
                 <Button
                   onClick={() => setStep(step + 1)}
-                  className="ml-auto bg-green-600 hover:bg-green-700"
+                  className="ml-auto bg-green-600 hover:bg-green-700 flex-shrink-0"
                   disabled={
                     (step === 1 && !foundation) ||
                     (step === 2 && !material) ||
@@ -542,7 +543,7 @@ const OrderFormSection = () => {
               {step === 5 && (
                 <Button
                   onClick={handleSubmit}
-                  className="ml-auto bg-blue-600 hover:bg-blue-700"
+                  className="ml-auto bg-blue-600 hover:bg-blue-700 flex-shrink-0"
                   disabled={!name || !phone || !messenger || isSubmitting}
                 >
                   {isSubmitting ? 'Отправка...' : 'Отправить заявку'}

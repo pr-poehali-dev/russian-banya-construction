@@ -264,9 +264,9 @@ const Index = () => {
 
 
       <section id="about" className="py-20 px-4 sm:px-6 w-full overflow-hidden">
-        <div className="container mx-auto">
+        <div className="container mx-auto max-w-7xl">
           <h2 className="text-4xl font-bold text-center mb-12">Обо мне</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start">
             <div className="space-y-6">
               <div className="text-lg text-muted-foreground leading-relaxed space-y-4">
                 <p>Меня зовут Александр. Я — специалист по строительству русских бань с огромным стажем и любовью к своему делу.</p>
@@ -288,7 +288,7 @@ const Index = () => {
               <img 
                 src="https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg"
                 alt="Мастер банных дел"
-                className="rounded-lg shadow-xl w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover object-[center_20%]"
+                className="rounded-lg shadow-xl w-full max-w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover object-[center_20%]"
               />
             </div>
           </div>
