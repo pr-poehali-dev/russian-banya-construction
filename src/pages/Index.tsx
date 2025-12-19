@@ -224,20 +224,6 @@ const Index = () => {
 
       </header>
 
-      <div className="fixed top-[100px] md:top-[120px] left-0 right-0 bg-gradient-to-r from-red-600 via-red-500 to-red-600 z-40 animate-pulse">
-        <div className="container mx-auto px-4 py-3 md:py-4">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-white text-center">
-            <div className="flex items-center gap-2">
-              <Icon name="Gift" size={24} className="flex-shrink-0" />
-              <span className="text-lg md:text-2xl font-bold">НОВОГОДНЯЯ АКЦИЯ!</span>
-            </div>
-            <div className="text-base md:text-xl font-semibold">
-              При заказе строительства бани до <span className="font-bold underline">25.12.2025</span> — скидка <span className="text-2xl md:text-3xl font-black">10%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
         <div className="absolute inset-0">
           <img 
@@ -258,6 +244,19 @@ const Index = () => {
           <Button size="lg" onClick={() => scrollToSection("order")} className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw]">
             Получить подробный расчет стоимости бани
           </Button>
+        </div>
+
+        <div className="absolute bottom-8 right-4 md:bottom-12 md:right-8 z-20 transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300 animate-bounce">
+          <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl shadow-2xl border-4 border-yellow-400">
+            <div className="absolute -top-2 -right-2 bg-yellow-400 text-red-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-lg md:text-xl shadow-lg">
+              <Icon name="Gift" size={24} />
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="text-xs md:text-sm font-bold uppercase tracking-wider mb-1 text-yellow-300">Новогодняя акция</div>
+              <div className="text-3xl md:text-5xl font-black leading-none mb-1">-10%</div>
+              <div className="text-[10px] md:text-xs font-medium opacity-90">до 25 декабря</div>
+            </div>
+          </div>
         </div>
       </section>
 
