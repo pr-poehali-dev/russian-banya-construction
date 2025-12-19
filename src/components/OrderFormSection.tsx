@@ -90,13 +90,13 @@ const OrderFormSection = () => {
 
   return (
     <section id="order" className="py-20 px-4 sm:px-6 w-full overflow-x-hidden bg-gradient-to-b from-amber-50 to-white">
-      <div className="container mx-auto max-w-4xl">
-        <h2 className="text-4xl font-bold text-center mb-8 text-gray-900">
+      <div className="container mx-auto max-w-4xl w-full">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-900 px-2">
           Калькулятор стоимости бани
         </h2>
 
-        <div className="mb-8 overflow-x-hidden">
-          <div className="flex justify-center items-center space-x-1 md:space-x-4 px-2">
+        <div className="mb-8 overflow-x-hidden w-full">
+          <div className="flex justify-center items-center space-x-1 md:space-x-4 px-4 max-w-full">
             {[1, 2, 3, 4, 5].map((s) => (
               <div key={s} className="flex items-center flex-shrink-0">
                 <div className={`w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs md:text-base flex-shrink-0 ${
@@ -117,9 +117,9 @@ const OrderFormSection = () => {
           </div>
         </div>
 
-        <Card>
+        <Card className="w-full max-w-full overflow-hidden">
           <CardHeader className="bg-yellow-400">
-            <CardTitle className="text-xl md:text-2xl text-black text-center">
+            <CardTitle className="text-lg md:text-2xl text-black text-center break-words px-2">
               {step === 1 && 'Выберите тип фундамента'}
               {step === 2 && 'Выберите материал стен'}
               {step === 3 && 'Укажите размеры бани'}
@@ -127,7 +127,7 @@ const OrderFormSection = () => {
               {step === 5 && 'Ваши контактные данные'}
             </CardTitle>
           </CardHeader>
-          <CardContent className="pt-6 space-y-6">
+          <CardContent className="pt-6 space-y-6 w-full max-w-full overflow-x-hidden">
             {step === 1 && (
               <div className="space-y-4">
                 <Label>Тип фундамента *</Label>
