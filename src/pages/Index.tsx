@@ -131,7 +131,8 @@ const Index = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const headerHeight = 120;
+      const isMobile = window.innerWidth < 768;
+      const headerHeight = isMobile ? 85 : 120;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - headerHeight;
       
@@ -146,13 +147,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <header className="fixed top-0 left-0 right-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
-        <nav className="container mx-auto px-3 sm:px-6 py-1 relative">
+        <nav className="container mx-auto px-3 sm:px-6 py-1 pb-2 md:pb-1 relative">
           <div className="flex items-start justify-between w-full">
             <div className="flex items-start gap-2 mt-1">
-              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-8 w-8 md:h-10 md:w-10 object-contain bg-yellow-400 rounded" />
-              <div className="flex flex-col items-start">
-                <div className="text-xl md:text-2xl font-bold text-black leading-tight">Пермский Пар</div>
-                <div className="text-[9px] md:text-[10px] text-black/70 -mt-0.5">строительная компания г.Пермь</div>
+              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-8 w-8 md:h-10 md:w-10 object-contain bg-yellow-400 rounded flex-shrink-0" />
+              <div className="flex flex-col items-start max-w-[140px] md:max-w-none">
+                <div className="text-base sm:text-xl md:text-2xl font-bold text-black leading-tight">Пермский Пар</div>
+                <div className="text-[8px] sm:text-[9px] md:text-[10px] text-black/70 -mt-0.5 whitespace-nowrap">строительная компания г.Пермь</div>
               </div>
             </div>
             <div className="flex items-start gap-3 mt-1">
@@ -193,11 +194,11 @@ const Index = () => {
             <button onClick={() => scrollToSection("services")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Услуги</button>
             <button onClick={() => scrollToSection("contact")} className="text-black hover:text-black/70 transition-colors font-medium text-sm lg:text-base">Контакты</button>
           </div>
-          <div className="text-center px-1 absolute left-1/2 -translate-x-1/2 top-14">
-            <p className="text-xs sm:text-sm text-black font-medium whitespace-nowrap">Русская баня — это не помещение, это процесс!</p>
+          <div className="w-full text-center mt-2 md:mt-0 md:absolute md:left-1/2 md:-translate-x-1/2 md:top-14">
+            <p className="text-[10px] sm:text-xs md:text-sm text-black font-medium px-2 break-words leading-tight">Русская баня — это не помещение, это процесс!</p>
           </div>
           {isMobileMenuOpen && (
-            <div className="md:hidden fixed top-[100px] left-0 right-0 bg-yellow-400 border-t border-yellow-500 shadow-lg max-h-[calc(100vh-100px)] overflow-y-auto">
+            <div className="md:hidden fixed top-[85px] left-0 right-0 bg-yellow-400 border-t border-yellow-500 shadow-lg max-h-[calc(100vh-85px)] overflow-y-auto z-50">
               <div className="flex flex-col py-2">
                 <button onClick={() => { scrollToSection("hero"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Главная</button>
                 <button onClick={() => { scrollToSection("about"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Обо мне</button>
