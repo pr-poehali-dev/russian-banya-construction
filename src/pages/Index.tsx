@@ -294,10 +294,10 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="gallery" className="py-20 bg-muted/30 px-4 sm:px-6 w-full overflow-hidden">
-        <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">Несколько примеров построенных бань и парных</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section id="gallery" className="py-20 bg-muted/30 px-4 sm:px-6 w-full overflow-x-hidden">
+        <div className="container mx-auto w-full max-w-full">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 px-2 break-words">Несколько примеров построенных бань и парных</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-full">
             {[
               {
                 img: "https://cdn.poehali.dev/files/photo_2025-12-11_22-03-04.jpg",
@@ -344,7 +344,7 @@ const Index = () => {
             ].map((project, idx) => (
               <Card 
                 key={idx} 
-                className="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2 cursor-pointer"
+                className="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2 cursor-pointer w-full max-w-full"
                 onClick={() => openGallery(idx)}
               >
                 <div className="overflow-hidden relative group">
@@ -362,9 +362,9 @@ const Index = () => {
                     </div>
                   )}
                 </div>
-                <CardContent className="pt-6">
-                  <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-                  <div className="space-y-2 text-sm text-muted-foreground">
+                <CardContent className="pt-6 w-full max-w-full overflow-x-hidden">
+                  <h3 className="text-lg md:text-xl font-bold mb-3 break-words">{project.title}</h3>
+                  <div className="space-y-2 text-sm text-muted-foreground break-words">
                     <div className="flex items-center gap-2">
                       <Icon name="Ruler" size={16} className="text-primary" />
                       <span>Размер: {project.size}</span>
@@ -387,23 +387,23 @@ const Index = () => {
 
       <OrderFormSection />
 
-      <section id="services" className="py-20 px-4 sm:px-6 w-full overflow-hidden">
-        <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">Наши услуги</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section id="services" className="py-20 px-4 sm:px-6 w-full overflow-x-hidden">
+        <div className="container mx-auto w-full max-w-full">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 px-2">Наши услуги</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-full">
             {[
               { icon: "FileText", title: "Консультации", desc: "Перед началом строительства проводим полноценные бесплатные консультации по процессам парения, устройства бани, материалам, размерам и прочим очень важным вопросам." },
               { icon: "HardHat", title: "Строительство", desc: "Полный цикл строительных работ, внутренняя и внешняя отделка материалами премиум класса." },
               { icon: "Wrench", title: "Инженерные системы", desc: "Установка печи, водоснабжения, водоотведения, вентиляции, полков, электрики, отопления и т.д." },
               { icon: "Sparkles", title: "Дополнительно", desc: "Ремонт и модернизация существующих бань, террасы, банные чаны, купели" }
             ].map((service, idx) => (
-              <Card key={idx}>
-                <CardContent className="pt-6">
+              <Card key={idx} className="w-full max-w-full">
+                <CardContent className="pt-6 overflow-x-hidden">
                   <div className="w-14 h-14 bg-secondary/10 rounded-lg flex items-center justify-center mb-4 mx-auto">
                     <Icon name={service.icon} className="text-secondary" size={28} />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2 text-center">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm text-center">{service.desc}</p>
+                  <h3 className="text-base md:text-lg font-semibold mb-2 text-center break-words">{service.title}</h3>
+                  <p className="text-muted-foreground text-xs md:text-sm text-center break-words">{service.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -412,13 +412,13 @@ const Index = () => {
       </section>
 
       <Dialog open={selectedProject !== null} onOpenChange={closeGallery}>
-        <DialogContent className="max-w-5xl max-h-[90vh] overflow-auto" hideClose>
+        <DialogContent className="max-w-[95vw] md:max-w-5xl max-h-[90vh] overflow-auto" hideClose>
           {selectedProject !== null && (
-            <div className="relative">
+            <div className="relative w-full max-w-full overflow-hidden">
               <img 
                 src={projectGalleries[selectedProject][currentImageIndex]} 
                 alt={`Фото ${currentImageIndex + 1}`}
-                className="w-full h-auto max-h-[50vh] object-contain rounded-lg"
+                className="w-full max-w-full h-auto max-h-[50vh] object-contain rounded-lg"
               />
               <div className="flex items-center justify-between mt-4">
                 <Button 
@@ -441,7 +441,7 @@ const Index = () => {
                   <Icon name="ChevronRight" size={24} />
                 </Button>
               </div>
-              <div className="grid grid-cols-7 gap-1.5 mt-3">
+              <div className="grid grid-cols-5 md:grid-cols-7 gap-1 md:gap-1.5 mt-3 w-full max-w-full overflow-x-hidden">
                 {projectGalleries[selectedProject].map((img, idx) => (
                   <img
                     key={idx}
@@ -459,14 +459,14 @@ const Index = () => {
         </DialogContent>
       </Dialog>
 
-      <section id="contact" className="py-12 sm:py-20 bg-yellow-400 text-black px-4 sm:px-6">
-        <div className="container mx-auto max-w-2xl text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Готовы начать строительство?</h2>
-          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8">
+      <section id="contact" className="py-12 sm:py-20 bg-yellow-400 text-black px-4 sm:px-6 w-full overflow-x-hidden">
+        <div className="container mx-auto max-w-2xl text-center w-full">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 px-2 break-words">Готовы начать строительство?</h2>
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 px-2 break-words">
             Свяжитесь с нами для бесплатной консультации и расчёта стоимости вашего проекта
           </p>
-          <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center">
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center w-full max-w-full">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 px-2">
               <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
                 <Icon name="MessageCircle" size={28} />
               </a>
@@ -486,9 +486,9 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="py-8 border-t border-border px-4 sm:px-6 w-full overflow-hidden">
-        <div className="container mx-auto text-center text-muted-foreground">
-          <p>© 2020г Пермский Пар. Все права защищены.</p>
+      <footer className="py-8 border-t border-border px-4 sm:px-6 w-full overflow-x-hidden">
+        <div className="container mx-auto text-center text-muted-foreground w-full max-w-full">
+          <p className="text-sm md:text-base px-2 break-words">© 2020г Пермский Пар. Все права защищены.</p>
         </div>
       </footer>
     </div>
