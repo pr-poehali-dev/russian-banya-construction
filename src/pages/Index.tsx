@@ -252,9 +252,9 @@ const Index = () => {
           </Button>
         </div>
 
-        <div className="absolute bottom-8 left-4 md:bottom-12 md:left-8 z-20 transform rotate-[5deg] hover:rotate-0 transition-transform duration-300">
-          <div className="relative bg-gradient-to-br from-green-600 via-green-500 to-green-700 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl shadow-2xl border-4 border-yellow-400">
-            <div className="absolute -top-2 -left-2 bg-yellow-400 text-green-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-lg md:text-xl shadow-lg">
+        <div className="absolute bottom-32 left-4 md:bottom-40 md:left-8 z-20 transform rotate-[5deg] hover:rotate-0 transition-transform duration-300">
+          <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl shadow-2xl border-4 border-yellow-400">
+            <div className="absolute -top-2 -left-2 bg-yellow-400 text-red-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-lg md:text-xl shadow-lg">
               <Icon name="MapPin" size={24} />
             </div>
             <div className="flex flex-col items-center text-center">
@@ -265,7 +265,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-8 right-4 md:bottom-12 md:right-8 z-20 transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
+        <div className="absolute bottom-32 right-4 md:bottom-40 md:right-8 z-20 transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
           <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl shadow-2xl border-4 border-yellow-400">
             <div className="absolute -top-2 -right-2 bg-yellow-400 text-red-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-lg md:text-xl shadow-lg">
               <Icon name="Gift" size={24} />
