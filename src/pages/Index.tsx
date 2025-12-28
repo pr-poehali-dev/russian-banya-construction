@@ -255,7 +255,7 @@ const Index = () => {
             <div className="flex flex-col items-center text-center">
               <div className="text-xs md:text-sm font-bold uppercase tracking-wider mb-1 text-yellow-300">Новогодняя акция</div>
               <div className="text-3xl md:text-5xl font-black leading-none mb-1">-10%</div>
-              <div className="text-[10px] md:text-xs font-medium opacity-90">до 25 декабря</div>
+              <div className="text-[10px] md:text-xs font-medium opacity-90">до 31 декабря 2025г</div>
             </div>
           </div>
         </div>
