@@ -151,11 +151,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <header className="fixed top-0 left-0 right-0 w-full bg-yellow-400 z-50 border-b-2 border-yellow-500">
+      <header className="fixed top-0 left-0 right-0 w-full bg-white z-50 border-b-2 border-gray-200">
         <nav className="container mx-auto px-3 sm:px-6 py-1 pb-2 md:pb-1 relative">
           <div className="flex items-start justify-between w-full">
             <div className="flex items-start gap-2 mt-1">
-              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-8 w-8 md:h-10 md:w-10 object-contain bg-yellow-400 rounded flex-shrink-0" />
+              <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" alt="Пермский Пар" className="h-8 w-8 md:h-10 md:w-10 object-contain bg-white rounded flex-shrink-0" />
               <div className="flex flex-col items-start max-w-[140px] md:max-w-none">
                 <div className="text-base sm:text-xl md:text-2xl font-bold text-black leading-tight">Пермский Пар</div>
                 <div className="text-[8px] sm:text-[9px] md:text-[10px] text-black/70 -mt-0.5 whitespace-nowrap">строительная компания г.Пермь</div>
@@ -203,19 +203,19 @@ const Index = () => {
             <p className="text-[10px] sm:text-xs md:text-sm text-black font-medium px-2 break-words leading-tight">Русская баня — это не помещение, это процесс!</p>
           </div>
           {isMobileMenuOpen && (
-            <div className="md:hidden fixed top-[85px] left-0 right-0 bg-yellow-400 border-t border-yellow-500 shadow-lg max-h-[calc(100vh-85px)] overflow-y-auto z-50">
+            <div className="md:hidden fixed top-[85px] left-0 right-0 bg-white border-t border-gray-200 shadow-lg max-h-[calc(100vh-85px)] overflow-y-auto z-50">
               <div className="flex flex-col py-2">
-                <button onClick={() => { scrollToSection("hero"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Главная</button>
-                <button onClick={() => { scrollToSection("about"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Обо мне</button>
-                <button onClick={() => { scrollToSection("gallery"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Галерея</button>
-                <button onClick={() => { scrollToSection("order"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Калькулятор</button>
-                <button onClick={() => { scrollToSection("services"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Услуги</button>
-                <button onClick={() => { scrollToSection("contact"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-yellow-500 transition-colors font-medium py-3 px-4 text-left">Контакты</button>
-                <a href="tel:+73422984030" className="text-black hover:bg-yellow-500 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
+                <button onClick={() => { scrollToSection("hero"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-gray-100 transition-colors font-medium py-3 px-4 text-left">Главная</button>
+                <button onClick={() => { scrollToSection("about"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-gray-100 transition-colors font-medium py-3 px-4 text-left">Обо мне</button>
+                <button onClick={() => { scrollToSection("gallery"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-gray-100 transition-colors font-medium py-3 px-4 text-left">Галерея</button>
+                <button onClick={() => { scrollToSection("order"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-gray-100 transition-colors font-medium py-3 px-4 text-left">Калькулятор</button>
+                <button onClick={() => { scrollToSection("services"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-gray-100 transition-colors font-medium py-3 px-4 text-left">Услуги</button>
+                <button onClick={() => { scrollToSection("contact"); setIsMobileMenuOpen(false); }} className="text-black hover:bg-gray-100 transition-colors font-medium py-3 px-4 text-left">Контакты</button>
+                <a href="tel:+73422984030" className="text-black hover:bg-gray-100 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
                   <Icon name="Phone" size={20} />
                   +7 (342) 298-40-30
                 </a>
-                <a href="tel:+79824900900" className="text-black hover:bg-yellow-500 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
+                <a href="tel:+79824900900" className="text-black hover:bg-gray-100 transition-colors font-bold text-lg py-3 px-4 text-left flex items-center gap-2">
                   <Icon name="Phone" size={20} />
                   +7 (982) 490-09-00
                 </a>
@@ -252,27 +252,26 @@ const Index = () => {
           </Button>
         </div>
 
-        <div className="absolute bottom-32 left-4 md:bottom-40 md:left-8 z-20 transform rotate-[5deg] hover:rotate-0 transition-transform duration-300">
-          <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl shadow-2xl border-4 border-yellow-400">
+        <div className="absolute bottom-20 left-4 md:bottom-24 md:left-8 z-20 transform rotate-[5deg] hover:rotate-0 transition-transform duration-300">
+          <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-4 py-3 md:px-6 md:py-4 rounded-2xl shadow-2xl border-4 border-yellow-400">
             <div className="absolute -top-2 -left-2 bg-yellow-400 text-red-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-lg md:text-xl shadow-lg">
-              <Icon name="MapPin" size={24} />
+              <Icon name="MapPin" size={20} />
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="text-xs md:text-sm font-bold uppercase tracking-wider mb-1 text-yellow-300">Бесплатно</div>
-              <div className="text-lg md:text-2xl font-black leading-tight mb-1">Выезд на объект<br/>замеры и расчет</div>
-              <div className="text-[10px] md:text-xs font-medium opacity-90">в Перми и Пермском крае</div>
+              <div className="text-base md:text-xl font-black leading-tight mb-1">Выезд на объект<br/>замеры и расчет</div>
             </div>
           </div>
         </div>
 
-        <div className="absolute bottom-32 right-4 md:bottom-40 md:right-8 z-20 transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
-          <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-6 py-4 md:px-8 md:py-5 rounded-2xl shadow-2xl border-4 border-yellow-400">
+        <div className="absolute bottom-20 right-4 md:bottom-24 md:right-8 z-20 transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
+          <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-4 py-3 md:px-6 md:py-4 rounded-2xl shadow-2xl border-4 border-yellow-400">
             <div className="absolute -top-2 -right-2 bg-yellow-400 text-red-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-lg md:text-xl shadow-lg">
-              <Icon name="Gift" size={24} />
+              <Icon name="Gift" size={20} />
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="text-xs md:text-sm font-bold uppercase tracking-wider mb-1 text-yellow-300">Новогодняя акция</div>
-              <div className="text-3xl md:text-5xl font-black leading-none mb-1">-10%</div>
+              <div className="text-2xl md:text-3xl font-black leading-none mb-1">-10%</div>
               <div className="text-[10px] md:text-xs font-medium opacity-90">до 31 декабря 2025г</div>
             </div>
           </div>
