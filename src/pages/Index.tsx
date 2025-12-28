@@ -284,9 +284,7 @@ const Index = () => {
                   size="lg" 
                   onClick={() => scrollToSection("order")} 
                   className="text-xs sm:text-sm md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 shadow-lg w-full md:w-auto max-w-full break-words whitespace-normal h-auto py-3 leading-tight"
-                >
-                  Получить подробный расчет стоимости бани
-                </Button>
+                >Консультация по строительству или ремонту бани</Button>
               </div>
             </div>
             <div className="w-full max-w-full overflow-hidden">
