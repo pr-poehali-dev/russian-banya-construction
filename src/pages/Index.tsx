@@ -236,7 +236,7 @@ const Index = () => {
         </div>
         <div className="relative z-10 container mx-auto px-4 text-center text-white animate-fade-in w-full">
           <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-2 leading-tight">
-            Строим бани<br />из бревна и бруса
+            Строим и ремонтируем бани<br />из бревна и бруса
           </h1>
           <p className="text-lg sm:text-xl md:text-3xl mb-4 font-medium">В Перми и Пермском крае</p>
           <p className="text-base sm:text-lg md:text-2xl mb-6 max-w-2xl mx-auto leading-relaxed px-2">
