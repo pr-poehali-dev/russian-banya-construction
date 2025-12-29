@@ -45,6 +45,7 @@ const Index = () => {
       "https://cdn.poehali.dev/files/6c712b7d-0a01-41fe-89c1-29ec45bad1dd.jpg"
     ],
     [
+      "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
       "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
       "https://cdn.poehali.dev/files/2025-08-19 16-17-16.JPG",
       "https://cdn.poehali.dev/files/2025-07-21 09-57-59.JPG",
@@ -330,10 +331,10 @@ const Index = () => {
                 location: "д. Гамы, Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
+                img: "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
                 title: "Баня из бревна 6×6",
                 size: "6×6 м",
-                material: "Рубленное бревно",
+                material: "Ремонт бани",
                 location: "д. Скобелевка, Пермский край"
               },
               {
