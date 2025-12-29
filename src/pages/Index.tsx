@@ -298,7 +298,7 @@ const Index = () => {
                   size="lg" 
                   onClick={() => setIsCallbackFormOpen(true)} 
                   className="text-xs sm:text-sm md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 w-full md:w-auto max-w-full break-words whitespace-normal h-auto py-3 leading-tight"
-                >Получить консультацию</Button>
+                >Получить мою консультацию бесплатно</Button>
               </div>
             </div>
             <div className="w-full max-w-full overflow-hidden">
