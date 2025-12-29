@@ -295,7 +295,7 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   disabled 
-                  className="text-xs sm:text-sm md:text-lg px-4 sm:px-6 md:px-8 bg-gray-400 text-white font-bold shadow-lg w-full md:w-auto max-w-full break-words whitespace-normal h-auto py-3 leading-tight cursor-not-allowed opacity-60"
+                  className="text-xs sm:text-sm md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 text-black font-bold shadow-lg w-full md:w-auto max-w-full break-words whitespace-normal h-auto py-3 leading-tight cursor-not-allowed"
                 >Консультация по строительству или ремонту бани +79824900900(Александр)</Button>
               </div>
             </div>
