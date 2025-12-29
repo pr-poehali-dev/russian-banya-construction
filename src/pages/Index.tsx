@@ -46,7 +46,6 @@ const Index = () => {
     ],
     [
       "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
-      "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
       "https://cdn.poehali.dev/files/2025-08-19 16-17-16.JPG",
       "https://cdn.poehali.dev/files/2025-07-21 09-57-59.JPG",
       "https://cdn.poehali.dev/files/2025-07-21 11-54-58.JPG",
@@ -55,7 +54,8 @@ const Index = () => {
       "https://cdn.poehali.dev/files/2451e998-d599-4eeb-8bf3-8585ffab4342.jpg",
       "https://cdn.poehali.dev/files/48198ca6-3425-4781-aba7-849426247fc4.jpg",
       "https://cdn.poehali.dev/files/1f94dc5e-69ba-4805-8f4b-ca5bbf6a404c.jpg",
-      "https://cdn.poehali.dev/files/e9474b80-69ae-4a00-8574-c27200bb57ba.jpg"
+      "https://cdn.poehali.dev/files/e9474b80-69ae-4a00-8574-c27200bb57ba.jpg",
+      "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg"
     ],
     [
       "https://cdn.poehali.dev/files/cca216a7-9b9e-425b-b0e4-d352cea5b6a4.png",
