@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import OrderFormSection from "@/components/OrderFormSection";
-import CallbackForm from "@/components/CallbackForm";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -13,7 +12,6 @@ const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCallbackFormOpen, setIsCallbackFormOpen] = useState(false);
 
   const projectGalleries = [
     [
@@ -296,9 +294,9 @@ const Index = () => {
               <div className="flex justify-center md:justify-start w-full max-w-full">
                 <Button 
                   size="lg" 
-                  onClick={() => setIsCallbackFormOpen(true)} 
+                  onClick={() => scrollToSection("order")} 
                   className="text-xs sm:text-sm md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300 w-full md:w-auto max-w-full break-words whitespace-normal h-auto py-3 leading-tight"
-                >Получить мою консультацию бесплатно</Button>
+                >Консультация по строительству или ремонту бани</Button>
               </div>
             </div>
             <div className="w-full max-w-full overflow-hidden">
@@ -509,8 +507,6 @@ const Index = () => {
           <p className="text-sm md:text-base px-2 break-words">© 2020г Пермский Пар. Все права защищены.</p>
         </div>
       </footer>
-
-      <CallbackForm open={isCallbackFormOpen} onOpenChange={setIsCallbackFormOpen} />
     </div>
   );
 };
