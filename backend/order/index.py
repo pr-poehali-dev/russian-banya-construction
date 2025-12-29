@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Dict, Any
 
-# Версия: 2.1 - использован порт 465 SSL
+# Версия: 2.2 - исправлен SMTP_USER
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
