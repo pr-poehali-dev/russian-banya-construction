@@ -207,10 +207,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             msg.attach(html_part)
             
             print(f"Attempting to send email via {smtp_host}:{smtp_port}")
+            print(f"SMTP_USER: {smtp_user}")
+            print(f"SMTP_PASSWORD length: {len(smtp_password) if smtp_password else 0}")
             
             # Попробуем SSL-соединение (порт 465)
             if smtp_port == 465:
                 with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as server:
+                    server.set_debuglevel(1)
                     server.login(smtp_user, smtp_password)
                     server.send_message(msg)
                     print("Email sent successfully via SSL")
