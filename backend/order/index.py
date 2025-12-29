@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Dict, Any
 
-# Версия: 2.0 - обновлён пароль SMTP
+# Версия: 2.1 - использован порт 465 SSL
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
