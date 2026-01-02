@@ -292,7 +292,7 @@ const Index = () => {
                 <p>Обладаю глубоким знанием традиционных технологий и нюансов настоящего русского парения. Подхожу к каждому проекту с душой: помогаю с выбором материалов, продумываю планировку до мелочей и слежу за каждым этапом строительства.</p>
                 <p>За моими плечами более 15 лет опыта, десятки успешных проектов и довольных клиентов.</p>
               </div>
-              <div className="flex justify-center md:justify-start w-full max-w-full">
+              <div className="flex justify-center md:justify-start w-full max-w-full bg-green-600">
                 <Button 
                   size="lg" 
                   disabled 
