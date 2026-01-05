@@ -52,7 +52,10 @@ const Index = () => {
       "https://cdn.poehali.dev/files/2025-11-03 15-30-21.JPG",
       "https://cdn.poehali.dev/files/2025-11-13 15-15-33.JPG",
       "https://cdn.poehali.dev/files/IMG_20260105_110725.jpg",
-      "https://cdn.poehali.dev/files/IMG_20260105_110740.jpg"
+      "https://cdn.poehali.dev/files/IMG_20260105_110740.jpg",
+      "https://cdn.poehali.dev/files/IMG_20260105_110835.jpg",
+      "https://cdn.poehali.dev/files/IMG_20260105_111100.jpg",
+      "https://cdn.poehali.dev/files/photo_2025-12-05_20-09-38.jpg"
     ],
     [
       "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
@@ -334,7 +337,7 @@ const Index = () => {
                 location: "Резиденция \"Веретье\", Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
+                img: "https://cdn.poehali.dev/files/IMG_20260105_110740.jpg",
                 title: "Баня из бревна 3×6",
                 size: "3×6 м",
                 material: "Оцилиндрованное бревно",
