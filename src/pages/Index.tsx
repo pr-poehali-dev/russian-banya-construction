@@ -117,7 +117,12 @@ const Index = () => {
       "https://cdn.poehali.dev/files/ce713e72-983e-416c-bc45-d51e637013a5.JPG",
       "https://cdn.poehali.dev/files/5dc59788-ab7e-495e-97d4-952d49b7306f.JPG",
       "https://cdn.poehali.dev/files/22192856-ed5b-412f-9622-18c712999ffa.JPG",
-      "https://cdn.poehali.dev/files/ef3fe192-94c4-4d6a-871c-2420502aaa8f.JPG"
+      "https://cdn.poehali.dev/files/ef3fe192-94c4-4d6a-871c-2420502aaa8f.JPG",
+      "https://cdn.poehali.dev/files/2024-10-16 17-51-31.JPG",
+      "https://cdn.poehali.dev/files/2024-10-16 17-51-40.JPG",
+      "https://cdn.poehali.dev/files/2024-11-06 16-26-59.JPG",
+      "https://cdn.poehali.dev/files/2024-11-27 10-05-17.JPG",
+      "https://cdn.poehali.dev/files/2024-10-25 14-23-33.JPG"
     ]
   ];
 
