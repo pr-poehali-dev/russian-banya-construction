@@ -97,11 +97,11 @@ const Index = () => {
       "https://cdn.poehali.dev/files/photo_2025-12-05_20-09-38.jpg"
     ],
     [
-      "https://cdn.poehali.dev/files/1.JPG",
-      "https://cdn.poehali.dev/files/2.JPG",
-      "https://cdn.poehali.dev/files/3.JPG",
-      "https://cdn.poehali.dev/files/4.JPG",
-      "https://cdn.poehali.dev/files/5.JPG"
+      "https://cdn.poehali.dev/files/01.JPG",
+      "https://cdn.poehali.dev/files/02.JPG",
+      "https://cdn.poehali.dev/files/03.JPG",
+      "https://cdn.poehali.dev/files/04.JPG",
+      "https://cdn.poehali.dev/files/05.JPG"
     ],
     [
       "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
@@ -423,7 +423,7 @@ const Index = () => {
                 location: "д. Гамы, Пермский край"
               },
               {
-                img: "https://cdn.poehali.dev/files/1.JPG",
+                img: "https://cdn.poehali.dev/files/01.JPG",
                 title: "Баня из бруса 8×10",
                 size: "8×10 м",
                 material: "Клееный брус",
