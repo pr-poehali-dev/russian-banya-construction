@@ -36,6 +36,13 @@ const Index = () => {
       "https://cdn.poehali.dev/files/a485a14f-4056-4ba8-ba35-9aa846b2a045.JPG"
     ],
     [
+      "https://cdn.poehali.dev/files/1.JPG",
+      "https://cdn.poehali.dev/files/2.JPG",
+      "https://cdn.poehali.dev/files/3.JPG",
+      "https://cdn.poehali.dev/files/4.JPG",
+      "https://cdn.poehali.dev/files/5.JPG"
+    ],
+    [
       "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
       "https://cdn.poehali.dev/files/44a34322-94c4-4927-b372-e632bd76e8c3.png",
       "https://cdn.poehali.dev/files/7c45af13-f389-40c5-a0ec-e0bed1884fef.jpg",
@@ -128,13 +135,6 @@ const Index = () => {
       "https://cdn.poehali.dev/files/2025-05-11 23-36-25_1761417457.JPG",
       "https://cdn.poehali.dev/files/2025-05-11 23-36-27_1761417136.JPG",
       "https://cdn.poehali.dev/files/2025-05-11 23-36-28_1761416997.JPG"
-    ],
-    [
-      "https://cdn.poehali.dev/files/1.JPG",
-      "https://cdn.poehali.dev/files/2.JPG",
-      "https://cdn.poehali.dev/files/3.JPG",
-      "https://cdn.poehali.dev/files/4.JPG",
-      "https://cdn.poehali.dev/files/5.JPG"
     ]
   ];
 
@@ -370,6 +370,13 @@ const Index = () => {
                 location: "Резиденция \"Веретье\", Пермский край"
               },
               {
+                img: "https://cdn.poehali.dev/files/1.JPG",
+                title: "Баня из бруса 8×15",
+                size: "8×15 м",
+                material: "Профилированный брус",
+                location: "п. Полазна, Пермский край"
+              },
+              {
                 img: "https://cdn.poehali.dev/files/IMG_20260105_110740.jpg",
                 title: "Баня из бревна 3×6",
                 size: "3×6 м",
@@ -403,13 +410,6 @@ const Index = () => {
                 size: "5×5 м",
                 material: "Оцилиндрованное бревно",
                 location: "п. Усть-Качка, Пермский край"
-              },
-              {
-                img: "https://cdn.poehali.dev/files/1.JPG",
-                title: "Баня из бруса 8×15",
-                size: "8×15 м",
-                material: "Профилированный брус",
-                location: "п. Полазна, Пермский край"
               }
             ].map((project, idx) => (
               <Card 
