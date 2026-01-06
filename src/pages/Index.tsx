@@ -128,6 +128,13 @@ const Index = () => {
       "https://cdn.poehali.dev/files/2025-05-11 23-36-25_1761417457.JPG",
       "https://cdn.poehali.dev/files/2025-05-11 23-36-27_1761417136.JPG",
       "https://cdn.poehali.dev/files/2025-05-11 23-36-28_1761416997.JPG"
+    ],
+    [
+      "https://cdn.poehali.dev/files/1.JPG",
+      "https://cdn.poehali.dev/files/2.JPG",
+      "https://cdn.poehali.dev/files/3.JPG",
+      "https://cdn.poehali.dev/files/4.JPG",
+      "https://cdn.poehali.dev/files/5.JPG"
     ]
   ];
 
@@ -396,6 +403,13 @@ const Index = () => {
                 size: "5×5 м",
                 material: "Оцилиндрованное бревно",
                 location: "п. Усть-Качка, Пермский край"
+              },
+              {
+                img: "https://cdn.poehali.dev/files/1.JPG",
+                title: "Баня из бруса 8×15",
+                size: "8×15 м",
+                material: "Профилированный брус",
+                location: "п. Полазна, Пермский край"
               }
             ].map((project, idx) => (
               <Card 
