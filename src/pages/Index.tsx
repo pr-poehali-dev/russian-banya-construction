@@ -68,7 +68,12 @@ const Index = () => {
       "https://cdn.poehali.dev/files/48198ca6-3425-4781-aba7-849426247fc4.jpg",
       "https://cdn.poehali.dev/files/1f94dc5e-69ba-4805-8f4b-ca5bbf6a404c.jpg",
       "https://cdn.poehali.dev/files/e9474b80-69ae-4a00-8574-c27200bb57ba.jpg",
-      "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg"
+      "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
+      "https://cdn.poehali.dev/files/2025-09-30 13-06-25.JPEG",
+      "https://cdn.poehali.dev/files/2025-09-30 13-06-37.JPEG",
+      "https://cdn.poehali.dev/files/2025-10-15 14-56-54.JPG",
+      "https://cdn.poehali.dev/files/2025-10-31 15-12-02.JPG",
+      "https://cdn.poehali.dev/files/2025-10-17 15-58-24.JPG"
     ],
     [
       "https://cdn.poehali.dev/files/cca216a7-9b9e-425b-b0e4-d352cea5b6a4.png",
@@ -101,12 +106,7 @@ const Index = () => {
       "https://cdn.poehali.dev/files/ce713e72-983e-416c-bc45-d51e637013a5.JPG",
       "https://cdn.poehali.dev/files/5dc59788-ab7e-495e-97d4-952d49b7306f.JPG",
       "https://cdn.poehali.dev/files/22192856-ed5b-412f-9622-18c712999ffa.JPG",
-      "https://cdn.poehali.dev/files/ef3fe192-94c4-4d6a-871c-2420502aaa8f.JPG",
-      "https://cdn.poehali.dev/files/2025-09-30 13-06-25.JPEG",
-      "https://cdn.poehali.dev/files/2025-09-30 13-06-37.JPEG",
-      "https://cdn.poehali.dev/files/2025-10-15 14-56-54.JPG",
-      "https://cdn.poehali.dev/files/2025-10-31 15-12-02.JPG",
-      "https://cdn.poehali.dev/files/2025-10-17 15-58-24.JPG"
+      "https://cdn.poehali.dev/files/ef3fe192-94c4-4d6a-871c-2420502aaa8f.JPG"
     ]
   ];
 
