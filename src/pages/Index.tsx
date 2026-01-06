@@ -106,7 +106,12 @@ const Index = () => {
       "https://cdn.poehali.dev/files/07.JPG",
       "https://cdn.poehali.dev/files/08.JPG",
       "https://cdn.poehali.dev/files/09.JPG",
-      "https://cdn.poehali.dev/files/010.JPG"
+      "https://cdn.poehali.dev/files/010.JPG",
+      "https://cdn.poehali.dev/files/011.JPG",
+      "https://cdn.poehali.dev/files/012.JPG",
+      "https://cdn.poehali.dev/files/013.JPG",
+      "https://cdn.poehali.dev/files/014.JPG",
+      "https://cdn.poehali.dev/files/015.JPG"
     ],
     [
       "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
