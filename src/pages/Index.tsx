@@ -148,6 +148,13 @@ const Index = () => {
       "https://cdn.poehali.dev/files/2025-08-04 09-41-10.jpg"
     ],
     [
+      "https://cdn.poehali.dev/files/001.JPG",
+      "https://cdn.poehali.dev/files/002.JPEG",
+      "https://cdn.poehali.dev/files/003.JPG",
+      "https://cdn.poehali.dev/files/004.JPG",
+      "https://cdn.poehali.dev/files/005.JPG"
+    ],
+    [
       "https://cdn.poehali.dev/files/cca216a7-9b9e-425b-b0e4-d352cea5b6a4.png",
       "https://cdn.poehali.dev/files/9a264058-2d14-4695-bd33-455d0d97aad9.png",
       "https://cdn.poehali.dev/files/5b94e280-3e52-4724-9d15-ffe56a2b6bad.png",
@@ -466,6 +473,13 @@ const Index = () => {
                 title: "Баня из бруса 6×6",
                 size: "6×6 м",
                 material: "Профилированный брус",
+                location: "д. Красная Слудка, Пермский край"
+              },
+              {
+                img: "https://cdn.poehali.dev/files/001.JPG",
+                title: "Баня из бревна 6×6, Шлифовка/покраска бани",
+                size: "6×6 м",
+                material: "Оцилиндрованное бревно",
                 location: "д. Красная Слудка, Пермский край"
               },
               {
