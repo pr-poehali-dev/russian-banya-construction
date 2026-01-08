@@ -9,8 +9,10 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start w-full max-w-full">
           <div className="space-y-6 w-full max-w-full overflow-x-hidden">
             <div className="text-base md:text-lg text-muted-foreground leading-relaxed space-y-6 break-words">
-              <p className="text-lg font-bold text-black">Меня зовут Александр. 
-Я — специалист по строительству, модернизации и ремонту русских бань.</p>
+              <p className="text-lg font-bold text-black">
+                Меня зовут Александр.<br />
+                Я — специалист по строительству, модернизации и ремонту русских бань.
+              </p>
               
               <div className="flex items-start gap-4">
                 <Icon name="Award" size={32} className="text-primary flex-shrink-0 mt-1" />
