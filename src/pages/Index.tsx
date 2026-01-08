@@ -7,6 +7,7 @@ import ServicesSection from "@/components/home/ServicesSection";
 import ProjectGalleryDialog from "@/components/home/ProjectGalleryDialog";
 import OrderFormSection from "@/components/OrderFormSection";
 import Footer from "@/components/home/Footer";
+import CalculatorSection from "@/components/home/CalculatorSection";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -49,7 +50,7 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "gallery", "order", "services"];
+      const sections = ["hero", "about", "gallery", "calculator", "order", "services"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -79,6 +80,8 @@ const Index = () => {
       <AboutSection />
 
       <GallerySection onProjectClick={openGallery} />
+
+      <CalculatorSection />
 
       <OrderFormSection />
 

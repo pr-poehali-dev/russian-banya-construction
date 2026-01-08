@@ -23,6 +23,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
     { id: "about", label: "Обо мне" },
     { id: "services", label: "Услуги" },
     { id: "gallery", label: "Галерея" },
+    { id: "calculator", label: "Калькулятор" },
     { id: "order", label: "Контакты" }
   ];
 
@@ -31,11 +32,13 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-              <Icon name="Home" size={24} className="text-white" />
-            </div>
+            <img 
+              src="https://cdn.poehali.dev/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" 
+              alt="Пермский Пар лого"
+              className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-lg flex-shrink-0"
+            />
             <div className="flex flex-col">
-              <div className="text-xl md:text-2xl font-black text-primary">Пермский Пар</div>
+              <div className="text-xl md:text-2xl font-black text-black">Пермский Пар</div>
               <div className="text-xs text-muted-foreground">строительная компания г.Пермь</div>
             </div>
           </div>
@@ -46,8 +49,8 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
                 key={item.id}
                 variant="ghost"
                 onClick={() => scrollToSection(item.id)}
-                className={`hover:bg-primary/10 transition-colors ${
-                  activeSection === item.id ? "bg-primary/10 text-primary" : ""
+                className={`transition-transform hover:scale-110 ${
+                  activeSection === item.id ? "text-primary" : ""
                 }`}
               >
                 {item.label}
@@ -92,8 +95,8 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
                     scrollToSection(item.id);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`hover:bg-primary/10 transition-colors text-lg py-3 justify-start ${
-                    activeSection === item.id ? "bg-primary/10 text-primary" : ""
+                  className={`transition-transform hover:scale-105 text-lg py-3 justify-start ${
+                    activeSection === item.id ? "text-primary" : ""
                   }`}
                 >
                   {item.label}
@@ -115,6 +118,9 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
             </div>
           </div>
         )}
+        <div className="hidden lg:block text-center mt-2 text-sm text-muted-foreground italic">
+          "Русская баня — это не помещение, это процесс!"
+        </div>
       </nav>
     </header>
   );
