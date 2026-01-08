@@ -30,12 +30,17 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
     <header className="fixed top-0 w-full bg-white shadow-md z-50">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex flex-col">
-            <div className="text-2xl md:text-3xl font-black text-primary">Пермский Пар</div>
-            <div className="text-xs md:text-sm text-muted-foreground">строительная компания</div>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+              <Icon name="Home" size={24} className="text-white" />
+            </div>
+            <div className="flex flex-col">
+              <div className="text-xl md:text-2xl font-black text-primary">Пермский Пар</div>
+              <div className="text-xs text-muted-foreground">строительная компания г.Пермь</div>
+            </div>
           </div>
 
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-1">
             {menuItems.map((item) => (
               <Button
                 key={item.id}
@@ -50,17 +55,26 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-2">
-            <div className="flex flex-col text-right text-sm">
-              <a href="tel:+73422984030" className="hover:text-primary transition-colors">+7 (342) 298-40-30</a>
-              <a href="tel:+79824900900" className="hover:text-primary transition-colors">+7 (982) 490-09-00</a>
+          <div className="hidden md:flex flex-col items-end gap-1">
+            <div className="flex items-center gap-2">
+              <Icon name="Phone" size={16} />
+              <a href="tel:+73422984030" className="hover:text-primary transition-colors font-semibold">+7 (342) 298-40-30</a>
             </div>
+            <div className="flex items-center gap-2">
+              <Icon name="Phone" size={16} />
+              <a href="tel:+79824900900" className="hover:text-primary transition-colors font-semibold">+7 (982) 490-09-00</a>
+            </div>
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <Icon name="Clock" size={14} />
+              <span>Пн-Пт 08.00-20.00</span>
+            </div>
+            <div className="text-xs text-muted-foreground pl-5">Сб-Вс 10.00-15.00</div>
           </div>
 
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={24} />
@@ -68,7 +82,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-[72px] left-0 w-full bg-white shadow-lg border-t">
+          <div className="lg:hidden absolute top-[72px] left-0 w-full bg-white shadow-lg border-t">
             <div className="flex flex-col py-2">
               {menuItems.map((item) => (
                 <Button
