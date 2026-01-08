@@ -41,7 +41,7 @@ const AboutSection = () => {
                 size="lg" 
                 disabled 
                 className="text-xs sm:text-sm md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 text-black font-black shadow-lg w-full md:w-auto max-w-full break-words whitespace-normal h-auto py-3 leading-tight cursor-not-allowed"
-              >Консультация по строительству или ремонту бани +7(982)4-900-900(Александр)</Button>
+              >Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</Button>
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden">
