@@ -46,7 +46,7 @@ const AboutSection = () => {
 
               <div className="flex items-start gap-3">
                 <Icon name="Calculator" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Бесплатный расчет стоимости строительства или ремонта</p>
+                <p className="font-semibold text-black text-sm">Бесплатный быстрый расчет стоимости строительства по авторской программе</p>
               </div>
 
               <div className="flex items-start gap-3">
