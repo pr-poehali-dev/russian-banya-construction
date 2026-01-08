@@ -57,12 +57,31 @@ const AboutSection = () => {
               <p className="text-lg font-bold text-black">Моя цель — построить баню «под ключ», чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
             </div>
           </div>
-          <div className="w-full max-w-full overflow-hidden">
+          <div className="w-full max-w-full overflow-hidden space-y-4">
             <img 
               src="https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg"
               alt="Мастер банных дел"
               className="rounded-lg shadow-xl w-full max-w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover object-[center_20%]"
             />
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex items-center gap-4">
+                <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                  <Icon name="MessageCircle" size={24} className="text-white" />
+                </a>
+                <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                  <Icon name="Send" size={24} className="text-white" />
+                </a>
+                <a href="mailto:perm-par@mail.ru" className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
+                  <Icon name="Mail" size={24} className="text-white" />
+                </a>
+                <a href="tel:+79824900900" className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <Icon name="Phone" size={24} className="text-white" />
+                </a>
+              </div>
+              <a href="tel:+79824900900" className="text-xl font-bold text-black hover:text-primary transition-colors">
+                +7 (982) 490-09-00
+              </a>
+            </div>
           </div>
         </div>
       </div>
