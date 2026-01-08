@@ -25,6 +25,11 @@ const AboutSection = () => {
                 <Icon name="Flame" size={32} className="text-primary flex-shrink-0 mt-1" />
                 <p className="font-semibold text-black">Знание технологий и нюансов настоящего парения</p>
               </div>
+
+              <div className="flex items-start gap-4">
+                <Icon name="Handshake" size={32} className="text-primary flex-shrink-0 mt-1" />
+                <p className="font-semibold text-black">Прямое участие в каждом проекте, от консультации до сдачи</p>
+              </div>
             </div>
             <div className="flex justify-center md:justify-start w-full max-w-full bg-green-600">
               <Button 
