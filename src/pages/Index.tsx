@@ -384,30 +384,7 @@ const Index = () => {
           </Button>
         </div>
 
-        <div className="absolute bottom-20 left-4 md:bottom-24 md:left-8 z-20 transform rotate-[5deg] hover:rotate-0 transition-transform duration-300">
-          <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-4 py-3 md:px-6 md:py-4 rounded-2xl shadow-2xl border-4 border-yellow-400">
-            <div className="absolute -top-2 -left-2 bg-yellow-400 text-red-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-lg md:text-xl shadow-lg">
-              <Icon name="MapPin" size={20} />
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="text-xs md:text-sm font-bold uppercase tracking-wider mb-1 text-yellow-300">Бесплатно</div>
-              <div className="text-base md:text-xl font-black leading-tight mb-1">Выезд на объект<br/>замеры и расчет</div>
-            </div>
-          </div>
-        </div>
 
-        <div className="absolute bottom-20 right-4 md:bottom-24 md:right-8 z-20 transform rotate-[-5deg] hover:rotate-0 transition-transform duration-300">
-          <div className="relative bg-gradient-to-br from-red-600 via-red-500 to-red-700 text-white px-4 py-3 md:px-6 md:py-4 rounded-2xl shadow-2xl border-4 border-yellow-400">
-            <div className="absolute -top-2 -right-2 bg-yellow-400 text-red-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-lg md:text-xl shadow-lg">
-              <Icon name="Gift" size={20} />
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="text-xs md:text-sm font-bold uppercase tracking-wider mb-1 text-yellow-300">Новогодняя акция</div>
-              <div className="text-2xl md:text-3xl font-black leading-none mb-1">-10%</div>
-              <div className="text-[10px] md:text-xs font-medium opacity-90">до 31 января 2026г</div>
-            </div>
-          </div>
-        </div>
       </section>
 
 
