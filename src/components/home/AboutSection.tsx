@@ -54,7 +54,7 @@ const AboutSection = () => {
                 <p className="font-semibold text-black text-sm">Подробная смета с учетом всех нюансов и пожеланий заказчика</p>
               </div>
 
-              <p className="text-base text-muted-foreground italic">Моя цель — построить баню «под ключ», чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
+              <p className="text-lg font-bold text-black">Моя цель — построить баню «под ключ», чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden">
