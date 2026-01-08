@@ -49,8 +49,8 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
                 key={item.id}
                 variant="ghost"
                 onClick={() => scrollToSection(item.id)}
-                className={`bg-white hover:bg-white transition-transform hover:scale-110 ${
-                  activeSection === item.id ? "text-black" : ""
+                className={`bg-white hover:bg-white hover:text-black transition-transform hover:scale-110 ${
+                  activeSection === item.id ? "text-black font-bold" : "text-black"
                 }`}
               >
                 {item.label}
@@ -95,8 +95,8 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
                     scrollToSection(item.id);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`bg-white hover:bg-white transition-transform hover:scale-105 text-lg py-3 justify-start ${
-                    activeSection === item.id ? "text-black" : ""
+                  className={`bg-white hover:bg-white hover:text-black transition-transform hover:scale-105 text-lg py-3 justify-start ${
+                    activeSection === item.id ? "text-black font-bold" : "text-black"
                   }`}
                 >
                   {item.label}
