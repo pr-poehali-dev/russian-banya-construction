@@ -34,14 +34,12 @@ const AboutSection = () => {
                 <p className="font-semibold text-black">Прямое участие в каждом проекте, от консультации до сдачи</p>
               </div>
 
+              <div className="flex items-start gap-4">
+                <Icon name="MessageSquare" size={32} className="text-primary flex-shrink-0 mt-1" />
+                <p className="font-semibold text-black">Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</p>
+              </div>
+
               <p className="text-lg text-muted-foreground italic">Моя цель — построить баню «под ключ», чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
-            </div>
-            <div className="flex justify-center md:justify-start w-full max-w-full bg-green-600">
-              <Button 
-                size="lg" 
-                disabled 
-                className="text-xs sm:text-sm md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 text-black font-black shadow-lg w-full md:w-auto max-w-full break-words whitespace-normal h-auto py-3 leading-tight cursor-not-allowed"
-              >Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</Button>
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden">
