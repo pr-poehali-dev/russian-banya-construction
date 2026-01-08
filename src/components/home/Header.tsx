@@ -32,7 +32,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
             <div className="text-2xl md:text-3xl font-black text-primary">Пермский Пар</div>
-            <div className="text-xs md:text-sm text-muted-foreground">строительная компания г.Пермь</div>
+            <div className="text-xs md:text-sm text-muted-foreground">строительная компания</div>
           </div>
 
           <div className="hidden md:flex items-center space-x-1">
