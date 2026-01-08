@@ -7,6 +7,13 @@ interface HeaderProps {
   scrollToSection: (id: string) => void;
 }
 
+interface MenuItem {
+  id: string;
+  label: string;
+  isExternal?: boolean;
+  path?: string;
+}
+
 const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -18,14 +25,22 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
     }
   }, [isMobileMenuOpen]);
 
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { id: "hero", label: "Главная" },
     { id: "about", label: "Обо мне" },
     { id: "services", label: "Услуги" },
     { id: "gallery", label: "Галерея" },
-    { id: "calculator", label: "Калькулятор" },
+    { id: "calculator", label: "Калькулятор", isExternal: true, path: "/calculator" },
     { id: "order", label: "Контакты" }
   ];
+
+  const handleMenuClick = (item: MenuItem) => {
+    if (item.isExternal && item.path) {
+      window.location.href = item.path;
+    } else {
+      scrollToSection(item.id);
+    }
+  };
 
   return (
     <header className="fixed top-0 w-full bg-white shadow-md z-50">
@@ -48,9 +63,9 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
               <Button
                 key={item.id}
                 variant="ghost"
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleMenuClick(item)}
                 className={`bg-white hover:bg-white hover:text-black transition-transform hover:scale-110 ${
-                  activeSection === item.id ? "text-black font-bold" : "text-black"
+                  activeSection === item.id && !item.isExternal ? "text-black font-bold" : "text-black"
                 }`}
               >
                 {item.label}
@@ -92,11 +107,11 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
                   key={item.id}
                   variant="ghost"
                   onClick={() => {
-                    scrollToSection(item.id);
+                    handleMenuClick(item);
                     setIsMobileMenuOpen(false);
                   }}
                   className={`bg-white hover:bg-white hover:text-black transition-transform hover:scale-105 text-lg py-3 justify-start ${
-                    activeSection === item.id ? "text-black font-bold" : "text-black"
+                    activeSection === item.id && !item.isExternal ? "text-black font-bold" : "text-black"
                   }`}
                 >
                   {item.label}
