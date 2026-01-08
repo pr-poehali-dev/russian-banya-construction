@@ -133,7 +133,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
             </div>
           </div>
         )}
-        <div className="hidden lg:block text-center mt-1 text-xs text-muted-foreground italic">
+        <div className="hidden lg:block text-center mt-1 text-sm font-bold text-gray-700 italic">
           "Русская баня — это не помещение, это процесс!"
         </div>
       </nav>
