@@ -44,17 +44,17 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
 
   return (
     <header className="fixed top-0 w-full bg-white shadow-md z-50">
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-4 py-2">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img 
               src="https://cdn.poehali.dev/files/e234d6d8-c101-4c8e-bf09-e9e9d739ad32.jpg" 
               alt="Пермский Пар лого"
-              className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-lg flex-shrink-0"
+              className="w-8 h-8 md:w-10 md:h-10 object-cover rounded-lg flex-shrink-0"
             />
             <div className="flex flex-col">
-              <div className="text-xl md:text-2xl font-black text-black">Пермский Пар</div>
-              <div className="text-xs text-muted-foreground">строительная компания г.Пермь</div>
+              <div className="text-lg md:text-xl font-black text-black">Пермский Пар</div>
+              <div className="text-[10px] md:text-xs text-muted-foreground">строительная компания г.Пермь</div>
             </div>
           </div>
 
@@ -73,20 +73,20 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
             ))}
           </div>
 
-          <div className="hidden md:flex flex-col items-end gap-1">
-            <div className="flex items-center gap-2">
-              <Icon name="Phone" size={16} />
-              <a href="tel:+73422984030" className="hover:text-primary transition-colors font-semibold">+7 (342) 298-40-30</a>
+          <div className="hidden md:flex flex-col items-end gap-0.5">
+            <div className="flex items-center gap-1.5">
+              <Icon name="Phone" size={14} />
+              <a href="tel:+73422984030" className="hover:text-primary transition-colors font-semibold text-sm">+7 (342) 298-40-30</a>
             </div>
-            <div className="flex items-center gap-2">
-              <Icon name="Phone" size={16} />
-              <a href="tel:+79824900900" className="hover:text-primary transition-colors font-semibold">+7 (982) 490-09-00</a>
+            <div className="flex items-center gap-1.5">
+              <Icon name="Phone" size={14} />
+              <a href="tel:+79824900900" className="hover:text-primary transition-colors font-semibold text-sm">+7 (982) 490-09-00</a>
             </div>
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-              <Icon name="Clock" size={14} />
+            <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <Icon name="Clock" size={12} />
               <span>Пн-Пт 08.00-20.00</span>
             </div>
-            <div className="text-xs text-muted-foreground pl-5">Сб-Вс 10.00-15.00</div>
+            <div className="text-[10px] text-muted-foreground pl-4">Сб-Вс 10.00-15.00</div>
           </div>
 
           <Button
@@ -133,7 +133,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
             </div>
           </div>
         )}
-        <div className="hidden lg:block text-center mt-2 text-sm text-muted-foreground italic">
+        <div className="hidden lg:block text-center mt-1 text-xs text-muted-foreground italic">
           "Русская баня — это не помещение, это процесс!"
         </div>
       </nav>
