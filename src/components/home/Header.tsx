@@ -31,7 +31,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="text-2xl md:text-3xl font-black text-black">🪵 БАНЯ.СТРОЙ</div>
+            <div className="text-2xl md:text-3xl font-black text-black">Пермский Пар</div>
           </div>
 
           <div className="hidden md:flex items-center space-x-1">
