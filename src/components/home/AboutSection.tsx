@@ -31,6 +31,8 @@ const AboutSection = () => {
                 <Icon name="Handshake" size={32} className="text-primary flex-shrink-0 mt-1" />
                 <p className="font-semibold text-black">Прямое участие в каждом проекте, от консультации до сдачи</p>
               </div>
+
+              <p className="text-lg text-muted-foreground italic">Моя цель — построить баню «под ключ», чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
             </div>
             <div className="flex justify-center md:justify-start w-full max-w-full bg-green-600">
               <Button 
