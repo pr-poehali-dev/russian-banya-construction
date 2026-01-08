@@ -20,18 +20,19 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
 
   const menuItems = [
     { id: "hero", label: "Главная" },
-    { id: "about", label: "О мастере" },
-    { id: "gallery", label: "Проекты" },
-    { id: "order", label: "Калькулятор" },
-    { id: "services", label: "Услуги" }
+    { id: "about", label: "Обо мне" },
+    { id: "services", label: "Услуги" },
+    { id: "gallery", label: "Галерея" },
+    { id: "order", label: "Контакты" }
   ];
 
   return (
     <header className="fixed top-0 w-full bg-white shadow-md z-50">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col">
             <div className="text-2xl md:text-3xl font-black text-primary">Пермский Пар</div>
+            <div className="text-xs md:text-sm text-muted-foreground">строительная компания г.Пермь</div>
           </div>
 
           <div className="hidden md:flex items-center space-x-1">
@@ -50,12 +51,10 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
           </div>
 
           <div className="hidden md:flex items-center gap-2">
-            <a href="tel:+79824900900">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90">
-                <Icon name="Phone" size={20} />
-                +7 (982) 490-09-00
-              </Button>
-            </a>
+            <div className="flex flex-col text-right text-sm">
+              <a href="tel:+73422984030" className="hover:text-primary transition-colors">+7 (342) 298-40-30</a>
+              <a href="tel:+79824900900" className="hover:text-primary transition-colors">+7 (982) 490-09-00</a>
+            </div>
           </div>
 
           <Button
@@ -87,6 +86,10 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
                 </Button>
               ))}
               <div className="border-t my-2"></div>
+              <a href="tel:+73422984030" className="hover:bg-primary/10 transition-colors text-lg py-3 px-4 text-left flex items-center gap-2">
+                <Icon name="Phone" size={20} />
+                +7 (342) 298-40-30
+              </a>
               <a href="tel:+79824900900" className="hover:bg-primary/10 transition-colors text-lg py-3 px-4 text-left flex items-center gap-2">
                 <Icon name="Phone" size={20} />
                 +7 (982) 490-09-00

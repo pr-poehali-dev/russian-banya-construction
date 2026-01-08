@@ -15,9 +15,17 @@ const Footer = () => {
           <div className="text-center">
             <h4 className="font-semibold mb-4">Контакты</h4>
             <div className="space-y-2 text-gray-400 text-sm">
+              <a href="tel:+73422984030" className="flex items-center justify-center gap-2 hover:text-primary transition-colors">
+                <Icon name="Phone" size={16} />
+                +7 (342) 298-40-30
+              </a>
               <a href="tel:+79824900900" className="flex items-center justify-center gap-2 hover:text-primary transition-colors">
                 <Icon name="Phone" size={16} />
                 +7 (982) 490-09-00
+              </a>
+              <a href="mailto:perm-par@mail.ru" className="flex items-center justify-center gap-2 hover:text-primary transition-colors">
+                <Icon name="Mail" size={16} />
+                perm-par@mail.ru
               </a>
               <div className="flex items-center justify-center gap-2">
                 <Icon name="Clock" size={16} />
@@ -34,23 +42,20 @@ const Footer = () => {
           </div>
 
           <div className="text-center md:text-right">
-            <h4 className="font-semibold mb-4">Социальные сети</h4>
+            <h4 className="font-semibold mb-4">Мессенджеры</h4>
             <div className="flex justify-center md:justify-end gap-4">
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
-                <Icon name="Instagram" size={20} />
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
-                <Icon name="Send" size={20} />
-              </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
                 <Icon name="MessageCircle" size={20} />
+              </a>
+              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                <Icon name="Send" size={20} />
               </a>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; 2024 Пермский Пар. Все права защищены.</p>
+          <p>&copy; 2020г Пермский Пар. Все права защищены.</p>
         </div>
       </div>
     </footer>
