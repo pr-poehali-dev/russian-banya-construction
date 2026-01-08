@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Icon from "@/components/ui/icon";
 
 const AboutSection = () => {
   return (
@@ -7,11 +8,23 @@ const AboutSection = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-2">Обо мне</h2>
         <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start w-full max-w-full">
           <div className="space-y-6 w-full max-w-full overflow-x-hidden">
-            <div className="text-base md:text-lg text-muted-foreground leading-relaxed space-y-4 break-words">
-              <p>Меня зовут Александр. Я — специалист по строительству, модернизации и ремонту русских бань.</p>
-              <p>Моя цель — чтобы вы не просто получили баню, а открыли для себя настоящее удовольствие от живого пара, тепла дерева и уюта, в котором хочется остаться надолго.</p>
-              <p>Обладаю глубоким знанием традиционных технологий и нюансов настоящего русского парения. Подхожу к каждому проекту с душой: помогаю с выбором материалов, продумываю планировку до мелочей и слежу за каждым этапом строительства.</p>
-              <p>За моими плечами более 15 лет опыта, десятки успешных проектов и довольных клиентов.</p>
+            <div className="text-base md:text-lg text-muted-foreground leading-relaxed space-y-6 break-words">
+              <p className="text-lg">Меня зовут Александр. Я — специалист по строительству, модернизации и ремонту русских бань.</p>
+              
+              <div className="flex items-start gap-4">
+                <Icon name="Award" size={32} className="text-primary flex-shrink-0 mt-1" />
+                <p className="font-semibold text-black">Более 15 лет опыта в строительстве бань</p>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <Icon name="Users" size={32} className="text-primary flex-shrink-0 mt-1" />
+                <p className="font-semibold text-black">Десятки успешных проектов и довольных клиентов</p>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <Icon name="Flame" size={32} className="text-primary flex-shrink-0 mt-1" />
+                <p className="font-semibold text-black">Знание технологий и нюансов настоящего парения</p>
+              </div>
             </div>
             <div className="flex justify-center md:justify-start w-full max-w-full bg-green-600">
               <Button 
