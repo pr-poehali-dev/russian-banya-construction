@@ -63,19 +63,21 @@ const AboutSection = () => {
               alt="Мастер банных дел"
               className="rounded-lg shadow-xl w-full max-w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover object-[center_20%]"
             />
-            <a href="tel:+79824900900" className="w-full bg-primary hover:bg-primary/90 text-white font-bold text-2xl py-4 rounded-lg flex items-center justify-center gap-3 transition-colors shadow-lg">
-              <Icon name="Phone" size={28} />
-              +7 (982) 490-09-00
-            </a>
-            <div className="flex items-center justify-center gap-4">
-              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors shadow-md">
-                <Icon name="MessageCircle" size={28} className="text-white" />
+            <div className="flex items-center justify-center gap-4 flex-wrap">
+              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <Icon name="MessageCircle" size={24} className="text-white" />
               </a>
-              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors shadow-md">
-                <Icon name="Send" size={28} className="text-white" />
+              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                <Icon name="Send" size={24} className="text-white" />
               </a>
-              <a href="https://my.mail.ru/mail/perm-par/" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity overflow-hidden shadow-md">
+              <a href="https://my.mail.ru/mail/perm-par/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity overflow-hidden">
                 <img src="https://cdn.poehali.dev/files/IlwnOob3_b8V56ug0ufBKQPFI6Di_pNsKHZUm7_yDwj0wSGwJVIhHVATvJ5AhTO56sg4PhSTOS7DvQ5swJRUSIh8.jpg" alt="МАКС" className="w-full h-full object-cover" />
+              </a>
+              <a href="tel:+79824900900" className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                <Icon name="Phone" size={24} className="text-white" />
+              </a>
+              <a href="tel:+79824900900" className="text-xl font-bold text-black hover:text-primary transition-colors">
+                +7 (982) 490-09-00
               </a>
             </div>
           </div>
