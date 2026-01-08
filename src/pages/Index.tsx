@@ -6,6 +6,7 @@ import GallerySection from "@/components/home/GallerySection";
 import ServicesSection from "@/components/home/ServicesSection";
 import ProjectGalleryDialog from "@/components/home/ProjectGalleryDialog";
 import OrderFormSection from "@/components/OrderFormSection";
+import Footer from "@/components/home/Footer";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -91,6 +92,8 @@ const Index = () => {
         onNextImage={nextImage}
         onSelectImage={setCurrentImageIndex}
       />
+
+      <Footer />
     </div>
   );
 };
