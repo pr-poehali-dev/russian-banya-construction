@@ -30,7 +30,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
     { id: "about", label: "Обо мне" },
     { id: "services", label: "Услуги" },
     { id: "gallery", label: "Галерея" },
-    { id: "calculator", label: "Калькулятор", isExternal: true, path: "/calculator" },
+    { id: "order", label: "Калькулятор" },
     { id: "order", label: "Контакты" }
   ];
 
