@@ -192,10 +192,10 @@ export const projects: Project[] = [
   },
   {
     img: "https://cdn.poehali.dev/files/IMG_20260105_110740.jpg",
-    title: "Баня из бруса 10×10",
-    size: "10×10 м",
-    material: "Клееный брус",
-    location: "д. Ключи, Пермский край"
+    title: "Баня из бревна 3×6",
+    size: "3×6 м",
+    material: "Оцилиндрованное бревно",
+    location: "д. Гамы, Пермский край"
   },
   {
     img: "https://cdn.poehali.dev/files/01.JPG",
