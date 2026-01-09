@@ -2,28 +2,28 @@ import Icon from "@/components/ui/icon";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 w-full overflow-x-hidden">
+    <footer className="bg-yellow-500 text-black py-12 px-4 sm:px-6 w-full overflow-x-hidden">
       <div className="container mx-auto max-w-6xl">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-bold mb-4 text-primary">Пермский Пар</h3>
-            <p className="text-gray-400 text-sm">
+            <h3 className="text-xl font-bold mb-4 text-black">Пермский Пар</h3>
+            <p className="text-black text-sm">
               Строительство и модернизация бань премиум-класса в Перми и Пермском крае
             </p>
           </div>
 
           <div className="text-center">
             <h4 className="font-semibold mb-4">Контакты</h4>
-            <div className="space-y-2 text-gray-400 text-sm">
-              <a href="tel:+73422984030" className="flex items-center justify-center gap-2 hover:text-primary transition-colors">
+            <div className="space-y-2 text-black text-sm">
+              <a href="tel:+73422984030" className="flex items-center justify-center gap-2 hover:text-gray-700 transition-colors">
                 <Icon name="Phone" size={16} />
                 +7 (342) 298-40-30
               </a>
-              <a href="tel:+79824900900" className="flex items-center justify-center gap-2 hover:text-primary transition-colors">
+              <a href="tel:+79824900900" className="flex items-center justify-center gap-2 hover:text-gray-700 transition-colors">
                 <Icon name="Phone" size={16} />
                 +7 (982) 490-09-00
               </a>
-              <a href="mailto:perm-par@mail.ru" className="flex items-center justify-center gap-2 hover:text-primary transition-colors">
+              <a href="mailto:perm-par@mail.ru" className="flex items-center justify-center gap-2 hover:text-gray-700 transition-colors">
                 <Icon name="Mail" size={16} />
                 perm-par@mail.ru
               </a>
@@ -43,18 +43,24 @@ const Footer = () => {
 
           <div className="text-center md:text-right">
             <h4 className="font-semibold mb-4">Мессенджеры</h4>
-            <div className="flex justify-center md:justify-end gap-4">
-              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
-                <Icon name="MessageCircle" size={20} />
+            <div className="flex justify-center md:justify-end gap-3 flex-wrap">
+              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <Icon name="MessageCircle" size={20} className="text-white" />
               </a>
-              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
-                <Icon name="Send" size={20} />
+              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                <Icon name="Send" size={20} className="text-white" />
+              </a>
+              <a href="https://my.mail.ru/mail/perm-par/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity overflow-hidden">
+                <img src="https://cdn.poehali.dev/files/IlwnOob3_b8V56ug0ufBKQPFI6Di_pNsKHZUm7_yDwj0wSGwJVIhHVATvJ5AhTO56sg4PhSTOS7DvQ5swJRUSIh8.jpg" alt="МАКС" className="w-full h-full object-cover" />
+              </a>
+              <a href="tel:+79824900900" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                <Icon name="Phone" size={20} className="text-white" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+        <div className="border-t border-black/20 mt-8 pt-8 text-center text-black text-sm">
           <p>&copy; 2020г Пермский Пар. Все права защищены.</p>
         </div>
       </div>
