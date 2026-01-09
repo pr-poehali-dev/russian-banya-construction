@@ -192,24 +192,24 @@ export const projects: Project[] = [
   },
   {
     img: "https://cdn.poehali.dev/files/IMG_20260105_110740.jpg",
+    title: "Баня из бревна 3×6",
+    size: "3×6 м",
+    material: "Оцилиндрованное бревно",
+    location: "д. Гамы, Пермский край"
+  },
+  {
+    img: "https://cdn.poehali.dev/files/01.JPG",
     title: "Баня из бруса 10×10",
     size: "10×10 м",
     material: "Клееный брус",
     location: "д. Ключи, Пермский край"
   },
   {
-    img: "https://cdn.poehali.dev/files/01.JPG",
+    img: "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
     title: "Баня из бревна 6×6",
     size: "6×6 м",
     material: "Ремонт парной и помывочной",
     location: "д. Скобелевка, Пермский край"
-  },
-  {
-    img: "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
-    title: "Баня из сосны 6×4",
-    size: "6×4 м",
-    material: "Обычный брус",
-    location: "д. Чигироб, Пермский край"
   },
   {
     img: "https://cdn.poehali.dev/files/001.JPG",
