@@ -180,7 +180,12 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/312.JPG",
     "https://cdn.poehali.dev/files/313.JPG",
     "https://cdn.poehali.dev/files/314.JPG",
-    "https://cdn.poehali.dev/files/315.JPG"
+    "https://cdn.poehali.dev/files/315.JPG",
+    "https://cdn.poehali.dev/files/316.JPG",
+    "https://cdn.poehali.dev/files/317.JPG",
+    "https://cdn.poehali.dev/files/318.JPG",
+    "https://cdn.poehali.dev/files/319.JPG",
+    "https://cdn.poehali.dev/files/320.JPG"
   ]
 ];
 
