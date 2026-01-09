@@ -158,7 +158,12 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/aec4a2ca-0cc4-45f5-8a1f-76001cdb8530.png",
     "https://cdn.poehali.dev/files/84798a93-dd08-41eb-b20d-1a3611acf1be.png",
     "https://cdn.poehali.dev/files/61280d11-4eee-40f4-9105-3a20b63619e0.jpg",
-    "https://cdn.poehali.dev/files/7062d1f4-7309-472d-bc60-6819f57dbd2f.png"
+    "https://cdn.poehali.dev/files/7062d1f4-7309-472d-bc60-6819f57dbd2f.png",
+    "https://cdn.poehali.dev/files/35c2929b-6726-4db3-aa64-52835d7f9c45.jpg",
+    "https://cdn.poehali.dev/files/9a264058-2d14-4695-bd33-455d0d97aad9.png",
+    "https://cdn.poehali.dev/files/5b94e280-3e52-4724-9d15-ffe56a2b6bad.png",
+    "https://cdn.poehali.dev/files/0c49f489-1f6b-4479-8142-3603d899660a.png",
+    "https://cdn.poehali.dev/files/0b03e8cf-ef69-475b-a180-72929c4813b6.jpg"
   ]
 ];
 
