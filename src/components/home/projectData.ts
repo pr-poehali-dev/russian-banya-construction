@@ -201,8 +201,8 @@ export const projects: Project[] = [
     img: "https://cdn.poehali.dev/files/01.JPG",
     title: "Баня из бревна 6×6",
     size: "6×6 м",
-    material: "Оцилиндрованное бревно",
-    location: "д. Филаты, Пермский край"
+    material: "Ремонт парной и помывочной",
+    location: "д. Скобелевка, Пермский край"
   },
   {
     img: "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
