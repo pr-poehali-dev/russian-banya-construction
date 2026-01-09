@@ -233,7 +233,7 @@ export const projects: Project[] = [
     location: "д. Красная Слудка, Пермский край"
   },
   {
-    img: "https://cdn.poehali.dev/files/305.jpg",
+    img: "https://cdn.poehali.dev/files/301.JPG",
     title: "Баня из бруса 6×8",
     size: "6×8 м",
     material: "Брус естественной влажности",
