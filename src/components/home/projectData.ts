@@ -196,6 +196,13 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/338.JPG",
     "https://cdn.poehali.dev/files/339.JPG",
     "https://cdn.poehali.dev/files/340.JPG"
+  ],
+  [
+    "https://cdn.poehali.dev/files/400.JPG",
+    "https://cdn.poehali.dev/files/402.JPG",
+    "https://cdn.poehali.dev/files/403.JPG",
+    "https://cdn.poehali.dev/files/404.JPG",
+    "https://cdn.poehali.dev/files/405.JPG"
   ]
 ];
 
@@ -263,5 +270,12 @@ export const projects: Project[] = [
     size: "6×8 м",
     material: "Брус естественной влажности",
     location: "г. Добрянка, Пермский край"
+  },
+  {
+    img: "https://cdn.poehali.dev/files/400.JPG",
+    title: "Баня из бревна 5×5",
+    size: "5×5 м",
+    material: "Оцилиндрованное бревно",
+    location: "п. Усть-Качка, Пермский край"
   }
 ];
