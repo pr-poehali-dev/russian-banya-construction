@@ -213,10 +213,10 @@ export const projects: Project[] = [
   },
   {
     img: "https://cdn.poehali.dev/files/001.JPG",
-    title: "Баня из кедра 6×4",
-    size: "6×4 м",
-    material: "Оцилиндрованное бревно",
-    location: "г. Пермь"
+    title: "Баня из бревна 6×6",
+    size: "6×6 м",
+    material: "Шлифовка и покраска наружных стен",
+    location: "д. Красная Слудка, Пермский край"
   },
   {
     img: "https://cdn.poehali.dev/files/cca216a7-9b9e-425b-b0e4-d352cea5b6a4.png",
