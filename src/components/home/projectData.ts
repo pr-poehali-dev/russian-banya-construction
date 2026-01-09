@@ -164,6 +164,9 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/5b94e280-3e52-4724-9d15-ffe56a2b6bad.png",
     "https://cdn.poehali.dev/files/0c49f489-1f6b-4479-8142-3603d899660a.png",
     "https://cdn.poehali.dev/files/0b03e8cf-ef69-475b-a180-72929c4813b6.jpg"
+  ],
+  [
+    "https://cdn.poehali.dev/files/305.jpg"
   ]
 ];
 
@@ -224,5 +227,12 @@ export const projects: Project[] = [
     size: "6×6 м",
     material: "Профилированный брус",
     location: "д. Красная Слудка, Пермский край"
+  },
+  {
+    img: "https://cdn.poehali.dev/files/305.jpg",
+    title: "Баня из бруса 6×8",
+    size: "6×8 м",
+    material: "Брус естественной влажности",
+    location: "г. Добрянка, Пермский край"
   }
 ];
