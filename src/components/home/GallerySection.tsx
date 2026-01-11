@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { projects, projectGalleries } from "./projectData";
 
@@ -7,12 +9,21 @@ interface GallerySectionProps {
 }
 
 const GallerySection = ({ onProjectClick }: GallerySectionProps) => {
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  const showMore = () => {
+    setVisibleCount(prev => Math.min(prev + 3, projects.length));
+  };
+
+  const visibleProjects = projects.slice(0, visibleCount);
+  const hasMore = visibleCount < projects.length;
+
   return (
     <section id="gallery" className="py-20 bg-muted/30 px-4 sm:px-6 w-full overflow-x-hidden">
       <div className="container mx-auto w-full max-w-full">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 px-2 break-words">Несколько примеров построенных и модернизированных бань и парных</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full max-w-full">
-          {projects.map((project, idx) => (
+          {visibleProjects.map((project, idx) => (
             <Card 
               key={idx} 
               className="overflow-hidden cursor-pointer transition-transform hover:scale-105 w-full max-w-full group"
@@ -53,6 +64,18 @@ const GallerySection = ({ onProjectClick }: GallerySectionProps) => {
             </Card>
           ))}
         </div>
+        {hasMore && (
+          <div className="flex justify-center mt-12">
+            <Button 
+              onClick={showMore}
+              size="lg"
+              className="px-8"
+            >
+              Смотреть еще
+              <Icon name="ChevronDown" size={20} className="ml-2" />
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
