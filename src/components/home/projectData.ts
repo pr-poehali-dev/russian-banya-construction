@@ -130,9 +130,7 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/2025-10-15 14-56-54.JPG",
     "https://cdn.poehali.dev/files/2025-10-31 15-12-02.JPG",
     "https://cdn.poehali.dev/files/2025-10-17 15-58-24.JPG",
-    "https://cdn.poehali.dev/files/2025-08-04 09-41-10.jpg",
-    "https://cdn.poehali.dev/files/301.jpg",
-    "https://cdn.poehali.dev/files/341.JPG"
+    "https://cdn.poehali.dev/files/2025-08-04 09-41-10.jpg"
   ],
   [
     "https://cdn.poehali.dev/files/001.JPG",
@@ -197,7 +195,9 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/337.JPG",
     "https://cdn.poehali.dev/files/338.JPG",
     "https://cdn.poehali.dev/files/339.JPG",
-    "https://cdn.poehali.dev/files/340.JPG"
+    "https://cdn.poehali.dev/files/340.JPG",
+    "https://cdn.poehali.dev/files/301.jpg",
+    "https://cdn.poehali.dev/files/341.JPG"
   ],
   [
     "https://cdn.poehali.dev/files/400.JPG",
