@@ -260,20 +260,20 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/460.jpg"
   ],
   [
-    "https://i.ibb.co/fzmVykdy/600.jpg",
-    "https://i.ibb.co/qFDTtjpn/601.jpg",
-    "https://i.ibb.co/BHFbSXX9/602.jpg",
-    "https://i.ibb.co/WvXF4c1P/603.jpg",
-    "https://i.ibb.co/QBnZmcW/604.jpg",
-    "https://i.ibb.co/7x9S5xqK/605.jpg",
-    "https://i.ibb.co/27PWnNZN/606.jpg",
-    "https://i.ibb.co/HTNXhj5c/607.jpg",
-    "https://i.ibb.co/hzx6715/608.jpg",
-    "https://i.ibb.co/3mctGhsF/609.jpg",
-    "https://i.ibb.co/Q3XyZBCB/610.jpg",
-    "https://i.ibb.co/YT0KJ7rz/611.jpg",
-    "https://i.ibb.co/ns41ZC2N/612.jpg",
-    "https://i.ibb.co/RwcfTmg/613.jpg"
+    "https://cdn.poehali.dev/files/600.jpg",
+    "https://cdn.poehali.dev/files/601.jpg",
+    "https://cdn.poehali.dev/files/602.jpg",
+    "https://cdn.poehali.dev/files/603.jpg",
+    "https://cdn.poehali.dev/files/604.jpg",
+    "https://cdn.poehali.dev/files/605.jpg",
+    "https://cdn.poehali.dev/files/606.jpg",
+    "https://cdn.poehali.dev/files/607.jpg",
+    "https://cdn.poehali.dev/files/608.jpg",
+    "https://cdn.poehali.dev/files/609.jpg",
+    "https://cdn.poehali.dev/files/610.jpg",
+    "https://cdn.poehali.dev/files/611.jpg",
+    "https://cdn.poehali.dev/files/612.jpg",
+    "https://cdn.poehali.dev/files/613.jpg"
   ]
 ];
 
@@ -350,7 +350,7 @@ export const projects: Project[] = [
     location: "п. Усть-Качка, Пермский край"
   },
   {
-    img: "https://i.ibb.co/fzmVykdy/600.jpg",
+    img: "https://cdn.poehali.dev/files/600.jpg",
     title: "Баня из бревна 6×5",
     size: "6×5 м",
     material: "Рубленное бревно",
