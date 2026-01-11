@@ -258,6 +258,22 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/458.JPG",
     "https://cdn.poehali.dev/files/459.JPG",
     "https://cdn.poehali.dev/files/460.jpg"
+  ],
+  [
+    "https://disk.yandex.ru/i/6rYxX4e_pKGv5g",
+    "https://disk.yandex.ru/i/NjAixQ2CzXyslA",
+    "https://disk.yandex.ru/i/xJjAQnxk_y-E-A",
+    "https://disk.yandex.ru/i/pROWt1wn7pR8ew",
+    "https://disk.yandex.ru/i/WNK8c91YLUk9ow",
+    "https://disk.yandex.ru/i/2gLQb1Uc0FdvRw",
+    "https://disk.yandex.ru/i/A6VZr5v5GF2RQw",
+    "https://disk.yandex.ru/i/G8pxfE_46iHQnw",
+    "https://disk.yandex.ru/i/7Dh-a53xwX8OSQ",
+    "https://disk.yandex.ru/i/xO8YYM_HgcGUGA",
+    "https://disk.yandex.ru/i/sxvSUzY-8JPOJA",
+    "https://disk.yandex.ru/i/g3Ro5aLVUQYeVQ",
+    "https://disk.yandex.ru/i/Fg2kSAeOdFO3SQ",
+    "https://disk.yandex.ru/i/SXzq6MZN11Aw_Q"
   ]
 ];
 
@@ -332,5 +348,12 @@ export const projects: Project[] = [
     size: "5×5 м",
     material: "Оцилиндрованное бревно",
     location: "п. Усть-Качка, Пермский край"
+  },
+  {
+    img: "https://disk.yandex.ru/i/6rYxX4e_pKGv5g",
+    title: "Баня из бревна 6×5",
+    size: "6×5 м",
+    material: "Рубленное бревно",
+    location: "п. Троица, Пермский край"
   }
 ];
