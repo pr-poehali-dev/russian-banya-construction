@@ -260,20 +260,20 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/460.jpg"
   ],
   [
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/71a1951e-68fa-413b-b5d5-0c182e1147c6.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/8ca85e72-ce27-4071-bd55-71adaaabad74.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/d8fc037b-7929-4879-a6ad-239cd1cb79a1.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/7bb635e1-2ea7-4de5-991e-972c15509f7a.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/87f5b4f6-9558-4991-8fb4-4df44898e315.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/91d7d6fa-0f7c-45ab-b78c-3cc483d582dc.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/c078c0d7-7c12-4673-b41d-578f255feccc.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/4b504385-7f7d-421d-9b40-3b01cd3e5d1d.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/1b3acec1-48e8-4f35-83c8-1a532e578626.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/9e6cf35c-2a3b-4764-8199-0e339553411a.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/9be59509-bf7f-4b83-85f3-bbef31116ba0.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/ba5d4552-c623-4cbc-ba51-76ecebf1867e.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/0928858e-bc58-4791-ac1c-d0976ba0e29c.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/5ae46ff3-d81f-45d5-815b-30fffdb19d4a.jpg"
+    "https://i.ibb.co/fzmVykdy/600.jpg",
+    "https://i.ibb.co/qFDTtjpn/601.jpg",
+    "https://i.ibb.co/BHFbSXX9/602.jpg",
+    "https://i.ibb.co/WvXF4c1P/603.jpg",
+    "https://i.ibb.co/QBnZmcW/604.jpg",
+    "https://i.ibb.co/7x9S5xqK/605.jpg",
+    "https://i.ibb.co/27PWnNZN/606.jpg",
+    "https://i.ibb.co/HTNXhj5c/607.jpg",
+    "https://i.ibb.co/hzx6715/608.jpg",
+    "https://i.ibb.co/3mctGhsF/609.jpg",
+    "https://i.ibb.co/Q3XyZBCB/610.jpg",
+    "https://i.ibb.co/YT0KJ7rz/611.jpg",
+    "https://i.ibb.co/ns41ZC2N/612.jpg",
+    "https://i.ibb.co/RwcfTmg/613.jpg"
   ]
 ];
 
@@ -350,7 +350,7 @@ export const projects: Project[] = [
     location: "п. Усть-Качка, Пермский край"
   },
   {
-    img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/71a1951e-68fa-413b-b5d5-0c182e1147c6.jpg",
+    img: "https://i.ibb.co/fzmVykdy/600.jpg",
     title: "Баня из бревна 6×5",
     size: "6×5 м",
     material: "Рубленное бревно",
