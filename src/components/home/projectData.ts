@@ -276,6 +276,13 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/611.jpg",
     "https://cdn.poehali.dev/files/612.jpg",
     "https://cdn.poehali.dev/files/613.jpg"
+  ],
+  [
+    "https://cdn.poehali.dev/files/500.jpg",
+    "https://cdn.poehali.dev/files/501.jpg",
+    "https://cdn.poehali.dev/files/502.jpg",
+    "https://cdn.poehali.dev/files/503.jpg",
+    "https://cdn.poehali.dev/files/504.jpg"
   ]
 ];
 
@@ -357,5 +364,12 @@ export const projects: Project[] = [
     size: "6×5 м",
     material: "Рубленное бревно",
     location: "п. Троица, Пермский край"
+  },
+  {
+    img: "https://cdn.poehali.dev/files/500.jpg",
+    title: "Баня из бревна 6×8",
+    size: "6×8 м",
+    material: "Оцилиндрованное бревно",
+    location: "д. Налимиха, Пермский край"
   }
 ];
