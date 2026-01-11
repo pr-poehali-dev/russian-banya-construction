@@ -67,7 +67,7 @@ const GallerySection = ({ onProjectClick }: GallerySectionProps) => {
           <div className="flex justify-center mt-12">
             <button 
               onClick={showMore}
-              className="text-lg font-semibold text-primary hover:text-primary/80 transition-all duration-300 hover:scale-110 flex items-center gap-2 group"
+              className="text-lg font-semibold hover:text-primary/80 transition-all duration-300 hover:scale-110 flex items-center gap-2 group text-[#000000]"
             >
               Смотреть еще выполненные проекты
               <Icon name="ChevronDown" size={20} className="group-hover:translate-y-1 transition-transform" />
