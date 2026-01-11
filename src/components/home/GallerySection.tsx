@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { projects, projectGalleries } from "./projectData";
 
@@ -66,11 +65,13 @@ const GallerySection = ({ onProjectClick }: GallerySectionProps) => {
         </div>
         {hasMore && (
           <div className="flex justify-center mt-12">
-            <Button 
+            <button 
               onClick={showMore}
-              size="lg"
-              className="px-8"
-            >Смотреть еще выполненные проекты</Button>
+              className="text-lg font-semibold text-primary hover:text-primary/80 transition-all duration-300 hover:scale-110 flex items-center gap-2 group"
+            >
+              Смотреть еще выполненные проекты
+              <Icon name="ChevronDown" size={20} className="group-hover:translate-y-1 transition-transform" />
+            </button>
           </div>
         )}
       </div>
