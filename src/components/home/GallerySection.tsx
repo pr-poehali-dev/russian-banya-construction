@@ -70,10 +70,7 @@ const GallerySection = ({ onProjectClick }: GallerySectionProps) => {
               onClick={showMore}
               size="lg"
               className="px-8"
-            >
-              Смотреть еще
-              <Icon name="ChevronDown" size={20} className="ml-2" />
-            </Button>
+            >Смотреть еще выполненные проекты</Button>
           </div>
         )}
       </div>
