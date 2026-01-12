@@ -235,18 +235,30 @@ const Calculator = () => {
                     />
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="partition" className="text-base font-semibold">
-                    Длина перегородок (м)
-                  </Label>
-                  <Input
-                    id="partition"
-                    type="number"
-                    placeholder="0"
-                    value={partitionLength}
-                    onChange={(e) => setPartitionLength(e.target.value)}
-                    className="text-lg"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="partition" className="text-base font-semibold">
+                      Длина перегородок (м)
+                    </Label>
+                    <Input
+                      id="partition"
+                      type="number"
+                      placeholder="0"
+                      value={partitionLength}
+                      onChange={(e) => setPartitionLength(e.target.value)}
+                      className="text-lg"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-base font-semibold">
+                      Периметр (м)
+                    </Label>
+                    <div className="h-11 flex items-center justify-center bg-gray-100 rounded-md border text-lg font-semibold text-gray-700">
+                      {length && width ? (
+                        (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
+                      ).toFixed(2) : '—'}
+                    </div>
+                  </div>
                 </div>
               </div>
 
