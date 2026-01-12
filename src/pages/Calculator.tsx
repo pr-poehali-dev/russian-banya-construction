@@ -45,10 +45,9 @@ const Calculator = () => {
         items: [
           { name: 'Свая винтовая 89/6,5/300(2,5м)', unit: 'шт', quantity: pilesCount, price: 3000, total: pilesCount * 3000 },
           { name: 'Оголовки для свай съемные(150х150)мм', unit: 'шт', quantity: pilesCount, price: 600, total: pilesCount * 600 },
-          { name: 'Услуги ямобура', unit: 'ч', quantity: 4, price: 1800, total: 7200 },
-          { name: 'Монтаж свай', unit: 'шт', quantity: pilesCount, price: 3000, total: pilesCount * 3000 },
+          { name: 'Монтаж свай', unit: 'шт', quantity: pilesCount, price: 4000, total: pilesCount * 4000 },
         ],
-        subtotal: pilesCount * 6600 + 7200
+        subtotal: pilesCount * 7600
       });
     }
 
