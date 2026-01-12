@@ -30,7 +30,8 @@ const Calculator = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
-      <div className="container max-w-2xl mx-auto">
+      <div className="container max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8">
         <Card className="shadow-xl">
           <CardHeader className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
             <CardTitle className="text-3xl text-center">Калькулятор стоимости бани</CardTitle>
@@ -118,6 +119,26 @@ const Calculator = () => {
             )}
           </CardContent>
         </Card>
+
+        {/* Пример сметы */}
+        <Card className="shadow-xl lg:sticky lg:top-8 h-fit">
+          <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+            <CardTitle className="text-2xl text-center">Пример детальной сметы</CardTitle>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <div className="overflow-x-auto">
+              <img 
+                src="https://cdn.poehali.dev/files/2026-01-12_15-33-04.png" 
+                alt="Пример сметы на строительство бани"
+                className="w-full rounded-lg border"
+              />
+            </div>
+            <p className="text-sm text-gray-600 mt-4 text-center">
+              Детализированная смета поможет понять из чего складывается итоговая стоимость
+            </p>
+          </CardContent>
+        </Card>
+      </div>
       </div>
     </div>
   );
