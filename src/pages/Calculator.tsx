@@ -34,12 +34,12 @@ const Calculator = () => {
     const w = parseFloat(width);
     const pl = partitionLength ? parseFloat(partitionLength) : 0;
     const area = l * w;
-    const perimeter = 2 * (l + w);
+    const perimeter = 2 * (l + w) + pl;
 
     const sections: EstimateSection[] = [];
 
     if (foundation === 'сваи') {
-      const pilesCount = Math.ceil(perimeter / 1.5);
+      const pilesCount = Math.ceil(perimeter / 2);
       sections.push({
         title: 'Фундамент из винтовых свай',
         items: [
