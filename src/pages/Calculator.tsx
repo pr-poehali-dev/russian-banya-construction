@@ -38,45 +38,45 @@ const Calculator = () => {
 
     const sections: EstimateSection[] = [];
 
-    if (foundation === 'сваи') {
-      const pilesCount = Math.ceil(perimeter / 2);
-      sections.push({
-        title: 'Фундамент из винтовых свай',
-        items: [
-          { name: 'Свая винтовая 89/6,5/300(2,5м)', unit: 'шт', quantity: pilesCount, price: 3000, total: pilesCount * 3000 },
-          { name: 'Оголовки для свай съемные(150х150)мм', unit: 'шт', quantity: pilesCount, price: 600, total: pilesCount * 600 },
-          { name: 'Монтаж свай', unit: 'шт', quantity: pilesCount, price: 4000, total: pilesCount * 4000 },
-        ],
-        subtotal: pilesCount * 7600
-      });
-    }
+    // Винтовые сваи - всегда показываем, но считаем только если выбраны
+    const pilesCount = Math.ceil(perimeter / 2);
+    const isPilesSelected = foundation === 'сваи';
+    sections.push({
+      title: 'Фундамент из винтовых свай',
+      items: [
+        { name: 'Свая винтовая 89/6,5/300(2,5м)', unit: 'шт', quantity: pilesCount, price: 3000, total: isPilesSelected ? pilesCount * 3000 : 0 },
+        { name: 'Оголовки для свай съемные(150х150)мм', unit: 'шт', quantity: pilesCount, price: 600, total: isPilesSelected ? pilesCount * 600 : 0 },
+        { name: 'Монтаж свай', unit: 'шт', quantity: pilesCount, price: 4000, total: isPilesSelected ? pilesCount * 4000 : 0 },
+      ],
+      subtotal: isPilesSelected ? pilesCount * 7600 : 0
+    });
 
-    if (foundation === 'ленточный') {
-      const concrete = perimeter * 0.6 * 0.5;
-      sections.push({
-        title: 'Фундамент ленточный, с буронабивными сваями',
-        items: [
-          { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: parseFloat(concrete.toFixed(2)), price: 8100, total: Math.round(concrete * 8100) },
-          { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: 5, price: 1000, total: 5000 },
-          { name: 'Арматура металлическая(10мм)', unit: 'п.м', quantity: 200, price: 100, total: 20000 },
-          { name: 'Арматура металлическая(8мм)', unit: 'п.м', quantity: 200, price: 60, total: 12000 },
-          { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: 1, price: 500, total: 500 },
-          { name: 'Доска 1-й сорт(50х200)мм', unit: 'м3', quantity: 2.52, price: 19500, total: 49140 },
-          { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 14, price: 200, total: 2800 },
-          { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 400, price: 3, total: 1200 },
-          { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 40, price: 70, total: 2800 },
-          { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 1000, price: 0.2, total: 200 },
-          { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 200, price: 10, total: 2000 },
-          { name: 'Труба пластиковая(проходы)160мм', unit: 'м', quantity: 1, price: 1100, total: 1100 },
-          { name: 'Труба пластиковая(продухи)110мм', unit: 'м', quantity: 2, price: 950, total: 1900 },
-          { name: 'Услуги ямобура', unit: 'ч', quantity: 4, price: 1800, total: 6000 },
-          { name: 'Услуги экскаватора', unit: 'ч', quantity: 4, price: 1800, total: 6000 },
-          { name: 'Монтаж фундамента', unit: 'м3', quantity: parseFloat(concrete.toFixed(2)), price: 10000, total: Math.round(concrete * 10000) },
-        ],
-        subtotal: 0
-      });
-      sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
-    }
+    // Ленточный фундамент - всегда показываем, но считаем только если выбран
+    const concrete = perimeter * 0.6 * 0.5;
+    const isStripSelected = foundation === 'ленточный';
+    sections.push({
+      title: 'Фундамент ленточный, с буронабивными сваями',
+      items: [
+        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: parseFloat(concrete.toFixed(2)), price: 8100, total: isStripSelected ? Math.round(concrete * 8100) : 0 },
+        { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: 5, price: 1000, total: isStripSelected ? 5000 : 0 },
+        { name: 'Арматура металлическая(10мм)', unit: 'п.м', quantity: 200, price: 100, total: isStripSelected ? 20000 : 0 },
+        { name: 'Арматура металлическая(8мм)', unit: 'п.м', quantity: 200, price: 60, total: isStripSelected ? 12000 : 0 },
+        { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: 1, price: 500, total: isStripSelected ? 500 : 0 },
+        { name: 'Доска 1-й сорт(50х200)мм', unit: 'м3', quantity: 2.52, price: 19500, total: isStripSelected ? 49140 : 0 },
+        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 14, price: 200, total: isStripSelected ? 2800 : 0 },
+        { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 400, price: 3, total: isStripSelected ? 1200 : 0 },
+        { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 40, price: 70, total: isStripSelected ? 2800 : 0 },
+        { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 1000, price: 0.2, total: isStripSelected ? 200 : 0 },
+        { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 200, price: 10, total: isStripSelected ? 2000 : 0 },
+        { name: 'Труба пластиковая(проходы)160мм', unit: 'м', quantity: 1, price: 1100, total: isStripSelected ? 1100 : 0 },
+        { name: 'Труба пластиковая(продухи)110мм', unit: 'м', quantity: 2, price: 950, total: isStripSelected ? 1900 : 0 },
+        { name: 'Услуги ямобура', unit: 'ч', quantity: 4, price: 1800, total: isStripSelected ? 6000 : 0 },
+        { name: 'Услуги экскаватора', unit: 'ч', quantity: 4, price: 1800, total: isStripSelected ? 6000 : 0 },
+        { name: 'Монтаж фундамента', unit: 'м3', quantity: parseFloat(concrete.toFixed(2)), price: 10000, total: isStripSelected ? Math.round(concrete * 10000) : 0 },
+      ],
+      subtotal: 0
+    });
+    sections[sections.length - 1].subtotal = isStripSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
 
     sections.push({
       title: 'Обвязка и черновой пол',
@@ -303,11 +303,11 @@ const Calculator = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {section.items.filter(item => item.quantity > 0).map((item, itemIdx) => (
-                              <tr key={itemIdx} className="border-t hover:bg-gray-50">
+                            {section.items.map((item, itemIdx) => (
+                              <tr key={itemIdx} className={`border-t hover:bg-gray-50 ${item.total === 0 ? 'opacity-40' : ''}`}>
                                 <td className="p-2">{item.name}</td>
                                 <td className="text-center p-2">{item.unit}</td>
-                                <td className="text-center p-2">{item.quantity.toFixed(2)}</td>
+                                <td className="text-center p-2">{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
                                 <td className="text-right p-2">{item.price.toLocaleString('ru-RU')}</td>
                                 <td className="text-right p-2 font-semibold">{item.total.toLocaleString('ru-RU')}</td>
                               </tr>
