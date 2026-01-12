@@ -23,6 +23,7 @@ const Calculator = () => {
   const [foundation, setFoundation] = useState<string>('');
   const [length, setLength] = useState<string>('');
   const [width, setWidth] = useState<string>('');
+  const [partitionLength, setPartitionLength] = useState<string>('');
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -31,6 +32,7 @@ const Calculator = () => {
 
     const l = parseFloat(length);
     const w = parseFloat(width);
+    const pl = partitionLength ? parseFloat(partitionLength) : 0;
     const area = l * w;
     const perimeter = 2 * (l + w);
 
@@ -91,11 +93,12 @@ const Calculator = () => {
     });
     sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
 
+    const partitionVolume = pl > 0 ? parseFloat((pl * 0.15 * 2.5).toFixed(2)) : 0;
     sections.push({
       title: 'Сруб из бревна',
       items: [
         { name: 'Брус основного сруба', unit: 'м3', quantity: parseFloat((area * 1.2).toFixed(2)), price: 22000, total: Math.round(area * 1.2 * 22000) },
-        { name: 'Брус перегородки', unit: 'м3', quantity: 0, price: 0, total: 0 },
+        { name: 'Брус перегородки', unit: 'м3', quantity: partitionVolume, price: 22000, total: Math.round(partitionVolume * 22000) },
         { name: 'Брус фронтонов', unit: 'м3', quantity: 0, price: 19500, total: 0 },
       ],
       subtotal: 0
@@ -168,7 +171,7 @@ const Calculator = () => {
     if (foundation && length && width) {
       calculateEstimate();
     }
-  }, [foundation, length, width]);
+  }, [foundation, length, width, partitionLength]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
@@ -203,30 +206,45 @@ const Calculator = () => {
                 </RadioGroup>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="length" className="text-base font-semibold">
-                    Длина (м)
-                  </Label>
-                  <Input
-                    id="length"
-                    type="number"
-                    placeholder="6"
-                    value={length}
-                    onChange={(e) => setLength(e.target.value)}
-                    className="text-lg"
-                  />
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="length" className="text-base font-semibold">
+                      Длина (м)
+                    </Label>
+                    <Input
+                      id="length"
+                      type="number"
+                      placeholder="6"
+                      value={length}
+                      onChange={(e) => setLength(e.target.value)}
+                      className="text-lg"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="width" className="text-base font-semibold">
+                      Ширина (м)
+                    </Label>
+                    <Input
+                      id="width"
+                      type="number"
+                      placeholder="4"
+                      value={width}
+                      onChange={(e) => setWidth(e.target.value)}
+                      className="text-lg"
+                    />
+                  </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="width" className="text-base font-semibold">
-                    Ширина (м)
+                  <Label htmlFor="partition" className="text-base font-semibold">
+                    Длина перегородок (м)
                   </Label>
                   <Input
-                    id="width"
+                    id="partition"
                     type="number"
-                    placeholder="4"
-                    value={width}
-                    onChange={(e) => setWidth(e.target.value)}
+                    placeholder="0"
+                    value={partitionLength}
+                    onChange={(e) => setPartitionLength(e.target.value)}
                     className="text-lg"
                   />
                 </div>
