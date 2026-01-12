@@ -120,24 +120,36 @@ const Calculator = () => {
           </CardContent>
         </Card>
 
-        {/* Пример сметы */}
-        <Card className="shadow-xl lg:sticky lg:top-8 h-fit">
-          <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-            <CardTitle className="text-2xl text-center">Пример детальной сметы</CardTitle>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <div className="overflow-x-auto">
-              <img 
-                src="https://cdn.poehali.dev/files/2026-01-12_15-33-04.png" 
-                alt="Пример сметы на строительство бани"
-                className="w-full rounded-lg border"
-              />
-            </div>
-            <p className="text-sm text-gray-600 mt-4 text-center">
-              Детализированная смета поможет понять из чего складывается итоговая стоимость
-            </p>
-          </CardContent>
-        </Card>
+        {/* Пример сметы - показывается только при выборе фундамента */}
+        {foundation && foundation !== 'есть' && (
+          <Card className="shadow-xl lg:sticky lg:top-8 h-fit">
+            <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+              <CardTitle className="text-2xl text-center">
+                {foundation === 'ленточный' ? 'Смета: Ленточный фундамент' : 'Смета: Винтовые сваи'}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-6">
+              <div className="overflow-x-auto">
+                {foundation === 'ленточный' ? (
+                  <img 
+                    src="https://cdn.poehali.dev/files/2026-01-12_15-33-04.png" 
+                    alt="Смета на ленточный фундамент"
+                    className="w-full rounded-lg border"
+                  />
+                ) : (
+                  <img 
+                    src="https://cdn.poehali.dev/files/2026-01-12_15-33-04.png" 
+                    alt="Смета на винтовые сваи"
+                    className="w-full rounded-lg border"
+                  />
+                )}
+              </div>
+              <p className="text-sm text-gray-600 mt-4 text-center">
+                Детализированная смета поможет понять из чего складывается итоговая стоимость
+              </p>
+            </CardContent>
+          </Card>
+        )}
       </div>
       </div>
     </div>
