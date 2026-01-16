@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 
 interface EstimateItem {
   name: string;
@@ -30,16 +29,9 @@ const Calculator = () => {
   const calculateEstimate = () => {
     if (!foundation || !length || !width) return;
 
-    const l = parseFloat(length);
-    const w = parseFloat(width);
-    const pl = partitionLength ? parseFloat(partitionLength) : 0;
-    const area = l * w;
-    const perimeter = 2 * (l + w) + pl;
-
     const sections: EstimateSection[] = [];
 
     // Винтовые сваи - всегда показываем, но считаем только если выбраны
-    const pilesCount = 12;
     const isPilesSelected = foundation === 'сваи';
     sections.push({
       title: 'Фундамент из винтовых свай',
@@ -65,12 +57,14 @@ const Calculator = () => {
         { name: 'Рубероид РПП 350', unit: 'м2', quantity: 30, price: 65, total: 1950 },
         { name: 'Скобы строительные(8x250)', unit: 'шт', quantity: 6, price: 60, total: 360 },
         { name: 'Монтаж обвязки', unit: 'м3', quantity: 0.6, price: 10000, total: 6000 },
-        { name: 'Брус для сруба', unit: 'м3', quantity: 17.16, price: 19500, total: 334620 },
-        { name: 'Джут(150мм)', unit: 'п.м', quantity: 600, price: 25, total: 15000 },
-        { name: 'Скобы для степлера', unit: 'шт', quantity: 1000, price: 0.2, total: 200 },
-        { name: 'Шкант для стропил', unit: 'шт', quantity: 36, price: 60, total: 2160 },
+        { name: 'Брус для лаг(100х150)мм', unit: 'м3', quantity: 1.62, price: 19500, total: 31590 },
+        { name: 'Доска для чернового пола(25х150)мм', unit: 'м3', quantity: 0.9, price: 19500, total: 17550 },
+        { name: 'Антисептик "Фенелакс"(-15С)', unit: 'л', quantity: 5, price: 130, total: 650 },
+        { name: 'Саморезы черные', unit: 'шт', quantity: 350, price: 3, total: 1050 },
+        { name: 'Гвозди', unit: 'кг', quantity: 3, price: 200, total: 600 },
+        { name: 'Монтаж лаг и чернового пола', unit: 'услуга', quantity: 1, price: 10800, total: 10800 },
       ],
-      subtotal: 364100
+      subtotal: 82250
     });
 
     // Ленточный фундамент - всегда показываем, но считаем только если выбран
@@ -105,80 +99,12 @@ const Calculator = () => {
     sections.push({
       title: 'Сруб из бревна',
       items: [
-        { name: 'Брус для сруба', unit: 'м3', quantity: 21.07, price: 22000, total: 463540 },
+        { name: 'Брус для сруба', unit: 'м3', quantity: 17.16, price: 19500, total: 334620 },
         { name: 'Джут(150мм)', unit: 'п.м', quantity: 600, price: 25, total: 15000 },
-        { name: 'Скобы для степлера', unit: 'шт', quantity: 5000, price: 0.9, total: 4500 },
-        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 500, price: 9, total: 4500 },
-        { name: 'Анкер для бруса(20х750)мм', unit: 'шт', quantity: 25, price: 120, total: 3000 },
-        { name: 'Монтаж сруба', unit: 'м3', quantity: 21.07, price: 10000, total: 210700 },
+        { name: 'Скобы для степлера', unit: 'шт', quantity: 1000, price: 0.2, total: 200 },
+        { name: 'Шкант для стропил', unit: 'шт', quantity: 36, price: 60, total: 2160 },
       ],
-      subtotal: 700360
-    });
-
-    // Кровля
-    sections.push({
-      title: 'Кровля',
-      items: [
-        { name: 'Доска для лаг, балок(100х150)мм', unit: 'м3', quantity: 1.62, price: 19500, total: 31590 },
-        { name: 'Доска для стропил(50х150)мм', unit: 'м3', quantity: 1.7, price: 19500, total: 33150 },
-        { name: 'Доска для обрешетки(40х100)мм', unit: 'м3', quantity: 1.7, price: 19500, total: 33150 },
-        { name: 'Пленка гидроветрозащитная', unit: 'м2', quantity: 100, price: 150, total: 15000 },
-        { name: 'Планка гидроизоляционная', unit: 'м2', quantity: 100, price: 150, total: 15000 },
-        { name: 'Планка фронтонная(вет.планка)', unit: 'п.м', quantity: 8, price: 500, total: 4000 },
-        { name: 'Планка коньковая(конёк)НС35', unit: 'п.м', quantity: 6, price: 500, total: 3000 },
-        { name: 'Шайба уплотнительная оцинкованная(М10)', unit: 'шт', quantity: 30, price: 6, total: 180 },
-        { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: 90, price: 30, total: 2700 },
-        { name: 'Кровельный саморез(4,8х35)', unit: 'шт', quantity: 240, price: 6, total: 1440 },
-        { name: 'Монтаж стропильной системы', unit: 'м2', quantity: 80, price: 3000, total: 240000 },
-        { name: 'Доставка материалов', unit: 'услуга', quantity: 1, price: 84750, total: 84750 },
-      ],
-      subtotal: 702464
-    });
-
-    // Полы
-    sections.push({
-      title: 'Полы',
-      items: [
-        { name: 'Вагонка(А1х100)мм', unit: 'м2', quantity: 16, price: 200, total: 3200 },
-        { name: 'Металлочерепица', unit: 'м2', quantity: 80, price: 750, total: 60000 },
-        { name: 'Планка карнизная', unit: 'п.м', quantity: 16, price: 240, total: 3840 },
-        { name: 'Ветровая планка', unit: 'п.м', quantity: 20, price: 240, total: 4800 },
-        { name: 'Кровельные саморезы(4,8х35)', unit: 'шт', quantity: 15, price: 240, total: 3600 },
-        { name: 'Снегозадержатель сплошной(3,3м)', unit: 'шт', quantity: 2, price: 2450, total: 4900 },
-        { name: 'Кровельные саморезы(4,8х35)', unit: 'шт', quantity: 240, price: 6, total: 1440 },
-        { name: 'Монтаж кровли(цвет)', unit: 'м2', quantity: 80, price: 240, total: 19200 },
-      ],
-      subtotal: 29590
-    });
-
-    // Отделка
-    sections.push({
-      title: 'Отделка',
-      items: [
-        { name: 'Вагонка(А1х100)мм', unit: 'м2', quantity: 3000, price: 240, total: 720000 },
-        { name: 'Доска полов 1-й сорт(28х100)мм', unit: 'м2', quantity: 80, price: 1050, total: 84000 },
-        { name: 'Балясина резная 80х80х90см', unit: 'шт', quantity: 17, price: 350, total: 5950 },
-        { name: 'Ступень лиственница(40х300)мм', unit: 'м3', quantity: 1.2, price: 35000, total: 42000 },
-        { name: 'Опорный столб резной №1 90х90х270см', unit: 'шт', quantity: 2, price: 3800, total: 7600 },
-        { name: 'Перила/поручень лиственница(60х100)мм', unit: 'м3', quantity: 0.24, price: 45000, total: 10800 },
-        { name: 'Монтаж лестницы', unit: 'м2', quantity: 2, price: 4500, total: 9000 },
-      ],
-      subtotal: 549690
-    });
-
-    // Дополнительно
-    sections.push({
-      title: 'Дополнительно',
-      items: [
-        { name: 'Дверь металлическая(900х2100)мм', unit: 'шт', quantity: 1, price: 3000, total: 3000 },
-        { name: 'Ручка(А1х100)мм', unit: 'шт', quantity: 16, price: 200, total: 3200 },
-        { name: 'Металлочерепица', unit: 'м2', quantity: 80, price: 750, total: 60000 },
-        { name: 'Стеклопакет(6х3,5мм)', unit: 'шт', quantity: 6, price: 2500, total: 15000 },
-        { name: 'Монтаж окон', unit: 'шт', quantity: 6, price: 500, total: 3000 },
-        { name: 'Обсадная коробка(обл150х150)мм', unit: 'к-т', quantity: 6, price: 2500, total: 15000 },
-        { name: 'Коробка для двери(обл.90х200)мм', unit: 'шт', quantity: 1, price: 1500, total: 1500 },
-      ],
-      subtotal: 84750
+      subtotal: 351980
     });
 
     const total = sections.reduce((sum, section) => sum + section.subtotal, 0);
