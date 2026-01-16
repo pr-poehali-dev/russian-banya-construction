@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 interface EstimateItem {
   name: string;
@@ -29,83 +30,135 @@ const Calculator = () => {
   const calculateEstimate = () => {
     if (!foundation || !length || !width) return;
 
+    const l = parseFloat(length);
+    const w = parseFloat(width);
+    const pl = partitionLength ? parseFloat(partitionLength) : 0;
+    const area = l * w;
+    const perimeter = 2 * (l + w) + pl;
+
     const sections: EstimateSection[] = [];
 
     // Винтовые сваи - всегда показываем, но считаем только если выбраны
+    const pilesCount = Math.ceil(perimeter / 2);
     const isPilesSelected = foundation === 'сваи';
     sections.push({
       title: 'Фундамент из винтовых свай',
       items: [
-        { name: 'Свая винтовая 89/6,5/300(2,5м)', unit: 'шт', quantity: 12, price: 3000, total: isPilesSelected ? 36000 : 0 },
-        { name: 'Оголовки для свай съемные(150х150)мм', unit: 'шт', quantity: 12, price: 600, total: isPilesSelected ? 7200 : 0 },
-        { name: 'Брус для обвязки', unit: 'шт', quantity: 16, price: 4000, total: isPilesSelected ? 64000 : 0 },
-        { name: 'Рубероид РПП 350', unit: 'м2', quantity: 15, price: 65, total: isPilesSelected ? 975 : 0 },
-        { name: 'Антисептик "Фенелакс"(-15С)', unit: 'л', quantity: 5, price: 130, total: isPilesSelected ? 650 : 0 },
-        { name: 'Саморезы черные', unit: 'шт', quantity: 350, price: 3, total: isPilesSelected ? 1050 : 0 },
-        { name: 'Гвозди', unit: 'кг', quantity: 3, price: 200, total: isPilesSelected ? 600 : 0 },
-        { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 100, price: 10, total: isPilesSelected ? 1000 : 0 },
-        { name: 'Монтаж обвязки', unit: 'услуга', quantity: 1, price: 3205, total: isPilesSelected ? 3205 : 0 },
+        { name: 'Свая винтовая 89/6,5/300(2,5м)', unit: 'шт', quantity: pilesCount, price: 3000, total: isPilesSelected ? pilesCount * 3000 : 0 },
+        { name: 'Оголовки для свай съемные(150х150)мм', unit: 'шт', quantity: pilesCount, price: 600, total: isPilesSelected ? pilesCount * 600 : 0 },
+        { name: 'Монтаж свай', unit: 'шт', quantity: pilesCount, price: 4000, total: isPilesSelected ? pilesCount * 4000 : 0 },
       ],
-      subtotal: isPilesSelected ? 114680 : 0
-    });
-
-    // Обвязка и черновой пол - всегда показываем
-    sections.push({
-      title: 'Обвязка и черновой пол',
-      items: [
-        { name: 'Обвязочный брус(100х200х6000)мм', unit: 'м3', quantity: 0.6, price: 19500, total: 11700 },
-        { name: 'Рубероид РПП 350', unit: 'м2', quantity: 30, price: 65, total: 1950 },
-        { name: 'Скобы строительные(8x250)', unit: 'шт', quantity: 6, price: 60, total: 360 },
-        { name: 'Монтаж обвязки', unit: 'м3', quantity: 0.6, price: 10000, total: 6000 },
-        { name: 'Брус для лаг(100х150)мм', unit: 'м3', quantity: 1.62, price: 19500, total: 31590 },
-        { name: 'Доска для чернового пола(25х150)мм', unit: 'м3', quantity: 0.9, price: 19500, total: 17550 },
-        { name: 'Антисептик "Фенелакс"(-15С)', unit: 'л', quantity: 5, price: 130, total: 650 },
-        { name: 'Саморезы черные', unit: 'шт', quantity: 350, price: 3, total: 1050 },
-        { name: 'Гвозди', unit: 'кг', quantity: 3, price: 200, total: 600 },
-        { name: 'Монтаж лаг и чернового пола', unit: 'услуга', quantity: 1, price: 10800, total: 10800 },
-      ],
-      subtotal: 82250
+      subtotal: isPilesSelected ? pilesCount * 7600 : 0
     });
 
     // Ленточный фундамент - всегда показываем, но считаем только если выбран
+    const concrete = perimeter * 0.6 * 0.5;
     const isStripSelected = foundation === 'ленточный';
     sections.push({
       title: 'Фундамент ленточный, с буронабивными сваями',
       items: [
-        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: 12, price: 8100, total: isStripSelected ? 97200 : 0 },
+        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: parseFloat(concrete.toFixed(2)), price: 8100, total: isStripSelected ? Math.round(concrete * 8100) : 0 },
         { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: 5, price: 1000, total: isStripSelected ? 5000 : 0 },
-        { name: 'Арматура металлическая(А480)', unit: 'кг', quantity: 7, price: 50, total: isStripSelected ? 350 : 0 },
-        { name: 'Арматура металлическая(А240)', unit: 'кг', quantity: 4, price: 50, total: isStripSelected ? 200 : 0 },
-        { name: 'Доска для опалубки 1-й сорт(50х200х6000)мм', unit: 'м3', quantity: 2.52, price: 19500, total: isStripSelected ? 49140 : 0 },
-        { name: 'Гвозди для опалубки и др.(100х4)мм', unit: 'кг', quantity: 14, price: 200, total: isStripSelected ? 2800 : 0 },
-        { name: 'Пленка под опалубку 200мкм', unit: 'м2', quantity: 200, price: 70, total: isStripSelected ? 14000 : 0 },
-        { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 600, price: 3, total: isStripSelected ? 1800 : 0 },
-        { name: 'Пленка полиэтиленовая 200мкм', unit: 'м2', quantity: 50, price: 70, total: isStripSelected ? 3500 : 0 },
-        { name: 'Скобы для степлера', unit: 'шт', quantity: 600, price: 0.2, total: isStripSelected ? 120 : 0 },
-        { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 300, price: 10, total: isStripSelected ? 3000 : 0 },
-        { name: 'Монтаж фундамента, буронабивные сваи', unit: 'услуга', quantity: 1, price: 120000, total: isStripSelected ? 120000 : 0 },
-        { name: 'Работы ямобуром', unit: 'услуга', quantity: 1, price: 30000, total: isStripSelected ? 30000 : 0 },
-        { name: 'Работы экскаватором', unit: 'ч', quantity: 3, price: 2000, total: isStripSelected ? 6000 : 0 },
-        { name: 'Обвязочный борт(100х200х6000)мм', unit: 'м3', quantity: 0.6, price: 19500, total: isStripSelected ? 11700 : 0 },
-        { name: 'Рубероид РПП', unit: 'м2', quantity: 30, price: 65, total: isStripSelected ? 1950 : 0 },
-        { name: 'Антисептик зимний', unit: 'л', quantity: 1, price: 150, total: isStripSelected ? 150 : 0 },
-        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 6, price: 60, total: isStripSelected ? 360 : 0 },
-        { name: 'Монтаж обвязки', unit: 'м3', quantity: 0.6, price: 10000, total: isStripSelected ? 6000 : 0 },
+        { name: 'Арматура металлическая(10мм)', unit: 'п.м', quantity: 200, price: 100, total: isStripSelected ? 20000 : 0 },
+        { name: 'Арматура металлическая(8мм)', unit: 'п.м', quantity: 200, price: 60, total: isStripSelected ? 12000 : 0 },
+        { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: 1, price: 500, total: isStripSelected ? 500 : 0 },
+        { name: 'Доска 1-й сорт(50х200)мм', unit: 'м3', quantity: 2.52, price: 19500, total: isStripSelected ? 49140 : 0 },
+        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 14, price: 200, total: isStripSelected ? 2800 : 0 },
+        { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 400, price: 3, total: isStripSelected ? 1200 : 0 },
+        { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 40, price: 70, total: isStripSelected ? 2800 : 0 },
+        { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 1000, price: 0.2, total: isStripSelected ? 200 : 0 },
+        { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 200, price: 10, total: isStripSelected ? 2000 : 0 },
+        { name: 'Труба пластиковая(проходы)160мм', unit: 'м', quantity: 1, price: 1100, total: isStripSelected ? 1100 : 0 },
+        { name: 'Труба пластиковая(продухи)110мм', unit: 'м', quantity: 2, price: 950, total: isStripSelected ? 1900 : 0 },
+        { name: 'Услуги ямобура', unit: 'ч', quantity: 4, price: 1800, total: isStripSelected ? 6000 : 0 },
+        { name: 'Услуги экскаватора', unit: 'ч', quantity: 4, price: 1800, total: isStripSelected ? 6000 : 0 },
+        { name: 'Монтаж фундамента', unit: 'м3', quantity: parseFloat(concrete.toFixed(2)), price: 10000, total: isStripSelected ? Math.round(concrete * 10000) : 0 },
       ],
-      subtotal: isStripSelected ? 353270 : 0
+      subtotal: 0
     });
+    sections[sections.length - 1].subtotal = isStripSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
 
-    // Сруб из бревна
+    sections.push({
+      title: 'Обвязка и черновой пол',
+      items: [
+        { name: 'Обвязочный брус(100х200)мм', unit: 'м3', quantity: 0.48, price: 19500, total: 9360 },
+        { name: 'Рубероид РПП 300', unit: 'м2', quantity: 20, price: 65, total: 1300 },
+        { name: 'Антисептик зимний "Фенелакс"(-15С)', unit: 'л', quantity: 5, price: 130, total: 650 },
+        { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: Math.ceil(perimeter * 2), price: 4, total: Math.ceil(perimeter * 2) * 4 },
+        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 6, price: 60, total: 360 },
+        { name: 'Монтаж обвязки', unit: 'м3', quantity: 0.48, price: 7500, total: 3600 },
+      ],
+      subtotal: 0
+    });
+    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+
+    const partitionVolume = pl > 0 ? parseFloat((pl * 0.15 * 2.5).toFixed(2)) : 0;
     sections.push({
       title: 'Сруб из бревна',
       items: [
-        { name: 'Брус для сруба', unit: 'м3', quantity: 17.16, price: 19500, total: 334620 },
-        { name: 'Джут(150мм)', unit: 'п.м', quantity: 600, price: 25, total: 15000 },
-        { name: 'Скобы для степлера', unit: 'шт', quantity: 1000, price: 0.2, total: 200 },
-        { name: 'Шкант для стропил', unit: 'шт', quantity: 36, price: 60, total: 2160 },
+        { name: 'Брус основного сруба', unit: 'м3', quantity: parseFloat((area * 1.2).toFixed(2)), price: 22000, total: Math.round(area * 1.2 * 22000) },
+        { name: 'Брус перегородки', unit: 'м3', quantity: partitionVolume, price: 22000, total: Math.round(partitionVolume * 22000) },
+        { name: 'Брус фронтонов', unit: 'м3', quantity: 0, price: 19500, total: 0 },
       ],
-      subtotal: 351980
+      subtotal: 0
     });
+    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+
+    sections.push({
+      title: 'Общая кубатура',
+      items: [
+        { name: 'Джут(150мм)', unit: 'п.м', quantity: 500, price: 25, total: 12500 },
+        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 60, price: 40, total: 2400 },
+      ],
+      subtotal: 0
+    });
+    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+
+    sections.push({
+      title: 'Монтаж бруса (строгание с 2х сторон, фаски с 4х)',
+      items: [
+        { name: 'Монтаж сруба', unit: 'м3', quantity: parseFloat((area * 1.2).toFixed(2)), price: 9000, total: Math.round(area * 1.2 * 9000) },
+      ],
+      subtotal: Math.round(area * 1.2 * 9000)
+    });
+
+    sections.push({
+      title: 'Лаги пола, балки перекрытия',
+      items: [
+        { name: 'Брус для лаг, балок(100х150)мм', unit: 'м3', quantity: 1.62, price: 19500, total: 31590 },
+        { name: 'Монтаж лаг', unit: 'шт', quantity: 18, price: 600, total: 10800 },
+      ],
+      subtotal: 42390
+    });
+
+    sections.push({
+      title: 'Крыша',
+      items: [
+        { name: 'Доска 1-й сорт(50х150)мм', unit: 'м3', quantity: 1.46, price: 19500, total: 28518 },
+        { name: 'Доска 1-й сорт(40х100)мм', unit: 'м3', quantity: 1.27, price: 19500, total: 24757 },
+        { name: 'Брусок(50х50)мм', unit: 'м3', quantity: 0.22, price: 20000, total: 4383 },
+        { name: 'Пленка гидроветрозащитная', unit: 'м2', quantity: 100, price: 75, total: 7500 },
+        { name: 'Шпилька резьбовая оцинкованная(10х1000)мм', unit: 'м', quantity: 8, price: 100, total: 800 },
+        { name: 'Гайка оцинкованная(М10)', unit: 'шт', quantity: 78, price: 6, total: 468 },
+        { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: 78, price: 6, total: 468 },
+        { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: 26, price: 30, total: 780 },
+        { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: 52, price: 4, total: 208 },
+        { name: 'Джут(150мм)', unit: 'п.м', quantity: 30, price: 25, total: 750 },
+        { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 1000, price: 0.2, total: 200 },
+        { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: 4, price: 200, total: 800 },
+        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 6, price: 200, total: 1200 },
+        { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 250, price: 3, total: 750 },
+        { name: 'Металлочерепица', unit: 'м2', quantity: parseFloat((area * 1.5).toFixed(2)), price: 750, total: Math.round(area * 1.5 * 750) },
+        { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: Math.max(l, w), price: 240, total: Math.round(Math.max(l, w) * 240) },
+        { name: 'Ветровая планка', unit: 'п.м', quantity: 16, price: 240, total: 3840 },
+        { name: 'Карнизная планка', unit: 'п.м', quantity: 15, price: 240, total: 3600 },
+        { name: 'Кровельные саморезы(4,8*35)', unit: 'шт', quantity: 450, price: 5, total: 2250 },
+        { name: 'Кровельные саморезы(4,8*50)', unit: 'шт', quantity: 150, price: 6, total: 900 },
+        { name: 'Монтаж кровли', unit: 'м2', quantity: parseFloat((area * 1.5).toFixed(2)), price: 2500, total: Math.round(area * 1.5 * 2500) },
+      ],
+      subtotal: 0
+    });
+    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
 
     const total = sections.reduce((sum, section) => sum + section.subtotal, 0);
 
@@ -154,109 +207,133 @@ const Calculator = () => {
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="length" className="text-sm font-medium">Длина (м)</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="length" className="text-base font-semibold">
+                      Длина (м)
+                    </Label>
                     <Input
                       id="length"
                       type="number"
-                      step="0.5"
+                      placeholder="6"
                       value={length}
                       onChange={(e) => setLength(e.target.value)}
-                      placeholder="6"
-                      className="mt-1"
+                      className="text-lg"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="width" className="text-sm font-medium">Ширина (м)</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="width" className="text-base font-semibold">
+                      Ширина (м)
+                    </Label>
                     <Input
                       id="width"
                       type="number"
-                      step="0.5"
+                      placeholder="4"
                       value={width}
                       onChange={(e) => setWidth(e.target.value)}
-                      placeholder="4"
-                      className="mt-1"
+                      className="text-lg"
                     />
                   </div>
                 </div>
-
-                <div>
-                  <Label htmlFor="partitionLength" className="text-sm font-medium">
-                    Длина перегородок (м)
-                  </Label>
-                  <Input
-                    id="partitionLength"
-                    type="number"
-                    step="0.5"
-                    value={partitionLength}
-                    onChange={(e) => setPartitionLength(e.target.value)}
-                    placeholder="0"
-                    className="mt-1"
-                  />
-                </div>
-
-                {!foundation || !length || !width ? (
-                  <div className="text-sm text-amber-700 bg-amber-50 p-4 rounded-lg border border-amber-200">
-                    Заполните все обязательные поля для расчета
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="partition" className="text-base font-semibold">
+                      Длина перегородок (м)
+                    </Label>
+                    <Input
+                      id="partition"
+                      type="number"
+                      placeholder="0"
+                      value={partitionLength}
+                      onChange={(e) => setPartitionLength(e.target.value)}
+                      className="text-lg"
+                    />
                   </div>
-                ) : null}
+                  <div className="space-y-2">
+                    <Label className="text-base font-semibold">
+                      Периметр (м)
+                    </Label>
+                    <div className="h-11 flex items-center justify-center bg-gray-100 rounded-md border text-lg font-semibold text-gray-700">
+                      {length && width ? (
+                        (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
+                      ).toFixed(2) : '—'}
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              {totalPrice > 0 && (
+                <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
+                  <CardContent className="pt-4 pb-4">
+                    <div className="text-center space-y-1">
+                      <p className="text-gray-600 text-sm">Общая стоимость:</p>
+                      <p className="text-3xl font-bold text-green-700">
+                        {totalPrice.toLocaleString('ru-RU')} ₽
+                      </p>
+                      <p className="text-xs text-gray-500 mt-2">
+                        * Окончательная цена после осмотра объекта
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </CardContent>
           </Card>
 
           {estimate.length > 0 && (
-            <div className="space-y-6">
-              <Card className="shadow-xl">
-                <CardHeader className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
-                  <CardTitle className="text-2xl">Примерная смета</CardTitle>
-                </CardHeader>
-                <CardContent className="p-6 space-y-8">
+            <Card className="shadow-xl">
+              <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                <CardTitle className="text-xl text-center">
+                  Детальная смета (расчет под крышу, без отделки)
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <div className="space-y-6">
                   {estimate.map((section, idx) => (
-                    <div
-                      key={idx}
-                      className={`transition-opacity ${section.subtotal === 0 ? 'opacity-40' : ''}`}
-                    >
-                      <h3 className="font-bold text-lg text-amber-800 mb-4 pb-2 border-b-2 border-amber-200">
-                        {section.title}
-                      </h3>
-                      <div className="space-y-2 mb-4">
-                        {section.items.map((item, itemIdx) => (
-                          <div
-                            key={itemIdx}
-                            className="grid grid-cols-[1fr,auto,auto] gap-4 text-sm py-1"
-                          >
-                            <span className="text-gray-700">
-                              {item.name}
-                            </span>
-                            <span className="text-gray-500 text-right whitespace-nowrap">
-                              {item.quantity} {item.unit}
-                            </span>
-                            <span className="font-medium text-right whitespace-nowrap">
-                              {item.total.toLocaleString()} ₽
-                            </span>
-                          </div>
-                        ))}
+                    <div key={idx} className="border-b pb-4 last:border-b-0">
+                      <h3 className="font-bold text-lg mb-3 text-gray-800">{section.title}</h3>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="bg-gray-100">
+                              <th className="text-left p-2 font-semibold">Наименование</th>
+                              <th className="text-center p-2 font-semibold w-20">Ед.из</th>
+                              <th className="text-center p-2 font-semibold w-24">Кол-во</th>
+                              <th className="text-right p-2 font-semibold w-28">Цена, ₽</th>
+                              <th className="text-right p-2 font-semibold w-32">Стоимость, ₽</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {section.items.map((item, itemIdx) => (
+                              <tr key={itemIdx} className={`border-t hover:bg-gray-50 ${item.total === 0 ? 'opacity-40' : ''}`}>
+                                <td className="p-2">{item.name}</td>
+                                <td className="text-center p-2">{item.unit}</td>
+                                <td className="text-center p-2">{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
+                                <td className="text-right p-2">{item.price.toLocaleString('ru-RU')}</td>
+                                <td className="text-right p-2 font-semibold">{item.total.toLocaleString('ru-RU')}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
-                      <div className="flex justify-between items-center pt-3 border-t border-amber-200">
-                        <span className="font-semibold text-amber-800">Итого по разделу:</span>
-                        <span className="font-bold text-lg text-amber-900">
-                          {section.subtotal.toLocaleString()} ₽
+                      <div className="mt-2 text-right">
+                        <span className="text-lg font-bold text-blue-700">
+                          Поэтапно: {section.subtotal.toLocaleString('ru-RU')} ₽
                         </span>
                       </div>
                     </div>
                   ))}
-
-                  <div className="mt-8 pt-6 border-t-4 border-amber-500">
+                  
+                  <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200">
                     <div className="flex justify-between items-center">
-                      <span className="text-2xl font-bold text-gray-800">Общая стоимость:</span>
-                      <span className="text-3xl font-bold text-amber-600">
-                        {totalPrice.toLocaleString()} ₽
+                      <span className="text-xl font-bold">ИТОГО:</span>
+                      <span className="text-2xl font-bold text-green-700">
+                        {totalPrice.toLocaleString('ru-RU')} ₽
                       </span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+              </CardContent>
+            </Card>
           )}
         </div>
       </div>
