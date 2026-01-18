@@ -179,23 +179,6 @@ const FormStep = ({
               <Button
                 type="button"
                 onClick={() => {
-                  setMaterial('profilirovannyj-brus');
-                  setTimeout(() => setStep(3), 300);
-                }}
-                className={`h-auto py-6 text-left justify-start ${
-                  material === 'profilirovannyj-brus' 
-                    ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                }`}
-              >
-                <div>
-                  <div className="font-bold text-lg">Профилированный брус</div>
-                  <div className="text-sm opacity-80">Плотное соединение, меньше щелей</div>
-                </div>
-              </Button>
-              <Button
-                type="button"
-                onClick={() => {
                   setMaterial('kleyonyj-brus');
                   setTimeout(() => setStep(3), 300);
                 }}
