@@ -76,7 +76,7 @@ const Index = () => {
 
       <HeroSection scrollToSection={scrollToSection} />
 
-      <AboutSection />
+      <AboutSection scrollToSection={scrollToSection} />
 
       <GallerySection onProjectClick={openGallery} />
 

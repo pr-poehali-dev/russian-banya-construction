@@ -1,8 +1,13 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
-const AboutSection = () => {
+interface AboutSectionProps {
+  scrollToSection: (id: string) => void;
+}
+
+const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -35,6 +40,14 @@ const AboutSection = () => {
               </p>
               
               <p className="text-lg font-bold text-black">Моя цель — построить Вам новую баню, отремонтировать или модернизировать существующую так, чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
+              
+              <Button 
+                size="lg" 
+                onClick={() => scrollToSection("order")} 
+                className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
+              >
+                Получить подробный расчет стоимости бани
+              </Button>
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden space-y-4">
