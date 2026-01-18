@@ -15,7 +15,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
 
   const galleryImages = [
     "https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg",
-    "https://cdn.poehali.dev/files/2025-12-10 22-28-25.JPG",
+    "https://cdn.poehali.dev/files/photo_2026-01-18_23-52-14.jpg",
     "https://cdn.poehali.dev/files/IMG_1593.jpg",
     "https://cdn.poehali.dev/files/2026-01-18_19-59-32.png",
     "https://cdn.poehali.dev/files/photo_2026-01-17_09-58-59.jpg",
