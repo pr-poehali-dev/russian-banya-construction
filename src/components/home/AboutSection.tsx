@@ -26,7 +26,7 @@ const AboutSection = () => {
     <section id="about" className="py-20 px-4 sm:px-6 w-full overflow-x-hidden">
       <div className="container mx-auto max-w-7xl w-full">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-2">Обо мне</h2>
-        <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start w-full max-w-full">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start w-full max-w-full mb-16">
           <div className="space-y-6 w-full max-w-full overflow-x-hidden">
             <div className="text-base md:text-base text-muted-foreground leading-relaxed space-y-4 break-words">
               <p className="text-lg font-bold text-black">
@@ -34,46 +34,6 @@ const AboutSection = () => {
                 Я — специалист по строительству, модернизации и ремонту русских бань.
               </p>
               
-              <div className="flex items-start gap-3">
-                <Icon name="Award" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Более 15 лет опыта в строительстве бань</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="Users" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Десятки успешных проектов и довольных клиентов</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="Flame" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Знание технологий и нюансов настоящего парения</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="Handshake" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Прямое участие в каждом проекте, от консультации до сдачи</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="MessageSquare" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="MapPin" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Бесплатный выезд на объект для осмотра и замеров</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="Calculator" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Быстрый расчет стоимости строительства по авторской программе</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="FileText" size={24} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="font-semibold text-black text-sm">Подробная смета с учетом всех нюансов и пожеланий заказчика</p>
-              </div>
-
               <p className="text-lg font-bold text-black">Моя цель — построить баню «под ключ», чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
             </div>
           </div>
@@ -129,6 +89,51 @@ const AboutSection = () => {
               <a href="tel:+79824900900" className="text-2xl font-bold text-black hover:text-primary transition-colors">
                 +7 (982) 490-09-00
               </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16">
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">Мои преимущества</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <Icon name="Award" size={48} className="text-primary mb-4" />
+              <p className="font-semibold text-black">Более 15 лет опыта в строительстве бань</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <Icon name="Users" size={48} className="text-primary mb-4" />
+              <p className="font-semibold text-black">Десятки успешных проектов и довольных клиентов</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <Icon name="Flame" size={48} className="text-primary mb-4" />
+              <p className="font-semibold text-black">Знание технологий и нюансов настоящего парения</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <Icon name="Handshake" size={48} className="text-primary mb-4" />
+              <p className="font-semibold text-black">Прямое участие в каждом проекте, от консультации до сдачи</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <Icon name="MessageSquare" size={48} className="text-primary mb-4" />
+              <p className="font-semibold text-black">Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <Icon name="MapPin" size={48} className="text-primary mb-4" />
+              <p className="font-semibold text-black">Бесплатный выезд на объект для осмотра и замеров</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <Icon name="Calculator" size={48} className="text-primary mb-4" />
+              <p className="font-semibold text-black">Быстрый расчет стоимости строительства по авторской программе</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <Icon name="FileText" size={48} className="text-primary mb-4" />
+              <p className="font-semibold text-black">Подробная смета с учетом всех нюансов и пожеланий заказчика</p>
             </div>
           </div>
         </div>
