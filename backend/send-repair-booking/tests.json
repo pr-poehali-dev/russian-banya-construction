@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "Test repair booking submission",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Иван Петров",
+        "phone": "+79991234567",
+        "contact": "@ivan_petrov",
+        "address": "г. Пермь, ул. Ленина, д. 10",
+        "date": "2026-02-01",
+        "time": "10:00",
+        "comments": "Требуется ремонт печи и замена полков"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test OPTIONS for CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}

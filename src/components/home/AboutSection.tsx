@@ -2,6 +2,7 @@ import { useState } from "react";
 import Icon from "@/components/ui/icon";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import RepairBookingForm from "./RepairBookingForm";
 
 interface AboutSectionProps {
   scrollToSection: (id: string) => void;
@@ -10,6 +11,7 @@ interface AboutSectionProps {
 const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showRepairForm, setShowRepairForm] = useState(false);
 
   const galleryImages = [
     "https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg",
@@ -46,6 +48,12 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 onClick={() => scrollToSection("order")} 
                 className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
               >Рассчитать стоимость НОВОЙ бани</Button>
+              
+              <Button 
+                size="lg" 
+                onClick={() => setShowRepairForm(true)} 
+                className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
+              >Забронировать выезд для РЕМОНТА бани</Button>
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden space-y-4">
@@ -184,6 +192,8 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
             </div>
           </DialogContent>
         </Dialog>
+
+        <RepairBookingForm open={showRepairForm} onClose={() => setShowRepairForm(false)} />
       </div>
     </section>
   );
