@@ -134,7 +134,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
 
               <div className="flex items-start gap-3">
                 <Icon name="Wrench" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Ремонт и модернизация парных</p>
+                <p className="text-lg text-black">Ремонт и модернизация парных с эффектом "русской бани"</p>
               </div>
 
               <div className="flex items-start gap-3">
@@ -159,7 +159,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
 
               <div className="flex items-start gap-3">
                 <Icon name="Waves" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Банные чаны, купели, террасы</p>
+                <p className="text-lg text-black">Банные чаны, купели, террасы, дренаж</p>
               </div>
 
               <div className="flex items-start gap-3">
