@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import InputMask from "react-input-mask";
 
 interface FormStepProps {
   step: number;
@@ -321,14 +322,21 @@ const FormStep = ({
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">Телефон *</Label>
-              <Input
-                id="phone"
-                type="tel"
+              <InputMask
+                mask="+7 (999) 999-99-99"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="+7 (___) ___-__-__"
-                required
-              />
+              >
+                {(inputProps: any) => (
+                  <Input
+                    {...inputProps}
+                    id="phone"
+                    type="tel"
+                    placeholder="+7 (___) ___-__-__"
+                    required
+                  />
+                )}
+              </InputMask>
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email {messenger === 'email' ? '*' : '(необязательно)'}</Label>

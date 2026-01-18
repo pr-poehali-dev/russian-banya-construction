@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import InputMask from "react-input-mask";
 
 interface RepairBookingFormProps {
   open: boolean;
@@ -85,14 +86,21 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
 
           <div>
             <Label htmlFor="phone">Телефон *</Label>
-            <Input
-              id="phone"
-              type="tel"
-              required
+            <InputMask
+              mask="+7 (999) 999-99-99"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              placeholder="+7 (___) ___-__-__"
-            />
+            >
+              {(inputProps: any) => (
+                <Input
+                  {...inputProps}
+                  id="phone"
+                  type="tel"
+                  placeholder="+7 (___) ___-__-__"
+                  required
+                />
+              )}
+            </InputMask>
           </div>
 
           <div>
