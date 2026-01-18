@@ -94,7 +94,7 @@ const AboutSection = () => {
         </div>
 
         <div className="mt-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">Мои преимущества</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8"></h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <Icon name="Award" size={48} className="text-primary mb-4" />
