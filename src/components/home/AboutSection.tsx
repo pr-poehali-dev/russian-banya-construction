@@ -8,7 +8,7 @@ const AboutSection = () => {
 
   const galleryImages = [
     "https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/add487b3-1031-486e-87f5-d5fcf44e3281.jpg",
+    "https://cdn.poehali.dev/files/25201b9e-40a7-4c07-945d-e59b986838f7.jpg",
     "https://cdn.poehali.dev/files/IMG_1593.jpg",
     "https://cdn.poehali.dev/files/2026-01-18_19-59-32.png",
     "https://cdn.poehali.dev/files/photo_2026-01-17_09-58-59.jpg",
