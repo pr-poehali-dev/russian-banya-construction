@@ -405,7 +405,7 @@ const FormStep = ({
               <Button 
                 type="button" 
                 onClick={handleSubmit}
-                disabled={!name || !phone || !messenger || isSubmitting}
+                disabled={!name || !phone || !messenger || (messenger === 'email' && !email) || isSubmitting}
                 className="bg-green-600 hover:bg-green-700 text-white font-bold"
               >
                 {isSubmitting ? 'Отправка...' : 'Отправить заявку'}

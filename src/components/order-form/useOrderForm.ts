@@ -41,6 +41,15 @@ export const useOrderForm = () => {
       return;
     }
 
+    if (messenger === 'email' && !email) {
+      toast({
+        title: "Ошибка",
+        description: "Укажите адрес электронной почты",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
