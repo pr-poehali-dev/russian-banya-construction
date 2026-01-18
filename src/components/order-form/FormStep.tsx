@@ -331,13 +331,14 @@ const FormStep = ({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email (необязательно)</Label>
+              <Label htmlFor="email">Email {messenger === 'email' ? '*' : '(необязательно)'}</Label>
               <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
+                required={messenger === 'email'}
               />
             </div>
             <div className="space-y-2">
