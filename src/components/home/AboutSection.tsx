@@ -35,6 +35,16 @@ const AboutSection = () => {
               </p>
               
               <p className="text-lg font-bold text-black">Моя цель — построить Вам новую баню, отремонтировать или модернизировать существующую так, чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
+              
+              <a 
+                href="https://wa.me/79824900900?text=Здравствуйте!%20Хочу%20получить%20подробный%20расчет%20стоимости%20бани" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
+              >
+                <Icon name="Calculator" size={24} />
+                Получить подробный расчет стоимости бани
+              </a>
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden space-y-4">
