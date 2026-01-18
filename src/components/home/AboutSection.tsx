@@ -113,13 +113,18 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
 
         <div className="mt-20">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-2">Что я умею и могу предложить</h2>
-          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start mb-6">
-            <div className="w-full">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start">
+            <div className="w-full space-y-4">
               <img
                 src="https://cdn.poehali.dev/files/1a2c671f_20260118_152414_9991d4e8_req_b74b5eeb.jpg"
                 alt="Александр за работой"
                 className="w-full h-auto rounded-lg shadow-xl object-cover"
               />
+              <Button 
+                size="lg" 
+                onClick={() => scrollToSection("order")} 
+                className="w-full text-base md:text-lg px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95"
+              >Рассчитать стоимость бани</Button>
             </div>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
@@ -172,48 +177,20 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 <p className="text-lg text-black">Банные чаны, купели, террасы, дренаж</p>
               </div>
 
-              <Button 
-                size="lg" 
-                onClick={() => scrollToSection("order")} 
-                className="w-full text-base md:text-lg px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 mt-6"
-              >Рассчитать стоимость бани</Button>
-            </div>
-          </div>
+              <div className="flex items-start gap-3">
+                <Icon name="MapPin" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
+                <p className="text-lg text-black">Бесплатный выезд на объект для осмотра и замеров</p>
+              </div>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm mt-6">
-            <div className="flex items-start gap-2">
-              <Icon name="Award" size={18} className="text-orange-500 flex-shrink-0 mt-0.5" />
-              <p className="text-gray-700">Более 15 лет опыта в строительстве бань</p>
-            </div>
+              <div className="flex items-start gap-3">
+                <Icon name="Calculator" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
+                <p className="text-lg text-black">Быстрый расчет стоимости строительства по авторской программе</p>
+              </div>
 
-            <div className="flex items-start gap-2">
-              <Icon name="Users" size={18} className="text-orange-500 flex-shrink-0 mt-0.5" />
-              <p className="text-gray-700">Десятки успешных проектов и довольных клиентов</p>
-            </div>
-
-            <div className="flex items-start gap-2">
-              <Icon name="ThermometerSun" size={18} className="text-orange-500 flex-shrink-0 mt-0.5" />
-              <p className="text-gray-700">Знание технологий и нюансов настоящего парения</p>
-            </div>
-
-            <div className="flex items-start gap-2">
-              <Icon name="Handshake" size={18} className="text-orange-500 flex-shrink-0 mt-0.5" />
-              <p className="text-gray-700">Прямое участие в каждом проекте, от консультации до сдачи объекта</p>
-            </div>
-
-            <div className="flex items-start gap-2">
-              <Icon name="MapPin" size={18} className="text-orange-500 flex-shrink-0 mt-0.5" />
-              <p className="text-gray-700">Бесплатный выезд на объект для осмотра и замеров</p>
-            </div>
-
-            <div className="flex items-start gap-2">
-              <Icon name="Calculator" size={18} className="text-orange-500 flex-shrink-0 mt-0.5" />
-              <p className="text-gray-700">Быстрый расчет стоимости строительства по авторской программе</p>
-            </div>
-
-            <div className="flex items-start gap-2 col-span-2">
-              <Icon name="FileText" size={18} className="text-orange-500 flex-shrink-0 mt-0.5" />
-              <p className="text-gray-700">Подробная смета с учетом всех нюансов и пожеланий заказчика</p>
+              <div className="flex items-start gap-3">
+                <Icon name="FileText" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
+                <p className="text-lg text-black">Подробная смета с учетом всех нюансов и пожеланий заказчика</p>
+              </div>
             </div>
           </div>
         </div>
