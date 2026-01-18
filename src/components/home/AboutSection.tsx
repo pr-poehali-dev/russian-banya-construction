@@ -4,6 +4,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const AboutSection = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const galleryImages = [
     "https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg",
@@ -13,6 +14,14 @@ const AboutSection = () => {
     "https://cdn.poehali.dev/files/photo_2026-01-17_09-58-59.jpg",
     "https://cdn.poehali.dev/files/photo_2026-01-18_19-06-10.jpg",
   ];
+
+  const nextImage = () => {
+    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  };
 
   return (
     <section id="about" className="py-20 px-4 sm:px-6 w-full overflow-x-hidden">
@@ -70,20 +79,39 @@ const AboutSection = () => {
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden space-y-4">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              {galleryImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="relative aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity shadow-lg"
-                  onClick={() => setSelectedImage(image)}
-                >
-                  <img
-                    src={image}
-                    alt={`Фото ${index + 1}`}
-                    className="w-full h-full object-cover"
+            <div className="relative rounded-lg shadow-xl overflow-hidden group">
+              <img
+                src={galleryImages[currentIndex]}
+                alt={`Фото ${currentIndex + 1}`}
+                className="w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover cursor-pointer"
+                onClick={() => setSelectedImage(galleryImages[currentIndex])}
+              />
+              
+              <button
+                onClick={prevImage}
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+              >
+                <Icon name="ChevronLeft" size={24} className="text-white" />
+              </button>
+
+              <button
+                onClick={nextImage}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+              >
+                <Icon name="ChevronRight" size={24} className="text-white" />
+              </button>
+
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {galleryImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentIndex ? 'bg-white w-6' : 'bg-white/50'
+                    }`}
                   />
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             <div className="flex items-center justify-center gap-3 flex-wrap">
@@ -118,8 +146,8 @@ const AboutSection = () => {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  const currentIndex = galleryImages.indexOf(selectedImage || "");
-                  const prevIndex = currentIndex > 0 ? currentIndex - 1 : galleryImages.length - 1;
+                  const index = galleryImages.indexOf(selectedImage || "");
+                  const prevIndex = index > 0 ? index - 1 : galleryImages.length - 1;
                   setSelectedImage(galleryImages[prevIndex]);
                 }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-colors"
@@ -130,8 +158,8 @@ const AboutSection = () => {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  const currentIndex = galleryImages.indexOf(selectedImage || "");
-                  const nextIndex = currentIndex < galleryImages.length - 1 ? currentIndex + 1 : 0;
+                  const index = galleryImages.indexOf(selectedImage || "");
+                  const nextIndex = index < galleryImages.length - 1 ? index + 1 : 0;
                   setSelectedImage(galleryImages[nextIndex]);
                 }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-colors"
