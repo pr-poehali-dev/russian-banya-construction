@@ -113,49 +113,91 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
 
         <div className="mt-20">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-2">Что я умею и могу предложить</h2>
-          <div className="max-w-2xl mx-auto">
-            <div className="w-full mb-6">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start mb-6">
+            <div className="w-full">
               <img
                 src="https://cdn.poehali.dev/files/1a2c671f_20260118_152414_9991d4e8_req_b74b5eeb.jpg"
                 alt="Александр за работой"
                 className="w-full h-auto rounded-lg shadow-xl object-cover"
               />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-              <div className="flex items-start gap-2">
-                <Icon name="Award" size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-black">Более 15 лет опыта в строительстве бань</p>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Icon name="Home" size={24} className="text-primary flex-shrink-0 mt-1" />
+                <p className="text-base text-black">Строительство бань "под крышу"</p>
               </div>
 
-              <div className="flex items-start gap-2">
-                <Icon name="Users" size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-black">Десятки успешных проектов и довольных клиентов</p>
+              <div className="flex items-start gap-3">
+                <Icon name="Key" size={24} className="text-primary flex-shrink-0 mt-1" />
+                <p className="text-base text-black">Строительство бань "под ключ"</p>
               </div>
 
-              <div className="flex items-start gap-2">
-                <Icon name="Flame" size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-black">Знание технологий и нюансов настоящего парения</p>
+              <div className="flex items-start gap-3">
+                <Icon name="Wrench" size={24} className="text-primary flex-shrink-0 mt-1" />
+                <p className="text-base text-black">Ремонт и модернизация парных</p>
               </div>
 
-              <div className="flex items-start gap-2">
-                <Icon name="Handshake" size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-black">Прямое участие в каждом проекте, от консультации до сдачи объекта</p>
+              <div className="flex items-start gap-3">
+                <Icon name="Paintbrush" size={24} className="text-primary flex-shrink-0 mt-1" />
+                <p className="text-base text-black">Внутренняя и внешняя отделка</p>
               </div>
 
-              <div className="flex items-start gap-2">
-                <Icon name="MapPin" size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-black">Бесплатный выезд на объект для осмотра и замеров</p>
+              <div className="flex items-start gap-3">
+                <Icon name="Flame" size={24} className="text-primary flex-shrink-0 mt-1" />
+                <p className="text-base text-black">Установка печей и дымоходов</p>
               </div>
 
-              <div className="flex items-start gap-2">
-                <Icon name="Calculator" size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-black">Быстрый расчет стоимости строительства по авторской программе</p>
+              <div className="flex items-start gap-3">
+                <Icon name="Droplets" size={24} className="text-primary flex-shrink-0 mt-1" />
+                <p className="text-base text-black">Электрика, сантехника, водоснабжение</p>
               </div>
 
-              <div className="flex items-start gap-2 sm:col-span-2">
-                <Icon name="FileText" size={20} className="text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-black">Подробная смета с учетом всех нюансов и пожеланий заказчика</p>
+              <div className="flex items-start gap-3">
+                <Icon name="Sparkles" size={24} className="text-primary flex-shrink-0 mt-1" />
+                <p className="text-base text-black">Шлифовка и защита деревянных поверхностей</p>
               </div>
+
+              <div className="flex items-start gap-3">
+                <Icon name="Waves" size={24} className="text-primary flex-shrink-0 mt-1" />
+                <p className="text-base text-black">Банные чаны, купели, террасы</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm mt-6">
+            <div className="flex items-start gap-2">
+              <Icon name="Award" size={20} className="text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-black">Более 15 лет опыта в строительстве бань</p>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <Icon name="Users" size={20} className="text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-black">Десятки успешных проектов и довольных клиентов</p>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <Icon name="ThermometerSun" size={20} className="text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-black">Знание технологий и нюансов настоящего парения</p>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <Icon name="Handshake" size={20} className="text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-black">Прямое участие в каждом проекте, от консультации до сдачи объекта</p>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <Icon name="MapPin" size={20} className="text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-black">Бесплатный выезд на объект для осмотра и замеров</p>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <Icon name="Calculator" size={20} className="text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-black">Быстрый расчет стоимости строительства по авторской программе</p>
+            </div>
+
+            <div className="flex items-start gap-2 sm:col-span-2 md:col-span-3">
+              <Icon name="FileText" size={20} className="text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-black">Подробная смета с учетом всех нюансов и пожеланий заказчика</p>
             </div>
           </div>
         </div>
