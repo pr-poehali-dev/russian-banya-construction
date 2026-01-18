@@ -8,7 +8,7 @@ const AboutSection = () => {
 
   const galleryImages = [
     "https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg",
-    "https://cdn.poehali.dev/files/2025-02-11 15-01-22.JPG",
+    "https://cdn.poehali.dev/files/25201b9e-40a7-4c07-945d-e59b986838f7.jpg",
     "https://cdn.poehali.dev/files/IMG_1593.jpg",
     "https://cdn.poehali.dev/files/IMG_2984.jpg",
     "https://cdn.poehali.dev/files/photo_2026-01-17_09-58-59.jpg",
@@ -135,8 +135,8 @@ const AboutSection = () => {
         </div>
 
         <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-          <DialogContent className="max-w-4xl w-full p-0">
-            <div className="relative">
+          <DialogContent className="max-w-5xl w-[95vw] p-0">
+            <div className="relative flex items-center justify-center bg-black">
               <img
                 src={selectedImage || ""}
                 alt="Просмотр фото"
