@@ -32,7 +32,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
       <div className="container mx-auto max-w-7xl w-full">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-2">Обо мне</h2>
         <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start w-full max-w-full mb-16">
-          <div className="space-y-6 w-full max-w-full overflow-x-hidden">
+          <div className="space-y-6 w-full max-w-full overflow-hidden">
             <div className="text-base md:text-base text-muted-foreground leading-relaxed space-y-4 break-words">
               <p className="text-lg font-bold text-black">
                 Меня зовут Александр.<br />
