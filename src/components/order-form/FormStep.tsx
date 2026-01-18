@@ -360,7 +360,7 @@ const FormStep = ({
               />
             </div>
             <div className="space-y-2">
-              <Label>Как с вами связаться? *</Label>
+              <Label>Куда отправить расчет? *</Label>
               <div className="grid gap-3">
                 <Button
                   type="button"
@@ -386,14 +386,25 @@ const FormStep = ({
                 </Button>
                 <Button
                   type="button"
-                  onClick={() => setMessenger('phone')}
+                  onClick={() => setMessenger('email')}
                   className={`h-auto py-4 text-left justify-start ${
-                    messenger === 'phone' 
+                    messenger === 'email' 
                       ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
                       : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                   }`}
                 >
-                  Позвоните мне
+                  На почту
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => setMessenger('maks')}
+                  className={`h-auto py-4 text-left justify-start ${
+                    messenger === 'maks' 
+                      ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
+                      : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
+                  }`}
+                >
+                  МАКС (мой.мир)
                 </Button>
               </div>
             </div>
