@@ -258,9 +258,7 @@ const FormStep = ({
                       ? 'bg-yellow-400 hover:bg-yellow-500 text-black' 
                       : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                   }`}
-                >
-                  2 этажа
-                </Button>
+                >1,5 этажа(мансарда)</Button>
               </div>
             </div>
             <div className="flex justify-between pt-4">
