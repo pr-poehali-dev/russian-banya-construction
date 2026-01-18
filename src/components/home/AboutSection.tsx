@@ -6,6 +6,7 @@ const AboutSection = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const galleryImages = [
+    "https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg",
     "https://cdn.poehali.dev/files/2025-02-11 15-01-22.JPG",
     "https://cdn.poehali.dev/files/IMG_1593.jpg",
     "https://cdn.poehali.dev/files/IMG_2984.jpg",
@@ -69,29 +70,20 @@ const AboutSection = () => {
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden space-y-4">
-            <img 
-              src="https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg"
-              alt="Мастер банных дел"
-              className="rounded-lg shadow-xl w-full max-w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover object-[center_20%]"
-            />
-
-            <div className="mt-4">
-              <h3 className="text-xl font-bold mb-3 text-center">Моя работа</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {galleryImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
-                    onClick={() => setSelectedImage(image)}
-                  >
-                    <img
-                      src={image}
-                      alt={`Фото ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {galleryImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity shadow-lg"
+                  onClick={() => setSelectedImage(image)}
+                >
+                  <img
+                    src={image}
+                    alt={`Фото ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
             </div>
 
             <div className="flex items-center justify-center gap-3 flex-wrap">
