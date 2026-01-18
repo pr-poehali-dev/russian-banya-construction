@@ -9,8 +9,8 @@ const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
       <div className="absolute inset-0">
         <img 
-          src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/e5212274-23cb-48e3-a724-60171be466b0.jpg"
-          alt="Парная с прямоугольной печью в облицовке камнем"
+          src="https://cdn.poehali.dev/files/photo_2026-01-09_18-38-03.jpg"
+          alt="Интерьер бани с деревянной отделкой"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40"></div>
