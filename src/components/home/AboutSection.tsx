@@ -74,25 +74,8 @@ const AboutSection = () => {
               alt="Мастер банных дел"
               className="rounded-lg shadow-xl w-full max-w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover object-[center_20%]"
             />
-            <div className="flex items-center justify-center gap-3 flex-wrap">
-              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
-                <Icon name="MessageCircle" size={20} className="text-white" />
-              </a>
-              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
-                <Icon name="Send" size={20} className="text-white" />
-              </a>
-              <a href="https://my.mail.ru/mail/perm-par/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity overflow-hidden">
-                <img src="https://cdn.poehali.dev/files/IlwnOob3_b8V56ug0ufBKQPFI6Di_pNsKHZUm7_yDwj0wSGwJVIhHVATvJ5AhTO56sg4PhSTOS7DvQ5swJRUSIh8.jpg" alt="МАКС" className="w-full h-full object-cover" />
-              </a>
-              <a href="tel:+79824900900" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-                <Icon name="Phone" size={20} className="text-white" />
-              </a>
-              <a href="tel:+79824900900" className="text-2xl font-bold text-black hover:text-primary transition-colors">
-                +7 (982) 490-09-00
-              </a>
-            </div>
 
-            <div className="mt-6">
+            <div className="mt-4">
               <h3 className="text-xl font-bold mb-3 text-center">Моя работа</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {galleryImages.map((image, index) => (
@@ -110,6 +93,24 @@ const AboutSection = () => {
                 ))}
               </div>
             </div>
+
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <Icon name="MessageCircle" size={20} className="text-white" />
+              </a>
+              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                <Icon name="Send" size={20} className="text-white" />
+              </a>
+              <a href="https://my.mail.ru/mail/perm-par/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity overflow-hidden">
+                <img src="https://cdn.poehali.dev/files/IlwnOob3_b8V56ug0ufBKQPFI6Di_pNsKHZUm7_yDwj0wSGwJVIhHVATvJ5AhTO56sg4PhSTOS7DvQ5swJRUSIh8.jpg" alt="МАКС" className="w-full h-full object-cover" />
+              </a>
+              <a href="tel:+79824900900" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                <Icon name="Phone" size={20} className="text-white" />
+              </a>
+              <a href="tel:+79824900900" className="text-2xl font-bold text-black hover:text-primary transition-colors">
+                +7 (982) 490-09-00
+              </a>
+            </div>
           </div>
         </div>
 
@@ -121,6 +122,30 @@ const AboutSection = () => {
                 alt="Просмотр фото"
                 className="w-full h-auto max-h-[90vh] object-contain"
               />
+              
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const currentIndex = galleryImages.indexOf(selectedImage || "");
+                  const prevIndex = currentIndex > 0 ? currentIndex - 1 : galleryImages.length - 1;
+                  setSelectedImage(galleryImages[prevIndex]);
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-colors"
+              >
+                <Icon name="ChevronLeft" size={32} className="text-white" />
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const currentIndex = galleryImages.indexOf(selectedImage || "");
+                  const nextIndex = currentIndex < galleryImages.length - 1 ? currentIndex + 1 : 0;
+                  setSelectedImage(galleryImages[nextIndex]);
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition-colors"
+              >
+                <Icon name="ChevronRight" size={32} className="text-white" />
+              </button>
             </div>
           </DialogContent>
         </Dialog>
