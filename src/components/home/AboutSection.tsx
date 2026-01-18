@@ -123,6 +123,11 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
             </div>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
+                <Icon name="MessageSquare" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
+                <p className="text-lg text-black">Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</p>
+              </div>
+
+              <div className="flex items-start gap-3">
                 <Icon name="Home" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
                 <p className="text-lg text-black">Строительство бань "под крышу"</p>
               </div>
@@ -162,10 +167,13 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 <p className="text-lg text-black">Банные чаны, купели, террасы, дренаж</p>
               </div>
 
-              <div className="flex items-start gap-3">
-                <Icon name="MessageSquare" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</p>
-              </div>
+              <Button 
+                size="lg" 
+                onClick={() => scrollToSection("order")} 
+                className="w-full text-base md:text-lg px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 mt-6"
+              >
+                Рассчитать стоимость НОВОЙ бани
+              </Button>
             </div>
           </div>
 
