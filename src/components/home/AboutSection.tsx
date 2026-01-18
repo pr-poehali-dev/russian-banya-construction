@@ -54,6 +54,27 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 onClick={() => setShowRepairForm(true)} 
                 className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
               >Забронировать выезд для РЕМОНТА бани</Button>
+              
+              <p className="text-base md:text-lg text-black font-semibold mt-4">
+                Бесплатная консультация по строительству, ремонту или модернизации бани
+              </p>
+
+              <div className="flex items-center justify-center gap-3 flex-wrap mt-4">
+              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                <Icon name="MessageCircle" size={20} className="text-white" />
+              </a>
+              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                <Icon name="Send" size={20} className="text-white" />
+              </a>
+              <a href="https://my.mail.ru/mail/perm-par/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity overflow-hidden">
+                <img src="https://cdn.poehali.dev/files/IlwnOob3_b8V56ug0ufBKQPFI6Di_pNsKHZUm7_yDwj0wSGwJVIhHVATvJ5AhTO56sg4PhSTOS7DvQ5swJRUSIh8.jpg" alt="МАКС" className="w-full h-full object-cover" />
+              </a>
+              <a href="tel:+79824900900" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                <Icon name="Phone" size={20} className="text-white" />
+              </a>
+              <a href="tel:+79824900900" className="text-2xl font-bold text-black hover:text-primary transition-colors">
+                +7 (982) 490-09-00
+              </a>
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden space-y-4">
@@ -90,24 +111,6 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                   />
                 ))}
               </div>
-            </div>
-
-            <div className="flex items-center justify-center gap-3 flex-wrap">
-              <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
-                <Icon name="MessageCircle" size={20} className="text-white" />
-              </a>
-              <a href="https://t.me/+79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
-                <Icon name="Send" size={20} className="text-white" />
-              </a>
-              <a href="https://my.mail.ru/mail/perm-par/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity overflow-hidden">
-                <img src="https://cdn.poehali.dev/files/IlwnOob3_b8V56ug0ufBKQPFI6Di_pNsKHZUm7_yDwj0wSGwJVIhHVATvJ5AhTO56sg4PhSTOS7DvQ5swJRUSIh8.jpg" alt="МАКС" className="w-full h-full object-cover" />
-              </a>
-              <a href="tel:+79824900900" className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-                <Icon name="Phone" size={20} className="text-white" />
-              </a>
-              <a href="tel:+79824900900" className="text-2xl font-bold text-black hover:text-primary transition-colors">
-                +7 (982) 490-09-00
-              </a>
             </div>
           </div>
         </div>
