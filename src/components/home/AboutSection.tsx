@@ -113,7 +113,7 @@ const AboutSection = () => {
 
             <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <Icon name="Handshake" size={48} className="text-primary mb-4" />
-              <p className="font-semibold text-black">Прямое участие в каждом проекте, от консультации до сдачи</p>
+              <p className="font-semibold text-black">Прямое участие в каждом проекте, от консультации до сдачи объекта</p>
             </div>
 
             <div className="flex flex-col items-center text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
