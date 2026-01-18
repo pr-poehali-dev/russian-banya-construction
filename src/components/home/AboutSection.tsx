@@ -76,6 +76,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 +7 (982) 490-09-00
               </a>
             </div>
+            </div>
           </div>
           <div className="w-full max-w-full overflow-hidden space-y-4">
             <div className="relative rounded-lg shadow-xl overflow-hidden group">
