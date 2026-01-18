@@ -347,6 +347,7 @@ const FormStep = ({
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 required={messenger === 'email'}
+                className={messenger === 'email' && !email ? 'border-red-500 focus-visible:ring-red-500' : ''}
               />
             </div>
             <div className="space-y-2">
