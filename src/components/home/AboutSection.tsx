@@ -12,7 +12,6 @@ const AboutSection = () => {
     "https://cdn.poehali.dev/files/IMG_1593.jpg",
     "https://cdn.poehali.dev/files/2026-01-18_19-59-32.png",
     "https://cdn.poehali.dev/files/photo_2026-01-17_09-58-59.jpg",
-    "https://cdn.poehali.dev/files/photo_2026-01-18_19-06-10.jpg",
   ];
 
   const nextImage = () => {
@@ -135,7 +134,7 @@ const AboutSection = () => {
         </div>
 
         <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-          <DialogContent className="max-w-5xl w-[95vw] p-0">
+          <DialogContent className="max-w-5xl w-[95vw] p-0 [&>button]:bg-white [&>button]:text-black [&>button]:hover:bg-gray-200">
             <div className="relative flex items-center justify-center bg-black">
               <img
                 src={selectedImage || ""}
