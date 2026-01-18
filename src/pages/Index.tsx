@@ -3,7 +3,6 @@ import Header from "@/components/home/Header";
 import HeroSection from "@/components/home/HeroSection";
 import AboutSection from "@/components/home/AboutSection";
 import GallerySection from "@/components/home/GallerySection";
-import ServicesSection from "@/components/home/ServicesSection";
 import ProjectGalleryDialog from "@/components/home/ProjectGalleryDialog";
 import OrderFormSection from "@/components/OrderFormSection";
 import Footer from "@/components/home/Footer";
@@ -49,7 +48,7 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "gallery", "order", "services"];
+      const sections = ["hero", "about", "gallery", "order"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -81,8 +80,6 @@ const Index = () => {
       <GallerySection onProjectClick={openGallery} />
 
       <OrderFormSection />
-
-      <ServicesSection />
 
       <ProjectGalleryDialog
         selectedProject={selectedProject}
