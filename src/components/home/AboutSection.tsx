@@ -1,7 +1,18 @@
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const AboutSection = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const galleryImages = [
+    "https://cdn.poehali.dev/files/2025-02-11 15-01-22.JPG",
+    "https://cdn.poehali.dev/files/IMG_1593.jpg",
+    "https://cdn.poehali.dev/files/IMG_2984.jpg",
+    "https://cdn.poehali.dev/files/photo_2026-01-17_09-58-59.jpg",
+    "https://cdn.poehali.dev/files/photo_2026-01-18_19-06-10.jpg",
+  ];
+
   return (
     <section id="about" className="py-20 px-4 sm:px-6 w-full overflow-x-hidden">
       <div className="container mx-auto max-w-7xl w-full">
@@ -80,8 +91,39 @@ const AboutSection = () => {
                 +7 (982) 490-09-00
               </a>
             </div>
+
+            <div className="mt-6">
+              <h3 className="text-xl font-bold mb-3 text-center">Моя работа</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {galleryImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+                    onClick={() => setSelectedImage(image)}
+                  >
+                    <img
+                      src={image}
+                      alt={`Фото ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+
+        <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+          <DialogContent className="max-w-4xl w-full p-0">
+            <div className="relative">
+              <img
+                src={selectedImage || ""}
+                alt="Просмотр фото"
+                className="w-full h-auto max-h-[90vh] object-contain"
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
