@@ -83,7 +83,7 @@ const AboutSection = () => {
               <img
                 src={galleryImages[currentIndex]}
                 alt={`Фото ${currentIndex + 1}`}
-                className="w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover cursor-pointer"
+                className="w-full h-[300px] sm:h-[400px] md:h-[600px] object-cover object-bottom cursor-pointer"
                 onClick={() => setSelectedImage(galleryImages[currentIndex])}
               />
               
@@ -140,7 +140,7 @@ const AboutSection = () => {
               <img
                 src={selectedImage || ""}
                 alt="Просмотр фото"
-                className="w-full h-auto max-h-[90vh] object-contain"
+                className="max-w-[85vw] h-auto max-h-[90vh] object-contain"
               />
               
               <button
