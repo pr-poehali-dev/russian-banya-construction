@@ -14,27 +14,28 @@ const Footer = () => {
 
           <div className="text-center">
             <h4 className="font-semibold mb-4">Контакты</h4>
-            <div className="space-y-2 text-black text-sm">
-              <a href="tel:+73422984030" className="flex items-center justify-center gap-2 hover:text-gray-700 transition-colors">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-black text-sm">
+              <a href="tel:+73422984030" className="flex items-center justify-center sm:justify-start gap-2 hover:text-gray-700 transition-colors">
                 <Icon name="Phone" size={16} />
                 +7 (342) 298-40-30
               </a>
-              <a href="tel:+79824900900" className="flex items-center justify-center gap-2 hover:text-gray-700 transition-colors">
-                <Icon name="Phone" size={16} />
-                +7 (982) 490-09-00
-              </a>
-              <a href="mailto:perm-par@mail.ru" className="flex items-center justify-center gap-2 hover:text-gray-700 transition-colors">
-                <Icon name="Mail" size={16} />
-                perm-par@mail.ru
-              </a>
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center sm:justify-start gap-2">
                 <Icon name="Clock" size={16} />
                 <span>Пн-Пт 08:00-20:00</span>
               </div>
-              <div className="flex items-center justify-center gap-2">
+              <a href="tel:+79824900900" className="flex items-center justify-center sm:justify-start gap-2 hover:text-gray-700 transition-colors">
+                <Icon name="Phone" size={16} />
+                +7 (982) 490-09-00
+              </a>
+              <div className="flex items-center justify-center sm:justify-start gap-2">
+                <Icon name="Clock" size={16} />
                 <span>Сб-Вс 10:00-15:00</span>
               </div>
-              <div className="flex items-center justify-center gap-2">
+              <a href="mailto:perm-par@mail.ru" className="flex items-center justify-center sm:justify-start gap-2 hover:text-gray-700 transition-colors">
+                <Icon name="Mail" size={16} />
+                perm-par@mail.ru
+              </a>
+              <div className="flex items-center justify-center sm:justify-start gap-2">
                 <Icon name="MapPin" size={16} />
                 <span>Пермь, Пермский край</span>
               </div>
