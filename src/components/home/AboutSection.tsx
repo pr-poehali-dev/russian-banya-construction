@@ -96,6 +96,12 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 <Icon name="ChevronRight" size={24} className="text-white" />
               </button>
 
+              <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
+                <span className="text-white text-sm font-medium">
+                  {currentIndex + 1} / {galleryImages.length}
+                </span>
+              </div>
+
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                 {galleryImages.map((_, index) => (
                   <button
