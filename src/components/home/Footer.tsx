@@ -2,7 +2,7 @@ import Icon from "@/components/ui/icon";
 
 const Footer = () => {
   return (
-    <footer className="bg-yellow-500 text-black py-12 px-4 sm:px-6 w-full overflow-x-hidden">
+    <footer id="contacts" className="bg-yellow-500 text-black py-12 px-4 sm:px-6 w-full overflow-x-hidden">
       <div className="container mx-auto max-w-6xl">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center md:text-left">

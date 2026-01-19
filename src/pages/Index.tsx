@@ -15,7 +15,7 @@ const Index = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const headerOffset = 80;
+      const headerOffset = id === 'services' ? 120 : 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -48,7 +48,7 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "gallery", "order"];
+      const sections = ["hero", "about", "services", "gallery", "order", "contacts"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {

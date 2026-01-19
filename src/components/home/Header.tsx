@@ -31,7 +31,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
     { id: "services", label: "Услуги" },
     { id: "gallery", label: "Галерея" },
     { id: "order", label: "Калькулятор" },
-    { id: "order", label: "Контакты" }
+    { id: "contacts", label: "Контакты" }
   ];
 
   const handleMenuClick = (item: MenuItem) => {
