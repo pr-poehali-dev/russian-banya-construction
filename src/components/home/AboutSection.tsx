@@ -53,7 +53,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 size="lg" 
                 onClick={() => setShowRepairForm(true)} 
                 className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
-              >Забронировать выезд, если у вас РЕМОНТ или МОДЕРНИЗАЦИЯ бани</Button>
+              >Нужен РЕМОНТ или МОДЕРНИЗАЦИЯ бани</Button>
               
               <p className="text-base md:text-lg text-black font-semibold mt-4">Бесплатная консультация по строительству, ремонту или модернизации Вашей бани</p>
 
