@@ -126,23 +126,11 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/ключи25.JPG"
   ],
   [
-    "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
-    "https://cdn.poehali.dev/files/2025-08-19 16-17-16.JPG",
-    "https://cdn.poehali.dev/files/2025-07-21 09-57-59.JPG",
-    "https://cdn.poehali.dev/files/2025-07-21 11-54-58.JPG",
-    "https://cdn.poehali.dev/files/2025-07-21 12-47-59.JPG",
-    "https://cdn.poehali.dev/files/2025-10-01 14-53-09.JPG",
-    "https://cdn.poehali.dev/files/2451e998-d599-4eeb-8bf3-8585ffab4342.jpg",
-    "https://cdn.poehali.dev/files/48198ca6-3425-4781-aba7-849426247fc4.jpg",
-    "https://cdn.poehali.dev/files/1f94dc5e-69ba-4805-8f4b-ca5bbf6a404c.jpg",
-    "https://cdn.poehali.dev/files/e9474b80-69ae-4a00-8574-c27200bb57ba.jpg",
-    "https://cdn.poehali.dev/files/1d9d6ed2-45ec-4f8f-a51f-bc5915cdd76a.jpg",
-    "https://cdn.poehali.dev/files/2025-09-30 13-06-25.JPEG",
-    "https://cdn.poehali.dev/files/2025-09-30 13-06-37.JPEG",
-    "https://cdn.poehali.dev/files/2025-10-15 14-56-54.JPG",
-    "https://cdn.poehali.dev/files/2025-10-31 15-12-02.JPG",
-    "https://cdn.poehali.dev/files/2025-10-17 15-58-24.JPG",
-    "https://cdn.poehali.dev/files/2025-08-04 09-41-10.jpg"
+    "https://cdn.poehali.dev/files/скобелевка1.jpg",
+    "https://cdn.poehali.dev/files/скобелевка2.JPG",
+    "https://cdn.poehali.dev/files/скобелевка3.jpg",
+    "https://cdn.poehali.dev/files/скобелевка4.JPEG",
+    "https://cdn.poehali.dev/files/скобелевка5.JPG"
   ],
   [
     "https://cdn.poehali.dev/files/001.JPG",
@@ -347,7 +335,7 @@ export const projects: Project[] = [
     location: "д. Ключи, Пермский край"
   },
   {
-    img: "https://cdn.poehali.dev/files/photo_2025-12-29_10-41-49.jpg",
+    img: "https://cdn.poehali.dev/files/скобелевка1.jpg",
     title: "Баня из бревна 6×6",
     size: "6×6 м",
     material: "Ремонт парной и помывочной",
