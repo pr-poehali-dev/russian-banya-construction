@@ -42,9 +42,9 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex flex-col items-center md:items-end">
+          <div className="flex flex-col items-center">
             <h4 className="font-semibold mb-4">Мессенджеры</h4>
-            <div className="flex flex-col items-center md:items-end gap-3">
+            <div className="flex flex-col items-center gap-3">
               <div className="flex gap-3 flex-wrap">
                 <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
                   <Icon name="MessageCircle" size={20} className="text-white" />
