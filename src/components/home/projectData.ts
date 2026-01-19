@@ -1,24 +1,9 @@
 export const projectGalleries = [
   [
-    "https://cdn.poehali.dev/files/photo_2025-12-11_22-03-04.jpg",
-    "https://cdn.poehali.dev/files/fd3c3beb-58e6-4d41-8f1c-16c4e6f576ac.JPG",
-    "https://cdn.poehali.dev/files/9db95649-86f2-4493-be39-4d7acb47ba14.JPG",
-    "https://cdn.poehali.dev/files/55a193e7-ac59-4782-9e54-0776e338f0af.JPG",
-    "https://cdn.poehali.dev/files/242e8fc2-f9ba-46fc-9bc3-657aa6915553.JPG",
-    "https://cdn.poehali.dev/files/f92cf9b3-fcf2-45e8-942d-4af9154f1760.JPG",
-    "https://cdn.poehali.dev/files/c3f01861-ddfa-4365-8096-45ee644563d6.JPG",
-    "https://cdn.poehali.dev/files/e612108f-9639-4eb8-92eb-7cf986c34f31.JPG",
-    "https://cdn.poehali.dev/files/4e6b64a3-b7b3-4fba-af24-07ed8c17bd82.JPG",
-    "https://cdn.poehali.dev/files/506ae37e-28ae-471e-8156-6c28ca4ba9db.JPG",
-    "https://cdn.poehali.dev/files/1bb8c944-bfa2-42a5-b390-65e6df6dd5d6.JPG",
-    "https://cdn.poehali.dev/files/89e29cc4-9f5e-4937-b56c-4be50d10f14d.JPG",
-    "https://cdn.poehali.dev/files/f820bbd0-2db4-4948-978c-a3840219ebfa.JPG",
-    "https://cdn.poehali.dev/files/dce63058-7770-4a36-b3a0-be7ccc1b6da8.JPG",
-    "https://cdn.poehali.dev/files/6a05e040-7656-499e-bd66-509b5cea6a23.JPG",
-    "https://cdn.poehali.dev/files/2d422aac-2e42-4cbf-a15d-1652c949d423.JPG",
-    "https://cdn.poehali.dev/files/9b750020-b2e4-4e44-b917-a6f6a3c32043.JPG",
-    "https://cdn.poehali.dev/files/bac906e9-8def-470a-9125-96dd78fc1a64.JPG",
-    "https://cdn.poehali.dev/files/a485a14f-4056-4ba8-ba35-9aa846b2a045.JPG"
+    "https://cdn.poehali.dev/files/веретье0.jpg",
+    "https://cdn.poehali.dev/files/веретье1.JPG",
+    "https://cdn.poehali.dev/files/веретье2.JPG",
+    "https://cdn.poehali.dev/files/веретье3.JPG"
   ],
   [
     "https://cdn.poehali.dev/files/1.JPG",
@@ -307,7 +292,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    img: "https://cdn.poehali.dev/files/photo_2025-12-11_22-03-04.jpg",
+    img: "https://cdn.poehali.dev/files/веретье0.jpg",
     title: "Баня из бревна 6×12",
     size: "6×12 м",
     material: "Оцилиндрованное бревно",
