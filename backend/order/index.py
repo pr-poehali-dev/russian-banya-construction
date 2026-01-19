@@ -86,6 +86,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         phone = body_data.get('phone', '')
         email_client = body_data.get('email', '')
         messenger = body_data.get('messenger', '')
+        comment = body_data.get('comment', '')
         
         material_names = {
             'ocilindrovannoe-brevno': 'Оцилиндрованное бревно',
@@ -189,6 +190,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                             <div class="field-label">Место строительства:</div>
                             <div class="field-value">{location_names.get(location, location)}</div>
                         </div>
+                        {f'<div class="field"><div class="field-label">Комментарий:</div><div class="field-value">{comment}</div></div>' if comment else ''}
                     </div>
                     <div class="footer">
                         <p>Заявка отправлена автоматически с сайта perm-par.ru</p>
