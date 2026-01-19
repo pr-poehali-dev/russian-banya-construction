@@ -63,26 +63,11 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/полазна37.JPG"
   ],
   [
-    "https://cdn.poehali.dev/files/e145e902-0d5a-4598-9062-6395356985f0.jpg",
-    "https://cdn.poehali.dev/files/44a34322-94c4-4927-b372-e632bd76e8c3.png",
-    "https://cdn.poehali.dev/files/7c45af13-f389-40c5-a0ec-e0bed1884fef.jpg",
-    "https://cdn.poehali.dev/files/cfa7f22e-7434-41a8-83cb-57c58472a187.jpg",
-    "https://cdn.poehali.dev/files/0d1e0e9b-67ef-4b9f-8a21-913de4d4c829.jpg",
-    "https://cdn.poehali.dev/files/4b438963-c14c-4a31-a4f6-dddd9a791e0c.jpg",
-    "https://cdn.poehali.dev/files/6c712b7d-0a01-41fe-89c1-29ec45bad1dd.jpg",
-    "https://cdn.poehali.dev/files/2025-10-24 11-58-47.JPG",
-    "https://cdn.poehali.dev/files/2025-10-28 15-44-24.JPG",
-    "https://cdn.poehali.dev/files/2025-10-28 15-44-38.JPG",
-    "https://cdn.poehali.dev/files/2025-10-30 11-43-00.JPG",
-    "https://cdn.poehali.dev/files/2025-10-30 11-43-04.JPG",
-    "https://cdn.poehali.dev/files/2025-11-01 11-49-37.JPG",
-    "https://cdn.poehali.dev/files/2025-11-03 15-30-21.JPG",
-    "https://cdn.poehali.dev/files/2025-11-13 15-15-33.JPG",
-    "https://cdn.poehali.dev/files/IMG_20260105_110725.jpg",
-    "https://cdn.poehali.dev/files/IMG_20260105_110740.jpg",
-    "https://cdn.poehali.dev/files/IMG_20260105_110835.jpg",
-    "https://cdn.poehali.dev/files/IMG_20260105_111100.jpg",
-    "https://cdn.poehali.dev/files/photo_2025-12-05_20-09-38.jpg"
+    "https://cdn.poehali.dev/files/гамы1.jpg",
+    "https://cdn.poehali.dev/files/гамы2.JPG",
+    "https://cdn.poehali.dev/files/гамы3.JPG",
+    "https://cdn.poehali.dev/files/гамы4.JPG",
+    "https://cdn.poehali.dev/files/гамы5.JPG"
   ],
   [
     "https://cdn.poehali.dev/files/01.JPG",
