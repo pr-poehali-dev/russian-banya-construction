@@ -315,6 +315,13 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/налимиха23.jpg",
     "https://cdn.poehali.dev/files/налимиха24.jpg",
     "https://cdn.poehali.dev/files/налимиха25.jpg"
+  ],
+  [
+    "https://cdn.poehali.dev/files/филатово1.jpg",
+    "https://cdn.poehali.dev/files/филатово2.jpg",
+    "https://cdn.poehali.dev/files/филатово3.jpg",
+    "https://cdn.poehali.dev/files/филатово4.jpg",
+    "https://cdn.poehali.dev/files/филатово5.jpg"
   ]
 ];
 
@@ -403,5 +410,12 @@ export const projects: Project[] = [
     size: "6×8 м",
     material: "Оцилиндрованное бревно",
     location: "д. Налимиха, Пермский край"
+  },
+  {
+    img: "https://cdn.poehali.dev/files/филатово1.jpg",
+    title: "Баня из бревна 6×6",
+    size: "6×6 м",
+    material: "Рубленое бревно",
+    location: "д. Филатово, Пермский край"
   }
 ];
