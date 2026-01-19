@@ -117,7 +117,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
           </div>
         </div>
 
-        <div className="mt-20">
+        <div id="services" className="mt-20">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-2">Что я умею и могу предложить</h2>
           <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start">
             <div className="w-full space-y-4">
