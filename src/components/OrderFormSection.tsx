@@ -1,6 +1,7 @@
 import StepIndicator from "@/components/order-form/StepIndicator";
 import FormStep from "@/components/order-form/FormStep";
 import { useOrderForm } from "@/components/order-form/useOrderForm";
+import SuccessModal from "@/components/SuccessModal";
 
 const OrderFormSection = () => {
   const {
@@ -29,6 +30,8 @@ const OrderFormSection = () => {
     messenger,
     setMessenger,
     isSubmitting,
+    showSuccess,
+    setShowSuccess,
     handleSubmit
   } = useOrderForm();
 
@@ -69,6 +72,7 @@ const OrderFormSection = () => {
           setStep={setStep}
           handleSubmit={handleSubmit}
         />
+        <SuccessModal open={showSuccess} onClose={() => setShowSuccess(false)} />
       </div>
     </section>
   );

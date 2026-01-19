@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import InputMask from "react-input-mask";
+import SuccessModal from "@/components/SuccessModal";
 
 interface RepairBookingFormProps {
   open: boolean;
@@ -15,6 +16,7 @@ interface RepairBookingFormProps {
 const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -37,10 +39,6 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
       });
 
       if (response.ok) {
-        toast({
-          title: "Заявка отправлена!",
-          description: "Мы свяжемся с вами в ближайшее время.",
-        });
         setFormData({
           name: "",
           phone: "",
@@ -51,6 +49,7 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
           comments: ""
         });
         onClose();
+        setShowSuccess(true);
       } else {
         throw new Error("Ошибка отправки");
       }
@@ -66,6 +65,7 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
   };
 
   return (
+    <>
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
@@ -170,6 +170,8 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
         </form>
       </DialogContent>
     </Dialog>
+    <SuccessModal open={showSuccess} onClose={() => setShowSuccess(false)} />
+    </>
   );
 };
 

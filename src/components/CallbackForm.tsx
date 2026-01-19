@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import SuccessModal from "@/components/SuccessModal";
 
 interface CallbackFormProps {
   open: boolean;
@@ -15,6 +16,7 @@ const CallbackForm = ({ open, onOpenChange }: CallbackFormProps) => {
   const [phone, setPhone] = useState("+7");
   const [callTime, setCallTime] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const { toast } = useToast();
 
   const formatPhone = (value: string) => {
@@ -78,14 +80,11 @@ const CallbackForm = ({ open, onOpenChange }: CallbackFormProps) => {
       });
 
       if (response.ok) {
-        toast({
-          title: "Заявка отправлена!",
-          description: "Мы свяжемся с вами в ближайшее время",
-        });
         setName("");
         setPhone("+7");
         setCallTime("");
         onOpenChange(false);
+        setShowSuccess(true);
       } else {
         throw new Error("Ошибка отправки");
       }
@@ -101,6 +100,7 @@ const CallbackForm = ({ open, onOpenChange }: CallbackFormProps) => {
   };
 
   return (
+    <>
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -146,6 +146,8 @@ const CallbackForm = ({ open, onOpenChange }: CallbackFormProps) => {
         </form>
       </DialogContent>
     </Dialog>
+    <SuccessModal open={showSuccess} onClose={() => setShowSuccess(false)} />
+    </>
   );
 };
 

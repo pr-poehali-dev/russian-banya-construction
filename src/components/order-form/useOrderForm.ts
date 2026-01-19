@@ -18,6 +18,7 @@ export interface OrderFormData {
 export const useOrderForm = () => {
   const { toast } = useToast();
   const [step, setStep] = useState(1);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [material, setMaterial] = useState('');
   const [length, setLength] = useState('');
   const [width, setWidth] = useState('');
@@ -77,10 +78,6 @@ export const useOrderForm = () => {
         if (typeof window !== 'undefined' && (window as any).ym) {
           (window as any).ym(105711132, 'reachGoal', 'form_submit');
         }
-        toast({
-          title: "Заявка отправлена!",
-          description: "Мы свяжемся с вами в ближайшее время.",
-        });
         setStep(1);
         setMaterial('');
         setLength('');
@@ -93,6 +90,7 @@ export const useOrderForm = () => {
         setPhone('');
         setEmail('');
         setMessenger('');
+        setShowSuccess(true);
       } else {
         throw new Error('Failed to send');
       }
@@ -133,6 +131,8 @@ export const useOrderForm = () => {
     messenger,
     setMessenger,
     isSubmitting,
+    showSuccess,
+    setShowSuccess,
     handleSubmit
   };
 };
