@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import InputMask from "react-input-mask";
 
 interface FormStepProps {
@@ -28,6 +29,8 @@ interface FormStepProps {
   setEmail: (value: string) => void;
   messenger: string;
   setMessenger: (value: string) => void;
+  comment: string;
+  setComment: (value: string) => void;
   isSubmitting: boolean;
   setStep: (step: number) => void;
   handleSubmit: () => void;
@@ -57,6 +60,8 @@ const FormStep = ({
   setEmail,
   messenger,
   setMessenger,
+  comment,
+  setComment,
   isSubmitting,
   setStep,
   handleSubmit
@@ -398,6 +403,16 @@ const FormStep = ({
                   МАКС (мой.мир)
                 </Button>
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="comment">Комментарий (необязательно)</Label>
+              <Textarea
+                id="comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Дополнительные пожелания или вопросы"
+                rows={3}
+              />
             </div>
             <div className="flex justify-between pt-4">
               <Button type="button" variant="outline" onClick={() => setStep(4)}>

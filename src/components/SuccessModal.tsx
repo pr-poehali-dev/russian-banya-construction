@@ -13,6 +13,7 @@ const SuccessModal = ({ open, onClose }: SuccessModalProps) => {
   const handleClose = () => {
     onClose();
     navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

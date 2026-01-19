@@ -13,6 +13,7 @@ export interface OrderFormData {
   phone: string;
   email: string;
   messenger: string;
+  comment: string;
 }
 
 export const useOrderForm = () => {
@@ -30,6 +31,7 @@ export const useOrderForm = () => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [messenger, setMessenger] = useState('');
+  const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
@@ -70,7 +72,8 @@ export const useOrderForm = () => {
           name,
           phone,
           email,
-          messenger
+          messenger,
+          comment
         })
       });
 
@@ -90,6 +93,7 @@ export const useOrderForm = () => {
         setPhone('');
         setEmail('');
         setMessenger('');
+        setComment('');
         setShowSuccess(true);
       } else {
         throw new Error('Failed to send');
@@ -130,6 +134,8 @@ export const useOrderForm = () => {
     setEmail,
     messenger,
     setMessenger,
+    comment,
+    setComment,
     isSubmitting,
     showSuccess,
     setShowSuccess,

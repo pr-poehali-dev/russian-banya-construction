@@ -29,6 +29,8 @@ const OrderFormSection = () => {
     setEmail,
     messenger,
     setMessenger,
+    comment,
+    setComment,
     isSubmitting,
     showSuccess,
     setShowSuccess,
@@ -68,6 +70,8 @@ const OrderFormSection = () => {
           setEmail={setEmail}
           messenger={messenger}
           setMessenger={setMessenger}
+          comment={comment}
+          setComment={setComment}
           isSubmitting={isSubmitting}
           setStep={setStep}
           handleSubmit={handleSubmit}
