@@ -47,7 +47,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 size="lg" 
                 onClick={() => scrollToSection("order")} 
                 className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
-              >Рассчитать стоимость НОВОЙ бани</Button>
+              >Рассчитать стоимость новой бани</Button>
               
               <Button 
                 size="lg" 
