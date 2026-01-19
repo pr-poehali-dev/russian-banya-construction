@@ -275,20 +275,11 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/одино60.jpg"
   ],
   [
-    "https://cdn.poehali.dev/files/600.jpg",
-    "https://cdn.poehali.dev/files/601.jpg",
-    "https://cdn.poehali.dev/files/602.jpg",
-    "https://cdn.poehali.dev/files/603.jpg",
-    "https://cdn.poehali.dev/files/604.jpg",
-    "https://cdn.poehali.dev/files/605.jpg",
-    "https://cdn.poehali.dev/files/606.jpg",
-    "https://cdn.poehali.dev/files/607.jpg",
-    "https://cdn.poehali.dev/files/608.jpg",
-    "https://cdn.poehali.dev/files/609.jpg",
-    "https://cdn.poehali.dev/files/610.jpg",
-    "https://cdn.poehali.dev/files/611.jpg",
-    "https://cdn.poehali.dev/files/612.jpg",
-    "https://cdn.poehali.dev/files/613.jpg"
+    "https://cdn.poehali.dev/files/троица1.jpg",
+    "https://cdn.poehali.dev/files/троица2.jpg",
+    "https://cdn.poehali.dev/files/троица3.jpg",
+    "https://cdn.poehali.dev/files/троица4.jpg",
+    "https://cdn.poehali.dev/files/троица5.jpg"
   ],
   [
     "https://cdn.poehali.dev/files/500.jpg",
