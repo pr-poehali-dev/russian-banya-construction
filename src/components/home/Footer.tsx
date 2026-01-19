@@ -14,7 +14,7 @@ const Footer = () => {
 
           <div className="text-center">
             <h4 className="font-semibold mb-4">Контакты</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-black text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-black text-sm">
               <a href="tel:+73422984030" className="flex items-center justify-center sm:justify-start gap-2 hover:text-gray-700 transition-colors">
                 <Icon name="Phone" size={16} />
                 +7 (342) 298-40-30
@@ -35,7 +35,7 @@ const Footer = () => {
                 <Icon name="Mail" size={16} />
                 perm-par@mail.ru
               </a>
-              <div className="flex items-center justify-center sm:justify-start gap-2">
+              <div className="flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap">
                 <Icon name="MapPin" size={16} />
                 <span>Пермь, Пермский край</span>
               </div>
@@ -45,7 +45,7 @@ const Footer = () => {
           <div className="text-center md:text-right">
             <h4 className="font-semibold mb-4">Мессенджеры</h4>
             <div className="flex flex-col items-center md:items-end gap-3">
-              <div className="flex justify-center md:justify-end gap-3 flex-wrap">
+              <div className="flex gap-3 flex-wrap justify-center md:justify-end">
                 <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
                   <Icon name="MessageCircle" size={20} className="text-white" />
                 </a>
