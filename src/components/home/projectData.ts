@@ -361,7 +361,10 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/горюшки17.jpg",
     "https://cdn.poehali.dev/files/горюшки18.jpg",
     "https://cdn.poehali.dev/files/горюшки19.jpg",
-    "https://cdn.poehali.dev/files/горюшки20.jpg"
+    "https://cdn.poehali.dev/files/горюшки20.jpg",
+    "https://cdn.poehali.dev/files/горюшки21.jpg",
+    "https://cdn.poehali.dev/files/горюшки22.jpg",
+    "https://cdn.poehali.dev/files/горюшки23.JPG"
   ]
 ];
 
@@ -459,7 +462,7 @@ export const projects: Project[] = [
     location: "д. Филатово, Пермский край"
   },
   {
-    img: "https://cdn.poehali.dev/files/горюшки1.jpg",
+    img: "https://cdn.poehali.dev/files/горюшки22.jpg",
     title: "Баня из бревна 6×8",
     size: "6×8 м",
     material: "Рубленое бревно",
