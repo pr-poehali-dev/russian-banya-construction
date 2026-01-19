@@ -430,7 +430,7 @@ export const projects: Project[] = [
     location: "д. Налимиха, Пермский край"
   },
   {
-    img: "https://cdn.poehali.dev/files/филатово1.jpg",
+    img: "https://cdn.poehali.dev/files/филатово23.jpg",
     title: "Баня из бревна 6×6",
     size: "6×6 м",
     material: "Рубленое бревно",
