@@ -182,7 +182,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         </div>
                         <div class="field">
                             <div class="field-label">Размеры:</div>
-                            <div class="field-value">{length} x {width} м, этажность: {floors}</div>
+                            <div class="field-value">{length} x {width} м, этажность: {'1,5 (мансарда)' if floors == '2' else floors}</div>
                         </div>
                         {f'<div class="field"><div class="field-label">Длина перегородок:</div><div class="field-value">{partitions_length} м</div></div>' if partitions_length else ''}
                         <div class="field">
