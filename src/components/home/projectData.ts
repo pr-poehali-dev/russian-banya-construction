@@ -398,6 +398,13 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/жебреи30.jpg",
     "https://cdn.poehali.dev/files/жебреи31.jpg",
     "https://cdn.poehali.dev/files/жебреи32.jpg"
+  ],
+  [
+    "https://cdn.poehali.dev/files/бершеть1.jpg",
+    "https://cdn.poehali.dev/files/бершеть2.jpg",
+    "https://cdn.poehali.dev/files/бершеть3.jpg",
+    "https://cdn.poehali.dev/files/бершеть4.jpg",
+    "https://cdn.poehali.dev/files/бершеть5.jpg"
   ]
 ];
 
@@ -507,5 +514,12 @@ export const projects: Project[] = [
     size: "6×6 м",
     material: "Рубленое бревно",
     location: "п. Жебреи, Пермский край"
+  },
+  {
+    img: "https://cdn.poehali.dev/files/бершеть1.jpg",
+    title: "Баня из бруса 6×6",
+    size: "6×6 м",
+    material: "Брус естественной влажности",
+    location: "п. Бершеть, Пермский край"
   }
 ];
