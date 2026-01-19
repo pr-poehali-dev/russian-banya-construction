@@ -257,7 +257,11 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/одино42.JPG",
     "https://cdn.poehali.dev/files/одино43.JPG",
     "https://cdn.poehali.dev/files/одино44.JPG",
-    "https://cdn.poehali.dev/files/одино45.JPG"
+    "https://cdn.poehali.dev/files/одино45.JPG",
+    "https://cdn.poehali.dev/files/одино46.JPG",
+    "https://cdn.poehali.dev/files/одино47.JPG",
+    "https://cdn.poehali.dev/files/одино48.JPG",
+    "https://cdn.poehali.dev/files/одино49.JPG"
   ],
   [
     "https://cdn.poehali.dev/files/600.jpg",
