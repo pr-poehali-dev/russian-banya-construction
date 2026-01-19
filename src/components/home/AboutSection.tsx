@@ -36,12 +36,12 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
         <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start w-full max-w-full mb-16">
           <div className="space-y-6 w-full max-w-full overflow-hidden">
             <div className="text-base md:text-base text-muted-foreground leading-relaxed space-y-4 break-words">
-              <p className="text-lg font-bold text-black">
+              <p className="text-base sm:text-lg font-bold text-black">
                 Меня зовут Александр.<br />
                 Я — специалист по строительству, модернизации и ремонту русских бань.
               </p>
               
-              <p className="text-lg font-bold text-black">Моя цель — построить Вам новую баню, отремонтировать или модернизировать существующую так, чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
+              <p className="text-base sm:text-lg font-bold text-black">Моя цель — построить Вам новую баню, отремонтировать или модернизировать существующую так, чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
               
               <Button 
                 size="lg" 
@@ -55,10 +55,10 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-white hover:bg-green-600 text-black hover:text-white font-bold border-2 border-green-600 transition-all hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
               >Нужен ремонт или модернизация бани</Button>
               
-              <p className="text-base md:text-lg text-black font-semibold mt-4">Бесплатная консультация по строительству, ремонту или модернизации Вашей бани</p>
+              <p className="text-sm sm:text-base md:text-lg text-black font-semibold mt-4">Бесплатная консультация по строительству, ремонту или модернизации Вашей бани</p>
 
               <div className="flex items-center justify-center gap-3 flex-wrap mt-4">
-              <a href="tel:+79824900900" className="text-2xl font-bold text-black hover:text-primary transition-colors">
+              <a href="tel:+79824900900" className="text-xl sm:text-2xl font-bold text-black hover:text-primary transition-colors">
                 +7 (982) 490-09-00
               </a>
               <a href="https://wa.me/79824900900" target="_blank" rel="noopener noreferrer" className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
@@ -129,52 +129,52 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <Icon name="MessageSquare" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</p>
+                <p className="text-base sm:text-lg text-black">Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="Home" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Строительство бань "под крышу"</p>
+                <p className="text-base sm:text-lg text-black">Строительство бань "под крышу"</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="Key" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Строительство бань "под ключ"</p>
+                <p className="text-base sm:text-lg text-black">Строительство бань "под ключ"</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="Wrench" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Ремонт и модернизация парных с эффектом "русской бани"</p>
+                <p className="text-base sm:text-lg text-black">Ремонт и модернизация парных с эффектом "русской бани"</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="Paintbrush" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Внутренняя и внешняя отделка</p>
+                <p className="text-base sm:text-lg text-black">Внутренняя и внешняя отделка</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="Flame" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Установка печей и дымоходов</p>
+                <p className="text-base sm:text-lg text-black">Установка печей и дымоходов</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="Droplets" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Электрика, сантехника, водоснабжение</p>
+                <p className="text-base sm:text-lg text-black">Электрика, сантехника, водоснабжение</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="DoorOpen" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Установка дверей и окон</p>
+                <p className="text-base sm:text-lg text-black">Установка дверей и окон</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="Sparkles" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Шлифовка и защита деревянных поверхностей</p>
+                <p className="text-base sm:text-lg text-black">Шлифовка и защита деревянных поверхностей</p>
               </div>
 
               <div className="flex items-start gap-3">
                 <Icon name="Waves" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                <p className="text-lg text-black">Банные чаны, купели, террасы, дренаж</p>
+                <p className="text-base sm:text-lg text-black">Банные чаны, купели, террасы, дренаж</p>
               </div>
 
               <div className="flex items-start gap-3">
