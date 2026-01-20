@@ -1,4 +1,9 @@
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+
 const ReviewsSection = () => {
+  const [visibleCount, setVisibleCount] = useState(6);
+
   const reviews = [
     {
       id: "review-01",
@@ -94,7 +99,7 @@ const ReviewsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((review) => (
+          {reviews.slice(0, visibleCount).map((review) => (
             <div key={review.id} data-review-id={review.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
@@ -109,6 +114,18 @@ const ReviewsSection = () => {
             </div>
           ))}
         </div>
+
+        {visibleCount < reviews.length && (
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => setVisibleCount(prev => prev + 3)}
+              variant="outline"
+              className="px-8 py-3 text-lg"
+            >
+              Смотреть еще отзывы
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
