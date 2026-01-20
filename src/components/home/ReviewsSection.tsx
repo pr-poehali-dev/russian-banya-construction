@@ -173,15 +173,21 @@ export const reviewsData = [
 
 const ReviewsSection = () => {
   const [reviews, setReviews] = useState(() => {
-    const saved = localStorage.getItem('reviewsData');
-    return saved ? JSON.parse(saved) : reviewsData;
+    const saved = localStorage.getItem('reviewsData_v2');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.length === reviewsData.length) {
+        return parsed;
+      }
+    }
+    return reviewsData;
   });
 
   const handleChange = (index: number, field: string, value: string) => {
     const updatedReviews = [...reviews];
     updatedReviews[index] = { ...updatedReviews[index], [field]: value };
     setReviews(updatedReviews);
-    localStorage.setItem('reviewsData', JSON.stringify(updatedReviews));
+    localStorage.setItem('reviewsData_v2', JSON.stringify(updatedReviews));
   };
 
   return (
