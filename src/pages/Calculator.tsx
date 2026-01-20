@@ -50,27 +50,22 @@ const Calculator = () => {
     });
 
     // Ленточный фундамент - всегда показываем, но считаем только если выбран
-    const concrete = perimeter * 0.6 * 0.5;
+    const concrete = 12;
     const isStripSelected = foundation === 'ленточный';
     sections.push({
       title: 'Фундамент ленточный, с буронабивными сваями',
       items: [
-        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: parseFloat(concrete.toFixed(2)), price: 8100, total: isStripSelected ? Math.round(concrete * 8100) : 0 },
+        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: 12, price: 8100, total: isStripSelected ? 97200 : 0 },
         { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: 5, price: 1000, total: isStripSelected ? 5000 : 0 },
-        { name: 'Арматура металлическая(10мм)', unit: 'п.м', quantity: 200, price: 100, total: isStripSelected ? 20000 : 0 },
-        { name: 'Арматура металлическая(8мм)', unit: 'п.м', quantity: 200, price: 60, total: isStripSelected ? 12000 : 0 },
-        { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: 1, price: 500, total: isStripSelected ? 500 : 0 },
-        { name: 'Доска 1-й сорт(50х200)мм', unit: 'м3', quantity: 2.52, price: 19500, total: isStripSelected ? 49140 : 0 },
-        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 14, price: 200, total: isStripSelected ? 2800 : 0 },
-        { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 400, price: 3, total: isStripSelected ? 1200 : 0 },
-        { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 40, price: 70, total: isStripSelected ? 2800 : 0 },
-        { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 1000, price: 0.2, total: isStripSelected ? 200 : 0 },
-        { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 200, price: 10, total: isStripSelected ? 2000 : 0 },
-        { name: 'Труба пластиковая(проходы)160мм', unit: 'м', quantity: 1, price: 1100, total: isStripSelected ? 1100 : 0 },
-        { name: 'Труба пластиковая(продухи)110мм', unit: 'м', quantity: 2, price: 950, total: isStripSelected ? 1900 : 0 },
-        { name: 'Услуги ямобура', unit: 'ч', quantity: 4, price: 1800, total: isStripSelected ? 6000 : 0 },
-        { name: 'Услуги экскаватора', unit: 'ч', quantity: 4, price: 1800, total: isStripSelected ? 6000 : 0 },
-        { name: 'Монтаж фундамента', unit: 'м3', quantity: parseFloat(concrete.toFixed(2)), price: 10000, total: isStripSelected ? Math.round(concrete * 10000) : 0 },
+        { name: 'Арматура металлическая(12мм)', unit: 'п.м', quantity: 500, price: 100, total: isStripSelected ? 50000 : 0 },
+        { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: 2, price: 500, total: isStripSelected ? 1000 : 0 },
+        { name: 'Доска для опалубки 1-й сорт(50х200х6000)мм', unit: 'м3', quantity: 4, price: 19500, total: isStripSelected ? 78000 : 0 },
+        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 21, price: 200, total: isStripSelected ? 4200 : 0 },
+        { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 600, price: 3, total: isStripSelected ? 1800 : 0 },
+        { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 50, price: 70, total: isStripSelected ? 3500 : 0 },
+        { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 2000, price: 0.2, total: isStripSelected ? 400 : 0 },
+        { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 300, price: 10, total: isStripSelected ? 3000 : 0 },
+        { name: 'Монтаж фундамента(с буронабивными сваями)', unit: 'м3', quantity: 12, price: 10000, total: isStripSelected ? 120000 : 0 },
       ],
       subtotal: 0
     });
