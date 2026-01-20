@@ -335,7 +335,9 @@ const Calculator = () => {
                         <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
                         <td className="border-r border-black p-1.5 text-center">1,5 этажа</td>
                         <td className="border-r border-black p-1.5 text-center">Высота мансарды, м</td>
-                        <td className="p-1.5 text-right">{(1 + 2.4).toFixed(1)}</td>
+                        <td className="p-1.5 text-right">
+                          {width ? (1 + parseFloat(width) / 2.5).toFixed(1) : '—'}
+                        </td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
@@ -359,7 +361,9 @@ const Calculator = () => {
                         <td className="border-r border-black p-1.5" colSpan={2}>Расстояние до объекта в 1 сторону, км</td>
                         <td className="border-r border-black p-1.5 text-center">0</td>
                         <td className="border-r border-black p-1.5 text-center">Высота крыши, м</td>
-                        <td className="p-1.5 text-right">2,4</td>
+                        <td className="p-1.5 text-right">
+                          {width ? (parseFloat(width) / 2.5).toFixed(1) : '—'}
+                        </td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}></td>
