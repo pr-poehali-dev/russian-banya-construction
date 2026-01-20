@@ -81,14 +81,13 @@ const Calculator = () => {
     sections[sections.length - 1].subtotal = isStripSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
 
     sections.push({
-      title: 'Обвязка и черновой пол',
+      title: 'Обвязка фундамента',
       items: [
-        { name: 'Обвязочный брус(100х200)мм', unit: 'м3', quantity: 0.48, price: 19500, total: 9360 },
-        { name: 'Рубероид РПП 300', unit: 'м2', quantity: 20, price: 65, total: 1300 },
-        { name: 'Антисептик зимний "Фенелакс"(-15С)', unit: 'л', quantity: 5, price: 130, total: 650 },
-        { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: Math.ceil(perimeter * 2), price: 4, total: Math.ceil(perimeter * 2) * 4 },
+        { name: 'Обвязочный брус(100х200х6000)мм', unit: 'м3', quantity: 0.60, price: 19500, total: 11700 },
+        { name: 'Рубероид РПП 300', unit: 'м2', quantity: 30, price: 65, total: 1950 },
+        { name: 'Антисептик', unit: 'л', quantity: 10, price: 130, total: 1300 },
         { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 6, price: 60, total: 360 },
-        { name: 'Монтаж обвязки', unit: 'м3', quantity: 0.48, price: 7500, total: 3600 },
+        { name: 'Монтаж обвязки', unit: 'м3', quantity: 0.60, price: 10000, total: 6000 },
       ],
       subtotal: 0
     });
