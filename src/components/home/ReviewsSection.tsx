@@ -1,7 +1,4 @@
-import { useState } from "react";
-import Icon from "@/components/ui/icon";
-
-export const reviewsData = [
+const reviewsData = [
   {
     name: "Александр Петров",
     location: "д. Веретье",
@@ -173,100 +170,15 @@ export const reviewsData = [
 ];
 
 const ReviewsSection = () => {
-  const [reviews, setReviews] = useState(() => {
-    const saved = localStorage.getItem('reviewsData_v2');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.length === reviewsData.length) {
-        return parsed;
-      }
-    }
-    return reviewsData;
-  });
-
-  const handleChange = (index: number, field: string, value: string) => {
-    const updatedReviews = [...reviews];
-    updatedReviews[index] = { ...updatedReviews[index], [field]: value };
-    setReviews(updatedReviews);
-    localStorage.setItem('reviewsData_v2', JSON.stringify(updatedReviews));
-  };
-
-  const handleExport = () => {
-    const dataStr = JSON.stringify(reviews, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'reviews-backup.json';
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const imported = JSON.parse(event.target?.result as string);
-        if (Array.isArray(imported) && imported.length === reviewsData.length) {
-          setReviews(imported);
-          localStorage.setItem('reviewsData_v2', JSON.stringify(imported));
-          alert('Отзывы успешно импортированы!');
-        } else {
-          alert('Неверный формат файла или количество отзывов не совпадает!');
-        }
-      } catch (error) {
-        alert('Ошибка при чтении файла!');
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  const handleReset = () => {
-    if (confirm('Сбросить все изменения и вернуться к исходным данным?')) {
-      setReviews(reviewsData);
-      localStorage.setItem('reviewsData_v2', JSON.stringify(reviewsData));
-    }
-  };
-
   return (
     <section className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">Отзывы моих клиентов</h2>
         </div>
 
-        <div className="flex justify-center gap-3 mb-8 flex-wrap">
-          <button
-            onClick={handleExport}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            <Icon name="Download" size={18} />
-            Экспортировать изменения
-          </button>
-          <label className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors cursor-pointer">
-            <Icon name="Upload" size={18} />
-            Импортировать изменения
-            <input
-              type="file"
-              accept=".json"
-              onChange={handleImport}
-              className="hidden"
-            />
-          </label>
-          <button
-            onClick={handleReset}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-          >
-            <Icon name="RotateCcw" size={18} />
-            Сбросить всё
-          </button>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((review: any, index: number) => (
+          {reviewsData.map((review, index) => (
             <div 
               key={index}
               className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col"
@@ -280,27 +192,12 @@ const ReviewsSection = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <input
-                    type="text"
-                    value={review.name}
-                    onChange={(e) => handleChange(index, 'name', e.target.value)}
-                    className="font-bold text-lg text-gray-900 w-full bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded"
-                  />
-                  <input
-                    type="text"
-                    value={review.location}
-                    onChange={(e) => handleChange(index, 'location', e.target.value)}
-                    className="text-sm text-gray-500 w-full bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded"
-                  />
+                  <p className="font-bold text-lg text-gray-900">{review.name}</p>
+                  <p className="text-sm text-gray-500">{review.location}</p>
                 </div>
               </div>
               
-              <textarea
-                value={review.text}
-                onChange={(e) => handleChange(index, 'text', e.target.value)}
-                className="text-gray-700 leading-relaxed flex-1 bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded resize-none"
-                rows={4}
-              />
+              <p className="text-gray-700 leading-relaxed">{review.text}</p>
             </div>
           ))}
         </div>
