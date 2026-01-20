@@ -52,11 +52,11 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/ключи1.JPG" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Ольга Викторовна</p>
+                <p className="font-bold text-lg text-gray-900">Александр Сергеевич</p>
                 <p className="text-sm text-gray-500">д. Ключи</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Заказывали баню из клееного бруса 10х10. Результат превзошел все ожидания! Качество материалов на высоте, сборка идеальная. Внутри просторно, светло. Парная - просто огонь! Отдельное спасибо за помощь с планировкой, учли все наши пожелания.</p>
+            <p className="text-gray-700 leading-relaxed">Александра порекомендовал печник, который устанавливал камин в доме. Александр приехал на объект, обсудили детали отделки, сделал замеры, посчитал смету. Все работы сделали хорошо, особенно парную. Полок из абаши особенно понравился. паримся в бане всей семьей, очень нравиться.</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
