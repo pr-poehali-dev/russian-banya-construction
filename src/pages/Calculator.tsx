@@ -207,30 +207,18 @@ const Calculator = () => {
                     />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="partition" className="text-base font-semibold">
-                      Длина перегородок (м)
-                    </Label>
-                    <Input
-                      id="partition"
-                      type="number"
-                      placeholder="0"
-                      value={partitionLength}
-                      onChange={(e) => setPartitionLength(e.target.value)}
-                      className="text-lg"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label className="text-base font-semibold">
-                      Периметр (м)
-                    </Label>
-                    <div className="h-11 flex items-center justify-center bg-gray-100 rounded-md border text-lg font-semibold text-gray-700">
-                      {length && width ? (
-                        (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
-                      ).toFixed(2) : '—'}
-                    </div>
-                  </div>
+                <div className="space-y-2">
+                  <Label htmlFor="partition" className="text-base font-semibold">
+                    Длина перегородок (м)
+                  </Label>
+                  <Input
+                    id="partition"
+                    type="number"
+                    placeholder="0"
+                    value={partitionLength}
+                    onChange={(e) => setPartitionLength(e.target.value)}
+                    className="text-lg"
+                  />
                 </div>
               </div>
 
@@ -325,7 +313,11 @@ const Calculator = () => {
                           {foundation === 'ленточный' ? 'Ленточный' : foundation === 'сваи' ? 'Винтовые сваи' : foundation === 'есть' ? 'Без фундамента' : '—'}
                         </td>
                         <td className="border-r border-black p-1.5 text-center">Периметр фундамента, м</td>
-                        <td className="p-1.5 text-right">30</td>
+                        <td className="p-1.5 text-right">
+                          {length && width ? (
+                            (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
+                          ).toFixed(2) : '—'}
+                        </td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Что хотите построить</td>
