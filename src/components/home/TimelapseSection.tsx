@@ -82,9 +82,9 @@ const TimelapseSection = ({ scrollToSection }: TimelapseSectionProps) => {
         <div className="text-center">
           <button
             onClick={() => scrollToSection?.('order')}
-            className="px-8 py-4 bg-primary text-white rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
+            className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg text-lg transition-transform hover:scale-105 active:scale-95"
           >
-            Рассчитать стоимость бани
+            Рассчитать стоимость вашей бани
           </button>
         </div>
       </div>
