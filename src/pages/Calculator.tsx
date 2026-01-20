@@ -50,8 +50,8 @@ const Calculator = () => {
     });
 
     // Ленточный фундамент - всегда показываем, но считаем только если выбран
-    const concrete = parseFloat((perimeter * 0.4).toFixed(2));
-    const drainagePillow = Math.round(perimeter * 0.15);
+    const concrete = Math.ceil(perimeter * 0.4 * 100) / 100;
+    const drainagePillow = Math.ceil(perimeter * 0.15);
     const reinforcement = Math.ceil(perimeter * 15 / 100) * 100;
     const bindingWire = Math.ceil(perimeter * 0.06);
     const formworkBoard = Math.ceil(perimeter * 0.126);
@@ -64,7 +64,7 @@ const Calculator = () => {
     sections.push({
       title: 'Фундамент ленточный, с буронабивными сваями',
       items: [
-        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: concrete, price: 8100, total: isStripSelected ? Math.round(concrete * 8100) : 0 },
+        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: concrete, price: 8100, total: isStripSelected ? Math.ceil(concrete * 8100) : 0 },
         { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: drainagePillow, price: 1000, total: isStripSelected ? drainagePillow * 1000 : 0 },
         { name: 'Арматура металлическая(12мм)', unit: 'п.м', quantity: reinforcement, price: 100, total: isStripSelected ? reinforcement * 100 : 0 },
         { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: bindingWire, price: 500, total: isStripSelected ? bindingWire * 500 : 0 },
@@ -74,7 +74,7 @@ const Calculator = () => {
         { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: film, price: 70, total: isStripSelected ? film * 70 : 0 },
         { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: staples, price: 0.2, total: isStripSelected ? staples * 0.2 : 0 },
         { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: fixators, price: 10, total: isStripSelected ? fixators * 10 : 0 },
-        { name: 'Монтаж фундамента(с буронабивными сваями)', unit: 'м3', quantity: concrete, price: 10000, total: isStripSelected ? Math.round(concrete * 10000) : 0 },
+        { name: 'Монтаж фундамента(с буронабивными сваями)', unit: 'м3', quantity: concrete, price: 10000, total: isStripSelected ? Math.ceil(concrete * 10000) : 0 },
       ],
       subtotal: 0
     });
@@ -93,12 +93,12 @@ const Calculator = () => {
     });
     sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
 
-    const partitionVolume = pl > 0 ? parseFloat((pl * 0.15 * 2.5).toFixed(2)) : 0;
+    const partitionVolume = pl > 0 ? Math.ceil(pl * 0.15 * 2.5 * 100) / 100 : 0;
     sections.push({
       title: 'Сруб из бревна',
       items: [
-        { name: 'Брус основного сруба', unit: 'м3', quantity: parseFloat((area * 1.2).toFixed(2)), price: 22000, total: Math.round(area * 1.2 * 22000) },
-        { name: 'Брус перегородки', unit: 'м3', quantity: partitionVolume, price: 22000, total: Math.round(partitionVolume * 22000) },
+        { name: 'Брус основного сруба', unit: 'м3', quantity: Math.ceil(area * 1.2 * 100) / 100, price: 22000, total: Math.ceil(area * 1.2 * 22000) },
+        { name: 'Брус перегородки', unit: 'м3', quantity: partitionVolume, price: 22000, total: Math.ceil(partitionVolume * 22000) },
         { name: 'Брус фронтонов', unit: 'м3', quantity: 0, price: 19500, total: 0 },
       ],
       subtotal: 0
@@ -118,9 +118,9 @@ const Calculator = () => {
     sections.push({
       title: 'Монтаж бруса (строгание с 2х сторон, фаски с 4х)',
       items: [
-        { name: 'Монтаж сруба', unit: 'м3', quantity: parseFloat((area * 1.2).toFixed(2)), price: 9000, total: Math.round(area * 1.2 * 9000) },
+        { name: 'Монтаж сруба', unit: 'м3', quantity: Math.ceil(area * 1.2 * 100) / 100, price: 9000, total: Math.ceil(area * 1.2 * 9000) },
       ],
-      subtotal: Math.round(area * 1.2 * 9000)
+      subtotal: Math.ceil(area * 1.2 * 9000)
     });
 
     sections.push({
@@ -149,13 +149,13 @@ const Calculator = () => {
         { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: 4, price: 200, total: 800 },
         { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 6, price: 200, total: 1200 },
         { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 250, price: 3, total: 750 },
-        { name: 'Металлочерепица', unit: 'м2', quantity: parseFloat((area * 1.5).toFixed(2)), price: 750, total: Math.round(area * 1.5 * 750) },
-        { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: Math.max(l, w), price: 240, total: Math.round(Math.max(l, w) * 240) },
+        { name: 'Металлочерепица', unit: 'м2', quantity: Math.ceil(area * 1.5 * 100) / 100, price: 750, total: Math.ceil(area * 1.5 * 750) },
+        { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: Math.ceil(Math.max(l, w)), price: 240, total: Math.ceil(Math.max(l, w) * 240) },
         { name: 'Ветровая планка', unit: 'п.м', quantity: 16, price: 240, total: 3840 },
         { name: 'Карнизная планка', unit: 'п.м', quantity: 15, price: 240, total: 3600 },
         { name: 'Кровельные саморезы(4,8*35)', unit: 'шт', quantity: 450, price: 5, total: 2250 },
         { name: 'Кровельные саморезы(4,8*50)', unit: 'шт', quantity: 150, price: 6, total: 900 },
-        { name: 'Монтаж кровли', unit: 'м2', quantity: parseFloat((area * 1.5).toFixed(2)), price: 2500, total: Math.round(area * 1.5 * 2500) },
+        { name: 'Монтаж кровли', unit: 'м2', quantity: Math.ceil(area * 1.5 * 100) / 100, price: 2500, total: Math.ceil(area * 1.5 * 2500) },
       ],
       subtotal: 0
     });
