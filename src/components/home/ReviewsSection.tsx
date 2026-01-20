@@ -143,11 +143,11 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/сылва1.JPG" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Валерий Степанович</p>
-                <p className="text-sm text-gray-500">п. Сылва</p>
+                <p className="font-bold text-lg text-gray-900">Алексей</p>
+                <p className="text-sm text-gray-500">д. Троица</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Отличная работа! Сделали баню под ключ 8х10. Парная прогревается за 40 минут и держит температуру долго. Печь подобрали отличную. Все материалы качественные, сборка профессиональная. Очень доволен результатом!</p>
+            <p className="text-gray-700 leading-relaxed">Заказал сруб для бани у Александра. Понравилось, как работают рубщики, все ровно, плотно, никаких щелей, хороший лес. Решил собрать тоже с Александром, и не прогадал. Фундамент, сруб и крышу сделали за неделю. Отделку делал своими силами, ни одной проблемы в конструктиве не обнаружилось. Александра, как специалиста, рекомендую.</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
