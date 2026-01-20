@@ -97,44 +97,42 @@ const Calculator = () => {
     });
     sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
 
-    const partitionVolume = pl > 0 ? Math.ceil(pl * 0.15 * 2.5 * 100) / 100 : 0;
+    sections.push({
+      title: 'Сруб из бруса',
+      items: [
+        { name: 'Брус для сруба', unit: 'м3', quantity: 19.95, price: 0, total: 0 },
+        { name: 'Джут(150мм)', unit: 'п.м', quantity: 1000, price: 25, total: 25000 },
+        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: 5200 },
+        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: 1000 },
+        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 100, price: 60, total: 6000 },
+        { name: 'Монтаж бруса', unit: 'м3', quantity: 19.95, price: 10000, total: 0 },
+      ],
+      subtotal: 0
+    });
+    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+
     sections.push({
       title: 'Сруб из бревна',
       items: [
-        { name: 'Брус основного сруба', unit: 'м3', quantity: Math.ceil(area * 1.2 * 100) / 100, price: 22000, total: Math.ceil(area * 1.2 * 22000) },
-        { name: 'Брус перегородки', unit: 'м3', quantity: partitionVolume, price: 22000, total: Math.ceil(partitionVolume * 22000) },
-        { name: 'Брус фронтонов', unit: 'м3', quantity: 0, price: 19500, total: 0 },
+        { name: 'Бревно сруба', unit: 'м3', quantity: 24.58, price: 22000, total: 540736.3 },
+        { name: 'Джут(150мм)', unit: 'п.м', quantity: 1000, price: 25, total: 25000 },
+        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: 5200 },
+        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: 1000 },
+        { name: 'Монтаж сруба', unit: 'м3', quantity: 24.58, price: 10000, total: 245789.2 },
       ],
       subtotal: 0
     });
     sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
-
-    sections.push({
-      title: 'Общая кубатура',
-      items: [
-        { name: 'Джут(150мм)', unit: 'п.м', quantity: 500, price: 25, total: 12500 },
-        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 60, price: 40, total: 2400 },
-      ],
-      subtotal: 0
-    });
-    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
-
-    sections.push({
-      title: 'Монтаж бруса (строгание с 2х сторон, фаски с 4х)',
-      items: [
-        { name: 'Монтаж сруба', unit: 'м3', quantity: Math.ceil(area * 1.2 * 100) / 100, price: 9000, total: Math.ceil(area * 1.2 * 9000) },
-      ],
-      subtotal: Math.ceil(area * 1.2 * 9000)
-    });
 
     sections.push({
       title: 'Лаги пола, балки перекрытия',
       items: [
-        { name: 'Брус для лаг, балок(100х150)мм', unit: 'м3', quantity: 1.62, price: 19500, total: 31590 },
-        { name: 'Монтаж лаг', unit: 'шт', quantity: 18, price: 600, total: 10800 },
+        { name: 'Брус для лаг, балок(100х150)мм', unit: 'м3', quantity: 2.34, price: 19500, total: 45630 },
+        { name: 'Монтаж лаг', unit: 'шт', quantity: 26, price: 1000, total: 44000 },
       ],
-      subtotal: 42390
+      subtotal: 0
     });
+    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
 
     sections.push({
       title: 'Крыша',
