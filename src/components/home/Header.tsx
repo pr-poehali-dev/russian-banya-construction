@@ -30,6 +30,7 @@ const Header = ({ activeSection, scrollToSection }: HeaderProps) => {
     { id: "about", label: "Обо мне" },
     { id: "services", label: "Услуги" },
     { id: "gallery", label: "Галерея" },
+    { id: "reviews", label: "Отзывы" },
     { id: "order", label: "Калькулятор" },
     { id: "contacts", label: "Контакты" }
   ];
