@@ -82,7 +82,7 @@ const ReviewsSection = () => {
                 <p className="text-sm text-gray-500">д. Красная Слудка</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Построили нам чудесную баньку 6х6 из профилированного бруса. Очень довольны! Ребята работают слаженно, знают свое дело. Все этапы прошли в срок, без накладок. Теперь каждые выходные паримся всей семьей. Огромное спасибо мастерам!</p>
+            <p className="text-gray-700 leading-relaxed">Александр сделал отделку бани, установил печь, двери, окна, сантехнику. Даже камни сам в печь уложил, оказывается, это важно! Всем рекомендую!</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
