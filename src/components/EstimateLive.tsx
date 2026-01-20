@@ -4,9 +4,19 @@ interface EstimateLiveProps {
   width: string;
   foundation: string;
   location: string;
+  partitionsLength: string;
+  floors: string;
 }
 
-const EstimateLive = ({ material, length, width, foundation, location }: EstimateLiveProps) => {
+const EstimateLive = ({ 
+  material, 
+  length, 
+  width, 
+  foundation, 
+  location,
+  partitionsLength,
+  floors 
+}: EstimateLiveProps) => {
   if (!length || !width || !material) {
     return (
       <div className="text-center py-12 text-gray-500">
@@ -16,452 +26,239 @@ const EstimateLive = ({ material, length, width, foundation, location }: Estimat
     );
   }
 
-  const area = parseFloat(length) * parseFloat(width);
-  const perimeter = (parseFloat(length) + parseFloat(width)) * 2;
-  const height = 2.2;
-  const wallVolume = perimeter * height * 0.15;
+  const len = parseFloat(length);
+  const wid = parseFloat(width);
+  const area = len * wid;
+  const perimeter = (len + wid) * 2;
+  const partLen = partitionsLength ? parseFloat(partitionsLength) : 0;
 
   const formatNumber = (num: number) => {
     return num.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
-  const calculateFoundationTotal = () => {
-    if (!foundation || foundation === 'net') return 0;
+  type EstimateItem = {
+    name: string;
+    unit: string;
+    quantity: number;
+    price: number;
+    total: number;
+  };
+
+  type EstimateSection = {
+    title: string;
+    items: EstimateItem[];
+  };
+
+  const sections: EstimateSection[] = [];
+
+  if (foundation && foundation !== 'net') {
+    const foundationItems: EstimateItem[] = [];
     
     if (foundation === 'lentochnyj') {
-      return 232510 + 9640 + 550 + 450 + 77 + 210 + 2000 + 44000;
+      foundationItems.push(
+        { name: 'Бетон В20 М250(на щебне)', unit: 'м3', quantity: 12.00, price: 8100.00, total: 97200.00 },
+        { name: 'Опалубка для свай (клееный)(150х150)мм', unit: 'шт', quantity: 19.00, price: 600.00, total: 11400.00 },
+        { name: 'Пиломатериал обрезной, доска(50х200)мм', unit: 'м3', quantity: 1.50, price: 18000.00, total: 27000.00 },
+        { name: 'Проволока вязальная(1,4мм)', unit: 'кг', quantity: 7.00, price: 300.00, total: 2100.00 },
+        { name: 'Доска для опалубки и 1 стадию, мм', unit: 'м3', quantity: 4.00, price: 18000.00, total: 72000.00 },
+        { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 24.00, price: 60.00, total: 1440.00 },
+        { name: 'Гвозди(3х70)мм', unit: 'кг', quantity: 8.00, price: 180.00, total: 1440.00 },
+        { name: 'Рубероид РКП', unit: 'рулон', quantity: 4.00, price: 450.00, total: 1800.00 }
+      );
+    } else if (foundation === 'stolbchatyj') {
+      foundationItems.push(
+        { name: 'Сваи винтовые (диаметр 89мм)', unit: 'шт', quantity: 16.00, price: 1800.00, total: 28800.00 },
+        { name: 'Монтаж винтовых свай', unit: 'шт', quantity: 16.00, price: 1200.00, total: 19200.00 },
+        { name: 'Обвязка швеллером(12мм)', unit: 'м', quantity: perimeter, price: 950.00, total: perimeter * 950 },
+        { name: 'Антикоррозийная обработка металла', unit: 'м2', quantity: 8.00, price: 180.00, total: 1440.00 }
+      );
     }
-    if (foundation === 'stolbchatyj') {
-      return 72000 + 8640 + 550 + 450 + 77 + 210 + 2000 + 33000;
-    }
-    if (foundation === 'plitnyj') {
-      return area * 0.25 * 4500 + area * 15 * 55 + area * 800 + 8640 + 550 + 450 + 77 + 210 + 2000 + (area * 800);
-    }
-    return 0;
-  };
 
-  const calculateWallsTotal = () => {
-    const pricePerM3 = material === 'bревно' ? 27000 : 22000;
-    const wallPrice = wallVolume * pricePerM3;
-    const assemblyPrice = area * 7000;
-    return wallPrice + assemblyPrice + 8640 + 320 + 450 + 180 + 2000 + 3500 + 300 + 960 + 700 + 3200 + 550 + 180 + 960;
-  };
+    sections.push({
+      title: `Фундамент ${foundation === 'lentochnyj' ? 'ленточный' : 'на винтовых сваях'}`,
+      items: foundationItems
+    });
+  }
 
-  const calculateDeliveryTotal = () => {
-    if (!location) return 0;
-    if (location === 'perm') return 0;
-    if (location === 'perm-30km') return 5000;
-    if (location === 'perm-50km') return 10000;
-    if (location === 'perm-100km') return 20000;
-    return 0;
-  };
+  const wallItems: EstimateItem[] = [];
+  const materialName = material === 'ocilindrovannoe-brevno' ? 'Оцилиндрованное бревно Ø220мм' 
+    : material === 'obychnyj-brus' ? 'Брус профилированный 150х150мм'
+    : 'Брус клееный 150х150мм';
+  
+  const materialPricePerM3 = material === 'ocilindrovannoe-brevno' ? 27000 
+    : material === 'obychnyj-brus' ? 22000 
+    : 32000;
 
-  const grandTotal = calculateFoundationTotal() + calculateWallsTotal() + calculateDeliveryTotal();
+  const wallVolume = (perimeter * 2.2 * 0.15) + (partLen * 2.2 * 0.1);
+  const roofArea = floors === '2' ? area * 1.5 : area * 1.2;
+
+  wallItems.push(
+    { name: materialName, unit: 'м3', quantity: wallVolume, price: materialPricePerM3, total: wallVolume * materialPricePerM3 },
+    { name: 'Доска пола(40х150)мм', unit: 'м3', quantity: area * 0.04, price: 18000, total: area * 0.04 * 18000 },
+    { name: 'Доска потолка(25х150)мм', unit: 'м3', quantity: area * 0.025, price: 18000, total: area * 0.025 * 18000 },
+    { name: 'Балки перекрытия(100х200)мм', unit: 'м3', quantity: area * 0.06, price: 20000, total: area * 0.06 * 20000 },
+    { name: 'Стропильная система', unit: 'м3', quantity: roofArea * 0.05, price: 20000, total: roofArea * 0.05 * 20000 },
+    { name: 'Обрешетка кровли(25х100)мм', unit: 'м3', quantity: roofArea * 0.01, price: 18000, total: roofArea * 0.01 * 18000 },
+    { name: 'Гидроизоляция(Изоспан)', unit: 'м2', quantity: roofArea, price: 85, total: roofArea * 85 },
+    { name: 'Металлочерепица', unit: 'м2', quantity: roofArea, price: 450, total: roofArea * 450 },
+    { name: 'Доборные элементы кровли', unit: 'комп', quantity: 1, price: 12000, total: 12000 },
+    { name: 'Утеплитель Ursa(100мм)', unit: 'м3', quantity: area * 0.1, price: 2800, total: area * 0.1 * 2800 },
+    { name: 'Пароизоляция(Изоспан B)', unit: 'м2', quantity: area, price: 45, total: area * 45 },
+    { name: 'Огнебиозащита(Сенеж)', unit: 'л', quantity: area * 0.3, price: 480, total: area * 0.3 * 480 },
+    { name: 'Нагели деревянные(Ø25мм)', unit: 'шт', quantity: perimeter * 4, price: 35, total: perimeter * 4 * 35 },
+    { name: 'Джут межвенцовый(8мм)', unit: 'м.п', quantity: perimeter * 15, price: 25, total: perimeter * 15 * 25 }
+  );
+
+  sections.push({
+    title: 'Материалы и работы',
+    items: wallItems
+  });
+
+  const workItems: EstimateItem[] = [
+    { name: 'Монтаж сруба', unit: 'м2', quantity: area, price: 4500, total: area * 4500 },
+    { name: 'Монтаж стропильной системы', unit: 'м2', quantity: roofArea, price: 650, total: roofArea * 650 },
+    { name: 'Монтаж кровли', unit: 'м2', quantity: roofArea, price: 450, total: roofArea * 450 },
+    { name: 'Устройство полов', unit: 'м2', quantity: area, price: 800, total: area * 800 },
+    { name: 'Устройство потолков', unit: 'м2', quantity: area, price: 600, total: area * 600 }
+  ];
+
+  sections.push({
+    title: 'Монтажные работы',
+    items: workItems
+  });
+
+  let grandTotal = 0;
+  sections.forEach(section => {
+    section.items.forEach(item => {
+      grandTotal += item.total;
+    });
+  });
+
+  const currentDate = new Date().toLocaleDateString('ru-RU');
 
   return (
-    <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-      {foundation && foundation !== 'net' && (
-        <div className="border rounded-lg p-4 bg-white">
-          <h3 className="font-bold text-sm mb-3 text-gray-800">
-            Фундамент из {foundation === 'lentochnyj' ? 'ленточного бетона' : foundation === 'stolbchatyj' ? 'винтовых свай' : 'плиты'}
-          </h3>
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left py-1 font-medium text-gray-600">Наименование</th>
-                <th className="text-center py-1 font-medium text-gray-600 w-12">Ед.</th>
-                <th className="text-right py-1 font-medium text-gray-600 w-16">Кол-во</th>
-                <th className="text-right py-1 font-medium text-gray-600 w-20">Цена</th>
-                <th className="text-right py-1 font-medium text-gray-600 w-24">Сумма</th>
-              </tr>
-            </thead>
-            <tbody>
-              {foundation === 'lentochnyj' && (
-                <>
-                  <tr className="border-b bg-gray-50">
-                    <td colSpan={5} className="py-1.5 font-semibold text-xs">Фундамент ленточный, с буронабивными сваями</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Бетон В20 М250(на щебне)</td>
-                    <td className="text-center py-1.5">м3</td>
-                    <td className="text-right py-1.5">7,70</td>
-                    <td className="text-right py-1.5">7 100,00</td>
-                    <td className="text-right py-1.5 font-medium">54 670,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Дренажная подушка(ПГС)</td>
-                    <td className="text-center py-1.5">т</td>
-                    <td className="text-right py-1.5">5,00</td>
-                    <td className="text-right py-1.5">700,00</td>
-                    <td className="text-right py-1.5 font-medium">3 500,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Арматура металлическая(гладкая 10мм)</td>
-                    <td className="text-center py-1.5">п.м</td>
-                    <td className="text-right py-1.5">200,00</td>
-                    <td className="text-right py-1.5">90,00</td>
-                    <td className="text-right py-1.5 font-medium">18 000,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Арматура металлическая(8мм)</td>
-                    <td className="text-center py-1.5">п.м</td>
-                    <td className="text-right py-1.5">200,00</td>
-                    <td className="text-right py-1.5">50,00</td>
-                    <td className="text-right py-1.5 font-medium">10 000,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Проволока вязальная(1,4мм)</td>
-                    <td className="text-center py-1.5">кг</td>
-                    <td className="text-right py-1.5">1,00</td>
-                    <td className="text-right py-1.5">300,00</td>
-                    <td className="text-right py-1.5 font-medium">300,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Доска 1-й сорт(50х200)мм</td>
-                    <td className="text-center py-1.5">м3</td>
-                    <td className="text-right py-1.5">2,66</td>
-                    <td className="text-right py-1.5">18 000,00</td>
-                    <td className="text-right py-1.5 font-medium">47 790,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Гвозди(4х100)мм</td>
-                    <td className="text-center py-1.5">кг</td>
-                    <td className="text-right py-1.5">15,00</td>
-                    <td className="text-right py-1.5">180,00</td>
-                    <td className="text-right py-1.5 font-medium">2 700,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Саморезы черные(3,5х90)мм</td>
-                    <td className="text-center py-1.5">шт</td>
-                    <td className="text-right py-1.5">500,00</td>
-                    <td className="text-right py-1.5">2,50</td>
-                    <td className="text-right py-1.5 font-medium">1 250,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Пленка полиэтиленовая(200мк)</td>
-                    <td className="text-center py-1.5">м2</td>
-                    <td className="text-right py-1.5">40,00</td>
-                    <td className="text-right py-1.5">60,00</td>
-                    <td className="text-right py-1.5 font-medium">2 400,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Скобы для степлера(№10)</td>
-                    <td className="text-center py-1.5">шт</td>
-                    <td className="text-right py-1.5">1000,00</td>
-                    <td className="text-right py-1.5">0,15</td>
-                    <td className="text-right py-1.5 font-medium">150,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Фиксаторы арматуры(35мм)</td>
-                    <td className="text-center py-1.5">шт</td>
-                    <td className="text-right py-1.5">200,00</td>
-                    <td className="text-right py-1.5">6,00</td>
-                    <td className="text-right py-1.5 font-medium">1 200,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Труба пластиковая(продухи)160мм</td>
-                    <td className="text-center py-1.5">м</td>
-                    <td className="text-right py-1.5">1,00</td>
-                    <td className="text-right py-1.5">950,00</td>
-                    <td className="text-right py-1.5 font-medium">950,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Труба пластиковая(продухи)110мм</td>
-                    <td className="text-center py-1.5">м</td>
-                    <td className="text-right py-1.5">2,00</td>
-                    <td className="text-right py-1.5">800,00</td>
-                    <td className="text-right py-1.5 font-medium">1 600,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Услуги ямобура</td>
-                    <td className="text-center py-1.5">ч</td>
-                    <td className="text-right py-1.5">4,00</td>
-                    <td className="text-right py-1.5">1 500,00</td>
-                    <td className="text-right py-1.5 font-medium">6 000,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Услуги экскаватора</td>
-                    <td className="text-center py-1.5">ч</td>
-                    <td className="text-right py-1.5">4,00</td>
-                    <td className="text-right py-1.5">1 500,00</td>
-                    <td className="text-right py-1.5 font-medium">6 000,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Монтаж фундамента</td>
-                    <td className="text-center py-1.5">м3</td>
-                    <td className="text-right py-1.5">7,70</td>
-                    <td className="text-right py-1.5">10 000,00</td>
-                    <td className="text-right py-1.5 font-medium">77 000,00</td>
-                  </tr>
-                  <tr className="bg-blue-50">
-                    <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого основные работы:</td>
-                    <td className="text-right py-2 font-semibold text-blue-700">232 510,00</td>
-                  </tr>
-                </>
-              )}
-              {foundation === 'stolbchatyj' && (
-                <>
-                  <tr className="border-b bg-gray-50">
-                    <td colSpan={5} className="py-1.5 font-semibold text-xs">Фундамент из винтовых свай</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Свая винтовая 89/6/300(2,5м)</td>
-                    <td className="text-center py-1.5">шт</td>
-                    <td className="text-right py-1.5">11,00</td>
-                    <td className="text-right py-1.5">2 500,00</td>
-                    <td className="text-right py-1.5 font-medium">27 500,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Оголовки для свай съемные(150х150)мм</td>
-                    <td className="text-center py-1.5">шт</td>
-                    <td className="text-right py-1.5">11,00</td>
-                    <td className="text-right py-1.5">500,00</td>
-                    <td className="text-right py-1.5 font-medium">5 500,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Услуги ямобура</td>
-                    <td className="text-center py-1.5">ч</td>
-                    <td className="text-right py-1.5">4,00</td>
-                    <td className="text-right py-1.5">1 500,00</td>
-                    <td className="text-right py-1.5 font-medium">6 000,00</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Монтаж свай</td>
-                    <td className="text-center py-1.5">шт</td>
-                    <td className="text-right py-1.5">11,00</td>
-                    <td className="text-right py-1.5">3 000,00</td>
-                    <td className="text-right py-1.5 font-medium">33 000,00</td>
-                  </tr>
-                  <tr className="bg-blue-50">
-                    <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого основные работы:</td>
-                    <td className="text-right py-2 font-semibold text-blue-700">72 000,00</td>
-                  </tr>
-                </>
-              )}
-              {foundation === 'plitnyj' && (
-                <>
-                  <tr className="border-b">
-                    <td className="py-1.5">Бетон М300</td>
-                    <td className="text-center py-1.5">м3</td>
-                    <td className="text-right py-1.5">{formatNumber(area * 0.25)}</td>
-                    <td className="text-right py-1.5">4 500,00</td>
-                    <td className="text-right py-1.5 font-medium">{formatNumber(area * 0.25 * 4500)}</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Арматура А500</td>
-                    <td className="text-center py-1.5">кг</td>
-                    <td className="text-right py-1.5">{formatNumber(area * 15)}</td>
-                    <td className="text-right py-1.5">55,00</td>
-                    <td className="text-right py-1.5 font-medium">{formatNumber(area * 15 * 55)}</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-1.5">Работы по заливке</td>
-                    <td className="text-center py-1.5">м2</td>
-                    <td className="text-right py-1.5">{formatNumber(area)}</td>
-                    <td className="text-right py-1.5">800,00</td>
-                    <td className="text-right py-1.5 font-medium">{formatNumber(area * 800)}</td>
-                  </tr>
-                  <tr className="bg-blue-50">
-                    <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого основные работы:</td>
-                    <td className="text-right py-2 font-semibold text-blue-700">72 000,00</td>
-                  </tr>
-                </>
-              )}
-
-              {foundation === 'plitnyj' && (
-                <tr className="bg-blue-50">
-                  <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого основные работы:</td>
-                  <td className="text-right py-2 font-semibold text-blue-700">{formatNumber(area * 0.25 * 4500 + area * 15 * 55 + area * 800)}</td>
-                </tr>
-              )}
-              <tr className="border-b bg-gray-50">
-                <td colSpan={5} className="py-1.5 font-semibold text-xs">Обвязка фундамента</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-1.5">Обвязочный брус(100х200)мм</td>
-                <td className="text-center py-1.5">м3</td>
-                <td className="text-right py-1.5">0,48</td>
-                <td className="text-right py-1.5">18 000,00</td>
-                <td className="text-right py-1.5 font-medium">8 640,00</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-1.5">Рубероид РПП 300</td>
-                <td className="text-center py-1.5">м2</td>
-                <td className="text-right py-1.5">10,00</td>
-                <td className="text-right py-1.5">55,00</td>
-                <td className="text-right py-1.5 font-medium">550,00</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-1.5">Антисептик зимний "Фенелакс"(-15С)</td>
-                <td className="text-center py-1.5">л</td>
-                <td className="text-right py-1.5">5,00</td>
-                <td className="text-right py-1.5">90,00</td>
-                <td className="text-right py-1.5 font-medium">450,00</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-1.5">Шуруп "глухарь"(8х40) 1кг/ми</td>
-                <td className="text-center py-1.5">шт</td>
-                <td className="text-right py-1.5">22,00</td>
-                <td className="text-right py-1.5">3,50</td>
-                <td className="text-right py-1.5 font-medium">77,00</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-1.5">Скобы строительные(8х250)</td>
-                <td className="text-center py-1.5">шт</td>
-                <td className="text-right py-1.5">6,00</td>
-                <td className="text-right py-1.5">50,00</td>
-                <td className="text-right py-1.5 font-medium">300,00</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-1.5">Монтаж обвязки</td>
-                <td className="text-center py-1.5">м3</td>
-                <td className="text-right py-1.5">0,48</td>
-                <td className="text-right py-1.5">7 500,00</td>
-                <td className="text-right py-1.5 font-medium">3 600,00</td>
-              </tr>
-              <tr className="bg-blue-50">
-                <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого обвязка:</td>
-                <td className="text-right py-2 font-semibold text-blue-700">13 617,00</td>
-              </tr>
-              <tr className="bg-yellow-50">
-                <td colSpan={4} className="py-2 font-bold text-right">Итого по разделу:</td>
-                <td className="text-right py-2 font-bold text-green-700">
-                  {foundation === 'lentochnyj' && '85 617,00'}
-                  {foundation === 'stolbchatyj' && '63 117,00'}
-                  {foundation === 'plitnyj' && formatNumber(area * 0.25 * 4500 + area * 15 * 55 + area * 800 + 13617)}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {material && (
-        <>
-          <div className="border rounded-lg p-4 bg-white">
-            <h3 className="font-bold text-sm mb-3 text-gray-800">
-              Сруб из {material === 'bревно' ? 'бревна' : 'бруса'}
-            </h3>
-            <table className="w-full text-xs">
-              <tbody>
-                <tr className="border-b">
-                  <td className="py-1.5">{material === 'bревно' ? 'Бревно сруба' : 'Брус профилированный'}</td>
-                  <td className="text-center py-1.5">м3</td>
-                  <td className="text-right py-1.5">{formatNumber(wallVolume)}</td>
-                  <td className="text-right py-1.5">{material === 'bревно' ? '19 500,00' : '17 500,00'}</td>
-                  <td className="text-right py-1.5 font-medium">
-                    {formatNumber(wallVolume * (material === 'bревно' ? 19500 : 17500))}
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-1.5">Бревно перегородки</td>
-                  <td className="text-center py-1.5">м3</td>
-                  <td className="text-right py-1.5">1,70</td>
-                  <td className="text-right py-1.5">17 500,00</td>
-                  <td className="text-right py-1.5 font-medium">29 750,00</td>
-                </tr>
-                <tr className="bg-blue-50">
-                  <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого материалы сруба:</td>
-                  <td className="text-right py-2 font-semibold text-blue-700">
-                    {formatNumber(wallVolume * (material === 'bревно' ? 19500 : 17500) + 29750)}
-                  </td>
-                </tr>
-                <tr className="bg-yellow-50">
-                  <td colSpan={4} className="py-2 font-bold text-right">Итого по разделу:</td>
-                  <td className="text-right py-2 font-bold text-green-700">
-                    {formatNumber(wallVolume * (material === 'bревно' ? 19500 : 17500) + 29750)}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    <div className="space-y-0 max-h-[600px] overflow-y-auto">
+      <div className="bg-white border-2 border-black">
+        <div className="border-b-2 border-black p-3">
+          <div className="flex justify-between items-start">
+            <div className="flex-1">
+              <h2 className="font-bold text-base">Предварительная примерная смета компании "Пермский Пар"</h2>
+            </div>
+            <div className="text-right text-xs">
+              <div>тел. +7 (342) 298-40-30</div>
+              <div>тел. +7(982) 490 09 00</div>
+            </div>
           </div>
-
-          <div className="border rounded-lg p-4 bg-white">
-            <h3 className="font-bold text-sm mb-3 text-gray-800">Общая кубатура</h3>
-            <table className="w-full text-xs">
-              <tbody>
-                <tr className="border-b">
-                  <td className="py-1.5">Джут(150мм)</td>
-                  <td className="text-center py-1.5">п.м</td>
-                  <td className="text-right py-1.5">600,00</td>
-                  <td className="text-right py-1.5">21,00</td>
-                  <td className="text-right py-1.5 font-medium">12 600,00</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-1.5">Шкант березовый(24х1200)мм</td>
-                  <td className="text-center py-1.5">шт</td>
-                  <td className="text-right py-1.5">80,00</td>
-                  <td className="text-right py-1.5">35,00</td>
-                  <td className="text-right py-1.5 font-medium">2 800,00</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-1.5">Скобы для степлера(№10)</td>
-                  <td className="text-center py-1.5">шт</td>
-                  <td className="text-right py-1.5">3 000,00</td>
-                  <td className="text-right py-1.5">0,15</td>
-                  <td className="text-right py-1.5 font-medium">450,00</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-1.5">Скобы строительные(8х250)</td>
-                  <td className="text-center py-1.5">шт</td>
-                  <td className="text-right py-1.5">31,00</td>
-                  <td className="text-right py-1.5">50,00</td>
-                  <td className="text-right py-1.5 font-medium">1 550,00</td>
-                </tr>
-                <tr className="bg-blue-50">
-                  <td colSpan={4} className="py-2 text-right font-semibold text-xs">Итого расходные материалы:</td>
-                  <td className="text-right py-2 font-semibold text-blue-700">17 400,00</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-1.5">Монтаж сруба</td>
-                  <td className="text-center py-1.5">м3</td>
-                  <td className="text-right py-1.5">{formatNumber(wallVolume + 1.7)}</td>
-                  <td className="text-right py-1.5">8 500,00</td>
-                  <td className="text-right py-1.5 font-medium">{formatNumber((wallVolume + 1.7) * 8500)}</td>
-                </tr>
-                <tr className="bg-yellow-50">
-                  <td colSpan={4} className="py-2 font-bold text-right">Итого по разделу:</td>
-                  <td className="text-right py-2 font-bold text-green-700">
-                    {formatNumber(12600 + 2800 + 450 + 1550 + (wallVolume + 1.7) * 8500)}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
-
-      {location && location !== 'perm' && (
-        <div className="border rounded-lg p-4 bg-white">
-          <h3 className="font-bold text-sm mb-3 text-gray-800">Доставка и выезд бригады</h3>
-          <table className="w-full text-xs">
-            <tbody>
-              <tr className="border-b">
-                <td className="py-1.5">
-                  Доставка материалов и выезд бригады ({location === 'perm-30km' ? 'до 30 км' : location === 'perm-50km' ? '30-50 км' : '50-100 км'} от Перми)
-                </td>
-                <td className="text-center py-1.5">услуга</td>
-                <td className="text-right py-1.5">1</td>
-                <td className="text-right py-1.5">{formatNumber(calculateDeliveryTotal())}</td>
-                <td className="text-right py-1.5 font-medium">{formatNumber(calculateDeliveryTotal())}</td>
-              </tr>
-              <tr className="bg-yellow-50">
-                <td colSpan={4} className="py-2 font-bold text-right">Итого по разделу:</td>
-                <td className="text-right py-2 font-bold text-green-700">
-                  {formatNumber(calculateDeliveryTotal())}
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
-      )}
 
-      <div className="border-4 border-green-600 rounded-lg p-6 bg-gradient-to-br from-green-50 to-white sticky bottom-0 shadow-xl">
-        <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-gray-800">ИТОГО ПО СМЕТЕ:</h2>
-          <div className="text-3xl font-bold text-green-700">{formatNumber(grandTotal)} ₽</div>
+        <table className="w-full text-[10px] border-collapse">
+          <tbody>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5 font-bold text-center" colSpan={2}>Заказчик</td>
+              <td className="p-1.5"></td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5 w-32"></td>
+              <td className="border-r border-black p-1.5 w-24 text-center">площадь</td>
+              <td className="border-r border-black p-1.5 w-24 text-center">Код по</td>
+            </tr>
+            <tr className="border-b border-black bg-gray-50">
+              <td className="border-r border-black p-1.5 font-bold text-center" colSpan={3}>Данные объекта</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5 font-bold">Параметры</td>
+              <td className="border-r border-black p-1.5 font-bold">Значение</td>
+              <td className="p-1.5 font-bold">Дополнительные значения</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5">Фундамент</td>
+              <td className="border-r border-black p-1.5">
+                {foundation === 'lentochnyj' ? 'Ленточный' : foundation === 'stolbchatyj' ? 'Винтовые сваи' : 'Без фундамента'}
+              </td>
+              <td className="p-1.5">Периметр: {perimeter.toFixed(1)} м</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5">Материал постройки</td>
+              <td className="border-r border-black p-1.5">{materialName}</td>
+              <td className="p-1.5">Высота стен: 2,2 м</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5">Этажность</td>
+              <td className="border-r border-black p-1.5">{floors === '2' ? '1,5 этажа' : '1 этаж'}</td>
+              <td className="p-1.5">Кровля: {roofArea.toFixed(1)} м2</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5">Длина и ширина объекта, м</td>
+              <td className="border-r border-black p-1.5">{len} х {wid}</td>
+              <td className="p-1.5">Площадь: {area.toFixed(1)} м2</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5">Длина перегородок, 1 этажа, м</td>
+              <td className="border-r border-black p-1.5">{partLen}</td>
+              <td className="p-1.5">Площадь пола: {area.toFixed(1)} м2</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5">Расстояние до объекта и 1 стадию, мм</td>
+              <td className="border-r border-black p-1.5">{location || '—'}</td>
+              <td className="p-1.5">Дата: {currentDate}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="p-2 bg-gray-100 border-y-2 border-black">
+          <h3 className="font-bold text-xs text-center">Расчеты</h3>
         </div>
-        <p className="text-sm text-gray-600 mt-2">Общая сумма всех разделов работ и материалов</p>
+
+        <table className="w-full text-[9px] border-collapse">
+          <thead>
+            <tr className="bg-gray-100 border-b border-black">
+              <th className="border-r border-black p-1.5 text-left font-bold">Наименование материалов и работ</th>
+              <th className="border-r border-black p-1.5 text-center font-bold w-12">Ед.из</th>
+              <th className="border-r border-black p-1.5 text-right font-bold w-16">Кол-во</th>
+              <th className="border-r border-black p-1.5 text-right font-bold w-20">Цена, р</th>
+              <th className="border-r border-black p-1.5 text-right font-bold w-24">Стоимость, р</th>
+              <th className="p-1.5 text-right font-bold w-24">Поставщ, р</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sections.map((section, sectionIdx) => {
+              const sectionTotal = section.items.reduce((sum, item) => sum + item.total, 0);
+              
+              return (
+                <React.Fragment key={sectionIdx}>
+                  <tr className="bg-yellow-100 border-y border-black">
+                    <td colSpan={6} className="p-1.5 font-bold">{section.title}</td>
+                  </tr>
+                  {section.items.map((item, itemIdx) => (
+                    <tr key={itemIdx} className={`border-b border-gray-300 ${itemIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                      <td className="border-r border-gray-300 p-1.5">{item.name}</td>
+                      <td className="border-r border-gray-300 p-1.5 text-center">{item.unit}</td>
+                      <td className="border-r border-gray-300 p-1.5 text-right">{formatNumber(item.quantity)}</td>
+                      <td className="border-r border-gray-300 p-1.5 text-right">{formatNumber(item.price)}</td>
+                      <td className="border-r border-gray-300 p-1.5 text-right font-medium">{formatNumber(item.total)}</td>
+                      <td className="p-1.5 text-right"></td>
+                    </tr>
+                  ))}
+                  <tr className="bg-gray-200 border-y border-black">
+                    <td colSpan={4} className="border-r border-black p-1.5 text-right font-bold">Итого по разделу:</td>
+                    <td colSpan={2} className="p-1.5 text-right font-bold">{formatNumber(sectionTotal)}</td>
+                  </tr>
+                </React.Fragment>
+              );
+            })}
+            <tr className="bg-yellow-200 border-t-2 border-black">
+              <td colSpan={4} className="border-r border-black p-2 text-right font-bold text-base">ИТОГО</td>
+              <td colSpan={2} className="p-2 text-right font-bold text-base">{formatNumber(grandTotal)}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="p-3 border-t-2 border-black text-[9px] space-y-1">
+          <p className="font-bold">Примечания:</p>
+          <p>• Смета является предварительной и может быть уточнена после выезда специалиста на объект</p>
+          <p>• Цены указаны с учетом материалов и работ на {currentDate}</p>
+          <p>• Точный расчет производится после замеров и согласования проекта</p>
+        </div>
       </div>
     </div>
   );
