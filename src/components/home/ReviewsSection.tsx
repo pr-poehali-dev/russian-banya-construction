@@ -117,8 +117,8 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/кольцово1.JPG" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Игорь Павлович</p>
-                <p className="text-sm text-gray-500">д. Кольцово</p>
+                <p className="font-bold text-lg text-gray-900">Дмитрий</p>
+                <p className="text-sm text-gray-500">д. Красная Слудка</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed">Заказывал баню 6х9 из оцилиндрованного бревна. Работой очень доволен! Мастера приезжали вовремя, работали аккуратно и быстро. Материал качественный, всё подогнано идеально. Парилка получилась супер - жар мягкий, долго держится. Рекомендую!</p>
