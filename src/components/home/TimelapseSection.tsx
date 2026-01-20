@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const timelapseData = [
   {
     image: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/cdcf3631-b7df-42cd-bcc7-b1c596a60032.jpg",
@@ -42,6 +44,15 @@ const timelapseData = [
 ];
 
 const TimelapseSection = () => {
+  const [descriptions, setDescriptions] = useState(
+    timelapseData.map(item => item.description)
+  );
+
+  const handleDescriptionChange = (index: number, value: string) => {
+    const newDescriptions = [...descriptions];
+    newDescriptions[index] = value;
+    setDescriptions(newDescriptions);
+  };
 
   return (
     <section id="timelapse" className="py-16 md:py-20 bg-white">
@@ -67,9 +78,13 @@ const TimelapseSection = () => {
                 <div className="text-sm font-semibold text-gray-500 mb-1">
                   День {index + 1}
                 </div>
-                <div className="text-sm text-gray-700">
-                  {item.description}
-                </div>
+                <input
+                  type="text"
+                  value={descriptions[index]}
+                  onChange={(e) => handleDescriptionChange(index, e.target.value)}
+                  className="w-full text-sm text-center text-gray-700 bg-transparent border-b border-transparent hover:border-gray-300 focus:border-primary focus:outline-none transition-colors px-2 py-1 cursor-text"
+                  placeholder="Добавьте описание"
+                />
               </div>
             </div>
           ))}
