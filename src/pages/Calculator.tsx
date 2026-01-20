@@ -170,7 +170,111 @@ const Calculator = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
-      <div className="container max-w-5xl mx-auto">
+      <div className="container max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-[400px,1fr] gap-8">
+          <Card className="shadow-xl h-fit lg:sticky lg:top-8">
+            <CardHeader className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
+              <CardTitle className="text-2xl text-center">Калькулятор бани</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6 pt-6">
+              <div className="space-y-3">
+                <Label className="text-base font-semibold">Выберите тип фундамента:</Label>
+                <RadioGroup value={foundation} onValueChange={setFoundation}>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="ленточный" id="lenточный" />
+                    <Label htmlFor="lenточный" className="cursor-pointer flex-1">
+                      Ленточный фундамент
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="сваи" id="svai" />
+                    <Label htmlFor="svai" className="cursor-pointer flex-1">
+                      Винтовые сваи
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="есть" id="est" />
+                    <Label htmlFor="est" className="cursor-pointer flex-1">
+                      Фундамент уже есть
+                    </Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="length" className="text-base font-semibold">
+                      Длина (м)
+                    </Label>
+                    <Input
+                      id="length"
+                      type="number"
+                      placeholder="6"
+                      value={length}
+                      onChange={(e) => setLength(e.target.value)}
+                      className="text-lg"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="width" className="text-base font-semibold">
+                      Ширина (м)
+                    </Label>
+                    <Input
+                      id="width"
+                      type="number"
+                      placeholder="4"
+                      value={width}
+                      onChange={(e) => setWidth(e.target.value)}
+                      className="text-lg"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="partition" className="text-base font-semibold">
+                      Длина перегородок (м)
+                    </Label>
+                    <Input
+                      id="partition"
+                      type="number"
+                      placeholder="0"
+                      value={partitionLength}
+                      onChange={(e) => setPartitionLength(e.target.value)}
+                      className="text-lg"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-base font-semibold">
+                      Периметр (м)
+                    </Label>
+                    <div className="h-11 flex items-center justify-center bg-gray-100 rounded-md border text-lg font-semibold text-gray-700">
+                      {length && width ? (
+                        (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
+                      ).toFixed(2) : '—'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {totalPrice > 0 && (
+                <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
+                  <CardContent className="pt-4 pb-4">
+                    <div className="text-center space-y-1">
+                      <p className="text-gray-600 text-sm">Общая стоимость:</p>
+                      <p className="text-3xl font-bold text-green-700">
+                        {totalPrice.toLocaleString('ru-RU')} ₽
+                      </p>
+                      <p className="text-xs text-gray-500 mt-2">
+                        * Окончательная цена после осмотра объекта
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </CardContent>
+          </Card>
+
           <Card className="shadow-xl">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
                 <CardTitle className="text-xl text-center">
@@ -216,17 +320,8 @@ const Calculator = () => {
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Фундамент</td>
-                        <td className="border-r border-black p-1.5">
-                          <select 
-                            value={foundation} 
-                            onChange={(e) => setFoundation(e.target.value)}
-                            className="w-full border-0 bg-transparent text-center text-[10px] focus:outline-none focus:ring-1 focus:ring-blue-500 rounded"
-                          >
-                            <option value="">Выберите</option>
-                            <option value="ленточный">Ленточный</option>
-                            <option value="сваи">Винтовые сваи</option>
-                            <option value="есть">Без фундамента</option>
-                          </select>
+                        <td className="border-r border-black p-1.5 text-center">
+                          {foundation === 'ленточный' ? 'Ленточный' : foundation === 'сваи' ? 'Винтовые сваи' : foundation === 'есть' ? 'Без фундамента' : '—'}
                         </td>
                         <td className="border-r border-black p-1.5 text-center">Периметр фундамента, м</td>
                         <td className="p-1.5 text-right">30</td>
@@ -251,43 +346,19 @@ const Calculator = () => {
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
-                        <td className="border-r border-black p-1.5">
-                          <Input
-                            type="number"
-                            value={length}
-                            onChange={(e) => setLength(e.target.value)}
-                            placeholder="6"
-                            className="h-6 text-[10px] text-center border-0 bg-transparent focus:outline-none focus:ring-1 focus:ring-blue-500 rounded p-0"
-                          />
-                        </td>
+                        <td className="border-r border-black p-1.5 text-center">{length || '—'}</td>
                         <td className="border-r border-black p-1.5 text-center">Высота стен мансарды, м</td>
                         <td className="p-1.5 text-right">1</td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Ширина строения, м</td>
-                        <td className="border-r border-black p-1.5">
-                          <Input
-                            type="number"
-                            value={width}
-                            onChange={(e) => setWidth(e.target.value)}
-                            placeholder="4"
-                            className="h-6 text-[10px] text-center border-0 bg-transparent focus:outline-none focus:ring-1 focus:ring-blue-500 rounded p-0"
-                          />
-                        </td>
+                        <td className="border-r border-black p-1.5 text-center">{width || '—'}</td>
                         <td className="border-r border-black p-1.5 text-center">Высота стен всего сруба, м</td>
                         <td className="p-1.5 text-right">3,8</td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Длина перегородок 1 этажа, м</td>
-                        <td className="border-r border-black p-1.5">
-                          <Input
-                            type="number"
-                            value={partitionLength}
-                            onChange={(e) => setPartitionLength(e.target.value)}
-                            placeholder="0"
-                            className="h-6 text-[10px] text-center border-0 bg-transparent focus:outline-none focus:ring-1 focus:ring-blue-500 rounded p-0"
-                          />
-                        </td>
+                        <td className="border-r border-black p-1.5 text-center">{partitionLength || '0'}</td>
                         <td className="border-r border-black p-1.5 text-center">Площадь, м2</td>
                         <td className="p-1.5 text-right">{length && width ? (parseFloat(length) * parseFloat(width)).toFixed(0) : '—'}</td>
                       </tr>
@@ -380,6 +451,7 @@ const Calculator = () => {
                 )}
               </CardContent>
             </Card>
+        </div>
       </div>
     </div>
   );
