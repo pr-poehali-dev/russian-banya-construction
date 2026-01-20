@@ -57,6 +57,7 @@ const Calculator = () => {
     const formworkBoard = Math.round(perimeter * 0.126);
     const nails = Math.round(perimeter * 0.25);
     const screws = Math.round(perimeter * 20 / 100) * 100;
+    const film = Math.round(perimeter * 1.6 / 10) * 10;
     const isStripSelected = foundation === 'ленточный';
     sections.push({
       title: 'Фундамент ленточный, с буронабивными сваями',
@@ -68,7 +69,7 @@ const Calculator = () => {
         { name: 'Доска для опалубки 1-й сорт(50х200х6000)мм', unit: 'м3', quantity: formworkBoard, price: 19500, total: isStripSelected ? formworkBoard * 19500 : 0 },
         { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: nails, price: 200, total: isStripSelected ? nails * 200 : 0 },
         { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: screws, price: 3, total: isStripSelected ? screws * 3 : 0 },
-        { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 50, price: 70, total: isStripSelected ? 3500 : 0 },
+        { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: film, price: 70, total: isStripSelected ? film * 70 : 0 },
         { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 2000, price: 0.2, total: isStripSelected ? 400 : 0 },
         { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 300, price: 10, total: isStripSelected ? 3000 : 0 },
         { name: 'Монтаж фундамента(с буронабивными сваями)', unit: 'м3', quantity: concrete, price: 10000, total: isStripSelected ? Math.round(concrete * 10000) : 0 },
