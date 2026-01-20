@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const timelapseData = [
   {
@@ -44,9 +44,14 @@ const timelapseData = [
 ];
 
 const TimelapseSection = () => {
-  const [descriptions, setDescriptions] = useState(
-    timelapseData.map(item => item.description)
-  );
+  const [descriptions, setDescriptions] = useState(() => {
+    const saved = localStorage.getItem('timelapseDescriptions');
+    return saved ? JSON.parse(saved) : timelapseData.map(item => item.description);
+  });
+
+  useEffect(() => {
+    localStorage.setItem('timelapseDescriptions', JSON.stringify(descriptions));
+  }, [descriptions]);
 
   const handleDescriptionChange = (index: number, value: string) => {
     const newDescriptions = [...descriptions];
