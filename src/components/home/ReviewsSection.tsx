@@ -93,7 +93,7 @@ const ReviewsSection = () => {
                   />
                   <div className="flex gap-1 mt-1">
                     {Array.from({ length: review.rating }).map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-lg">★</span>
+                      <span key={i} className="text-yellow-400 text-lg"></span>
                     ))}
                   </div>
                 </div>
