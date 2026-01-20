@@ -335,7 +335,7 @@ const Calculator = () => {
                         <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
                         <td className="border-r border-black p-1.5 text-center">1,5 этажа</td>
                         <td className="border-r border-black p-1.5 text-center">Высота мансарды, м</td>
-                        <td className="p-1.5 text-right">3,4</td>
+                        <td className="p-1.5 text-right">{(1 + 2.4).toFixed(1)}</td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
