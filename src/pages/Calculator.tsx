@@ -329,7 +329,7 @@ const Calculator = () => {
                         <td className="border-r border-black p-1.5" colSpan={2}>Из чего хотите построить</td>
                         <td className="border-r border-black p-1.5 text-center">Брус обычный</td>
                         <td className="border-r border-black p-1.5 text-center">Высота сруба 1 этажа, м</td>
-                        <td className="p-1.5 text-right">2,8</td>
+                        <td className="p-1.5 text-right">{(2.2 + 0.6).toFixed(1)}</td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
