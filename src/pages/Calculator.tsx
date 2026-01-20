@@ -56,7 +56,7 @@ const Calculator = () => {
     const bindingWire = Math.round(perimeter * 0.06);
     const formworkBoard = Math.round(perimeter * 0.126);
     const nails = Math.round(perimeter * 0.25);
-    const screws = Math.round(perimeter * 20 / 100) * 100;
+    const screws = Math.round(perimeter * 20 / 10) * 10;
     const film = Math.round(perimeter * 1.6 / 10) * 10;
     const staples = Math.round(perimeter * 35 / 1000) * 1000;
     const fixators = Math.round(perimeter * 10 / 100) * 100;
