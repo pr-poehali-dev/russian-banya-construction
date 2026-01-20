@@ -154,53 +154,105 @@ const EstimateLive = ({
         <table className="w-full text-[10px] border-collapse">
           <tbody>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 font-bold text-center" colSpan={2}>Заказчик</td>
-              <td className="p-1.5"></td>
+              <td className="border-r border-black p-1.5 font-bold text-center" colSpan={3}>Заказчик</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 w-32"></td>
-              <td className="border-r border-black p-1.5 w-24 text-center">площадь</td>
-              <td className="border-r border-black p-1.5 w-24 text-center">Код по</td>
+              <td className="border-r border-black p-1.5 w-1/3"></td>
+              <td className="border-r border-black p-1.5 w-1/3 text-center">телефон</td>
+              <td className="p-1.5 w-1/3"></td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5 text-center">почта</td>
+              <td className="p-1.5"></td>
             </tr>
             <tr className="border-b border-black bg-gray-50">
               <td className="border-r border-black p-1.5 font-bold text-center" colSpan={3}>Данные объекта</td>
             </tr>
             <tr className="border-b border-black">
               <td className="border-r border-black p-1.5 font-bold">Параметры</td>
-              <td className="border-r border-black p-1.5 font-bold">Значение</td>
-              <td className="p-1.5 font-bold">Дополнительные значения</td>
+              <td className="border-r border-black p-1.5 font-bold text-center">Значения</td>
+              <td className="p-1.5 font-bold text-center">Дополнительные значения</td>
             </tr>
             <tr className="border-b border-black">
               <td className="border-r border-black p-1.5">Фундамент</td>
-              <td className="border-r border-black p-1.5">
-                {foundation === 'lentochnyj' ? 'Ленточный' : foundation === 'stolbchatyj' ? 'Винтовые сваи' : 'Без фундамента'}
+              <td className="border-r border-black p-1.5 text-center">
+                {foundation === 'lentochnyj' ? 'Винтовые сваи' : foundation === 'stolbchatyj' ? 'Винтовые сваи' : 'Без фундамента'}
               </td>
-              <td className="p-1.5">Периметр: {perimeter.toFixed(1)} м</td>
+              <td className="border-r border-black p-1.5 text-center">Периметр фундамента, м</td>
+              <td className="p-1.5 text-right">30</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5">Материал постройки</td>
-              <td className="border-r border-black p-1.5">{materialName}</td>
-              <td className="p-1.5">Высота стен: 2,2 м</td>
+              <td className="border-r border-black p-1.5">Что хотите построить</td>
+              <td className="border-r border-black p-1.5 text-center">Баня под крышу</td>
+              <td className="border-r border-black p-1.5 text-center">Высота 1 этажа в чистоте, м</td>
+              <td className="p-1.5 text-right">2,2</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5">Из чего хотите построить</td>
+              <td className="border-r border-black p-1.5 text-center">{materialName}</td>
+              <td className="border-r border-black p-1.5 text-center">Высота сруба 1 этажа, м</td>
+              <td className="p-1.5 text-right">2,8</td>
             </tr>
             <tr className="border-b border-black">
               <td className="border-r border-black p-1.5">Этажность</td>
-              <td className="border-r border-black p-1.5">{floors === '2' ? '1,5 этажа' : '1 этаж'}</td>
-              <td className="p-1.5">Кровля: {roofArea.toFixed(1)} м2</td>
+              <td className="border-r border-black p-1.5 text-center">{floors === '2' ? '1,5 этажа' : '1 этаж'}</td>
+              <td className="border-r border-black p-1.5 text-center">Высота мансарды, м</td>
+              <td className="p-1.5 text-right">3,4</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5">Длина и ширина объекта, м</td>
-              <td className="border-r border-black p-1.5">{len} х {wid}</td>
-              <td className="p-1.5">Площадь: {area.toFixed(1)} м2</td>
+              <td className="border-r border-black p-1.5">Длина строения, м</td>
+              <td className="border-r border-black p-1.5 text-center">{len}</td>
+              <td className="border-r border-black p-1.5 text-center">Высота стен мансарды, м</td>
+              <td className="p-1.5 text-right">1</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5">Длина перегородок, 1 этажа, м</td>
-              <td className="border-r border-black p-1.5">{partLen}</td>
-              <td className="p-1.5">Площадь пола: {area.toFixed(1)} м2</td>
+              <td className="border-r border-black p-1.5">Ширина строения, м</td>
+              <td className="border-r border-black p-1.5 text-center">{wid}</td>
+              <td className="border-r border-black p-1.5 text-center">Высота стен всего сруба, м</td>
+              <td className="p-1.5 text-right">3,8</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5">Расстояние до объекта и 1 стадию, мм</td>
-              <td className="border-r border-black p-1.5">{location || '—'}</td>
-              <td className="p-1.5">Дата: {currentDate}</td>
+              <td className="border-r border-black p-1.5">Длина перегородок 1 этажа, м</td>
+              <td className="border-r border-black p-1.5 text-center">{partLen}</td>
+              <td className="border-r border-black p-1.5 text-center">Площадь, м2</td>
+              <td className="p-1.5 text-right">{area.toFixed(0)}</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5">Расстояние до объекта в 1 сторону, км</td>
+              <td className="border-r border-black p-1.5 text-center">0</td>
+              <td className="border-r border-black p-1.5 text-center">Высота крыши, м</td>
+              <td className="p-1.5 text-right">2,4</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5 text-center">Длина конька, м</td>
+              <td className="p-1.5 text-right">7</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5 text-center">Длина стропила, м</td>
+              <td className="p-1.5 text-right">4,9</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5 text-center">Площадь кровли, м</td>
+              <td className="p-1.5 text-right">80</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5 text-center">Количество стропильных пар, шт</td>
+              <td className="p-1.5 text-right">15</td>
+            </tr>
+            <tr className="border-b border-black">
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5"></td>
+              <td className="p-1.5"></td>
             </tr>
           </tbody>
         </table>
