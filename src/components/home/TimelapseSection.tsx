@@ -20,11 +20,11 @@ const TimelapseSection = () => {
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/10be6644-ef88-4fb5-960a-0276f633cfe0.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/1cfa4e6f-9219-4b70-a9ed-9033645333a8.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/e4631dc6-3fc6-4a76-b6c3-06b05d99d4c6.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/09a24061-a0c9-426a-8cc6-30e321156650.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/d838e77e-85aa-431b-9f0e-c6c226edd9f7.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/e1d98c6d-c09f-4780-b56a-a2dadc226ad7.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/fad983d7-d9f8-4e85-ac52-e03e824d1fb0.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/0062d144-6ef6-4d2f-ad31-7221386d5603.jpg"
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/24eba619-7928-4ea2-bf89-a4cdf983f045.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/4f833e4f-dbba-4154-8441-5eee49755494.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/60642d90-bf95-4ebc-9c4b-d386206f5cd1.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/64642ba9-89a2-40b1-8c8f-7d09f62e97b0.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/716f0597-ce22-499c-a454-fcdf7d92b40c.jpg"
   ];
 
   const handleDescriptionChange = (index: number, value: string) => {
