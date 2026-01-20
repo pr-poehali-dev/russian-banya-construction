@@ -65,7 +65,7 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/скобелевка1.jpg" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Дмитрий</p>
+                <p className="font-bold text-lg text-gray-900">Константин</p>
                 <p className="text-sm text-gray-500">д. Скобелевка</p>
               </div>
             </div>
