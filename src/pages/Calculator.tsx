@@ -100,11 +100,12 @@ const Calculator = () => {
 
     const isBrusSelected = wallMaterial === 'брус' || wallMaterial === 'клееный';
     const isBrevnoSelected = wallMaterial === 'бревно';
+    const brusPrice = wallMaterial === 'клееный' ? 70000 : 0;
     
     sections.push({
       title: 'Сруб из бруса',
       items: [
-        { name: 'Брус для сруба', unit: 'м3', quantity: 19.95, price: 0, total: 0 },
+        { name: 'Брус для сруба', unit: 'м3', quantity: 19.95, price: brusPrice, total: isBrusSelected ? Math.ceil(19.95 * brusPrice) : 0 },
         { name: 'Джут(150мм)', unit: 'п.м', quantity: 1000, price: 25, total: isBrusSelected ? 25000 : 0 },
         { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: isBrusSelected ? 5200 : 0 },
         { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: isBrusSelected ? 1000 : 0 },
