@@ -10,11 +10,11 @@ const ReviewsSection = () => {
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
             <div className="flex items-start gap-4 mb-4">
               <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
-                <img src="https://cdn.poehali.dev/files/веретье0.jpg" alt="Отзыв" className="w-full h-full object-cover" />
+                <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/a7eecdb2-6b80-4eea-8fd4-5861b797d9db.jpg" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
                 <p className="font-bold text-lg text-gray-900">Алексей</p>
-                <p className="text-sm text-gray-500">Резиденция "Веретье"</p>
+                <p className="text-sm text-gray-500">п. Троица</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed">Александр построил баню под ключ, от фундамента до отделки и установки мебели. Сделал все коммуникации, банный чан, террасу. Сейчас строим с Александром дом из клееного бруса. Всем рекомендую этого специалиста!</p>
