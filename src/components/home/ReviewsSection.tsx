@@ -69,7 +69,7 @@ const ReviewsSection = () => {
                 <p className="text-sm text-gray-500">д. Скобелевка</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Делали ремонт старой бани - парная и помывочная. Преобразили полностью! Теперь как новая. Цена адекватная, работают быстро.</p>
+            <p className="text-gray-700 leading-relaxed">Александра порекомендовал общий знакомый. Сделали ремонт старой бани, парной и помывочной. Конечно, отличия колоссальные, все аккуратно, технологично, мягкий пар. планируем в дальнейшем ремонт комнаты отдыха и отделку снаружи.</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
