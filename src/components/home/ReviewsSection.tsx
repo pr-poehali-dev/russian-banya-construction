@@ -39,11 +39,11 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/гамы1.jpg" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Сергей Иванович</p>
+                <p className="font-bold text-lg text-gray-900">Дмитрий</p>
                 <p className="text-sm text-gray-500">д. Гамы</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Компактная банька 3х6, но сделана на совесть. Печка топится отлично, за час прогревается до кондиции. Ребята молодцы, работают профессионально.</p>
+            <p className="text-gray-700 leading-relaxed">Сначала заказали шлифовку и покраску сруба снаружи. Все понравилось, у ребят профессиональное немецкое беспылевое оборудование, немецкие масла. Решили сделать с александром и внутреннюю отделку. Все супер, особенно парная, настоящая русская баня!</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
