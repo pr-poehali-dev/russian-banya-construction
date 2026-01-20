@@ -104,11 +104,11 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/500.jpg" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Елена</p>
+                <p className="font-bold text-lg text-gray-900">Михаил</p>
                 <p className="text-sm text-gray-500">д. Налимиха</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Хочу поблагодарить мастеров за прекрасную работу! Баня из бревна 6х8 получилась очень красивая и функциональная. Парная прогревается равномерно, жар держится долго. Всё сделано качественно и с душой. Соседи теперь тоже хотят к вам обращаться)</p>
+            <p className="text-gray-700 leading-relaxed">Заказал баню у Александра, из рубленого бревна 6х8. Срубили максимально качественно, смонтировали быстро. Отделку попробую сделать сам, если не получится, обращусь к Александру за помощью))</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
