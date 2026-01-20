@@ -587,6 +587,13 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/305efe29-eeb9-40e4-9e03-8733d02c7a1b.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/6eb2659e-7be7-4583-a54b-8fa26ed3d573.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/e7ac7f5a-740b-45b3-94d7-d07921c39f27.jpg"
+  ],
+  [
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/6d43cef9-009f-49d5-ac83-2f370403dba0.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/12d4490b-c7fa-41f2-822c-26eb11fe3f84.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/496c591c-2074-4601-b24f-9c845a01706e.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/874b44c2-b4e4-4489-9733-591238ed9354.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/dca88edf-9d64-42d8-b8c8-e015fbb48792.jpg"
   ]
 ];
 
@@ -752,5 +759,12 @@ export const projects: Project[] = [
     size: "2,5×3,5 м",
     material: "Брус естественной влажности",
     location: "Закамск, г. Пермь"
+  },
+  {
+    img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/6d43cef9-009f-49d5-ac83-2f370403dba0.jpg",
+    title: "Баня из бруса 6×4",
+    size: "6×4 м",
+    material: "Брус естественной влажности",
+    location: "д. Фадеята, Пермский край"
   }
 ];
