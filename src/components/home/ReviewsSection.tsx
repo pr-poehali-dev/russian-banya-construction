@@ -17,7 +17,7 @@ const ReviewsSection = () => {
                 <p className="text-sm text-gray-500">Резиденция "Веретье"</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Александр построил баню под ключ, от фундамента до отделки и установки мебели. Сделал все коммуникации, банный чан, террасу. Сейчас строим дом из клееного бруса. Всем рекомендую этого специалиста!</p>
+            <p className="text-gray-700 leading-relaxed">Александр построил баню под ключ, от фундамента до отделки и установки мебели. Сделал все коммуникации, банный чан, террасу. Сейчас строим с Александром дом из клееного бруса. Всем рекомендую этого специалиста!</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
