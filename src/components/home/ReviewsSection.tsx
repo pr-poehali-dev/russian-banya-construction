@@ -13,11 +13,11 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/веретье0.jpg" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Александр Петров</p>
-                <p className="text-sm text-gray-500">д. Веретье</p>
+                <p className="font-bold text-lg text-gray-900">Алексей</p>
+                <p className="text-sm text-gray-500">Резиденция "Веретье"</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Ребята построили баню 6х12 из оцилиндрованного бревна. Работали быстро, четко, без задержек. Особенно порадовала парная - жар мягкий, дышится легко. Печь подобрали идеально. Спасибо за качественную работу!</p>
+            <p className="text-gray-700 leading-relaxed">Александр построил баню под ключ, от фундамента до отделки и установки мебели. Сделал все коммуникации, банный чан, террасу. Сейчас строим дом из клееного бруса. Всем рекомендую этого специалиста!</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
