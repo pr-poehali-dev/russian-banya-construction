@@ -229,30 +229,6 @@ const Calculator = () => {
               </div>
 
               <div className="space-y-3">
-                <Label className="text-base font-semibold">Материал стен бани:</Label>
-                <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="бревно" id="brevno" />
-                    <Label htmlFor="brevno" className="cursor-pointer flex-1">
-                      Оцилиндрованное бревно
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="брус" id="brus" />
-                    <Label htmlFor="brus" className="cursor-pointer flex-1">
-                      Брус естественной влажности
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="клееный" id="kleeniy" />
-                    <Label htmlFor="kleeniy" className="cursor-pointer flex-1">
-                      Клееный брус
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
-
-              <div className="space-y-3">
                 <Label className="text-base font-semibold">Выберите тип фундамента:</Label>
                 <RadioGroup value={foundation} onValueChange={setFoundation}>
                   <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
@@ -271,6 +247,30 @@ const Calculator = () => {
                     <RadioGroupItem value="есть" id="est" />
                     <Label htmlFor="est" className="cursor-pointer flex-1">
                       Фундамент уже есть
+                    </Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              <div className="space-y-3">
+                <Label className="text-base font-semibold">Материал стен бани:</Label>
+                <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="бревно" id="brevno" />
+                    <Label htmlFor="brevno" className="cursor-pointer flex-1">
+                      Оцилиндрованное бревно
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="брус" id="brus" />
+                    <Label htmlFor="brus" className="cursor-pointer flex-1">
+                      Брус естественной влажности
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="клееный" id="kleeniy" />
+                    <Label htmlFor="kleeniy" className="cursor-pointer flex-1">
+                      Клееный брус
                     </Label>
                   </div>
                 </RadioGroup>
