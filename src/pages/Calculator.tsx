@@ -82,13 +82,15 @@ const Calculator = () => {
 
     const bindingBrusVolume = Math.ceil(perimeter / 6) * 0.12;
     const roofingFelt = Math.ceil(perimeter / 10) * 10;
+    const antiseptic = Math.ceil(perimeter * 0.166 / 10) * 10;
+    const clamps = Math.ceil(perimeter * 0.2);
     sections.push({
       title: 'Обвязка фундамента',
       items: [
         { name: 'Обвязочный брус(100х200х6000)мм', unit: 'м3', quantity: bindingBrusVolume, price: 19500, total: Math.ceil(bindingBrusVolume * 19500) },
         { name: 'Рубероид РПП 300', unit: 'м2', quantity: roofingFelt, price: 65, total: roofingFelt * 65 },
-        { name: 'Антисептик', unit: 'л', quantity: 10, price: 130, total: 1300 },
-        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 6, price: 60, total: 360 },
+        { name: 'Антисептик', unit: 'л', quantity: antiseptic, price: 130, total: antiseptic * 130 },
+        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: clamps, price: 60, total: clamps * 60 },
         { name: 'Монтаж обвязки', unit: 'м3', quantity: bindingBrusVolume, price: 10000, total: Math.ceil(bindingBrusVolume * 10000) },
       ],
       subtotal: 0
