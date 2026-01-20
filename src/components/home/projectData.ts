@@ -468,7 +468,13 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/aa3f527b-64f0-4745-8c82-8614ba70259a.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/b99f079d-f8bd-4fc5-aca4-955fc059d04e.jpg"
   ],
-  []
+  [
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/70f5d533-55de-4d3a-9b21-b3080dc9ef87.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/6160081a-7e55-4016-af4f-7e1e7ab8305f.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/569b40fc-99e0-4db6-9694-21bd3adcedab.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/65b206db-0f2b-462b-9ff5-906a9da9d658.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/62dde3fd-bde7-4534-b803-02b991060b39.jpg"
+  ]
 ];
 
 export interface Project {
@@ -600,7 +606,7 @@ export const projects: Project[] = [
     location: "п. Горный, Пермский край"
   },
   {
-    img: "",
+    img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/70f5d533-55de-4d3a-9b21-b3080dc9ef87.jpg",
     title: "Баня из бруса 3×5",
     size: "3×5 м",
     material: "Брус естественной влажности",
