@@ -1,4 +1,4 @@
-const reviewsData = [
+export const reviewsData = [
   {
     name: "Александр Петров",
     location: "д. Веретье",
@@ -85,18 +85,10 @@ const ReviewsSection = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 
-                    className="font-bold text-lg text-gray-900 cursor-text hover:bg-gray-50 px-2 py-1 -mx-2 rounded transition-colors"
-                    contentEditable
-                    suppressContentEditableWarning
-                  >
+                  <h3 className="font-bold text-lg text-gray-900">
                     {review.name}
                   </h3>
-                  <p 
-                    className="text-sm text-gray-500 cursor-text hover:bg-gray-50 px-2 py-1 -mx-2 rounded transition-colors"
-                    contentEditable
-                    suppressContentEditableWarning
-                  >
+                  <p className="text-sm text-gray-500">
                     {review.location}
                   </p>
                   <div className="flex gap-1 mt-1">
@@ -107,11 +99,7 @@ const ReviewsSection = () => {
                 </div>
               </div>
               
-              <p 
-                className="text-gray-700 leading-relaxed flex-1 cursor-text hover:bg-gray-50 px-2 py-1 -mx-2 rounded transition-colors"
-                contentEditable
-                suppressContentEditableWarning
-              >
+              <p className="text-gray-700 leading-relaxed flex-1">
                 {review.text}
               </p>
             </div>
