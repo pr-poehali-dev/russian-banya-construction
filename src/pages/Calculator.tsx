@@ -369,7 +369,9 @@ const Calculator = () => {
                         <td className="border-r border-black p-1.5" colSpan={2}></td>
                         <td className="border-r border-black p-1.5"></td>
                         <td className="border-r border-black p-1.5 text-center">Длина конька, м</td>
-                        <td className="p-1.5 text-right">7</td>
+                        <td className="p-1.5 text-right">
+                          {length ? (parseFloat(length) + 1).toFixed(0) : '—'}
+                        </td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}></td>
