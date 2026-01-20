@@ -28,10 +28,8 @@ const Calculator = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const calculateEstimate = () => {
-    if (!foundation || !length || !width) return;
-
-    const l = parseFloat(length);
-    const w = parseFloat(width);
+    const l = length ? parseFloat(length) : 6;
+    const w = width ? parseFloat(width) : 4;
     const pl = partitionLength ? parseFloat(partitionLength) : 0;
     const area = l * w;
     const perimeter = 2 * (l + w) + pl;
@@ -167,9 +165,7 @@ const Calculator = () => {
   };
 
   useEffect(() => {
-    if (foundation && length && width) {
-      calculateEstimate();
-    }
+    calculateEstimate();
   }, [foundation, length, width, partitionLength]);
 
   return (
