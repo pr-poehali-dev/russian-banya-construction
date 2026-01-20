@@ -154,23 +154,23 @@ const EstimateLive = ({
         <table className="w-full text-[10px] border-collapse">
           <tbody>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 font-bold text-center" colSpan={3}>Заказчик</td>
+              <td className="border-r border-black p-1.5 font-bold text-center" colSpan={4}>Заказчик</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 w-1/3"></td>
-              <td className="border-r border-black p-1.5 w-1/3 text-center">телефон</td>
-              <td className="p-1.5 w-1/3"></td>
+              <td className="border-r border-black p-1.5" colSpan={2}></td>
+              <td className="border-r border-black p-1.5 text-center">телефон</td>
+              <td className="p-1.5"></td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5"></td>
+              <td className="border-r border-black p-1.5" colSpan={2}></td>
               <td className="border-r border-black p-1.5 text-center">почта</td>
               <td className="p-1.5"></td>
             </tr>
             <tr className="border-b border-black bg-gray-50">
-              <td className="border-r border-black p-1.5 font-bold text-center" colSpan={3}>Данные объекта</td>
+              <td className="border-r border-black p-1.5 font-bold text-center" colSpan={4}>Данные объекта</td>
             </tr>
             <tr className="border-b border-black">
-              <td className="border-r border-black p-1.5 font-bold">Параметры</td>
+              <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Параметры</td>
               <td className="border-r border-black p-1.5 font-bold text-center">Значения</td>
               <td className="p-1.5 font-bold text-center">Дополнительные значения</td>
             </tr>
