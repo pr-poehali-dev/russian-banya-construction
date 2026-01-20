@@ -85,10 +85,18 @@ const ReviewsSection = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-lg text-gray-900">
+                  <h3 
+                    className="font-bold text-lg text-gray-900 cursor-text hover:bg-gray-50 px-2 py-1 -mx-2 rounded transition-colors"
+                    contentEditable
+                    suppressContentEditableWarning
+                  >
                     {review.name}
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p 
+                    className="text-sm text-gray-500 cursor-text hover:bg-gray-50 px-2 py-1 -mx-2 rounded transition-colors"
+                    contentEditable
+                    suppressContentEditableWarning
+                  >
                     {review.location}
                   </p>
                   <div className="flex gap-1 mt-1">
@@ -99,7 +107,11 @@ const ReviewsSection = () => {
                 </div>
               </div>
               
-              <p className="text-gray-700 leading-relaxed flex-1">
+              <p 
+                className="text-gray-700 leading-relaxed flex-1 cursor-text hover:bg-gray-50 px-2 py-1 -mx-2 rounded transition-colors"
+                contentEditable
+                suppressContentEditableWarning
+              >
                 {review.text}
               </p>
             </div>
