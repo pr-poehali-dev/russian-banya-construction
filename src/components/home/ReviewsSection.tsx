@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const reviewsData = [
   {
     name: "Александр Петров",
@@ -58,16 +60,28 @@ export const reviewsData = [
 ];
 
 const ReviewsSection = () => {
+  const [reviews, setReviews] = useState(() => {
+    const saved = localStorage.getItem('reviewsData');
+    return saved ? JSON.parse(saved) : reviewsData;
+  });
+
+  const handleChange = (index: number, field: string, value: string) => {
+    const updatedReviews = [...reviews];
+    updatedReviews[index] = { ...updatedReviews[index], [field]: value };
+    setReviews(updatedReviews);
+    localStorage.setItem('reviewsData', JSON.stringify(updatedReviews));
+  };
+
   return (
     <section className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">Отзывы </h2>
-          <p className="text-gray-600 text-lg"></p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">Отзывы наших клиентов</h2>
+          <p className="text-gray-600 text-lg">Более 100 построенных бань в Пермском крае</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviewsData.map((review, index) => (
+          {reviews.map((review: any, index: number) => (
             <div 
               key={index}
               className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col"
@@ -83,24 +97,27 @@ const ReviewsSection = () => {
                 <div className="flex-1">
                   <input
                     type="text"
-                    defaultValue={review.name}
+                    value={review.name}
+                    onChange={(e) => handleChange(index, 'name', e.target.value)}
                     className="font-bold text-lg text-gray-900 w-full bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded"
                   />
                   <input
                     type="text"
-                    defaultValue={review.location}
+                    value={review.location}
+                    onChange={(e) => handleChange(index, 'location', e.target.value)}
                     className="text-sm text-gray-500 w-full bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded"
                   />
                   <div className="flex gap-1 mt-1">
                     {Array.from({ length: review.rating }).map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-lg"></span>
+                      <span key={i} className="text-yellow-400 text-lg">★</span>
                     ))}
                   </div>
                 </div>
               </div>
               
               <textarea
-                defaultValue={review.text}
+                value={review.text}
+                onChange={(e) => handleChange(index, 'text', e.target.value)}
                 className="text-gray-700 leading-relaxed flex-1 bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded resize-none"
                 rows={4}
               />
