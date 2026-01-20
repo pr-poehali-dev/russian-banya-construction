@@ -45,11 +45,11 @@ const TimelapseSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {images.map((image, index) => (
             <div key={index} className="flex flex-col gap-3">
-              <div className="aspect-[4/3] relative overflow-hidden rounded-lg shadow-lg">
+              <div className="aspect-[4/3] relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
                 <img 
                   src={image}
                   alt={`День ${index + 1}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
               </div>
               
