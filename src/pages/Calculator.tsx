@@ -51,12 +51,13 @@ const Calculator = () => {
 
     // Ленточный фундамент - всегда показываем, но считаем только если выбран
     const concrete = parseFloat((perimeter * 0.4).toFixed(2));
+    const drainagePillow = Math.round(perimeter * 0.15);
     const isStripSelected = foundation === 'ленточный';
     sections.push({
       title: 'Фундамент ленточный, с буронабивными сваями',
       items: [
         { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: concrete, price: 8100, total: isStripSelected ? Math.round(concrete * 8100) : 0 },
-        { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: 5, price: 1000, total: isStripSelected ? 5000 : 0 },
+        { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: drainagePillow, price: 1000, total: isStripSelected ? drainagePillow * 1000 : 0 },
         { name: 'Арматура металлическая(12мм)', unit: 'п.м', quantity: 500, price: 100, total: isStripSelected ? 50000 : 0 },
         { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: 2, price: 500, total: isStripSelected ? 1000 : 0 },
         { name: 'Доска для опалубки 1-й сорт(50х200х6000)мм', unit: 'м3', quantity: 4, price: 19500, total: isStripSelected ? 78000 : 0 },
