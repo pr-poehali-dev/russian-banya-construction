@@ -486,7 +486,12 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/6a009b89-9f21-494a-8c04-f459acd5c8d6.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/f2ed5e7a-8fb9-422a-b2c6-6fb3761049bc.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/900b9c38-c6d6-47b5-a95d-53155c165733.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/fde77acf-ab6e-4629-b917-3b73ad3575d6.jpg"
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/fde77acf-ab6e-4629-b917-3b73ad3575d6.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/ff150e69-42a4-4274-9d5f-09f0ff77f7dd.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/0643f848-4ac5-4ac4-8a27-e0dee945f880.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/3fdd7e00-1f01-4dde-a777-f4b0ca83828c.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/8efc92c8-2b6b-4811-b25c-fbbc1b93c050.jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/d1123dd6-45b2-4613-b2cd-6bc61e39738b.jpg"
   ]
 ];
 
