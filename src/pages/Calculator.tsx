@@ -58,7 +58,7 @@ const Calculator = () => {
     const nails = Math.round(perimeter * 0.25);
     const screws = Math.round(perimeter * 20 / 10) * 10;
     const film = Math.round(perimeter * 1.6 / 10) * 10;
-    const staples = Math.round(perimeter * 35 / 1000) * 1000;
+    const staples = Math.ceil(perimeter * 35 / 1000) * 1000;
     const fixators = Math.round(perimeter * 10 / 100) * 100;
     const isStripSelected = foundation === 'ленточный';
     sections.push({
