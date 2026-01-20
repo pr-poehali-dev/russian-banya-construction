@@ -177,31 +177,8 @@ const Calculator = () => {
               <CardTitle className="text-2xl text-center">Калькулятор бани</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 pt-6">
-              <div className="space-y-3">
-                <Label className="text-base font-semibold">Выберите тип фундамента:</Label>
-                <RadioGroup value={foundation} onValueChange={setFoundation}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="ленточный" id="lenточный" />
-                    <Label htmlFor="lenточный" className="cursor-pointer flex-1">
-                      Ленточный фундамент
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="сваи" id="svai" />
-                    <Label htmlFor="svai" className="cursor-pointer flex-1">
-                      Винтовые сваи
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="есть" id="est" />
-                    <Label htmlFor="est" className="cursor-pointer flex-1">
-                      Фундамент уже есть
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
-
               <div className="space-y-4">
+                <Label className="text-base font-semibold">Размеры вашей бани</Label>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="length" className="text-base font-semibold">
@@ -255,6 +232,30 @@ const Calculator = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="space-y-3">
+                <Label className="text-base font-semibold">Выберите тип фундамента:</Label>
+                <RadioGroup value={foundation} onValueChange={setFoundation}>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="ленточный" id="lenточный" />
+                    <Label htmlFor="lenточный" className="cursor-pointer flex-1">
+                      Ленточный фундамент
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="сваи" id="svai" />
+                    <Label htmlFor="svai" className="cursor-pointer flex-1">
+                      Винтовые сваи
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="есть" id="est" />
+                    <Label htmlFor="est" className="cursor-pointer flex-1">
+                      Фундамент уже есть
+                    </Label>
+                  </div>
+                </RadioGroup>
               </div>
 
               {totalPrice > 0 && (
