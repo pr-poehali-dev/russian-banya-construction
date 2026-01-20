@@ -55,6 +55,7 @@ const Calculator = () => {
     const reinforcement = Math.round(perimeter * 15 / 100) * 100;
     const bindingWire = Math.round(perimeter * 0.06);
     const formworkBoard = Math.round(perimeter * 0.126);
+    const nails = Math.round(perimeter * 0.25);
     const isStripSelected = foundation === 'ленточный';
     sections.push({
       title: 'Фундамент ленточный, с буронабивными сваями',
@@ -64,7 +65,7 @@ const Calculator = () => {
         { name: 'Арматура металлическая(12мм)', unit: 'п.м', quantity: reinforcement, price: 100, total: isStripSelected ? reinforcement * 100 : 0 },
         { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: bindingWire, price: 500, total: isStripSelected ? bindingWire * 500 : 0 },
         { name: 'Доска для опалубки 1-й сорт(50х200х6000)мм', unit: 'м3', quantity: formworkBoard, price: 19500, total: isStripSelected ? formworkBoard * 19500 : 0 },
-        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 21, price: 200, total: isStripSelected ? 4200 : 0 },
+        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: nails, price: 200, total: isStripSelected ? nails * 200 : 0 },
         { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 600, price: 3, total: isStripSelected ? 1800 : 0 },
         { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 50, price: 70, total: isStripSelected ? 3500 : 0 },
         { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 2000, price: 0.2, total: isStripSelected ? 400 : 0 },
