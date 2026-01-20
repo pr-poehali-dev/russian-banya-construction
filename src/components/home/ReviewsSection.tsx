@@ -79,9 +79,9 @@ const ReviewsSection = () => {
     },
     {
       id: "review-12",
-      name: "Виталий",
-      location: "д. Тюнино",
-      image: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/2e3a6b4d-bf73-4862-b4b8-c56e65d81dda.jpg",
+      name: "Олег",
+      location: "д. Филатово",
+      image: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/06638761-a814-4e91-913b-55e4f7adfc87.jpg",
       text: "Заказал сруб у Александра, рубщики срубили очень хорошо. В итоге, заключили договор на фундамент, сборку сруба и крыши. Все получилось очень хорошо и красиво."
     }
   ];
