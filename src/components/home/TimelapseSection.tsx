@@ -1,3 +1,7 @@
+interface TimelapseSectionProps {
+  scrollToSection?: (id: string) => void;
+}
+
 const timelapseData = [
   {
     image: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/cdcf3631-b7df-42cd-bcc7-b1c596a60032.jpg",
@@ -41,7 +45,7 @@ const timelapseData = [
   }
 ];
 
-const TimelapseSection = () => {
+const TimelapseSection = ({ scrollToSection }: TimelapseSectionProps) => {
 
   return (
     <section id="timelapse" className="py-16 md:py-20 bg-white">
@@ -52,7 +56,7 @@ const TimelapseSection = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
           {timelapseData.map((item, index) => (
             <div key={index} className="flex flex-col gap-3">
               <div className="aspect-[4/3] relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
@@ -73,6 +77,15 @@ const TimelapseSection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="text-center">
+          <button
+            onClick={() => scrollToSection?.('order')}
+            className="px-8 py-4 bg-primary text-white rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
+          >
+            Рассчитать стоимость бани
+          </button>
         </div>
       </div>
     </section>

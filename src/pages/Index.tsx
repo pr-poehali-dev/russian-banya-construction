@@ -80,7 +80,7 @@ const Index = () => {
 
       <GallerySection onProjectClick={openGallery} />
 
-      <TimelapseSection />
+      <TimelapseSection scrollToSection={scrollToSection} />
 
       <OrderFormSection />
 
