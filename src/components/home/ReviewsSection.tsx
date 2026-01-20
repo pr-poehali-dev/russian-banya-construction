@@ -114,7 +114,7 @@ const ReviewsSection = () => {
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
             <div className="flex items-start gap-4 mb-4">
               <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
-                <img src="https://cdn.poehali.dev/files/кольцово1.JPG" alt="Отзыв" className="w-full h-full object-cover" />
+                <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/bc14bf83-2207-4706-9d23-aea9eda1f5db.JPG" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
                 <p className="font-bold text-lg text-gray-900">Дмитрий</p>
