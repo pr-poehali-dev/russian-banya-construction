@@ -3,6 +3,7 @@ import Header from "@/components/home/Header";
 import HeroSection from "@/components/home/HeroSection";
 import AboutSection from "@/components/home/AboutSection";
 import GallerySection from "@/components/home/GallerySection";
+import TimelapseSection from "@/components/home/TimelapseSection";
 import ProjectGalleryDialog from "@/components/home/ProjectGalleryDialog";
 import OrderFormSection from "@/components/OrderFormSection";
 import Footer from "@/components/home/Footer";
@@ -78,6 +79,8 @@ const Index = () => {
       <AboutSection scrollToSection={scrollToSection} />
 
       <GallerySection onProjectClick={openGallery} />
+
+      <TimelapseSection />
 
       <OrderFormSection />
 
