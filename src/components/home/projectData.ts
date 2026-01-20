@@ -467,7 +467,8 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/9527ada5-82b0-4302-ad97-eb842ecdd920.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/aa3f527b-64f0-4745-8c82-8614ba70259a.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/b99f079d-f8bd-4fc5-aca4-955fc059d04e.jpg"
-  ]
+  ],
+  []
 ];
 
 export interface Project {
@@ -597,5 +598,12 @@ export const projects: Project[] = [
     size: "6×6 м",
     material: "Брус естественной влажности",
     location: "п. Горный, Пермский край"
+  },
+  {
+    img: "",
+    title: "Баня из бруса 3×5",
+    size: "3×5 м",
+    material: "Брус естественной влажности",
+    location: "Заозерье, г. Пермь"
   }
 ];
