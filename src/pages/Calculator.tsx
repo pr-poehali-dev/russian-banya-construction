@@ -21,9 +21,9 @@ interface EstimateSection {
 
 const Calculator = () => {
   const [foundation, setFoundation] = useState<string>('');
-  const [length, setLength] = useState<string>('');
-  const [width, setWidth] = useState<string>('');
-  const [partitionLength, setPartitionLength] = useState<string>('');
+  const [length, setLength] = useState<string>('6');
+  const [width, setWidth] = useState<string>('6');
+  const [partitionLength, setPartitionLength] = useState<string>('6');
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
