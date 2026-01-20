@@ -91,11 +91,11 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/добрянка1.jpg" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Андрей Владимирович</p>
+                <p className="font-bold text-lg text-gray-900">Владимир</p>
                 <p className="text-sm text-gray-500">г. Добрянка</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Баня 6х8 из бруса. Строили летом, к осени уже парились. Качество работы отличное, претензий нет. Рекомендую!</p>
+            <p className="text-gray-700 leading-relaxed">Баню строил Александр, на моем фундаменте и из моего бруса. первым этапом построили под крышу, все понравилось. Через год сделали внутреннюю отделку, парную, комнату отдыха и 2 спальни на втором этаже. Думали, будет баня выходного дня, в итоге живем в ней всей семьей уже более 4-х лет. Александра, как человека и как специалиста, однозначно рекомендую!</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
