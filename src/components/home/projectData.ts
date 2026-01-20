@@ -400,13 +400,6 @@ export const projectGalleries = [
     "https://cdn.poehali.dev/files/жебреи32.jpg"
   ],
   [
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/56ffd009-8b25-4c96-809f-a6cf2c993890.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/b5c4c05f-c398-46e3-abcc-ea5be0466bcf.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/4d15e11c-0e89-427a-866d-e97cc6ce55ff.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/0c715af2-88d5-43d9-83d3-b116fa123dd5.jpg",
-    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/ce602663-fb4e-4099-8f95-ebf972cfe3e8.jpg"
-  ],
-  [
     "https://cdn.poehali.dev/files/бершеть1.jpg",
     "https://cdn.poehali.dev/files/бершеть2.jpg",
     "https://cdn.poehali.dev/files/бершеть3.jpg",
@@ -539,13 +532,6 @@ export const projects: Project[] = [
     size: "6×6 м",
     material: "Рубленое бревно",
     location: "п. Жебреи, Пермский край"
-  },
-  {
-    img: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/56ffd009-8b25-4c96-809f-a6cf2c993890.jpg",
-    title: "Баня из бревна 5×5",
-    size: "5×5 м",
-    material: "Оцилиндрованное бревно",
-    location: "г. Пермь"
   },
   {
     img: "https://cdn.poehali.dev/files/бершеть1.jpg",
