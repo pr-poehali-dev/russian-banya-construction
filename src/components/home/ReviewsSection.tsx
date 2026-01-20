@@ -62,12 +62,8 @@ const ReviewsSection = () => {
     <section className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
-            Отзывы наших клиентов
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Более 100 построенных бань в Пермском крае
-          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">Отзывы </h2>
+          <p className="text-gray-600 text-lg"></p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
