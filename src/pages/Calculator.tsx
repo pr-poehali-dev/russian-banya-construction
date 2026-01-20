@@ -389,7 +389,16 @@ const Calculator = () => {
                         <td className="border-r border-black p-1.5" colSpan={2}></td>
                         <td className="border-r border-black p-1.5"></td>
                         <td className="border-r border-black p-1.5 text-center">Площадь кровли, м</td>
-                        <td className="p-1.5 text-right">80</td>
+                        <td className="p-1.5 text-right">
+                          {length && width ? (() => {
+                            const l = parseFloat(length);
+                            const w = parseFloat(width);
+                            const ridgeLength = l + 1;
+                            const roofHeight = w / 2.5;
+                            const rafterLength = Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1;
+                            return (ridgeLength * rafterLength * 2.2).toFixed(0);
+                          })() : '—'}
+                        </td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}></td>
