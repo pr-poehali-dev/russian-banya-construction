@@ -100,7 +100,7 @@ const ReviewsSection = () => {
       id: "review-14",
       name: "Игорь",
       location: "п. Жебреи",
-      image: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/placeholder-review.jpg",
+      image: "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/89f3a3c2-51ff-45e5-94de-85f25805ca5c.jpg",
       text: "С Александром построили баню 6х6 из бревна. Понравилось все, от сруба, до полного монтажа. В итоге, отшлифовали еще дом, тоже из бревна. Александру спасибо!"
     }
   ];
