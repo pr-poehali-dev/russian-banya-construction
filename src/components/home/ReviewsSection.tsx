@@ -130,8 +130,8 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/ed798242-6bd3-44a4-bc38-965d118aeeee.jpg" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Светлана</p>
-                <p className="text-sm text-gray-500">д. Кузьминка</p>
+                <p className="font-bold text-lg text-gray-900">Сергей</p>
+                <p className="text-sm text-gray-500">д. Одино, Усть-Качка</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed">Долго искали исполнителя для постройки бани, остановились на этих ребятах и не прогадали. Построили баню 5х6 из профилированного бруса за месяц. Всё четко, качественно, без лишних вопросов. Спасибо большое!</p>
