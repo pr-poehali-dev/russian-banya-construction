@@ -26,11 +26,11 @@ const ReviewsSection = () => {
                 <img src="https://cdn.poehali.dev/files/полазна1.JPG" alt="Отзыв" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-lg text-gray-900">Марина</p>
+                <p className="font-bold text-lg text-gray-900">Вадим</p>
                 <p className="text-sm text-gray-500">п. Полазна</p>
               </div>
             </div>
-            <p className="text-gray-700 leading-relaxed">Долго выбирали исполнителя, остановились на этих мастерах и не пожалели ни разу! Баня 8х15 из бруса получилась просто огромная и красивая. Все сделано аккуратно, материалы качественные. Муж доволен как слон)) Рекомендую от всей души!</p>
+            <p className="text-gray-700 leading-relaxed">Делали с Александром внутреннюю отделку дома-бани. Отопление, электрика, шлифовка, покраска, наличники, потолки. Особенно понравилась отделка парной, Александр все доходчиво объяснил, как устроена парная, основы парения. Отдыхаем всей семьей, паримся по 2 раза в неделю!</p>
           </div>
 
           <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col">
