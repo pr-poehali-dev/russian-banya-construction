@@ -377,7 +377,13 @@ const Calculator = () => {
                         <td className="border-r border-black p-1.5" colSpan={2}></td>
                         <td className="border-r border-black p-1.5"></td>
                         <td className="border-r border-black p-1.5 text-center">Длина стропила, м</td>
-                        <td className="p-1.5 text-right">4,9</td>
+                        <td className="p-1.5 text-right">
+                          {width ? (() => {
+                            const w = parseFloat(width);
+                            const roofHeight = w / 2.5;
+                            return (Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1).toFixed(1);
+                          })() : '—'}
+                        </td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}></td>
