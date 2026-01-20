@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
 
 const ReviewsSection = () => {
   const [visibleCount, setVisibleCount] = useState(6);
@@ -116,14 +116,14 @@ const ReviewsSection = () => {
         </div>
 
         {visibleCount < reviews.length && (
-          <div className="text-center mt-8">
-            <Button
+          <div className="flex justify-center mt-12">
+            <button 
               onClick={() => setVisibleCount(prev => prev + 3)}
-              variant="outline"
-              className="px-8 py-3 text-lg"
+              className="text-lg font-semibold hover:text-primary/80 transition-all duration-300 hover:scale-110 flex items-center gap-2 group text-[#000000]"
             >
               Смотреть еще отзывы
-            </Button>
+              <Icon name="ChevronDown" size={20} className="group-hover:translate-y-1 transition-transform" />
+            </button>
           </div>
         )}
       </div>
