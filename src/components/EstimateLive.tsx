@@ -17,17 +17,8 @@ const EstimateLive = ({
   partitionsLength,
   floors 
 }: EstimateLiveProps) => {
-  if (!length || !width || !material) {
-    return (
-      <div className="text-center py-12 text-gray-500">
-        <p className="text-lg font-medium mb-2">Заполните параметры калькулятора</p>
-        <p className="text-sm">Выберите материал стен, длину и ширину для расчёта сметы</p>
-      </div>
-    );
-  }
-
-  const len = parseFloat(length);
-  const wid = parseFloat(width);
+  const len = length ? parseFloat(length) : 0;
+  const wid = width ? parseFloat(width) : 0;
   const area = len * wid;
   const perimeter = (len + wid) * 2;
   const partLen = partitionsLength ? parseFloat(partitionsLength) : 0;
