@@ -396,7 +396,8 @@ const Calculator = () => {
                             const ridgeLength = l + 1;
                             const roofHeight = w / 2.5;
                             const rafterLength = Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1;
-                            return (ridgeLength * rafterLength * 2.2).toFixed(0);
+                            const roofArea = ridgeLength * rafterLength * 2.2;
+                            return Math.ceil(roofArea / 10) * 10;
                           })() : '—'}
                         </td>
                       </tr>
