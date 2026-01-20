@@ -1,4 +1,4 @@
-const reviewsData = [
+export const reviewsData = [
   {
     name: "Александр Петров",
     location: "д. Веретье",
