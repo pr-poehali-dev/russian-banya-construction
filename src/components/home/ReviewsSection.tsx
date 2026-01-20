@@ -85,12 +85,16 @@ const ReviewsSection = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-lg text-gray-900">
-                    {review.name}
-                  </h3>
-                  <p className="text-sm text-gray-500">
-                    {review.location}
-                  </p>
+                  <input
+                    type="text"
+                    defaultValue={review.name}
+                    className="font-bold text-lg text-gray-900 w-full bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded"
+                  />
+                  <input
+                    type="text"
+                    defaultValue={review.location}
+                    className="text-sm text-gray-500 w-full bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded"
+                  />
                   <div className="flex gap-1 mt-1">
                     {Array.from({ length: review.rating }).map((_, i) => (
                       <span key={i} className="text-yellow-400 text-lg">★</span>
@@ -99,9 +103,11 @@ const ReviewsSection = () => {
                 </div>
               </div>
               
-              <p className="text-gray-700 leading-relaxed flex-1">
-                {review.text}
-              </p>
+              <textarea
+                defaultValue={review.text}
+                className="text-gray-700 leading-relaxed flex-1 bg-transparent border-none outline-none focus:bg-gray-50 px-1 -mx-1 rounded resize-none"
+                rows={4}
+              />
             </div>
           ))}
         </div>
