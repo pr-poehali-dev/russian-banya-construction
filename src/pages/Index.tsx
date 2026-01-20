@@ -4,6 +4,7 @@ import HeroSection from "@/components/home/HeroSection";
 import AboutSection from "@/components/home/AboutSection";
 import GallerySection from "@/components/home/GallerySection";
 import TimelapseSection from "@/components/home/TimelapseSection";
+import ReviewsSection from "@/components/home/ReviewsSection";
 import ProjectGalleryDialog from "@/components/home/ProjectGalleryDialog";
 import OrderFormSection from "@/components/OrderFormSection";
 import Footer from "@/components/home/Footer";
@@ -81,6 +82,8 @@ const Index = () => {
       <GallerySection onProjectClick={openGallery} />
 
       <TimelapseSection scrollToSection={scrollToSection} />
+
+      <ReviewsSection />
 
       <OrderFormSection />
 
