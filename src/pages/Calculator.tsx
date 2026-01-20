@@ -279,14 +279,134 @@ const Calculator = () => {
             </CardContent>
           </Card>
 
-          {estimate.length > 0 && (
-            <Card className="shadow-xl">
+          <Card className="shadow-xl">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
                 <CardTitle className="text-xl text-center">
                   Детальная смета (расчет под крышу, без отделки)
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
+                <div className="bg-white border-2 border-black mb-6">
+                  <div className="border-b-2 border-black p-3">
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <h2 className="font-bold text-base">Предварительная примерная смета компании "Пермский Пар"</h2>
+                      </div>
+                      <div className="text-right text-xs">
+                        <div>тел. +7 (342) 298-40-30</div>
+                        <div>тел. +7(982) 490 09 00</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <table className="w-full text-[10px] border-collapse">
+                    <tbody>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={4}>Заказчик</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5 text-center">телефон</td>
+                        <td className="p-1.5"></td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5 text-center">почта</td>
+                        <td className="p-1.5"></td>
+                      </tr>
+                      <tr className="border-b border-black bg-gray-50">
+                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={4}>Данные объекта</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Параметры</td>
+                        <td className="border-r border-black p-1.5 font-bold text-center">Значения</td>
+                        <td className="p-1.5 font-bold text-center">Дополнительные значения</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Фундамент</td>
+                        <td className="border-r border-black p-1.5 text-center">
+                          {foundation === 'ленточный' ? 'Ленточный' : foundation === 'сваи' ? 'Винтовые сваи' : foundation === 'есть' ? 'Без фундамента' : '—'}
+                        </td>
+                        <td className="border-r border-black p-1.5 text-center">Периметр фундамента, м</td>
+                        <td className="p-1.5 text-right">30</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Что хотите построить</td>
+                        <td className="border-r border-black p-1.5 text-center">Баня под крышу</td>
+                        <td className="border-r border-black p-1.5 text-center">Высота 1 этажа в чистоте, м</td>
+                        <td className="p-1.5 text-right">2,2</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Из чего хотите построить</td>
+                        <td className="border-r border-black p-1.5 text-center">Брус обычный</td>
+                        <td className="border-r border-black p-1.5 text-center">Высота сруба 1 этажа, м</td>
+                        <td className="p-1.5 text-right">2,8</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
+                        <td className="border-r border-black p-1.5 text-center">1,5 этажа</td>
+                        <td className="border-r border-black p-1.5 text-center">Высота мансарды, м</td>
+                        <td className="p-1.5 text-right">3,4</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
+                        <td className="border-r border-black p-1.5 text-center">{length || '—'}</td>
+                        <td className="border-r border-black p-1.5 text-center">Высота стен мансарды, м</td>
+                        <td className="p-1.5 text-right">1</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Ширина строения, м</td>
+                        <td className="border-r border-black p-1.5 text-center">{width || '—'}</td>
+                        <td className="border-r border-black p-1.5 text-center">Высота стен всего сруба, м</td>
+                        <td className="p-1.5 text-right">3,8</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Длина перегородок 1 этажа, м</td>
+                        <td className="border-r border-black p-1.5 text-center">{partitionLength || '0'}</td>
+                        <td className="border-r border-black p-1.5 text-center">Площадь, м2</td>
+                        <td className="p-1.5 text-right">{length && width ? (parseFloat(length) * parseFloat(width)).toFixed(0) : '—'}</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Расстояние до объекта в 1 сторону, км</td>
+                        <td className="border-r border-black p-1.5 text-center">0</td>
+                        <td className="border-r border-black p-1.5 text-center">Высота крыши, м</td>
+                        <td className="p-1.5 text-right">2,4</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5 text-center">Длина конька, м</td>
+                        <td className="p-1.5 text-right">7</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5 text-center">Длина стропила, м</td>
+                        <td className="p-1.5 text-right">4,9</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5 text-center">Площадь кровли, м</td>
+                        <td className="p-1.5 text-right">80</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5 text-center">Количество стропильных пар, шт</td>
+                        <td className="p-1.5 text-right">15</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="p-1.5"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {estimate.length > 0 && (
                 <div className="space-y-6">
                   {estimate.map((section, idx) => (
                     <div key={idx} className="border-b pb-4 last:border-b-0">
@@ -332,9 +452,9 @@ const Calculator = () => {
                     </div>
                   </div>
                 </div>
+                )}
               </CardContent>
             </Card>
-          )}
         </div>
       </div>
     </div>
