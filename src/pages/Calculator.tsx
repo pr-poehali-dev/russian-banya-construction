@@ -52,14 +52,14 @@ const Calculator = () => {
     // Ленточный фундамент - всегда показываем, но считаем только если выбран
     const concrete = parseFloat((perimeter * 0.4).toFixed(2));
     const drainagePillow = Math.round(perimeter * 0.15);
-    const reinforcement = Math.round(perimeter * 15 / 100) * 100;
-    const bindingWire = Math.round(perimeter * 0.06);
-    const formworkBoard = Math.round(perimeter * 0.126);
-    const nails = Math.round(perimeter * 0.25);
-    const screws = Math.round(perimeter * 20 / 10) * 10;
-    const film = Math.round(perimeter * 1.6 / 10) * 10;
+    const reinforcement = Math.ceil(perimeter * 15 / 100) * 100;
+    const bindingWire = Math.ceil(perimeter * 0.06);
+    const formworkBoard = Math.ceil(perimeter * 0.126);
+    const nails = Math.ceil(perimeter * 0.25);
+    const screws = Math.ceil(perimeter * 20 / 10) * 10;
+    const film = Math.ceil(perimeter * 1.6 / 10) * 10;
     const staples = Math.ceil(perimeter * 35 / 1000) * 1000;
-    const fixators = Math.round(perimeter * 10 / 100) * 100;
+    const fixators = Math.ceil(perimeter * 10 / 100) * 100;
     const isStripSelected = foundation === 'ленточный';
     sections.push({
       title: 'Фундамент ленточный, с буронабивными сваями',
