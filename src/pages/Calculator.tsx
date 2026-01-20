@@ -50,12 +50,12 @@ const Calculator = () => {
     });
 
     // Ленточный фундамент - всегда показываем, но считаем только если выбран
-    const concrete = 12;
+    const concrete = parseFloat((perimeter * 0.4).toFixed(2));
     const isStripSelected = foundation === 'ленточный';
     sections.push({
       title: 'Фундамент ленточный, с буронабивными сваями',
       items: [
-        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: 12, price: 8100, total: isStripSelected ? 97200 : 0 },
+        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: concrete, price: 8100, total: isStripSelected ? Math.round(concrete * 8100) : 0 },
         { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: 5, price: 1000, total: isStripSelected ? 5000 : 0 },
         { name: 'Арматура металлическая(12мм)', unit: 'п.м', quantity: 500, price: 100, total: isStripSelected ? 50000 : 0 },
         { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: 2, price: 500, total: isStripSelected ? 1000 : 0 },
@@ -65,7 +65,7 @@ const Calculator = () => {
         { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: 50, price: 70, total: isStripSelected ? 3500 : 0 },
         { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 2000, price: 0.2, total: isStripSelected ? 400 : 0 },
         { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: 300, price: 10, total: isStripSelected ? 3000 : 0 },
-        { name: 'Монтаж фундамента(с буронабивными сваями)', unit: 'м3', quantity: 12, price: 10000, total: isStripSelected ? 120000 : 0 },
+        { name: 'Монтаж фундамента(с буронабивными сваями)', unit: 'м3', quantity: concrete, price: 10000, total: isStripSelected ? Math.round(concrete * 10000) : 0 },
       ],
       subtotal: 0
     });
