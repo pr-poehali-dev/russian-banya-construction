@@ -98,32 +98,35 @@ const Calculator = () => {
     });
     sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
 
+    const isBrusSelected = wallMaterial === 'брус' || wallMaterial === 'клееный';
+    const isBrevnoSelected = wallMaterial === 'бревно';
+    
     sections.push({
       title: 'Сруб из бруса',
       items: [
         { name: 'Брус для сруба', unit: 'м3', quantity: 19.95, price: 0, total: 0 },
-        { name: 'Джут(150мм)', unit: 'п.м', quantity: 1000, price: 25, total: 25000 },
-        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: 5200 },
-        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: 1000 },
-        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 100, price: 60, total: 6000 },
+        { name: 'Джут(150мм)', unit: 'п.м', quantity: 1000, price: 25, total: isBrusSelected ? 25000 : 0 },
+        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: isBrusSelected ? 5200 : 0 },
+        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: isBrusSelected ? 1000 : 0 },
+        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 100, price: 60, total: isBrusSelected ? 6000 : 0 },
         { name: 'Монтаж бруса', unit: 'м3', quantity: 19.95, price: 10000, total: 0 },
       ],
       subtotal: 0
     });
-    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+    sections[sections.length - 1].subtotal = isBrusSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
 
     sections.push({
       title: 'Сруб из бревна',
       items: [
-        { name: 'Бревно сруба', unit: 'м3', quantity: 24.58, price: 22000, total: 540736.3 },
-        { name: 'Джут(150мм)', unit: 'п.м', quantity: 1000, price: 25, total: 25000 },
-        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: 5200 },
-        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: 1000 },
-        { name: 'Монтаж сруба', unit: 'м3', quantity: 24.58, price: 10000, total: 245789.2 },
+        { name: 'Бревно сруба', unit: 'м3', quantity: 24.58, price: 22000, total: isBrevnoSelected ? 540736.3 : 0 },
+        { name: 'Джут(150мм)', unit: 'п.м', quantity: 1000, price: 25, total: isBrevnoSelected ? 25000 : 0 },
+        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: isBrevnoSelected ? 5200 : 0 },
+        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: isBrevnoSelected ? 1000 : 0 },
+        { name: 'Монтаж сруба', unit: 'м3', quantity: 24.58, price: 10000, total: isBrevnoSelected ? 245789.2 : 0 },
       ],
       subtotal: 0
     });
-    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+    sections[sections.length - 1].subtotal = isBrevnoSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
 
     sections.push({
       title: 'Лаги пола, балки перекрытия',
