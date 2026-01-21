@@ -115,7 +115,7 @@ const Calculator = () => {
         { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: shkanty, price: 40, total: isBrusSelected ? shkanty * 40 : 0 },
         { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: skobki, price: 0.2, total: isBrusSelected ? skobki * 0.2 : 0 },
         { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 100, price: 60, total: isBrusSelected ? 6000 : 0 },
-        { name: 'Монтаж бруса', unit: 'м3', quantity: 19.95, price: 10000, total: 0 },
+        { name: 'Монтаж бруса', unit: 'м3', quantity: parseFloat(brusVolume.toFixed(2)), price: 10000, total: isBrusSelected ? Math.ceil(brusVolume * 10000) : 0 },
       ],
       subtotal: 0
     });
