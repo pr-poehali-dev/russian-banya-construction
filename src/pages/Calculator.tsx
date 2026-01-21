@@ -452,47 +452,44 @@ const Calculator = () => {
   }, [foundation, wallMaterial, floors, distance, length, width, partitionLength]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 py-12 px-4">
       <div className="container max-w-4xl mx-auto">
         <div className="space-y-8">
-          <Card className="shadow-xl">
-            <CardHeader className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
-              <CardTitle className="text-2xl text-center">Калькулятор бани</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6 pt-6">
-              {/* Индикатор шагов */}
-              <div className="mb-6">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm font-semibold text-amber-900">Шаг {step} из 4</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-gradient-to-r from-amber-600 to-orange-600 h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${(step / 4) * 100}%` }}
-                  />
-                </div>
+          <div className="space-y-6">
+            <h1 className="text-4xl font-bold text-emerald-900 text-center">Калькулятор бани</h1>
+            {/* Индикатор шагов */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm font-semibold text-emerald-900">Шаг {step} из 4</span>
               </div>
+              <div className="w-full bg-emerald-200 rounded-full h-2">
+                <div 
+                  className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${(step / 4) * 100}%` }}
+                />
+              </div>
+            </div>
 
-              {/* Шаг 1: Фундамент и материал */}
-              {step === 1 && (
-                <div className="space-y-6">
-                  <div className="space-y-3">
-                    <Label className="text-base font-semibold">Выберите тип фундамента:</Label>
-                    <RadioGroup value={foundation} onValueChange={setFoundation}>
-                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+            {/* Шаг 1: Фундамент и материал */}
+            {step === 1 && (
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <Label className="text-base font-semibold text-emerald-900">Выберите тип фундамента:</Label>
+                  <RadioGroup value={foundation} onValueChange={setFoundation}>
+                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                         <RadioGroupItem value="ленточный" id="lenточный" />
                         <Label htmlFor="lenточный" className="cursor-pointer flex-1">
                           Ленточный фундамент
                         </Label>
                       </div>
-                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                        <RadioGroupItem value="сваи" id="svai" />
+                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="сваи" id="svai" />
                         <Label htmlFor="svai" className="cursor-pointer flex-1">
                           Винтовые сваи
                         </Label>
                       </div>
-                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                        <RadioGroupItem value="есть" id="est" />
+                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="есть" id="est" />
                         <Label htmlFor="est" className="cursor-pointer flex-1">
                           Фундамент уже есть
                         </Label>
@@ -500,23 +497,23 @@ const Calculator = () => {
                     </RadioGroup>
                   </div>
 
-                  <div className="space-y-3">
-                    <Label className="text-base font-semibold">Материал стен бани:</Label>
-                    <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
-                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                <div className="space-y-3">
+                  <Label className="text-base font-semibold text-emerald-900">Материал стен бани:</Label>
+                  <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
+                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                         <RadioGroupItem value="бревно" id="brevno" />
                         <Label htmlFor="brevno" className="cursor-pointer flex-1">
                           Оцилиндрованное бревно
                         </Label>
                       </div>
-                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                        <RadioGroupItem value="брус" id="brus" />
+                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="брус" id="brus" />
                         <Label htmlFor="brus" className="cursor-pointer flex-1">
                           Брус естественной влажности
                         </Label>
                       </div>
-                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                        <RadioGroupItem value="клееный" id="kleeniy" />
+                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="клееный" id="kleeniy" />
                         <Label htmlFor="kleeniy" className="cursor-pointer flex-1">
                           Клееный брус
                         </Label>
@@ -524,33 +521,33 @@ const Calculator = () => {
                     </RadioGroup>
                   </div>
 
-                  <div className="flex justify-end pt-4">
-                    <Button 
-                      onClick={goToNextStep}
-                      className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
-                    >
-                      Далее
-                      <Icon name="ChevronRight" className="ml-2" size={20} />
-                    </Button>
-                  </div>
+                <div className="flex justify-end pt-4">
+                  <Button 
+                    onClick={goToNextStep}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                  >
+                    Далее
+                    <Icon name="ChevronRight" className="ml-2" size={20} />
+                  </Button>
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* Шаг 2: Размеры */}
-              {step === 2 && (
-                <div className="space-y-6">
-                  <div className="space-y-4">
-                <Label className="text-base font-semibold">Размеры вашей бани</Label>
+            {/* Шаг 2: Размеры */}
+            {step === 2 && (
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <Label className="text-base font-semibold text-emerald-900">Размеры вашей бани</Label>
                 <div className="space-y-3">
-                  <Label className="text-sm">Этажность:</Label>
+                  <Label className="text-sm text-emerald-900">Этажность:</Label>
                   <RadioGroup value={floors} onValueChange={setFloors}>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-2 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                       <RadioGroupItem value="1" id="floor1" />
                       <Label htmlFor="floor1" className="cursor-pointer flex-1 text-sm">
                         1 этаж
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-2 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                       <RadioGroupItem value="1.5" id="floor1.5" />
                       <Label htmlFor="floor1.5" className="cursor-pointer flex-1 text-sm">
                         1,5 этажа (мансарда)
@@ -560,7 +557,7 @@ const Calculator = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="length" className="text-base font-semibold">
+                    <Label htmlFor="length" className="text-base font-semibold text-emerald-900">
                       Длина (м)
                     </Label>
                     <Input
@@ -569,11 +566,11 @@ const Calculator = () => {
                       placeholder="6"
                       value={length}
                       onChange={(e) => setLength(e.target.value)}
-                      className="text-lg"
+                      className="text-lg border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="width" className="text-base font-semibold">
+                    <Label htmlFor="width" className="text-base font-semibold text-emerald-900">
                       Ширина (м)
                     </Label>
                     <Input
@@ -582,12 +579,12 @@ const Calculator = () => {
                       placeholder="4"
                       value={width}
                       onChange={(e) => setWidth(e.target.value)}
-                      className="text-lg"
+                      className="text-lg border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="partition" className="text-base font-semibold">
+                  <Label htmlFor="partition" className="text-base font-semibold text-emerald-900">
                     Длина перегородок (м)
                   </Label>
                   <Input
@@ -596,56 +593,56 @@ const Calculator = () => {
                     placeholder="0"
                     value={partitionLength}
                     onChange={(e) => setPartitionLength(e.target.value)}
-                    className="text-lg"
+                    className="text-lg border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-between pt-4">
-                <Button 
-                  onClick={goToPrevStep}
-                  variant="outline"
-                  className="border-amber-300 text-amber-900 hover:bg-amber-50"
-                >
-                  <Icon name="ChevronLeft" className="mr-2" size={20} />
-                  Назад
-                </Button>
-                <Button 
-                  onClick={goToNextStep}
-                  className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
-                >
-                  Далее
-                  <Icon name="ChevronRight" className="ml-2" size={20} />
-                </Button>
+                <div className="flex justify-between pt-4">
+                  <Button 
+                    onClick={goToPrevStep}
+                    variant="outline"
+                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                  >
+                    <Icon name="ChevronLeft" className="mr-2" size={20} />
+                    Назад
+                  </Button>
+                  <Button 
+                    onClick={goToNextStep}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                  >
+                    Далее
+                    <Icon name="ChevronRight" className="ml-2" size={20} />
+                  </Button>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Шаг 3: Расстояние */}
-          {step === 3 && (
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <Label className="text-base font-semibold">Расстояние от Перми до объекта в одну сторону, км:</Label>
+            {/* Шаг 3: Расстояние */}
+            {step === 3 && (
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <Label className="text-base font-semibold text-emerald-900">Расстояние от Перми до объекта в одну сторону, км:</Label>
                 <RadioGroup value={distance} onValueChange={setDistance}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                     <RadioGroupItem value="0-30" id="dist0-30" />
                     <Label htmlFor="dist0-30" className="cursor-pointer flex-1">
                       0-30 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                     <RadioGroupItem value="30-60" id="dist30-60" />
                     <Label htmlFor="dist30-60" className="cursor-pointer flex-1">
                       30-60 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                     <RadioGroupItem value="60-90" id="dist60-90" />
                     <Label htmlFor="dist60-90" className="cursor-pointer flex-1">
                       60-90 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                     <RadioGroupItem value="90+" id="dist90+" />
                     <Label htmlFor="dist90+" className="cursor-pointer flex-1">
                       более 90 км
@@ -674,12 +671,11 @@ const Calculator = () => {
             </div>
           )}
 
-          {/* Шаг 4: Контактные данные */}
-          {step === 4 && (
-            <div className="space-y-6">
-              {totalPrice > 0 && (
-                <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
-                  <CardContent className="pt-4 pb-4">
+            {/* Шаг 4: Контактные данные */}
+            {step === 4 && (
+              <div className="space-y-6">
+                {totalPrice > 0 && (
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-6 shadow-lg">
                     <div className="text-center space-y-1">
                       <p className="text-gray-600 text-sm">Общая стоимость:</p>
                       <p className="text-3xl font-bold text-green-700">
@@ -689,15 +685,14 @@ const Calculator = () => {
                         * Окончательная цена после осмотра объекта
                       </p>
                     </div>
-                  </CardContent>
-                </Card>
-              )}
+                  </div>
+                )}
 
-              <div className="space-y-4 pt-4 border-t">
-                <Label className="text-base font-semibold">Контактные данные</Label>
+                <div className="space-y-4 pt-4">
+                  <Label className="text-base font-semibold text-emerald-900">Контактные данные</Label>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm">
+                  <Label htmlFor="name" className="text-sm text-emerald-900">
                     Имя <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -707,12 +702,12 @@ const Calculator = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className={showValidation && !name ? 'border-red-500 border-2' : ''}
+                    className={showValidation && !name ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm">
+                  <Label htmlFor="phone" className="text-sm text-emerald-900">
                     Телефон <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -722,12 +717,12 @@ const Calculator = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
-                    className={showValidation && !phone ? 'border-red-500 border-2' : ''}
+                    className={showValidation && !phone ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm">
+                  <Label htmlFor="email" className="text-sm text-emerald-900">
                     Email {sendMethod === 'email' && <span className="text-red-500">*</span>}
                   </Label>
                   <Input
@@ -737,12 +732,12 @@ const Calculator = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required={sendMethod === 'email'}
-                    className={showValidation && sendMethod === 'email' && !email ? 'border-red-500 border-2' : ''}
+                    className={showValidation && sendMethod === 'email' && !email ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="telegram" className="text-sm flex items-center gap-2">
+                  <Label htmlFor="telegram" className="text-sm text-emerald-900 flex items-center gap-2">
                     Telegram username {sendMethod === 'telegram' && <span className="text-red-500">*</span>}
                     <Dialog>
                       <DialogTrigger asChild>
@@ -798,21 +793,21 @@ const Calculator = () => {
                     placeholder="@username"
                     value={telegram}
                     onChange={(e) => setTelegram(e.target.value)}
-                    className={showValidation && sendMethod === 'telegram' && !telegram ? 'border-red-500 border-2' : ''}
+                    className={showValidation && sendMethod === 'telegram' && !telegram ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
                   />
                   <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @) тогда смета придет автоматически, или оставьте пустым и мы отправим вам смету в ближайшее время в ручном режиме</p>
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-sm">Куда отправить смету:</Label>
+                  <Label className="text-sm text-emerald-900">Куда отправить смету:</Label>
                   <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-2 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                       <RadioGroupItem value="email" id="sendEmail" />
                       <Label htmlFor="sendEmail" className="cursor-pointer flex-1 text-sm">
                         Email
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-2 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
                       <RadioGroupItem value="telegram" id="sendTelegram" />
                       <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
                         Телеграм
@@ -821,44 +816,40 @@ const Calculator = () => {
                   </RadioGroup>
                 </div>
 
-                <div className="flex gap-3">
-                  <Button 
-                    onClick={goToPrevStep}
-                    variant="outline"
-                    className="border-amber-300 text-amber-900 hover:bg-amber-50"
-                  >
-                    <Icon name="ChevronLeft" className="mr-2" size={20} />
-                    Назад
-                  </Button>
-                  <Button 
-                    className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
-                    onClick={handleSendEstimate}
-                    disabled={isSending || estimate.length === 0}
-                  >
-                    {isSending ? 'Отправка...' : 'Отправить смету'}
-                  </Button>
+                  <div className="flex gap-3">
+                    <Button 
+                      onClick={goToPrevStep}
+                      variant="outline"
+                      className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                    >
+                      <Icon name="ChevronLeft" className="mr-2" size={20} />
+                      Назад
+                    </Button>
+                    <Button 
+                      className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-6 text-lg rounded-xl shadow-lg"
+                      onClick={handleSendEstimate}
+                      disabled={isSending || estimate.length === 0}
+                    >
+                      {isSending ? 'Отправка...' : 'Отправить смету'}
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-            </CardContent>
-          </Card>
+            )}
+          </div>
 
-          <Card className="shadow-xl">
-              <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-                <div className="flex justify-between items-center">
-                  <CardTitle className="text-xl">Детальная смета</CardTitle>
-                  <Button 
-                    onClick={handleDownloadPDF}
-                    disabled={isGeneratingPDF || estimate.length === 0}
-                    variant="secondary"
-                    className="bg-white text-blue-600 hover:bg-gray-100"
-                  >
-                    {isGeneratingPDF ? 'Генерация...' : 'Скачать PDF'}
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent className="pt-6">
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-emerald-900">Детальная смета</h2>
+              <Button 
+                onClick={handleDownloadPDF}
+                disabled={isGeneratingPDF || estimate.length === 0}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white"
+              >
+                {isGeneratingPDF ? 'Генерация...' : 'Скачать PDF'}
+              </Button>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
                 <div ref={estimateRef} className="w-full">
                 <div className="bg-white border-2 border-black">
                   <div className="border-b-2 border-black p-3">
@@ -1062,9 +1053,9 @@ const Calculator = () => {
                 </div>
                 )}
                 </div>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
