@@ -167,6 +167,7 @@ const Calculator = () => {
     const gayka = Math.ceil(stropilPairs * 6);
     const ugolok = stropilPairs * 2;
     const shurup = ugolok * 2;
+    const skobkiRoof = Math.ceil((roofArea * 30) / 1000) * 1000;
 
     sections.push({
       title: 'Крыша',
@@ -180,7 +181,7 @@ const Calculator = () => {
         { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: gayka, price: 6, total: gayka * 6 },
         { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: ugolok, price: 30, total: ugolok * 30 },
         { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: shurup, price: 4, total: shurup * 4 },
-        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 3000, price: 60, total: 180000 },
+        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: skobkiRoof, price: 0.2, total: skobkiRoof * 0.2 },
         { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: 16, price: 200, total: 3200 },
         { name: 'Металлочерепица', unit: 'м2', quantity: 80, price: 750, total: 60000 },
         { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: 7, price: 240, total: 1680 },
