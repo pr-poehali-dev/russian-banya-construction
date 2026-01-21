@@ -678,14 +678,14 @@ const Calculator = () => {
                 <Button 
                   onClick={goToPrevStep}
                   variant="outline"
-                  className="border-amber-300 text-amber-900 hover:bg-amber-50"
+                  className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
                 >
                   <Icon name="ChevronLeft" className="mr-2" size={20} />
                   Назад
                 </Button>
                 <Button 
                   onClick={goToNextStep}
-                  className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
                 >
                   Далее
                   <Icon name="ChevronRight" className="ml-2" size={20} />
