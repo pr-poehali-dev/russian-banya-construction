@@ -559,7 +559,7 @@ const Calculator = () => {
               </CardHeader>
               <CardContent className="pt-6">
                 <div ref={estimateRef} className="w-full">
-                <div className="bg-white border-2 border-black mb-6">
+                <div className="bg-white border-2 border-black">
                   <div className="border-b-2 border-black p-3">
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
@@ -707,14 +707,17 @@ const Calculator = () => {
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                  
+                  <div className="border-b-2 border-black p-1.5 bg-gray-50">
+                    <h3 className="font-bold text-sm text-center">Расчеты</h3>
+                  </div>
 
                 {estimate.length > 0 && (
-                <div className="border-2 border-black w-full">
+                <div className="w-full">
                   {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
                     <div key={idx}>
-                      <div className="bg-white border-b-2 border-black p-2">
-                        <h3 className="font-bold text-sm text-center">{section.title}</h3>
+                      <div className="bg-white border-b border-black py-1 px-1.5">
+                        <h3 className="font-bold text-xs">{section.title}</h3>
                       </div>
                       <table className="w-full text-[11px] border-collapse">
                         <thead>
@@ -755,6 +758,7 @@ const Calculator = () => {
                   </div>
                 </div>
                 )}
+                </div>
                 </div>
               </CardContent>
             </Card>
