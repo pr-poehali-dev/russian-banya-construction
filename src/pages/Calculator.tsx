@@ -164,6 +164,7 @@ const Calculator = () => {
     const brusokVent = Math.ceil((rafterLength * stropilPairs * 2) / 10) * 10;
     const plenka = Math.ceil((roofArea * 1.2) / 10) * 10;
     const shpilka = Math.ceil(stropilPairs / 2);
+    const gayka = Math.ceil(stropilPairs * 6);
 
     sections.push({
       title: 'Крыша',
@@ -173,7 +174,7 @@ const Calculator = () => {
         { name: 'Брусок для вент.загора(50х50х6000)мм', unit: 'п.м', quantity: brusokVent, price: 65, total: brusokVent * 65 },
         { name: 'Пленка гидроизоляционная', unit: 'м2', quantity: plenka, price: 150, total: plenka * 150 },
         { name: 'Шпилька резьбовая оцинкованная(10х1000)мм', unit: 'м', quantity: shpilka, price: 100, total: shpilka * 100 },
-        { name: 'Гайка оцинкованная(М10)', unit: 'шт', quantity: 90, price: 6, total: 540 },
+        { name: 'Гайка оцинкованная(М10)', unit: 'шт', quantity: gayka, price: 6, total: gayka * 6 },
         { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: 90, price: 6, total: 540 },
         { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: 30, price: 30, total: 900 },
         { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: 60, price: 4, total: 240 },
