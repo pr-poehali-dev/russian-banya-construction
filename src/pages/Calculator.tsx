@@ -156,31 +156,35 @@ const Calculator = () => {
     sections.push({
       title: 'Крыша',
       items: [
-        { name: 'Доска 1-й сорт(50х150)мм', unit: 'м3', quantity: 1.46, price: 19500, total: 28518 },
-        { name: 'Доска 1-й сорт(40х100)мм', unit: 'м3', quantity: 1.27, price: 19500, total: 24757 },
-        { name: 'Брусок(50х50)мм', unit: 'м3', quantity: 0.22, price: 20000, total: 4383 },
-        { name: 'Пленка гидроветрозащитная', unit: 'м2', quantity: 100, price: 75, total: 7500 },
+        { name: 'Доска для стропил и ригелей 1-й сорт(50х150х6000)мм', unit: 'м3', quantity: 1.70, price: 19500, total: 33150 },
+        { name: 'Доска для обрешетки 1-й сорт(40х100х6000)мм', unit: 'м3', quantity: 1.60, price: 19500, total: 31200 },
+        { name: 'Брусок для вент.зазора(50х50х6000)мм', unit: 'п.м', quantity: 150, price: 65, total: 9750 },
+        { name: 'Пленка гидроизоляционная', unit: 'м2', quantity: 100, price: 150, total: 15000 },
         { name: 'Шпилька резьбовая оцинкованная(10х1000)мм', unit: 'м', quantity: 8, price: 100, total: 800 },
-        { name: 'Гайка оцинкованная(М10)', unit: 'шт', quantity: 78, price: 6, total: 468 },
-        { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: 78, price: 6, total: 468 },
-        { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: 26, price: 30, total: 780 },
-        { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: 52, price: 4, total: 208 },
-        { name: 'Джут(150мм)', unit: 'п.м', quantity: 30, price: 25, total: 750 },
-        { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: 1000, price: 0.2, total: 200 },
-        { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: 4, price: 200, total: 800 },
-        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: 6, price: 200, total: 1200 },
-        { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: 250, price: 3, total: 750 },
-        { name: 'Металлочерепица', unit: 'м2', quantity: Math.ceil(area * 1.5 * 100) / 100, price: 750, total: Math.ceil(area * 1.5 * 750) },
-        { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: Math.ceil(Math.max(l, w)), price: 240, total: Math.ceil(Math.max(l, w) * 240) },
-        { name: 'Ветровая планка', unit: 'п.м', quantity: 16, price: 240, total: 3840 },
-        { name: 'Карнизная планка', unit: 'п.м', quantity: 15, price: 240, total: 3600 },
-        { name: 'Кровельные саморезы(4,8*35)', unit: 'шт', quantity: 450, price: 5, total: 2250 },
-        { name: 'Кровельные саморезы(4,8*50)', unit: 'шт', quantity: 150, price: 6, total: 900 },
-        { name: 'Монтаж кровли', unit: 'м2', quantity: Math.ceil(area * 1.5 * 100) / 100, price: 2500, total: Math.ceil(area * 1.5 * 2500) },
+        { name: 'Гайка оцинкованная(М10)', unit: 'шт', quantity: 90, price: 6, total: 540 },
+        { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: 90, price: 6, total: 540 },
+        { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: 30, price: 30, total: 900 },
+        { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: 60, price: 4, total: 240 },
+        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 3000, price: 60, total: 180000 },
+        { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: 16, price: 200, total: 3200 },
+        { name: 'Металлочерепица', unit: 'м2', quantity: 80, price: 750, total: 60000 },
+        { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: 7, price: 240, total: 1680 },
+        { name: 'Ветровая планка', unit: 'п.м', quantity: 20, price: 240, total: 4800 },
+        { name: 'Карнизная планка', unit: 'п.м', quantity: 14, price: 240, total: 3360 },
+        { name: 'Кровельные саморезы(4,8*35)', unit: 'шт', quantity: 800, price: 5, total: 4000 },
+        { name: 'Кровельные саморезы(4,8*50)', unit: 'шт', quantity: 240, price: 6, total: 1440 },
+        { name: 'Монтаж крыши', unit: 'м2', quantity: 80, price: 3000, total: 240000 },
       ],
-      subtotal: 0
+      subtotal: 590600
     });
-    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+
+    sections.push({
+      title: 'Прочие расходы',
+      items: [
+        { name: 'Доставка материалов, транспортные расходы, леса и тд', unit: 'шт', quantity: 1, price: 79250, total: 79250 },
+      ],
+      subtotal: 79250
+    });
 
     const total = sections.reduce((sum, section) => sum + section.subtotal, 0);
 
