@@ -232,22 +232,103 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             print(f"SMTP_USER: {smtp_user}")
             print(f"SMTP_PASSWORD length: {len(smtp_password) if smtp_password else 0}")
             
-            # Попробуем SSL-соединение (порт 465)
+            # Отправка владельцу
             if smtp_port == 465:
                 with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as server:
                     server.set_debuglevel(1)
                     server.login(smtp_user, smtp_password)
                     server.send_message(msg)
-                    print("Email sent successfully via SSL")
+                    print("Email to owner sent successfully via SSL")
                     email_sent = True
             else:
-                # Попробуем STARTTLS (порт 587)
                 with smtplib.SMTP(smtp_host, smtp_port, timeout=15) as server:
                     server.starttls()
                     server.login(smtp_user, smtp_password)
                     server.send_message(msg)
-                    print("Email sent successfully via STARTTLS")
+                    print("Email to owner sent successfully via STARTTLS")
                     email_sent = True
+            
+            # Отправка заказчику если указан email и способ связи - email
+            if email_client and messenger == 'email' and pdf_data:
+                customer_msg = MIMEMultipart('alternative')
+                customer_msg['Subject'] = 'Ваша смета от компании "Пермский Пар"'
+                customer_msg['From'] = smtp_user
+                customer_msg['To'] = email_client
+                
+                customer_html = f"""
+                <html>
+                <head>
+                    <style>
+                        body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                        .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+                        .header {{ background-color: #FBB040; padding: 20px; text-align: center; }}
+                        .header h1 {{ margin: 0; color: #000; }}
+                        .content {{ background-color: #f9f9f9; padding: 20px; }}
+                        .footer {{ text-align: center; padding: 20px; font-size: 12px; color: #999; }}
+                        .contacts {{ margin-top: 20px; padding: 15px; background: #fff; border-left: 4px solid #FBB040; }}
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>🏡 Пермский Пар</h1>
+                        </div>
+                        <div class="content">
+                            <p>Здравствуйте, {name}!</p>
+                            
+                            <p>Благодарим за обращение в компанию "Пермский Пар".</p>
+                            
+                            <p>Ваша предварительная смета во вложении.</p>
+                            
+                            <p>Для уточнения деталей и окончательного расчета стоимости наш специалист свяжется с вами в ближайшее время.</p>
+                            
+                            <div class="contacts">
+                                <strong>Наши контакты:</strong><br>
+                                Телефон: +7 (342) 298-40-30<br>
+                                Телефон: +7 (982) 490-09-00<br>
+                                Email: perm-par@mail.ru<br>
+                                Сайт: www.пермский-пар.рф
+                            </div>
+                            
+                            <p style="margin-top: 20px;">С уважением,<br>Команда "Пермский Пар"</p>
+                        </div>
+                        <div class="footer">
+                            <p>Письмо отправлено автоматически. Пожалуйста, не отвечайте на него.</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
+                """
+                
+                customer_html_part = MIMEText(customer_html, 'html', 'utf-8')
+                customer_msg.attach(customer_html_part)
+                
+                # Прикрепляем PDF
+                try:
+                    pdf_bytes = base64.b64decode(pdf_data)
+                    pdf_attachment = MIMEBase('application', 'octet-stream')
+                    pdf_attachment.set_payload(pdf_bytes)
+                    encoders.encode_base64(pdf_attachment)
+                    pdf_attachment.add_header(
+                        'Content-Disposition',
+                        f'attachment; filename=Смета_{name.replace(" ", "_")}.pdf'
+                    )
+                    customer_msg.attach(pdf_attachment)
+                except Exception as pdf_err:
+                    print(f"Failed to attach PDF to customer email: {pdf_err}")
+                
+                # Отправляем заказчику
+                if smtp_port == 465:
+                    with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as server:
+                        server.login(smtp_user, smtp_password)
+                        server.send_message(customer_msg)
+                        print(f"Email to customer ({email_client}) sent successfully via SSL")
+                else:
+                    with smtplib.SMTP(smtp_host, smtp_port, timeout=15) as server:
+                        server.starttls()
+                        server.login(smtp_user, smtp_password)
+                        server.send_message(customer_msg)
+                        print(f"Email to customer ({email_client}) sent successfully via STARTTLS")
                     
         except Exception as e:
             email_error = str(e)
