@@ -668,7 +668,7 @@ const Calculator = () => {
                     onChange={(e) => setTelegram(e.target.value)}
                     className={showValidation && (sendMethod === 'telegram' || sendMethod === 'max') && !telegram ? 'border-red-500 border-2' : ''}
                   />
-                  <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @)</p>
+                  <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @) тогда смета придет автоматически, или оставьте пустым и мы отправим вам смету в ближайшее время в ручном режиме</p>
                 </div>
 
                 <div className="space-y-3">
