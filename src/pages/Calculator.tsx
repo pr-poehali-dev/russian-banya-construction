@@ -381,7 +381,7 @@ const Calculator = () => {
       <div className="container max-w-2xl mx-auto">
         <Card className="shadow-2xl">
             <CardHeader className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
-              <CardTitle className="text-2xl text-center">Калькулятор бани</CardTitle>
+              <CardTitle className="text-2xl text-center">Калькулятор стоимости бани</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 pt-6">
               <div className="space-y-4">
