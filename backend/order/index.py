@@ -238,7 +238,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             customer_msg = None
             
             # Если выбран Telegram - отправляем инструкцию (даже если нет email)
-            if email_client and (messenger == 'telegram' or messenger == 'max'):
+            if email_client and messenger == 'telegram':
                 customer_msg = MIMEMultipart('alternative')
                 customer_msg['Subject'] = 'Получите смету в Telegram - Пермский Пар'
                 customer_msg['From'] = smtp_user
