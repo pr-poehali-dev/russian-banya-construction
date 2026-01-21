@@ -106,6 +106,7 @@ const Calculator = () => {
     const jute = Math.ceil((brusVolume / 0.135 * 6.5) / 100) * 100; // Округление вверх до сотен
     const shkanty = Math.ceil((jute / 8) / 10) * 10; // Округление вверх до десяток
     const skobki = Math.ceil((jute * 5) / 1000) * 1000; // Округление вверх до тысяч
+    const skobyStroit = Math.ceil(brusVolume * 5); // Округление вверх до целого
     
     sections.push({
       title: 'Сруб из бруса',
@@ -114,7 +115,7 @@ const Calculator = () => {
         { name: 'Джут(150мм)', unit: 'п.м', quantity: jute, price: 25, total: isBrusSelected ? jute * 25 : 0 },
         { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: shkanty, price: 40, total: isBrusSelected ? shkanty * 40 : 0 },
         { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: skobki, price: 0.2, total: isBrusSelected ? skobki * 0.2 : 0 },
-        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 100, price: 60, total: isBrusSelected ? 6000 : 0 },
+        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: skobyStroit, price: 60, total: isBrusSelected ? skobyStroit * 60 : 0 },
         { name: 'Монтаж бруса', unit: 'м3', quantity: parseFloat(brusVolume.toFixed(2)), price: 10000, total: isBrusSelected ? Math.ceil(brusVolume * 10000) : 0 },
       ],
       subtotal: 0
