@@ -11,8 +11,10 @@ from email import encoders
 import base64
 from typing import Dict, Any
 import urllib.request
+import psycopg2
+import uuid
 
-# Версия: 6.0 - автоматическая отправка сметы заказчику (email/telegram/макс)
+# Версия: 7.0 - сохранение заявок в БД для последующей отправки через Telegram
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -76,11 +78,41 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'perm-100km': '50-100 км от Перми'
         }
         
-        # Генерируем ID для письма (без сохранения в БД)
+        # Генерируем уникальный ID заявки
         from datetime import datetime
-        order_id = f"{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        order_id = str(uuid.uuid4())[:8].upper()
         
         print(f"Processing order ID: {order_id}")
+        
+        # Сохраняем заявку в БД
+        db_saved = False
+        try:
+            dsn = os.environ.get('DATABASE_URL')
+            if dsn:
+                conn = psycopg2.connect(dsn)
+                cur = conn.cursor()
+                
+                cur.execute("""
+                    INSERT INTO calculator_orders 
+                    (order_id, name, phone, email, telegram_username, messenger, 
+                     material, length, width, partitions_length, floors, foundation, location,
+                     pdf_sent_email, pdf_sent_telegram)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """, (
+                    order_id, name, phone, email_client, telegram_username, messenger,
+                    material, length, width, partitions_length, floors, foundation, location,
+                    False, False
+                ))
+                
+                conn.commit()
+                cur.close()
+                conn.close()
+                db_saved = True
+                print(f"Order {order_id} saved to database")
+            else:
+                print("DATABASE_URL not found")
+        except Exception as db_err:
+            print(f"DB save failed: {type(db_err).__name__}: {str(db_err)}")
         
         # Отправка email
         email_sent = False
@@ -296,97 +328,25 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             email_error = str(e)
             print(f"Email sending failed: {type(e).__name__}: {str(e)}")
         
-        # Отправка сметы в Telegram/Макс заказчику
-        telegram_sent = False
-        telegram_error = None
-        if telegram_username and messenger in ['telegram', 'max'] and pdf_data:
+        # Обновляем статус отправки email в БД
+        if db_saved and email_sent:
             try:
-                bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
-                if bot_token:
-                    # Формируем сообщение для заказчика
-                    message_text = f"""🏡 *Пермский Пар*
+                dsn = os.environ.get('DATABASE_URL')
+                if dsn:
+                    conn = psycopg2.connect(dsn)
+                    cur = conn.cursor()
+                    cur.execute("UPDATE calculator_orders SET pdf_sent_email = TRUE WHERE order_id = %s", (order_id,))
+                    conn.commit()
+                    cur.close()
+                    conn.close()
+            except Exception as db_err:
+                print(f"DB update (email) failed: {str(db_err)}")
+        
+        # Telegram отправка НЕ выполняется автоматически - только сохраняем данные
+        telegram_sent = False
+        telegram_error = "Смета будет отправлена вручную после подтверждения"
+        
 
-Здравствуйте, {name}!
-
-Благодарим за обращение в компанию "Пермский Пар".
-
-Ваша предварительная смета во вложении.
-
-Для уточнения деталей и окончательного расчета стоимости наш специалист свяжется с вами в ближайшее время.
-
-*Наши контакты:*
-📞 +7 (342) 298-40-30
-📞 +7 (982) 490-09-00
-📧 perm-par@mail.ru
-🌐 www.пермский-пар.рф
-
-С уважением,
-Команда "Пермский Пар"
-"""
-                    
-                    # Отправляем документ
-                    pdf_bytes = base64.b64decode(pdf_data)
-                    
-                    # Telegram API требует multipart/form-data
-                    boundary = '----WebKitFormBoundary' + os.urandom(16).hex()
-                    body = []
-                    
-                    # Добавляем chat_id (используем username с @)
-                    chat_id = telegram_username if telegram_username.startswith('@') else f'@{telegram_username}'
-                    body.append(f'--{boundary}'.encode())
-                    body.append(f'Content-Disposition: form-data; name="chat_id"'.encode())
-                    body.append(b'')
-                    body.append(chat_id.encode())
-                    
-                    # Добавляем caption
-                    body.append(f'--{boundary}'.encode())
-                    body.append(f'Content-Disposition: form-data; name="caption"'.encode())
-                    body.append(b'')
-                    body.append(message_text.encode('utf-8'))
-                    
-                    # Добавляем parse_mode
-                    body.append(f'--{boundary}'.encode())
-                    body.append(f'Content-Disposition: form-data; name="parse_mode"'.encode())
-                    body.append(b'')
-                    body.append(b'Markdown')
-                    
-                    # Добавляем файл
-                    filename = f'Смета_{name.replace(" ", "_")}.pdf'
-                    body.append(f'--{boundary}'.encode())
-                    body.append(f'Content-Disposition: form-data; name="document"; filename="{filename}"'.encode())
-                    body.append(b'Content-Type: application/pdf')
-                    body.append(b'')
-                    body.append(pdf_bytes)
-                    
-                    body.append(f'--{boundary}--'.encode())
-                    
-                    body_bytes = b'\r\n'.join(body)
-                    
-                    url = f'https://api.telegram.org/bot{bot_token}/sendDocument'
-                    req = urllib.request.Request(
-                        url,
-                        data=body_bytes,
-                        headers={
-                            'Content-Type': f'multipart/form-data; boundary={boundary}',
-                            'Content-Length': str(len(body_bytes))
-                        }
-                    )
-                    
-                    with urllib.request.urlopen(req, timeout=30) as response:
-                        result = json.loads(response.read().decode())
-                        if result.get('ok'):
-                            telegram_sent = True
-                            print(f"Telegram document sent to {chat_id}")
-                        else:
-                            telegram_error = result.get('description', 'Unknown error')
-                            print(f"Telegram API error: {telegram_error}")
-                else:
-                    telegram_error = "TELEGRAM_BOT_TOKEN not configured"
-                    print(telegram_error)
-                    
-            except Exception as tg_err:
-                telegram_error = str(tg_err)
-                print(f"Telegram sending failed: {type(tg_err).__name__}: {str(tg_err)}")
         
         return {
             'statusCode': 200,
