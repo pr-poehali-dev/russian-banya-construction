@@ -724,32 +724,31 @@ const Calculator = () => {
                         <th className="text-right py-1 px-1.5 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
                       </tr>
                     </thead>
-                  </table>
-                  
-                  {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
-                    <div key={idx}>
-                      <div className="bg-white border-b border-black py-1 px-1.5">
-                        <h3 className="font-bold text-xs">{section.title}</h3>
-                      </div>
-                      <table className="w-full text-[11px] border-collapse">
-                        <tbody>
+                    <tbody>
+                      {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
+                        <>
+                          <tr key={`header-${idx}`} className="border-b border-black">
+                            <td colSpan={5} className="bg-white py-1 px-1.5">
+                              <h3 className="font-bold text-xs">{section.title}</h3>
+                            </td>
+                          </tr>
                           {section.items.map((item, itemIdx) => (
-                            <tr key={itemIdx} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
+                            <tr key={`${idx}-${itemIdx}`} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
                               <td className="border-r border-black py-0.5 px-1.5">{item.name}</td>
-                              <td className="border-r border-black text-center py-0.5 px-1.5">{item.unit}</td>
-                              <td className="border-r border-black text-center py-0.5 px-1.5">{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
-                              <td className="border-r border-black text-right py-0.5 px-1.5">{item.price.toLocaleString('ru-RU')}</td>
-                              <td className="text-right py-0.5 px-1.5 font-semibold">{item.total.toLocaleString('ru-RU')}</td>
+                              <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '50px'}}>{item.unit}</td>
+                              <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '60px'}}>{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
+                              <td className="border-r border-black text-right py-0.5 px-1.5" style={{width: '80px'}}>{item.price.toLocaleString('ru-RU')}</td>
+                              <td className="text-right py-0.5 px-1.5 font-semibold" style={{width: '90px'}}>{item.total.toLocaleString('ru-RU')}</td>
                             </tr>
                           ))}
-                          <tr className="bg-gray-50 border-b-2 border-black">
+                          <tr key={`subtotal-${idx}`} className="bg-gray-50 border-b-2 border-black">
                             <td colSpan={4} className="border-r border-black py-1 px-1.5 text-right font-bold">Поэтапно:</td>
-                            <td className="py-1 px-1.5 text-right font-bold">{section.subtotal.toLocaleString('ru-RU')} ₽</td>
+                            <td className="py-1 px-1.5 text-right font-bold" style={{width: '90px'}}>{section.subtotal.toLocaleString('ru-RU')} ₽</td>
                           </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  ))}
+                        </>
+                      ))}
+                    </tbody>
+                  </table>
                   
                   <div className="bg-gray-50 p-3 border-t-2 border-black">
                     <div className="flex justify-between items-center">
