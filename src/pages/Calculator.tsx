@@ -432,9 +432,9 @@ const Calculator = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
-      <div className="container max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-[400px,1fr] gap-8">
-          <Card className="shadow-xl h-fit lg:sticky lg:top-8">
+      <div className="container max-w-4xl mx-auto">
+        <div className="space-y-8">
+          <Card className="shadow-xl">
             <CardHeader className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
               <CardTitle className="text-2xl text-center">Калькулятор бани</CardTitle>
             </CardHeader>
