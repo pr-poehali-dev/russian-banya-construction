@@ -7,7 +7,7 @@
       "expectedStatus": 200
     },
     {
-      "name": "Test POST order",
+      "name": "Test POST order with telegram",
       "method": "POST",
       "path": "/",
       "body": {
@@ -19,7 +19,8 @@
         "location": "perm",
         "name": "Тест",
         "phone": "+7 999 123-45-67",
-        "messenger": "whatsapp"
+        "messenger": "telegram",
+        "telegram": "@testuser"
       },
       "expectedStatus": 200
     }

@@ -1,5 +1,5 @@
 """
-Отправка заявки с калькулятора бани на email с PDF-сметой
+Отправка заявки с калькулятора бани на email с PDF-сметой или в Telegram
 """
 import json
 import os
@@ -10,8 +10,10 @@ from email.mime.base import MIMEBase
 from email import encoders
 import base64
 from typing import Dict, Any
+import urllib.request
+import urllib.parse
 
-# Версия: 3.0 - убрано сохранение в БД, только отправка email
+# Версия: 4.0 - добавлена отправка сметы в Telegram заказчику
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -53,6 +55,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         email_client = body_data.get('email', '')
         messenger = body_data.get('messenger', '')
         comment = body_data.get('comment', '')
+        telegram_username = body_data.get('telegram', '')  # Telegram username заказчика
         pdf_data = body_data.get('pdfData', '')  # Base64 encoded PDF
         
         material_names = {
@@ -293,7 +296,98 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         except Exception as e:
             email_error = str(e)
             print(f"Email sending failed: {type(e).__name__}: {str(e)}")
-            # Не падаем, заявка уже сохранена в БД
+        
+        # Отправка сметы в Telegram заказчику, если выбран telegram/whatsapp
+        telegram_sent = False
+        telegram_error = None
+        if telegram_username and messenger in ['telegram', 'whatsapp'] and pdf_data:
+            try:
+                bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
+                if bot_token:
+                    # Формируем сообщение для заказчика
+                    message_text = f"""🏡 *Пермский Пар*
+
+Здравствуйте, {name}!
+
+Благодарим за обращение в компанию "Пермский Пар".
+
+Ваша предварительная смета во вложении.
+
+Для уточнения деталей и окончательного расчета стоимости наш специалист свяжется с вами в ближайшее время.
+
+*Наши контакты:*
+📞 +7 (342) 298-40-30
+📞 +7 (982) 490-09-00
+📧 perm-par@mail.ru
+🌐 www.пермский-пар.рф
+
+С уважением,
+Команда "Пермский Пар"
+"""
+                    
+                    # Отправляем документ
+                    pdf_bytes = base64.b64decode(pdf_data)
+                    
+                    # Telegram API требует multipart/form-data
+                    boundary = '----WebKitFormBoundary' + os.urandom(16).hex()
+                    body = []
+                    
+                    # Добавляем chat_id (используем username с @)
+                    chat_id = telegram_username if telegram_username.startswith('@') else f'@{telegram_username}'
+                    body.append(f'--{boundary}'.encode())
+                    body.append(f'Content-Disposition: form-data; name="chat_id"'.encode())
+                    body.append(b'')
+                    body.append(chat_id.encode())
+                    
+                    # Добавляем caption
+                    body.append(f'--{boundary}'.encode())
+                    body.append(f'Content-Disposition: form-data; name="caption"'.encode())
+                    body.append(b'')
+                    body.append(message_text.encode('utf-8'))
+                    
+                    # Добавляем parse_mode
+                    body.append(f'--{boundary}'.encode())
+                    body.append(f'Content-Disposition: form-data; name="parse_mode"'.encode())
+                    body.append(b'')
+                    body.append(b'Markdown')
+                    
+                    # Добавляем файл
+                    filename = f'Смета_{name.replace(" ", "_")}.pdf'
+                    body.append(f'--{boundary}'.encode())
+                    body.append(f'Content-Disposition: form-data; name="document"; filename="{filename}"'.encode())
+                    body.append(b'Content-Type: application/pdf')
+                    body.append(b'')
+                    body.append(pdf_bytes)
+                    
+                    body.append(f'--{boundary}--'.encode())
+                    
+                    body_bytes = b'\r\n'.join(body)
+                    
+                    url = f'https://api.telegram.org/bot{bot_token}/sendDocument'
+                    req = urllib.request.Request(
+                        url,
+                        data=body_bytes,
+                        headers={
+                            'Content-Type': f'multipart/form-data; boundary={boundary}',
+                            'Content-Length': str(len(body_bytes))
+                        }
+                    )
+                    
+                    with urllib.request.urlopen(req, timeout=30) as response:
+                        result = json.loads(response.read().decode())
+                        if result.get('ok'):
+                            telegram_sent = True
+                            print(f"Telegram document sent to {chat_id}")
+                        else:
+                            telegram_error = result.get('description', 'Unknown error')
+                            print(f"Telegram API error: {telegram_error}")
+                else:
+                    telegram_error = "TELEGRAM_BOT_TOKEN not configured"
+                    print(telegram_error)
+                    
+            except Exception as tg_err:
+                telegram_error = str(tg_err)
+                print(f"Telegram sending failed: {type(tg_err).__name__}: {str(tg_err)}")
         
         return {
             'statusCode': 200,
@@ -302,7 +396,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'success': True, 
                 'order_id': order_id,
                 'email_sent': email_sent,
-                'email_error': email_error
+                'email_error': email_error,
+                'telegram_sent': telegram_sent,
+                'telegram_error': telegram_error
             }),
             'isBase64Encoded': False
         }
