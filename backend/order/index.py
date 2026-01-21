@@ -98,16 +98,25 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 conn = psycopg2.connect(dsn)
                 cur = conn.cursor()
                 
+                # Конвертируем base64 PDF в байты для сохранения в БД
+                pdf_bytes = None
+                if pdf_data:
+                    try:
+                        pdf_bytes = base64.b64decode(pdf_data)
+                        print(f"PDF size: {len(pdf_bytes)} bytes")
+                    except Exception as pdf_err:
+                        print(f"PDF decode error: {pdf_err}")
+                
                 cur.execute("""
                     INSERT INTO calculator_orders 
                     (order_id, name, phone, email, telegram_username, messenger, 
                      material, length, width, partitions_length, floors, foundation, location,
-                     pdf_sent_email, pdf_sent_telegram)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                     pdf_sent_email, pdf_sent_telegram, pdf_data)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (
                     order_id, name, phone, email_client, telegram_username, messenger,
                     material, length, width, partitions_length, floors, foundation, location,
-                    False, False
+                    False, False, pdf_bytes
                 ))
                 
                 conn.commit()
@@ -417,7 +426,7 @@ def handle_telegram_webhook(update: Dict[str, Any]) -> Dict[str, Any]:
         
         # Ищем заявки с этим username без chat_id
         cur.execute("""
-            SELECT order_id, name, telegram_username 
+            SELECT order_id, name, telegram_username, pdf_data 
             FROM calculator_orders 
             WHERE telegram_username ILIKE %s 
             AND telegram_chat_id IS NULL
@@ -428,16 +437,6 @@ def handle_telegram_webhook(update: Dict[str, Any]) -> Dict[str, Any]:
         orders = cur.fetchall()
         
         if orders:
-            # Обновляем все найденные заявки
-            for order_id, name, tg_username in orders:
-                cur.execute("""
-                    UPDATE calculator_orders 
-                    SET telegram_chat_id = %s, pdf_sent_telegram = TRUE
-                    WHERE order_id = %s
-                """, (chat_id, order_id))
-            
-            conn.commit()
-            
             # Отправляем приветственное сообщение
             welcome_text = f"""🏡 *Пермский Пар*
 
@@ -445,21 +444,37 @@ def handle_telegram_webhook(update: Dict[str, Any]) -> Dict[str, Any]:
 
 ✅ Ваш Telegram успешно подключен!
 
-Мы нашли {len(orders)} заявку(-ок) на расчёт сметы.
-
-К сожалению, PDF-файл смет не сохраняется в нашей системе автоматически. Мы отправим вам актуальную смету на почту или свяжемся с вами лично в ближайшее время.
-
-*Наши контакты:*
-📞 +7 (342) 298-40-30
-📞 +7 (982) 490-09-00
-📧 perm-par@mail.ru
-🌐 www.пермский-пар.рф
-
-С уважением,
-Команда "Пермский Пар" """
+Мы нашли {len(orders)} заявку(-ок) на расчёт сметы. Отправляем вам сметы прямо сейчас..."""
             
             send_telegram_message(bot_token, chat_id, welcome_text)
-            print(f"Updated {len(orders)} orders with chat_id {chat_id}")
+            
+            # Отправляем PDF каждой заявки
+            for order_id, name, tg_username, pdf_data in orders:
+                if pdf_data:
+                    # Отправляем PDF документ
+                    success = send_telegram_document(bot_token, chat_id, pdf_data, name, order_id)
+                    if success:
+                        # Обновляем статус отправки
+                        cur.execute("""
+                            UPDATE calculator_orders 
+                            SET telegram_chat_id = %s, pdf_sent_telegram = TRUE
+                            WHERE order_id = %s
+                        """, (chat_id, order_id))
+                        print(f"Order {order_id} sent via Telegram")
+                    else:
+                        print(f"Failed to send order {order_id} via Telegram")
+                else:
+                    # PDF не найден - отправляем уведомление
+                    send_telegram_message(bot_token, chat_id, 
+                        f"⚠️ Смета для заявки #{order_id} не найдена. Мы отправим её вам на почту.")
+                    cur.execute("""
+                        UPDATE calculator_orders 
+                        SET telegram_chat_id = %s
+                        WHERE order_id = %s
+                    """, (chat_id, order_id))
+            
+            conn.commit()
+            print(f"Processed {len(orders)} orders for chat_id {chat_id}")
         else:
             # Заявок нет - просто приветствие
             welcome_text = f"""🏡 *Пермский Пар*
@@ -521,4 +536,83 @@ def send_telegram_message(bot_token: str, chat_id: int, text: str) -> bool:
                 return False
     except Exception as e:
         print(f"Send message error: {type(e).__name__}: {str(e)}")
+        return False
+
+
+def send_telegram_document(bot_token: str, chat_id: int, pdf_bytes: bytes, name: str, order_id: str) -> bool:
+    """Отправка PDF документа в Telegram"""
+    try:
+        message_text = f"""🏡 *Пермский Пар*
+
+Здравствуйте, {name}!
+
+Ваша предварительная смета готова (заявка #{order_id}).
+
+Для уточнения деталей и окончательного расчета стоимости наш специалист свяжется с вами в ближайшее время.
+
+*Наши контакты:*
+📞 +7 (342) 298-40-30
+📞 +7 (982) 490-09-00
+📧 perm-par@mail.ru
+🌐 www.пермский-пар.рф
+
+С уважением,
+Команда "Пермский Пар" """
+        
+        # Формируем multipart/form-data запрос
+        boundary = '----WebKitFormBoundary' + os.urandom(16).hex()
+        body = []
+        
+        # chat_id
+        body.append(f'--{boundary}'.encode())
+        body.append(b'Content-Disposition: form-data; name="chat_id"')
+        body.append(b'')
+        body.append(str(chat_id).encode())
+        
+        # caption
+        body.append(f'--{boundary}'.encode())
+        body.append(b'Content-Disposition: form-data; name="caption"')
+        body.append(b'')
+        body.append(message_text.encode('utf-8'))
+        
+        # parse_mode
+        body.append(f'--{boundary}'.encode())
+        body.append(b'Content-Disposition: form-data; name="parse_mode"')
+        body.append(b'')
+        body.append(b'Markdown')
+        
+        # document (PDF)
+        filename = f'Смета_{name.replace(" ", "_")}.pdf'
+        body.append(f'--{boundary}'.encode())
+        body.append(f'Content-Disposition: form-data; name="document"; filename="{filename}"'.encode())
+        body.append(b'Content-Type: application/pdf')
+        body.append(b'')
+        body.append(pdf_bytes)
+        
+        body.append(f'--{boundary}--'.encode())
+        
+        body_bytes = b'\r\n'.join(body)
+        
+        url = f'https://api.telegram.org/bot{bot_token}/sendDocument'
+        req = urllib.request.Request(
+            url,
+            data=body_bytes,
+            headers={
+                'Content-Type': f'multipart/form-data; boundary={boundary}',
+                'Content-Length': str(len(body_bytes))
+            }
+        )
+        
+        with urllib.request.urlopen(req, timeout=30) as response:
+            result = json.loads(response.read().decode())
+            if result.get('ok'):
+                print(f"Document sent to chat_id {chat_id}")
+                return True
+            else:
+                print(f"Telegram API error: {result}")
+                return False
+    except Exception as e:
+        print(f"Send document error: {type(e).__name__}: {str(e)}")
+        import traceback
+        print(traceback.format_exc())
         return False
