@@ -104,13 +104,14 @@ const Calculator = () => {
     const totalWallHeight = (2.2 + 0.6) + 1; // Высота стен всего сруба (1 этаж + мансарда)
     const brusVolume = perimeter * totalWallHeight * 0.15;
     const jute = Math.ceil((brusVolume / 0.135 * 6.5) / 100) * 100; // Округление вверх до сотен
+    const shkanty = Math.ceil((jute / 8) / 10) * 10; // Округление вверх до десяток
     
     sections.push({
       title: 'Сруб из бруса',
       items: [
         { name: 'Брус для сруба', unit: 'м3', quantity: parseFloat(brusVolume.toFixed(2)), price: brusPrice, total: isBrusSelected ? Math.ceil(brusVolume * brusPrice) : 0 },
         { name: 'Джут(150мм)', unit: 'п.м', quantity: jute, price: 25, total: isBrusSelected ? jute * 25 : 0 },
-        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: isBrusSelected ? 5200 : 0 },
+        { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: shkanty, price: 40, total: isBrusSelected ? shkanty * 40 : 0 },
         { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: isBrusSelected ? 1000 : 0 },
         { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: 100, price: 60, total: isBrusSelected ? 6000 : 0 },
         { name: 'Монтаж бруса', unit: 'м3', quantity: 19.95, price: 10000, total: 0 },
