@@ -491,9 +491,7 @@ const Calculator = () => {
 
           <Card className="shadow-xl">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-                <CardTitle className="text-xl text-center">
-                  Детальная смета (расчет под крышу, без отделки)
-                </CardTitle>
+                <CardTitle className="text-xl text-center">Детальная смета</CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
                 <div className="bg-white border-2 border-black mb-6">
