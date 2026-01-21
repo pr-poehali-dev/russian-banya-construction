@@ -55,15 +55,16 @@ const Calculator = () => {
         return;
       }
       
-      // Генерируем PDF
+      // Генерируем PDF с меньшим scale для уменьшения размера
       const canvas = await html2canvas(estimateRef.current, {
-        scale: 2,
+        scale: 1.5,
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff'
       });
       
-      const imgData = canvas.toDataURL('image/png');
+      // Используем JPEG вместо PNG для меньшего размера
+      const imgData = canvas.toDataURL('image/jpeg', 0.85);
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'px',
@@ -82,13 +83,13 @@ const Calculator = () => {
       let heightLeft = scaledHeight;
       let position = 0;
       
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+      pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, scaledHeight);
       heightLeft -= pdfHeight;
       
       while (heightLeft > 0) {
         position = heightLeft - scaledHeight;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+        pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, scaledHeight);
         heightLeft -= pdfHeight;
       }
       
@@ -170,13 +171,13 @@ const Calculator = () => {
       let heightLeft = scaledHeight;
       let position = 0;
       
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+      pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, scaledHeight);
       heightLeft -= pdfHeight;
       
       while (heightLeft > 0) {
         position = heightLeft - scaledHeight;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+        pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, scaledHeight);
         heightLeft -= pdfHeight;
       }
       
