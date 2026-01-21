@@ -185,7 +185,7 @@ const Calculator = () => {
         { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: skobkiRoof, price: 0.2, total: skobkiRoof * 0.2 },
         { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: gvozdi, price: 200, total: gvozdi * 200 },
         { name: 'Металлочерепица', unit: 'м2', quantity: roofArea, price: 750, total: roofArea * 750 },
-        { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: 7, price: 240, total: 1680 },
+        { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: ridgeLength, price: 240, total: ridgeLength * 240 },
         { name: 'Ветровая планка', unit: 'п.м', quantity: 20, price: 240, total: 4800 },
         { name: 'Карнизная планка', unit: 'п.м', quantity: 14, price: 240, total: 3360 },
         { name: 'Кровельные саморезы(4,8*35)', unit: 'шт', quantity: 800, price: 5, total: 4000 },
