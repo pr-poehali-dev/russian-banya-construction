@@ -232,23 +232,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             print(f"SMTP_USER: {smtp_user}")
             print(f"SMTP_PASSWORD length: {len(smtp_password) if smtp_password else 0}")
             
-            # Отправка владельцу
-            if smtp_port == 465:
-                with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as server:
-                    server.set_debuglevel(1)
-                    server.login(smtp_user, smtp_password)
-                    server.send_message(msg)
-                    print("Email to owner sent successfully via SSL")
-                    email_sent = True
-            else:
-                with smtplib.SMTP(smtp_host, smtp_port, timeout=15) as server:
-                    server.starttls()
-                    server.login(smtp_user, smtp_password)
-                    server.send_message(msg)
-                    print("Email to owner sent successfully via STARTTLS")
-                    email_sent = True
-            
-            # Отправка заказчику если указан email и способ связи - email
+            # Подготавливаем письмо заказчику, если нужно
+            customer_msg = None
             if email_client and messenger == 'email' and pdf_data:
                 customer_msg = MIMEMultipart('alternative')
                 customer_msg['Subject'] = 'Ваша смета от компании "Пермский Пар"'
@@ -314,19 +299,38 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         f'attachment; filename=Смета_{name.replace(" ", "_")}.pdf'
                     )
                     customer_msg.attach(pdf_attachment)
+                    print("Customer email prepared successfully")
                 except Exception as pdf_err:
-                    print(f"Failed to attach PDF to customer email: {pdf_err}")
-                
-                # Отправляем заказчику
-                if smtp_port == 465:
-                    with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=15) as server:
-                        server.login(smtp_user, smtp_password)
+                    print(f"Failed to prepare customer PDF: {pdf_err}")
+                    customer_msg = None
+            
+            # Отправляем оба письма через одно соединение
+            if smtp_port == 465:
+                with smtplib.SMTP_SSL(smtp_host, smtp_port, timeout=30) as server:
+                    server.set_debuglevel(1)
+                    server.login(smtp_user, smtp_password)
+                    
+                    # Отправляем владельцу
+                    server.send_message(msg)
+                    print("Email to owner sent successfully via SSL")
+                    email_sent = True
+                    
+                    # Отправляем заказчику
+                    if customer_msg:
                         server.send_message(customer_msg)
                         print(f"Email to customer ({email_client}) sent successfully via SSL")
-                else:
-                    with smtplib.SMTP(smtp_host, smtp_port, timeout=15) as server:
-                        server.starttls()
-                        server.login(smtp_user, smtp_password)
+            else:
+                with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
+                    server.starttls()
+                    server.login(smtp_user, smtp_password)
+                    
+                    # Отправляем владельцу
+                    server.send_message(msg)
+                    print("Email to owner sent successfully via STARTTLS")
+                    email_sent = True
+                    
+                    # Отправляем заказчику
+                    if customer_msg:
                         server.send_message(customer_msg)
                         print(f"Email to customer ({email_client}) sent successfully via STARTTLS")
                     
