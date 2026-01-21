@@ -35,6 +35,10 @@ const Calculator = () => {
     const pl = partitionLength ? parseFloat(partitionLength) : 0;
     const area = l * w;
     const perimeter = 2 * (l + w) + pl;
+    const isOneFloor = floors === '1';
+    const mansardWallHeight = isOneFloor ? 0 : 1;
+    const roofHeight = w / 2.5;
+    const mansardHeight = isOneFloor ? 0 : mansardWallHeight + roofHeight;
 
     const sections: EstimateSection[] = [];
 
@@ -102,7 +106,7 @@ const Calculator = () => {
     const isBrusSelected = wallMaterial === 'брус' || wallMaterial === 'клееный';
     const isBrevnoSelected = wallMaterial === 'бревно';
     const brusPrice = wallMaterial === 'клееный' ? 70000 : wallMaterial === 'брус' ? 19500 : 0;
-    const totalWallHeight = (2.2 + 0.6) + 1; // Высота стен всего сруба (1 этаж + мансарда)
+    const totalWallHeight = (2.2 + 0.6) + mansardWallHeight; // Высота стен всего сруба (1 этаж + мансарда)
     const brusVolume = perimeter * totalWallHeight * 0.15;
     const jute = Math.ceil((brusVolume / 0.135 * 6.5) / 100) * 100; // Округление вверх до сотен
     const shkanty = Math.ceil((jute / 8) / 10) * 10; // Округление вверх до десяток
@@ -157,7 +161,6 @@ const Calculator = () => {
     const ridgeLength = l + 1;
     const stropilPairs = Math.round(ridgeLength / 0.64 + 4);
     const doskaSropil = Math.ceil(stropilPairs * 0.1125 * 10) / 10;
-    const roofHeight = w / 2.5;
     const rafterLength = Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1;
     const roofAreaRaw = ridgeLength * rafterLength * 2.2;
     const roofArea = Math.ceil(roofAreaRaw / 10) * 10;
@@ -430,23 +433,23 @@ const Calculator = () => {
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
-                        <td className="border-r border-black p-1.5 text-center">1,5 этажа</td>
+                        <td className="border-r border-black p-1.5 text-center">{floors === '1' ? '1 этаж' : '1,5 этажа'}</td>
                         <td className="border-r border-black p-1.5 text-center">Высота мансарды, м</td>
                         <td className="p-1.5 text-right">
-                          {width ? (1 + parseFloat(width) / 2.5).toFixed(1) : '—'}
+                          {floors === '1' ? '0' : (width ? (1 + parseFloat(width) / 2.5).toFixed(1) : '—')}
                         </td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
                         <td className="border-r border-black p-1.5 text-center">{length || '—'}</td>
                         <td className="border-r border-black p-1.5 text-center">Высота стен мансарды, м</td>
-                        <td className="p-1.5 text-right">1</td>
+                        <td className="p-1.5 text-right">{floors === '1' ? '0' : '1'}</td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Ширина строения, м</td>
                         <td className="border-r border-black p-1.5 text-center">{width || '—'}</td>
                         <td className="border-r border-black p-1.5 text-center">Высота стен всего сруба, м</td>
-                        <td className="p-1.5 text-right">{((2.2 + 0.6) + 1).toFixed(1)}</td>
+                        <td className="p-1.5 text-right">{((2.2 + 0.6) + (floors === '1' ? 0 : 1)).toFixed(1)}</td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Длина перегородок 1 этажа, м</td>
