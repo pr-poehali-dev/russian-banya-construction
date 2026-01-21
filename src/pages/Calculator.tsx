@@ -470,7 +470,7 @@ const Calculator = () => {
               </div>
             </div>
 
-            {/* Шаг 1: Фундамент и материал */}
+            {/* Шаг 1: Фундамент */}
             {step === 1 && (
               <div className="space-y-6">
                 <div className="space-y-3">
@@ -497,6 +497,21 @@ const Calculator = () => {
                     </RadioGroup>
                   </div>
 
+                <div className="flex justify-end pt-4">
+                  <Button 
+                    onClick={goToNextStep}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                  >
+                    Далее
+                    <Icon name="ChevronRight" className="ml-2" size={20} />
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {/* Шаг 2: Материал стен */}
+            {step === 2 && (
+              <div className="space-y-6">
                 <div className="space-y-3">
                   <Label className="text-base font-semibold text-emerald-900">Материал стен бани:</Label>
                   <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
@@ -521,7 +536,15 @@ const Calculator = () => {
                     </RadioGroup>
                   </div>
 
-                <div className="flex justify-end pt-4">
+                <div className="flex justify-between pt-4">
+                  <Button 
+                    onClick={goToPrevStep}
+                    variant="outline"
+                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                  >
+                    <Icon name="ChevronLeft" className="mr-2" size={20} />
+                    Назад
+                  </Button>
                   <Button 
                     onClick={goToNextStep}
                     className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
