@@ -32,7 +32,6 @@ const Calculator = () => {
   const [name, setName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [telegram, setTelegram] = useState<string>('');
   const [sendMethod, setSendMethod] = useState<string>('telegram');
   const [showValidation, setShowValidation] = useState<boolean>(false);
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
@@ -44,7 +43,7 @@ const Calculator = () => {
   const handleSendEstimate = async () => {
     setShowValidation(true);
     
-    if (!name || !phone || (sendMethod === 'email' && !email) || ((sendMethod === 'telegram' || sendMethod === 'whatsapp') && !telegram)) {
+    if (!name || !phone || (sendMethod === 'email' && !email)) {
       return;
     }
     
@@ -107,7 +106,6 @@ const Calculator = () => {
           name,
           phone,
           email,
-          telegram,
           messenger: sendMethod,
           material: wallMaterial,
           length,
@@ -128,7 +126,6 @@ const Calculator = () => {
         setName('');
         setPhone('');
         setEmail('');
-        setTelegram('');
         setShowValidation(false);
       } else {
         alert('Ошибка отправки: ' + (result.error || 'Неизвестная ошибка'));
@@ -586,22 +583,6 @@ const Calculator = () => {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="telegram" className="text-sm">
-                    Telegram {(sendMethod === 'telegram' || sendMethod === 'whatsapp') && <span className="text-red-500">*</span>}
-                  </Label>
-                  <Input
-                    id="telegram"
-                    type="text"
-                    placeholder="@username"
-                    value={telegram}
-                    onChange={(e) => setTelegram(e.target.value)}
-                    required={sendMethod === 'telegram' || sendMethod === 'whatsapp'}
-                    className={showValidation && (sendMethod === 'telegram' || sendMethod === 'whatsapp') && !telegram ? 'border-red-500 border-2' : ''}
-                  />
-                  <p className="text-xs text-gray-500">Укажите ваш Telegram username (например: @username)</p>
-                </div>
-
                 <div className="space-y-3">
                   <Label className="text-sm">Куда отправить смету:</Label>
                   <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
@@ -618,9 +599,9 @@ const Calculator = () => {
                       </Label>
                     </div>
                     <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                      <RadioGroupItem value="whatsapp" id="sendWhatsapp" />
-                      <Label htmlFor="sendWhatsapp" className="cursor-pointer flex-1 text-sm">
-                        WhatsApp
+                      <RadioGroupItem value="max" id="sendMax" />
+                      <Label htmlFor="sendMax" className="cursor-pointer flex-1 text-sm">
+                        Макс
                       </Label>
                     </div>
                   </RadioGroup>
