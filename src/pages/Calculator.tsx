@@ -73,11 +73,9 @@ const Calculator = () => {
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
-      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-      const imgX = (pdfWidth - imgWidth * ratio) / 2;
-      const imgY = 10;
+      const ratio = pdfWidth / imgWidth;
       
-      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight * ratio);
       
       const fileName = `Смета_${name || 'Баня'}_${new Date().toLocaleDateString('ru-RU')}.pdf`;
       pdf.save(fileName);
@@ -698,9 +696,9 @@ const Calculator = () => {
                 </div>
 
                 {estimate.length > 0 && (
-                <div className="space-y-4 w-full">
+                <div className="border-2 border-black w-full">
                   {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
-                    <div key={idx} className="border-2 border-black w-full">
+                    <div key={idx}>
                       <div className="bg-white border-b-2 border-black p-2">
                         <h3 className="font-bold text-sm text-center">{section.title}</h3>
                       </div>
@@ -724,7 +722,7 @@ const Calculator = () => {
                               <td className="text-right p-2 font-semibold">{item.total.toLocaleString('ru-RU')}</td>
                             </tr>
                           ))}
-                          <tr className="bg-gray-50">
+                          <tr className="bg-gray-50 border-b-2 border-black">
                             <td colSpan={4} className="border-r border-black p-2 text-right font-bold">Поэтапно:</td>
                             <td className="p-2 text-right font-bold text-sm">{section.subtotal.toLocaleString('ru-RU')} ₽</td>
                           </tr>
@@ -733,10 +731,10 @@ const Calculator = () => {
                     </div>
                   ))}
                   
-                  <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200">
+                  <div className="bg-gray-50 p-3 border-t-2 border-black">
                     <div className="flex justify-between items-center">
-                      <span className="text-xl font-bold">ИТОГО:</span>
-                      <span className="text-2xl font-bold text-green-700">
+                      <span className="text-base font-bold">ИТОГО:</span>
+                      <span className="text-lg font-bold">
                         {totalPrice.toLocaleString('ru-RU')} ₽
                       </span>
                     </div>
