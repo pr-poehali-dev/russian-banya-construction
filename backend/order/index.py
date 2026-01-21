@@ -216,13 +216,16 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             if pdf_data:
                 try:
                     pdf_bytes = base64.b64decode(pdf_data)
-                    pdf_attachment = MIMEBase('application', 'octet-stream')
+                    pdf_attachment = MIMEBase('application', 'pdf')
                     pdf_attachment.set_payload(pdf_bytes)
                     encoders.encode_base64(pdf_attachment)
+                    filename = f'Смета_{name.replace(" ", "_")}.pdf'
                     pdf_attachment.add_header(
                         'Content-Disposition',
-                        f'attachment; filename=Смета_{name.replace(" ", "_")}.pdf'
+                        'attachment',
+                        filename=('utf-8', '', filename)
                     )
+                    pdf_attachment.add_header('Content-Type', 'application/pdf', name=filename)
                     msg.attach(pdf_attachment)
                     print("PDF attachment added successfully")
                 except Exception as pdf_error:
@@ -291,13 +294,16 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 # Прикрепляем PDF
                 try:
                     pdf_bytes = base64.b64decode(pdf_data)
-                    pdf_attachment = MIMEBase('application', 'octet-stream')
+                    pdf_attachment = MIMEBase('application', 'pdf')
                     pdf_attachment.set_payload(pdf_bytes)
                     encoders.encode_base64(pdf_attachment)
+                    filename = f'Смета_{name.replace(" ", "_")}.pdf'
                     pdf_attachment.add_header(
                         'Content-Disposition',
-                        f'attachment; filename=Смета_{name.replace(" ", "_")}.pdf'
+                        'attachment',
+                        filename=('utf-8', '', filename)
                     )
+                    pdf_attachment.add_header('Content-Type', 'application/pdf', name=filename)
                     customer_msg.attach(pdf_attachment)
                     print("Customer email prepared successfully")
                 except Exception as pdf_err:
