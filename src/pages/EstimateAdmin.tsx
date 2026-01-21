@@ -4,15 +4,6 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import Icon from '@/components/ui/icon';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -30,7 +21,7 @@ interface EstimateSection {
   subtotal: number;
 }
 
-const Calculator = () => {
+const EstimateAdmin = () => {
   const [foundation, setFoundation] = useState<string>('');
   const [wallMaterial, setWallMaterial] = useState<string>('');
   const [floors, setFloors] = useState<string>('1.5');
@@ -41,39 +32,25 @@ const Calculator = () => {
   const [name, setName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [telegram, setTelegram] = useState<string>('');
-  const [sendMethod, setSendMethod] = useState<string>('telegram');
-  const [showValidation, setShowValidation] = useState<boolean>(false);
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [isSending, setIsSending] = useState<boolean>(false);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState<boolean>(false);
   const estimateRef = useRef<HTMLDivElement>(null);
 
-  const handleSendEstimate = async () => {
-    setShowValidation(true);
+  const handleDownloadPDF = async () => {
+    if (!estimateRef.current) return;
     
-    if (!name || !phone || (sendMethod === 'email' && !email)) {
-      return;
-    }
-    
-    setIsSending(true);
+    setIsGeneratingPDF(true);
     
     try {
-      if (!estimateRef.current) {
-        alert('Ошибка: смета не найдена');
-        return;
-      }
-      
-      // Генерируем PDF с меньшим scale для уменьшения размера
       const canvas = await html2canvas(estimateRef.current, {
-        scale: 1.5,
+        scale: 2,
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff'
       });
       
-      // Используем JPEG вместо PNG для меньшего размера
-      const imgData = canvas.toDataURL('image/jpeg', 0.85);
+      const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'px',
@@ -102,83 +79,14 @@ const Calculator = () => {
         heightLeft -= pdfHeight;
       }
       
-      // Получаем PDF как base64
-      const pdfBase64 = pdf.output('datauristring').split(',')[1];
-      
-      // Отправляем на сервер
-      const response = await fetch('https://functions.poehali.dev/cba76a16-6247-4333-9605-62ab8c813235', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          email,
-          telegram,
-          messenger: sendMethod,
-          material: wallMaterial,
-          length,
-          width,
-          partitionsLength: partitionLength,
-          floors,
-          foundation,
-          location: distance,
-          pdfData: pdfBase64
-        })
-      });
-      
-      const result = await response.json();
-      
-      if (result.success) {
-        let message = 'Заявка успешно отправлена!\n\n';
-        
-        // Показываем статус email только если он действительно отправлен
-        if (result.email_sent && sendMethod === 'email') {
-          message += '✅ Смета отправлена на вашу почту\n';
-        }
-        
-        // Для Telegram - показываем инструкцию
-        if (telegram && sendMethod === 'telegram') {
-          if (email) {
-            message += '\n📧 На вашу почту отправлена инструкция по получению сметы в Telegram\n';
-          }
-          message += '\n🤖 Чтобы получить смету в Telegram:\n';
-          message += '1. Откройте бот @permpar_smeta_bot\n';
-          message += '2. Нажмите СТАРТ\n';
-          message += '3. PDF придёт автоматически!';
-        } else if (!result.email_sent) {
-          message += '\nМы свяжемся с вами в ближайшее время.';
-        }
-        
-        alert(message);
-        
-        // Предлагаем открыть бота (но не принудительно)
-        if (telegram && sendMethod === 'telegram') {
-          if (confirm('Открыть Telegram бота сейчас?')) {
-            window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
-          }
-        }
-        
-        // Очищаем форму
-        setName('');
-        setPhone('');
-        setEmail('');
-        setTelegram('');
-        setShowValidation(false);
-      } else {
-        alert('Ошибка отправки: ' + (result.error || 'Неизвестная ошибка'));
-      }
-      
+      const fileName = `Смета_${name || 'Баня'}_${new Date().toLocaleDateString('ru-RU')}.pdf`;
+      pdf.save(fileName);
     } catch (error) {
-      console.error('Ошибка отправки сметы:', error);
-      alert('Ошибка отправки сметы. Попробуйте еще раз.');
+      console.error('Ошибка генерации PDF:', error);
     } finally {
-      setIsSending(false);
+      setIsGeneratingPDF(false);
     }
   };
-
-
 
   const calculateEstimate = () => {
     const l = length ? parseFloat(length) : 6;
@@ -257,12 +165,12 @@ const Calculator = () => {
     const isBrusSelected = wallMaterial === 'брус' || wallMaterial === 'клееный';
     const isBrevnoSelected = wallMaterial === 'бревно';
     const brusPrice = wallMaterial === 'клееный' ? 70000 : wallMaterial === 'брус' ? 19500 : 0;
-    const totalWallHeight = (2.2 + 0.6) + mansardWallHeight; // Высота стен всего сруба (1 этаж + мансарда)
+    const totalWallHeight = (2.2 + 0.6) + mansardWallHeight;
     const brusVolume = perimeter * totalWallHeight * 0.15;
-    const jute = Math.ceil((brusVolume / 0.135 * 6.5) / 100) * 100; // Округление вверх до сотен
-    const shkanty = Math.ceil((jute / 8) / 10) * 10; // Округление вверх до десяток
-    const skobki = Math.ceil((jute * 5) / 1000) * 1000; // Округление вверх до тысяч
-    const skobyStroit = Math.ceil(brusVolume * 5); // Округление вверх до целого
+    const jute = Math.ceil((brusVolume / 0.135 * 6.5) / 100) * 100;
+    const shkanty = Math.ceil((jute / 8) / 10) * 10;
+    const skobki = Math.ceil((jute * 5) / 1000) * 1000;
+    const skobyStroit = Math.ceil(brusVolume * 5);
     
     sections.push({
       title: 'Сруб из бруса',
@@ -377,25 +285,26 @@ const Calculator = () => {
   }, [foundation, wallMaterial, floors, distance, length, width, partitionLength]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
-      <div className="container max-w-2xl mx-auto">
-        <Card className="shadow-2xl">
-            <CardHeader className="bg-gradient-to-r from-amber-600 to-orange-600 text-white">
-              <CardTitle className="text-2xl text-center">Калькулятор бани</CardTitle>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4">
+      <div className="container max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-[400px,1fr] gap-8">
+          <Card className="shadow-xl h-fit lg:sticky lg:top-8">
+            <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+              <CardTitle className="text-2xl text-center">Админ: Редактор сметы</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 pt-6">
               <div className="space-y-4">
-                <Label className="text-base font-semibold">Размеры вашей бани</Label>
+                <Label className="text-base font-semibold">Размеры бани</Label>
                 <div className="space-y-3">
                   <Label className="text-sm">Этажность:</Label>
                   <RadioGroup value={floors} onValueChange={setFloors}>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                       <RadioGroupItem value="1" id="floor1" />
                       <Label htmlFor="floor1" className="cursor-pointer flex-1 text-sm">
                         1 этаж
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                       <RadioGroupItem value="1.5" id="floor1.5" />
                       <Label htmlFor="floor1.5" className="cursor-pointer flex-1 text-sm">
                         1,5 этажа (мансарда)
@@ -447,21 +356,21 @@ const Calculator = () => {
               </div>
 
               <div className="space-y-3">
-                <Label className="text-base font-semibold">Выберите тип фундамента:</Label>
+                <Label className="text-base font-semibold">Тип фундамента:</Label>
                 <RadioGroup value={foundation} onValueChange={setFoundation}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="ленточный" id="lenточный" />
                     <Label htmlFor="lenточный" className="cursor-pointer flex-1">
                       Ленточный фундамент
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="сваи" id="svai" />
                     <Label htmlFor="svai" className="cursor-pointer flex-1">
                       Винтовые сваи
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="есть" id="est" />
                     <Label htmlFor="est" className="cursor-pointer flex-1">
                       Фундамент уже есть
@@ -471,21 +380,21 @@ const Calculator = () => {
               </div>
 
               <div className="space-y-3">
-                <Label className="text-base font-semibold">Материал стен бани:</Label>
+                <Label className="text-base font-semibold">Материал стен:</Label>
                 <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="бревно" id="brevno" />
                     <Label htmlFor="brevno" className="cursor-pointer flex-1">
                       Оцилиндрованное бревно
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="брус" id="brus" />
                     <Label htmlFor="brus" className="cursor-pointer flex-1">
                       Брус естественной влажности
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="клееный" id="kleeniy" />
                     <Label htmlFor="kleeniy" className="cursor-pointer flex-1">
                       Клееный брус
@@ -495,27 +404,27 @@ const Calculator = () => {
               </div>
 
               <div className="space-y-3">
-                <Label className="text-base font-semibold">Расстояние от Перми до объекта в одну сторону, км:</Label>
+                <Label className="text-base font-semibold">Расстояние от Перми, км:</Label>
                 <RadioGroup value={distance} onValueChange={setDistance}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="0-30" id="dist0-30" />
                     <Label htmlFor="dist0-30" className="cursor-pointer flex-1">
                       0-30 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="30-60" id="dist30-60" />
                     <Label htmlFor="dist30-60" className="cursor-pointer flex-1">
                       30-60 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="60-90" id="dist60-90" />
                     <Label htmlFor="dist60-90" className="cursor-pointer flex-1">
                       60-90 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
                     <RadioGroupItem value="90+" id="dist90+" />
                     <Label htmlFor="dist90+" className="cursor-pointer flex-1">
                       более 90 км
@@ -525,139 +434,47 @@ const Calculator = () => {
               </div>
 
               <div className="space-y-4 pt-4 border-t">
-                <Label className="text-base font-semibold">Контактные данные</Label>
+                <Label className="text-base font-semibold">Данные клиента (для PDF)</Label>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm">
-                    Имя <span className="text-red-500">*</span>
-                  </Label>
+                  <Label htmlFor="name" className="text-sm">Имя</Label>
                   <Input
                     id="name"
                     type="text"
-                    placeholder="Ваше имя"
+                    placeholder="Имя клиента"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    required
-                    className={showValidation && !name ? 'border-red-500 border-2' : ''}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm">
-                    Телефон <span className="text-red-500">*</span>
-                  </Label>
+                  <Label htmlFor="phone" className="text-sm">Телефон</Label>
                   <Input
                     id="phone"
                     type="tel"
                     placeholder="+7 (___) ___-__-__"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    required
-                    className={showValidation && !phone ? 'border-red-500 border-2' : ''}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm">
-                    Email {sendMethod === 'email' && <span className="text-red-500">*</span>}
-                  </Label>
+                  <Label htmlFor="email" className="text-sm">Email</Label>
                   <Input
                     id="email"
                     type="email"
                     placeholder="example@mail.ru"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required={sendMethod === 'email'}
-                    className={showValidation && sendMethod === 'email' && !email ? 'border-red-500 border-2' : ''}
                   />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="telegram" className="text-sm flex items-center gap-2">
-                    Telegram username {sendMethod === 'telegram' && <span className="text-red-500">*</span>}
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <button type="button" className="text-gray-400 hover:text-gray-600 transition-colors">
-                          <Icon name="HelpCircle" size={16} />
-                        </button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-md">
-                        <DialogHeader>
-                          <DialogTitle>Как найти свой Telegram username?</DialogTitle>
-                          <DialogDescription className="space-y-3 pt-2">
-                            <div className="space-y-2 text-sm text-gray-700">
-                              <p className="font-semibold">📱 В мобильном приложении:</p>
-                              <ol className="list-decimal list-inside space-y-1 pl-2">
-                                <li>Откройте Telegram</li>
-                                <li>Нажмите на меню (☰) → Настройки</li>
-                                <li>Ваш username указан под именем (начинается с @)</li>
-                              </ol>
-                            </div>
-                            <div className="space-y-2 text-sm text-gray-700">
-                              <p className="font-semibold">💻 В десктоп версии:</p>
-                              <ol className="list-decimal list-inside space-y-1 pl-2">
-                                <li>Откройте Telegram</li>
-                                <li>Нажмите на три полоски → Настройки</li>
-                                <li>Ваш username указан под именем (начинается с @)</li>
-                              </ol>
-                            </div>
-                            <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 mt-3">
-                              <p className="text-xs text-blue-800 font-semibold mb-2">
-                                🤖 Для автоматической отправки сметы:
-                              </p>
-                              <ol className="text-xs text-blue-700 space-y-1 list-decimal list-inside">
-                                <li>Заполните калькулятор с вашим username</li>
-                                <li>После отправки откроется бот <a href="https://t.me/permpar_smeta_bot" target="_blank" rel="noopener noreferrer" className="font-mono bg-white px-1 rounded text-blue-600 hover:underline">@permpar_smeta_bot</a></li>
-                                <li>Напишите команду <span className="font-mono bg-white px-1 rounded">/заявка</span></li>
-                                <li>Смета придёт автоматически в течение секунды! ⚡</li>
-                              </ol>
-                            </div>
-                            <div className="bg-amber-50 p-3 rounded-lg border border-amber-200 mt-2">
-                              <p className="text-xs text-amber-800">
-                                ℹ️ Если не хотите использовать бота — оставьте поле пустым. 
-                                Мы отправим смету вручную в ближайшее время.
-                              </p>
-                            </div>
-                          </DialogDescription>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog>
-                  </Label>
-                  <Input
-                    id="telegram"
-                    type="text"
-                    placeholder="@username"
-                    value={telegram}
-                    onChange={(e) => setTelegram(e.target.value)}
-                    className={showValidation && sendMethod === 'telegram' && !telegram ? 'border-red-500 border-2' : ''}
-                  />
-                  <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @) тогда смета придет автоматически, или оставьте пустым и мы отправим вам смету в ближайшее время в ручном режиме</p>
-                </div>
-
-                <div className="space-y-3">
-                  <Label className="text-sm">Куда отправить смету:</Label>
-                  <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                      <RadioGroupItem value="email" id="sendEmail" />
-                      <Label htmlFor="sendEmail" className="cursor-pointer flex-1 text-sm">
-                        Email
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                      <RadioGroupItem value="telegram" id="sendTelegram" />
-                      <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
-                        Телеграм
-                      </Label>
-                    </div>
-                  </RadioGroup>
                 </div>
 
                 <Button 
-                  className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
-                  onClick={handleSendEstimate}
-                  disabled={isSending || estimate.length === 0}
+                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                  onClick={handleDownloadPDF}
+                  disabled={isGeneratingPDF || estimate.length === 0}
                 >
-                  {isSending ? 'Отправка...' : 'Отправить смету'}
+                  {isGeneratingPDF ? 'Генерация...' : 'Скачать PDF'}
                 </Button>
               </div>
 
@@ -669,18 +486,228 @@ const Calculator = () => {
                       <p className="text-3xl font-bold text-green-700">
                         {totalPrice.toLocaleString('ru-RU')} ₽
                       </p>
-                      <p className="text-xs text-gray-500 mt-2">
-                        * Окончательная цена после осмотра объекта
-                      </p>
                     </div>
                   </CardContent>
                 </Card>
               )}
             </CardContent>
-        </Card>
+          </Card>
+
+          <Card className="shadow-xl">
+              <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                <CardTitle className="text-xl">Детальная смета</CardTitle>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <div ref={estimateRef} className="w-full">
+                <div className="bg-white border-2 border-black">
+                  <div className="border-b-2 border-black p-3">
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <h2 className="font-bold text-base">Предварительная примерная смета компании "Пермский Пар"</h2>
+                      </div>
+                      <div className="text-right text-xs">
+                        <div>тел. +7 (342) 298-40-30</div>
+                        <div>тел. +7(982) 490 09 00</div>
+                        <div>perm-par@mail.ru</div>
+                        <div>www.пермский-пар.рф</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <table className="w-full text-[10px] border-collapse">
+                    <tbody>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Заказчик</td>
+                        <td className="border-r border-black p-1.5" colSpan={3}>{name || '—'}</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Телефон</td>
+                        <td className="border-r border-black p-1.5" colSpan={3}>{phone || '—'}</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Email</td>
+                        <td className="p-1.5" colSpan={3}>{email || '—'}</td>
+                      </tr>
+                      <tr className="border-b border-black bg-gray-50">
+                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={5}>Данные объекта</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Параметры</td>
+                        <td className="border-r border-black p-1.5 font-bold text-center">Значения</td>
+                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={2}>Дополнительные значения</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Фундамент</td>
+                        <td className="border-r border-black p-1.5 text-center">
+                          {foundation === 'ленточный' ? 'Ленточный' : foundation === 'сваи' ? 'Винтовые сваи' : foundation === 'есть' ? 'Без фундамента' : '—'}
+                        </td>
+                        <td className="border-r border-black p-1.5">Периметр фундамента, м</td>
+                        <td className="p-1.5 text-right">
+                          {length && width ? (
+                            (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
+                          ).toFixed(2) : '—'}
+                        </td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Что хотите построить</td>
+                        <td className="border-r border-black p-1.5 text-center">Баня под крышу</td>
+                        <td className="border-r border-black p-1.5">Высота 1 этажа в чистоте, м</td>
+                        <td className="p-1.5 text-right">2,2</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Из чего хотите построить</td>
+                        <td className="border-r border-black p-1.5 text-center">
+                          {wallMaterial === 'бревно' ? 'Оцилиндрованное бревно' : wallMaterial === 'брус' ? 'Брус естественной влажности' : wallMaterial === 'клееный' ? 'Клееный брус' : '—'}
+                        </td>
+                        <td className="border-r border-black p-1.5">Высота сруба 1 этажа, м</td>
+                        <td className="p-1.5 text-right">{(2.2 + 0.6).toFixed(1)}</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
+                        <td className="border-r border-black p-1.5 text-center">{floors === '1' ? '1 этаж' : '1,5 этажа'}</td>
+                        <td className="border-r border-black p-1.5">Высота мансарды, м</td>
+                        <td className="p-1.5 text-right">
+                          {floors === '1' ? '0' : (width ? (1 + parseFloat(width) / 2.5).toFixed(1) : '—')}
+                        </td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
+                        <td className="border-r border-black p-1.5 text-center">{length || '—'}</td>
+                        <td className="border-r border-black p-1.5">Высота стен мансарды, м</td>
+                        <td className="p-1.5 text-right">{floors === '1' ? '0' : '1'}</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Ширина строения, м</td>
+                        <td className="border-r border-black p-1.5 text-center">{width || '—'}</td>
+                        <td className="border-r border-black p-1.5">Высота стен всего сруба, м</td>
+                        <td className="p-1.5 text-right">{((2.2 + 0.6) + (floors === '1' ? 0 : 1)).toFixed(1)}</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Длина перегородок 1 этажа, м</td>
+                        <td className="border-r border-black p-1.5 text-center">{partitionLength || '0'}</td>
+                        <td className="border-r border-black p-1.5">Площадь, м2</td>
+                        <td className="p-1.5 text-right">{length && width ? (parseFloat(length) * parseFloat(width)).toFixed(0) : '—'}</td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}>Расстояние до объекта в 1 сторону, км</td>
+                        <td className="border-r border-black p-1.5 text-center">
+                          {distance === '0-30' ? '0-30' : distance === '30-60' ? '30-60' : distance === '60-90' ? '60-90' : 'более 90'}
+                        </td>
+                        <td className="border-r border-black p-1.5">Высота крыши, м</td>
+                        <td className="p-1.5 text-right">
+                          {width ? (parseFloat(width) / 2.5).toFixed(1) : '—'}
+                        </td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5">Длина конька, м</td>
+                        <td className="p-1.5 text-right">
+                          {length ? (parseFloat(length) + 1).toFixed(0) : '—'}
+                        </td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5">Длина стропила, м</td>
+                        <td className="p-1.5 text-right">
+                          {width ? (() => {
+                            const w = parseFloat(width);
+                            const roofHeight = w / 2.5;
+                            return (Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1).toFixed(1);
+                          })() : '—'}
+                        </td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5">Площадь кровли, м</td>
+                        <td className="p-1.5 text-right">
+                          {length && width ? (() => {
+                            const l = parseFloat(length);
+                            const w = parseFloat(width);
+                            const ridgeLength = l + 1;
+                            const roofHeight = w / 2.5;
+                            const rafterLength = Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1;
+                            const roofArea = ridgeLength * rafterLength * 2.2;
+                            return Math.ceil(roofArea / 10) * 10;
+                          })() : '—'}
+                        </td>
+                      </tr>
+                      <tr className="border-b border-black">
+                        <td className="border-r border-black p-1.5" colSpan={2}></td>
+                        <td className="border-r border-black p-1.5"></td>
+                        <td className="border-r border-black p-1.5">Количество стропильных пар, шт</td>
+                        <td className="p-1.5 text-right">
+                          {length ? (() => {
+                            const ridgeLength = parseFloat(length) + 1;
+                            return Math.round(ridgeLength / 0.64 + 4);
+                          })() : '—'}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                  <div className="border-y-2 border-black p-1.5 bg-gray-50">
+                    <h3 className="font-bold text-sm text-center">Расчеты</h3>
+                  </div>
+
+                {estimate.length > 0 && (
+                <div className="w-full">
+                  <table className="w-full text-[11px] border-collapse">
+                    <thead>
+                      <tr className="border-b border-black bg-gray-50">
+                        <th className="border-r border-black text-left py-1 px-1.5 font-bold">Наименование</th>
+                        <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '50px'}}>Ед.из</th>
+                        <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '60px'}}>Кол-во</th>
+                        <th className="border-r border-black text-right py-1 px-1.5 font-bold" style={{width: '80px'}}>Цена, ₽</th>
+                        <th className="text-right py-1 px-1.5 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
+                        <>
+                          <tr key={`header-${idx}`} className="border-b border-black">
+                            <td colSpan={5} className="bg-white py-1 px-1.5">
+                              <h3 className="font-bold text-xs">{section.title}</h3>
+                            </td>
+                          </tr>
+                          {section.items.map((item, itemIdx) => (
+                            <tr key={`${idx}-${itemIdx}`} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
+                              <td className="border-r border-black py-0.5 px-1.5">{item.name}</td>
+                              <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '50px'}}>{item.unit}</td>
+                              <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '60px'}}>{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
+                              <td className="border-r border-black text-right py-0.5 px-1.5" style={{width: '80px'}}>{item.price.toLocaleString('ru-RU')}</td>
+                              <td className="text-right py-0.5 px-1.5 font-semibold" style={{width: '90px'}}>{item.total.toLocaleString('ru-RU')}</td>
+                            </tr>
+                          ))}
+                          <tr key={`subtotal-${idx}`} className="bg-gray-50 border-b-2 border-black">
+                            <td colSpan={4} className="border-r border-black py-1 px-1.5 text-right font-bold">Поэтапно:</td>
+                            <td className="py-1 px-1.5 text-right font-bold" style={{width: '90px'}}>{section.subtotal.toLocaleString('ru-RU')} ₽</td>
+                          </tr>
+                        </>
+                      ))}
+                    </tbody>
+                  </table>
+                  
+                  <div className="bg-gray-50 p-3 border-t-2 border-black">
+                    <div className="flex justify-between items-center">
+                      <span className="text-base font-bold">ИТОГО:</span>
+                      <span className="text-lg font-bold">
+                        {totalPrice.toLocaleString('ru-RU')} ₽
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                )}
+                </div>
+                </div>
+              </CardContent>
+            </Card>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Calculator;
+export default EstimateAdmin;
