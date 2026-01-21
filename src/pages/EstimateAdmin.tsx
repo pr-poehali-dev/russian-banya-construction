@@ -616,6 +616,64 @@ const EstimateAdmin = () => {
             )}
           </div>
         </div>
+
+        {/* Детальная смета для контроля */}
+        {estimate.length > 0 && totalPrice > 0 && (
+          <div className="mt-12 max-w-7xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+              <div className="bg-emerald-600 text-white p-6">
+                <h2 className="text-2xl font-bold">Детальная смета</h2>
+                <p className="text-emerald-100 mt-1">Проверка расчётов</p>
+              </div>
+              
+              <div className="p-6">
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-emerald-50 border-b-2 border-emerald-200">
+                        <th className="text-left py-3 px-4 font-semibold text-emerald-900">Наименование</th>
+                        <th className="text-center py-3 px-4 font-semibold text-emerald-900 w-20">Ед.</th>
+                        <th className="text-center py-3 px-4 font-semibold text-emerald-900 w-24">Кол-во</th>
+                        <th className="text-right py-3 px-4 font-semibold text-emerald-900 w-32">Цена, ₽</th>
+                        <th className="text-right py-3 px-4 font-semibold text-emerald-900 w-32">Сумма, ₽</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
+                        <>
+                          <tr key={`header-${idx}`} className="bg-emerald-100/50">
+                            <td colSpan={5} className="py-3 px-4 font-bold text-emerald-900 border-t-2 border-emerald-200">
+                              {section.title}
+                            </td>
+                          </tr>
+                          {section.items.filter(item => item.total > 0).map((item, itemIdx) => (
+                            <tr key={`${idx}-${itemIdx}`} className="border-b border-emerald-100 hover:bg-emerald-50/30 transition-colors">
+                              <td className="py-2 px-4 text-gray-700">{item.name}</td>
+                              <td className="text-center py-2 px-4 text-gray-600">{item.unit}</td>
+                              <td className="text-center py-2 px-4 text-gray-700">{item.quantity.toFixed(2)}</td>
+                              <td className="text-right py-2 px-4 text-gray-700">{item.price.toLocaleString('ru-RU')}</td>
+                              <td className="text-right py-2 px-4 font-semibold text-emerald-900">{item.total.toLocaleString('ru-RU')}</td>
+                            </tr>
+                          ))}
+                          <tr key={`subtotal-${idx}`} className="bg-emerald-50 font-bold">
+                            <td colSpan={4} className="py-3 px-4 text-right text-emerald-900">Итого по разделу:</td>
+                            <td className="text-right py-3 px-4 text-emerald-900">{section.subtotal.toLocaleString('ru-RU')} ₽</td>
+                          </tr>
+                        </>
+                      ))}
+                    </tbody>
+                    <tfoot>
+                      <tr className="bg-emerald-600 text-white">
+                        <td colSpan={4} className="py-4 px-4 text-right text-xl font-bold">ИТОГО:</td>
+                        <td className="text-right py-4 px-4 text-xl font-bold">{totalPrice.toLocaleString('ru-RU')} ₽</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Скрытая смета для PDF */}
