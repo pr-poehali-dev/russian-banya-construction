@@ -31,8 +31,20 @@ const Calculator = () => {
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [sendMethod, setSendMethod] = useState<string>('telegram');
+  const [showValidation, setShowValidation] = useState<boolean>(false);
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  const handleSendEstimate = () => {
+    setShowValidation(true);
+    
+    if (!name || !phone || (sendMethod === 'email' && !email)) {
+      return;
+    }
+    
+    // Здесь будет логика отправки сметы
+    console.log('Отправка сметы:', { name, phone, email, sendMethod });
+  };
 
   const calculateEstimate = () => {
     const l = length ? parseFloat(length) : 6;
@@ -393,6 +405,7 @@ const Calculator = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
+                    className={showValidation && !name ? 'border-red-500 border-2' : ''}
                   />
                 </div>
 
@@ -407,6 +420,7 @@ const Calculator = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
+                    className={showValidation && !phone ? 'border-red-500 border-2' : ''}
                   />
                 </div>
 
@@ -421,6 +435,7 @@ const Calculator = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required={sendMethod === 'email'}
+                    className={showValidation && sendMethod === 'email' && !email ? 'border-red-500 border-2' : ''}
                   />
                 </div>
 
@@ -450,7 +465,7 @@ const Calculator = () => {
 
                 <Button 
                   className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
-                  disabled={!name || !phone || (sendMethod === 'email' && !email)}
+                  onClick={handleSendEstimate}
                 >
                   Отправить смету
                 </Button>
