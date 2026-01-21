@@ -162,6 +162,7 @@ const Calculator = () => {
     const roofArea = Math.ceil(roofAreaRaw / 10) * 10;
     const doskaObreshetka = parseFloat((roofArea * 0.02).toFixed(2));
     const brusokVent = Math.ceil((rafterLength * stropilPairs * 2) / 10) * 10;
+    const plenka = Math.ceil((roofArea * 1.2) / 10) * 10;
 
     sections.push({
       title: 'Крыша',
@@ -169,7 +170,7 @@ const Calculator = () => {
         { name: 'Доска для стропил и ригелей 1-й сорт(50х150х6000)мм', unit: 'м3', quantity: doskaSropil, price: 19500, total: Math.ceil(doskaSropil * 19500) },
         { name: 'Доска для обрешетки 1-й сорт(40х100х6000)мм', unit: 'м3', quantity: doskaObreshetka, price: 19500, total: Math.ceil(doskaObreshetka * 19500) },
         { name: 'Брусок для вент.загора(50х50х6000)мм', unit: 'п.м', quantity: brusokVent, price: 65, total: brusokVent * 65 },
-        { name: 'Пленка гидроизоляционная', unit: 'м2', quantity: 100, price: 150, total: 15000 },
+        { name: 'Пленка гидроизоляционная', unit: 'м2', quantity: plenka, price: 150, total: plenka * 150 },
         { name: 'Шпилька резьбовая оцинкованная(10х1000)мм', unit: 'м', quantity: 8, price: 100, total: 800 },
         { name: 'Гайка оцинкованная(М10)', unit: 'шт', quantity: 90, price: 6, total: 540 },
         { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: 90, price: 6, total: 540 },
