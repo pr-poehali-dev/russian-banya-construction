@@ -716,29 +716,29 @@ const Calculator = () => {
                       <div className="bg-white border-b-2 border-black p-2">
                         <h3 className="font-bold text-sm text-center">{section.title}</h3>
                       </div>
-                      <table className="w-full text-xs border-collapse">
+                      <table className="w-full text-[11px] border-collapse">
                         <thead>
                           <tr className="border-b border-black bg-gray-50">
-                            <th className="border-r border-black text-left p-2 font-bold">Наименование</th>
-                            <th className="border-r border-black text-center p-2 font-bold w-16">Ед.из</th>
-                            <th className="border-r border-black text-center p-2 font-bold w-20">Кол-во</th>
-                            <th className="border-r border-black text-right p-2 font-bold w-24">Цена, ₽</th>
-                            <th className="text-right p-2 font-bold w-28">Стоимость, ₽</th>
+                            <th className="border-r border-black text-left py-1 px-1.5 font-bold">Наименование</th>
+                            <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '50px'}}>Ед.из</th>
+                            <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '60px'}}>Кол-во</th>
+                            <th className="border-r border-black text-right py-1 px-1.5 font-bold" style={{width: '80px'}}>Цена, ₽</th>
+                            <th className="text-right py-1 px-1.5 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
                           </tr>
                         </thead>
                         <tbody>
                           {section.items.map((item, itemIdx) => (
                             <tr key={itemIdx} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
-                              <td className="border-r border-black p-2">{item.name}</td>
-                              <td className="border-r border-black text-center p-2">{item.unit}</td>
-                              <td className="border-r border-black text-center p-2">{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
-                              <td className="border-r border-black text-right p-2">{item.price.toLocaleString('ru-RU')}</td>
-                              <td className="text-right p-2 font-semibold">{item.total.toLocaleString('ru-RU')}</td>
+                              <td className="border-r border-black py-0.5 px-1.5">{item.name}</td>
+                              <td className="border-r border-black text-center py-0.5 px-1.5">{item.unit}</td>
+                              <td className="border-r border-black text-center py-0.5 px-1.5">{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
+                              <td className="border-r border-black text-right py-0.5 px-1.5">{item.price.toLocaleString('ru-RU')}</td>
+                              <td className="text-right py-0.5 px-1.5 font-semibold">{item.total.toLocaleString('ru-RU')}</td>
                             </tr>
                           ))}
                           <tr className="bg-gray-50 border-b-2 border-black">
-                            <td colSpan={4} className="border-r border-black p-2 text-right font-bold">Поэтапно:</td>
-                            <td className="p-2 text-right font-bold text-sm">{section.subtotal.toLocaleString('ru-RU')} ₽</td>
+                            <td colSpan={4} className="border-r border-black py-1 px-1.5 text-right font-bold">Поэтапно:</td>
+                            <td className="py-1 px-1.5 text-right font-bold">{section.subtotal.toLocaleString('ru-RU')} ₽</td>
                           </tr>
                         </tbody>
                       </table>
