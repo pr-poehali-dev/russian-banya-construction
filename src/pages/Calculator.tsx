@@ -138,21 +138,32 @@ const Calculator = () => {
           message += '✅ Смета отправлена на вашу почту\n';
         }
         
+        // Открываем бота ПЕРЕД alert, чтобы избежать блокировки popup
+        let botOpened = false;
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
-          message += '\n🤖 Чтобы получить смету в Telegram:\n';
-          message += 'Нажмите на кнопку ниже или напишите боту команду /заявка';
+          message += '\n🤖 Сейчас откроется Telegram бот\n';
+          message += 'Напишите команду /заявка чтобы получить смету';
+          
+          // Открываем бота сразу (без setTimeout)
+          const botWindow = window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
+          if (botWindow) {
+            botOpened = true;
+          } else {
+            message += '\n\n⚠️ Не удалось открыть бота автоматически.\nОткройте @permpar_smeta_bot вручную и напишите /заявка';
+          }
         } else {
           message += '\nМы свяжемся с вами в ближайшее время.';
         }
         
         alert(message);
         
-        // Открываем бота в Telegram, если выбран Telegram/Max
-        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
-          setTimeout(() => {
+        // Если бот не открылся - предлагаем открыть вручную
+        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max') && !botOpened) {
+          if (confirm('Открыть Telegram бота @permpar_smeta_bot?')) {
             window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
-          }, 500);
+          }
         }
+        
         // Очищаем форму
         setName('');
         setPhone('');
