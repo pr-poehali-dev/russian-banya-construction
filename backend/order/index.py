@@ -1,5 +1,5 @@
 """
-Отправка заявки с калькулятора бани на email с PDF-сметой или в Telegram/Макс
+Отправка заявки с калькулятора бани на email с PDF-сметой + Telegram бот webhook
 """
 import json
 import os
@@ -14,7 +14,7 @@ import urllib.request
 import psycopg2
 import uuid
 
-# Версия: 7.0 - сохранение заявок в БД для последующей отправки через Telegram
+# Версия: 8.0 - объединенная функция: заявки с калькулятора + Telegram бот webhook
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -44,6 +44,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     try:
         body_data = json.loads(event.get('body', '{}'))
         
+        # Определяем тип запроса: Telegram webhook или заявка калькулятора
+        if 'message' in body_data or 'update_id' in body_data:
+            # Это webhook от Telegram бота
+            return handle_telegram_webhook(body_data)
+        
+        # Это заявка с калькулятора
         material = body_data.get('material', '')
         length = body_data.get('length', '')
         width = body_data.get('width', '')
@@ -372,3 +378,147 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'body': json.dumps({'error': str(e), 'type': type(e).__name__}),
             'isBase64Encoded': False
         }
+
+
+def handle_telegram_webhook(update: Dict[str, Any]) -> Dict[str, Any]:
+    """Обработка webhook от Telegram бота"""
+    try:
+        print(f"Telegram webhook: {json.dumps(update)}")
+        
+        if 'message' not in update:
+            return {'statusCode': 200, 'body': json.dumps({'ok': True})}
+        
+        message = update['message']
+        chat_id = message['chat']['id']
+        username = message['chat'].get('username', '')
+        first_name = message['chat'].get('first_name', '')
+        text = message.get('text', '')
+        
+        print(f"Message from @{username} (chat_id: {chat_id}): {text}")
+        
+        bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
+        if not bot_token:
+            print("ERROR: TELEGRAM_BOT_TOKEN not configured")
+            return {'statusCode': 200, 'body': json.dumps({'ok': True})}
+        
+        # Обрабатываем только /start
+        if not text.startswith('/start'):
+            return {'statusCode': 200, 'body': json.dumps({'ok': True})}
+        
+        dsn = os.environ.get('DATABASE_URL')
+        if not dsn or not username:
+            send_telegram_message(bot_token, chat_id, 
+                f"Здравствуйте, {first_name}! Спасибо за обращение. Наш специалист свяжется с вами в ближайшее время.")
+            return {'statusCode': 200, 'body': json.dumps({'ok': True})}
+        
+        # Подключаемся к БД и ищем заявки
+        conn = psycopg2.connect(dsn)
+        cur = conn.cursor()
+        
+        # Ищем заявки с этим username без chat_id
+        cur.execute("""
+            SELECT order_id, name, telegram_username 
+            FROM calculator_orders 
+            WHERE telegram_username ILIKE %s 
+            AND telegram_chat_id IS NULL
+            AND pdf_sent_telegram = FALSE
+            ORDER BY created_at DESC
+        """, (f'%{username}%',))
+        
+        orders = cur.fetchall()
+        
+        if orders:
+            # Обновляем все найденные заявки
+            for order_id, name, tg_username in orders:
+                cur.execute("""
+                    UPDATE calculator_orders 
+                    SET telegram_chat_id = %s, pdf_sent_telegram = TRUE
+                    WHERE order_id = %s
+                """, (chat_id, order_id))
+            
+            conn.commit()
+            
+            # Отправляем приветственное сообщение
+            welcome_text = f"""🏡 *Пермский Пар*
+
+Здравствуйте, {first_name}!
+
+✅ Ваш Telegram успешно подключен!
+
+Мы нашли {len(orders)} заявку(-ок) на расчёт сметы.
+
+К сожалению, PDF-файл смет не сохраняется в нашей системе автоматически. Мы отправим вам актуальную смету на почту или свяжемся с вами лично в ближайшее время.
+
+*Наши контакты:*
+📞 +7 (342) 298-40-30
+📞 +7 (982) 490-09-00
+📧 perm-par@mail.ru
+🌐 www.пермский-пар.рф
+
+С уважением,
+Команда "Пермский Пар" """
+            
+            send_telegram_message(bot_token, chat_id, welcome_text)
+            print(f"Updated {len(orders)} orders with chat_id {chat_id}")
+        else:
+            # Заявок нет - просто приветствие
+            welcome_text = f"""🏡 *Пермский Пар*
+
+Здравствуйте, {first_name}!
+
+✅ Ваш Telegram успешно подключен к системе автоматической отправки смет.
+
+Теперь, когда вы заполните калькулятор на нашем сайте и укажете ваш username *@{username}*, мы свяжемся с вами через этот чат!
+
+*Наши контакты:*
+📞 +7 (342) 298-40-30
+📞 +7 (982) 490-09-00
+📧 perm-par@mail.ru
+🌐 www.пермский-пар.рф"""
+            
+            send_telegram_message(bot_token, chat_id, welcome_text)
+        
+        cur.close()
+        conn.close()
+        
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'application/json'},
+            'body': json.dumps({'ok': True}),
+            'isBase64Encoded': False
+        }
+        
+    except Exception as e:
+        print(f"Telegram webhook error: {type(e).__name__}: {str(e)}")
+        import traceback
+        print(traceback.format_exc())
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'application/json'},
+            'body': json.dumps({'ok': True}),
+            'isBase64Encoded': False
+        }
+
+
+def send_telegram_message(bot_token: str, chat_id: int, text: str) -> bool:
+    """Отправка текстового сообщения в Telegram"""
+    try:
+        url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
+        data = json.dumps({
+            'chat_id': chat_id,
+            'text': text,
+            'parse_mode': 'Markdown'
+        }).encode('utf-8')
+        
+        req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            result = json.loads(response.read().decode())
+            if result.get('ok'):
+                print(f"Message sent to chat_id {chat_id}")
+                return True
+            else:
+                print(f"Telegram API error: {result}")
+                return False
+    except Exception as e:
+        print(f"Send message error: {type(e).__name__}: {str(e)}")
+        return False
