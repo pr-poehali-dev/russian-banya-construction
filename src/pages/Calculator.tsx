@@ -124,7 +124,8 @@ const Calculator = () => {
 
     const brevnoVolume = totalWallHeight / 0.17 * perimeter / 6 * 0.1885;
     const juteBrevno = Math.ceil((totalWallHeight / 0.17 * perimeter * 1.2) / 100) * 100;
-    const shkantyBrevno = Math.ceil((juteBrevno * 8) / 10) * 10;
+    const shkantyBrevno = Math.ceil((juteBrevno / 8) / 10) * 10;
+    const skobbkiBrevno = Math.ceil((juteBrevno * 5) / 1000) * 1000;
 
     sections.push({
       title: 'Сруб из бревна',
@@ -132,7 +133,7 @@ const Calculator = () => {
         { name: 'Бревно сруба', unit: 'м3', quantity: parseFloat(brevnoVolume.toFixed(2)), price: 22000, total: isBrevnoSelected ? Math.ceil(brevnoVolume * 22000) : 0 },
         { name: 'Джут(150мм)', unit: 'п.м', quantity: juteBrevno, price: 25, total: isBrevnoSelected ? juteBrevno * 25 : 0 },
         { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: shkantyBrevno, price: 40, total: isBrevnoSelected ? shkantyBrevno * 40 : 0 },
-        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: isBrevnoSelected ? 1000 : 0 },
+        { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: skobbkiBrevno, price: 0.2, total: isBrevnoSelected ? skobbkiBrevno * 0.2 : 0 },
         { name: 'Монтаж сруба', unit: 'м3', quantity: 24.58, price: 10000, total: isBrevnoSelected ? 245789.2 : 0 },
       ],
       subtotal: 0
