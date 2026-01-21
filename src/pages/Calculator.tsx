@@ -410,6 +410,20 @@ const Calculator = () => {
                   />
                 </div>
 
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm">
+                    Email {sendMethod === 'email' && <span className="text-red-500">*</span>}
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="example@mail.ru"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required={sendMethod === 'email'}
+                  />
+                </div>
+
                 <div className="space-y-3">
                   <Label className="text-sm">Куда отправить смету:</Label>
                   <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
@@ -426,29 +440,13 @@ const Calculator = () => {
                       </Label>
                     </div>
                     <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                      <RadioGroupItem value="whatsapp" id="sendWhatsapp" />
-                      <Label htmlFor="sendWhatsapp" className="cursor-pointer flex-1 text-sm">
-                        WhatsApp
+                      <RadioGroupItem value="max" id="sendMax" />
+                      <Label htmlFor="sendMax" className="cursor-pointer flex-1 text-sm">
+                        Макс
                       </Label>
                     </div>
                   </RadioGroup>
                 </div>
-
-                {sendMethod === 'email' && (
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm">
-                      Email <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="example@mail.ru"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                  </div>
-                )}
 
                 <Button 
                   className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
