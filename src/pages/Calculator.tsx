@@ -135,28 +135,32 @@ const Calculator = () => {
         let message = 'Заявка успешно отправлена!\n\n';
         
         // Показываем статус email только если он действительно отправлен
-        if (result.email_sent && sendMethod === 'email') {
+        if (result.email_sent && (sendMethod === 'email' || sendMethod === 'max')) {
           message += '✅ Смета отправлена на вашу почту\n';
         }
         
-        // Для Telegram - показываем инструкцию
-        if (telegram && sendMethod === 'telegram') {
-          if (email) {
-            message += '\n📧 На вашу почту отправлена инструкция по получению сметы в Telegram\n';
+        // Открываем бота ПЕРЕД alert, чтобы избежать блокировки popup
+        let botOpened = false;
+        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
+          message += '\n🤖 Сейчас откроется Telegram бот\n';
+          message += 'Нажмите кнопку "📄 Получить смету" чтобы получить смету';
+          
+          // Открываем бота сразу (без setTimeout)
+          const botWindow = window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
+          if (botWindow) {
+            botOpened = true;
+          } else {
+            message += '\n\n⚠️ Не удалось открыть бота автоматически.\nОткройте @permpar_smeta_bot вручную';
           }
-          message += '\n🤖 Чтобы получить смету в Telegram:\n';
-          message += '1. Откройте бот @permpar_smeta_bot\n';
-          message += '2. Нажмите СТАРТ\n';
-          message += '3. PDF придёт автоматически!';
         } else if (!result.email_sent) {
           message += '\nМы свяжемся с вами в ближайшее время.';
         }
         
         alert(message);
         
-        // Предлагаем открыть бота (но не принудительно)
-        if (telegram && sendMethod === 'telegram') {
-          if (confirm('Открыть Telegram бота сейчас?')) {
+        // Если бот не открылся - предлагаем открыть вручную
+        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max') && !botOpened) {
+          if (confirm('Открыть Telegram бота @permpar_smeta_bot?')) {
             window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
           }
         }
@@ -625,7 +629,7 @@ const Calculator = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="telegram" className="text-sm flex items-center gap-2">
-                    Telegram username {sendMethod === 'telegram' && <span className="text-red-500">*</span>}
+                    Telegram username {(sendMethod === 'telegram' || sendMethod === 'max') && <span className="text-red-500">*</span>}
                     <Dialog>
                       <DialogTrigger asChild>
                         <button type="button" className="text-gray-400 hover:text-gray-600 transition-colors">
@@ -680,7 +684,7 @@ const Calculator = () => {
                     placeholder="@username"
                     value={telegram}
                     onChange={(e) => setTelegram(e.target.value)}
-                    className={showValidation && sendMethod === 'telegram' && !telegram ? 'border-red-500 border-2' : ''}
+                    className={showValidation && (sendMethod === 'telegram' || sendMethod === 'max') && !telegram ? 'border-red-500 border-2' : ''}
                   />
                   <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @) тогда смета придет автоматически, или оставьте пустым и мы отправим вам смету в ближайшее время в ручном режиме</p>
                 </div>
@@ -698,6 +702,12 @@ const Calculator = () => {
                       <RadioGroupItem value="telegram" id="sendTelegram" />
                       <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
                         Телеграм
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="max" id="sendMax" />
+                      <Label htmlFor="sendMax" className="cursor-pointer flex-1 text-sm">
+                        Макс
                       </Label>
                     </div>
                   </RadioGroup>
