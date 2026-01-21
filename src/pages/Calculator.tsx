@@ -23,6 +23,7 @@ const Calculator = () => {
   const [foundation, setFoundation] = useState<string>('');
   const [wallMaterial, setWallMaterial] = useState<string>('');
   const [floors, setFloors] = useState<string>('1.5');
+  const [distance, setDistance] = useState<string>('0-30');
   const [length, setLength] = useState<string>('6');
   const [width, setWidth] = useState<string>('6');
   const [partitionLength, setPartitionLength] = useState<string>('6');
@@ -223,7 +224,7 @@ const Calculator = () => {
 
   useEffect(() => {
     calculateEstimate();
-  }, [foundation, wallMaterial, floors, length, width, partitionLength]);
+  }, [foundation, wallMaterial, floors, distance, length, width, partitionLength]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
@@ -344,6 +345,36 @@ const Calculator = () => {
                 </RadioGroup>
               </div>
 
+              <div className="space-y-3">
+                <Label className="text-base font-semibold">Расстояние от Перми до объекта в одну сторону, км:</Label>
+                <RadioGroup value={distance} onValueChange={setDistance}>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="0-30" id="dist0-30" />
+                    <Label htmlFor="dist0-30" className="cursor-pointer flex-1">
+                      0-30 км
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="30-60" id="dist30-60" />
+                    <Label htmlFor="dist30-60" className="cursor-pointer flex-1">
+                      30-60 км
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="60-90" id="dist60-90" />
+                    <Label htmlFor="dist60-90" className="cursor-pointer flex-1">
+                      60-90 км
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                    <RadioGroupItem value="90+" id="dist90+" />
+                    <Label htmlFor="dist90+" className="cursor-pointer flex-1">
+                      более 90 км
+                    </Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
               {totalPrice > 0 && (
                 <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
                   <CardContent className="pt-4 pb-4">
@@ -459,7 +490,9 @@ const Calculator = () => {
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Расстояние до объекта в 1 сторону, км</td>
-                        <td className="border-r border-black p-1.5 text-center">0</td>
+                        <td className="border-r border-black p-1.5 text-center">
+                          {distance === '0-30' ? '0-30' : distance === '30-60' ? '30-60' : distance === '60-90' ? '60-90' : 'более 90'}
+                        </td>
                         <td className="border-r border-black p-1.5 text-center">Высота крыши, м</td>
                         <td className="p-1.5 text-right">
                           {width ? (parseFloat(width) / 2.5).toFixed(1) : '—'}
