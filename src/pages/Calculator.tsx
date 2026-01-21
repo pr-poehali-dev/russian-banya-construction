@@ -153,18 +153,18 @@ const Calculator = () => {
       const result = await response.json();
       
       if (result.success) {
-        // Для Telegram используем alert и window.open (самый надёжный способ)
+        // Для Telegram показываем сообщение и переходим в бот
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
           let message = '✅ Заявка успешно отправлена!\n\n';
           if (result.email_sent) {
             message += '📧 Смета отправлена на вашу почту\n\n';
           }
-          message += '🤖 Сейчас откроется Telegram бот для получения сметы автоматически';
+          message += '🤖 Нажмите ОК для перехода в Telegram бот';
           
           alert(message);
           
-          // Открываем бота в новой вкладке - надёжно работает после alert
-          window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
+          // Используем tg:// deep link - откроет бота напрямую в приложении
+          window.location.href = 'tg://resolve?domain=permpar_smeta_bot&start=order';
         } else {
           // Для email просто показываем alert
           let message = 'Заявка успешно отправлена!\n\n';
