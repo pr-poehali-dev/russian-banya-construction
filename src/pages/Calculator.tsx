@@ -196,15 +196,19 @@ const Calculator = () => {
         { name: 'Кровельные саморезы(4,8*50)', unit: 'шт', quantity: samorez50, price: 6, total: samorez50 * 6 },
         { name: 'Монтаж крыши', unit: 'м2', quantity: roofArea, price: 3000, total: roofArea * 3000 },
       ],
-      subtotal: 590600
+      subtotal: 0
     });
+    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+
+    const sumAllSections = sections.reduce((sum, section) => sum + section.subtotal, 0);
+    const prochieRashody = Math.ceil((sumAllSections / 30) / 10) * 10;
 
     sections.push({
       title: 'Прочие расходы',
       items: [
-        { name: 'Доставка материалов, транспортные расходы, леса и тд', unit: 'шт', quantity: 1, price: 79250, total: 79250 },
+        { name: 'Доставка материалов, транспортные расходы, леса и тд', unit: 'шт', quantity: 1, price: prochieRashody, total: prochieRashody },
       ],
-      subtotal: 79250
+      subtotal: prochieRashody
     });
 
     const total = sections.reduce((sum, section) => sum + section.subtotal, 0);
