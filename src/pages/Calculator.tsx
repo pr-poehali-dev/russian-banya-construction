@@ -648,7 +648,7 @@ const Calculator = () => {
 
                 {estimate.length > 0 && (
                 <div className="space-y-6">
-                  {estimate.map((section, idx) => (
+                  {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
                     <div key={idx} className="border-b pb-4 last:border-b-0">
                       <h3 className="font-bold text-lg mb-3 text-gray-800">{section.title}</h3>
                       <div className="overflow-x-auto">
