@@ -153,10 +153,14 @@ const Calculator = () => {
     });
     sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
 
+    const ridgeLength = l + 1;
+    const stropilPairs = Math.round(ridgeLength / 0.64 + 4);
+    const doskaSropil = Math.ceil(stropilPairs * 0.1125 * 10) / 10;
+
     sections.push({
       title: 'Крыша',
       items: [
-        { name: 'Доска для стропил и ригелей 1-й сорт(50х150х6000)мм', unit: 'м3', quantity: 1.70, price: 19500, total: 33150 },
+        { name: 'Доска для стропил и ригелей 1-й сорт(50х150х6000)мм', unit: 'м3', quantity: doskaSropil, price: 19500, total: Math.ceil(doskaSropil * 19500) },
         { name: 'Доска для обрешетки 1-й сорт(40х100х6000)мм', unit: 'м3', quantity: 1.60, price: 19500, total: 31200 },
         { name: 'Брусок для вент.зазора(50х50х6000)мм', unit: 'п.м', quantity: 150, price: 65, total: 9750 },
         { name: 'Пленка гидроизоляционная', unit: 'м2', quantity: 100, price: 150, total: 15000 },
