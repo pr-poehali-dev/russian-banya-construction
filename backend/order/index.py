@@ -410,8 +410,34 @@ def handle_telegram_webhook(update: Dict[str, Any]) -> Dict[str, Any]:
             print("ERROR: TELEGRAM_BOT_TOKEN not configured")
             return {'statusCode': 200, 'body': json.dumps({'ok': True})}
         
-        # Обрабатываем команды /start и /заявка
-        if not (text.startswith('/start') or text.startswith('/заявка')):
+        # Обрабатываем кнопки "Контакты" и "Сайт" отдельно
+        if text == '📞 Контакты':
+            contacts_text = """*📞 Наши контакты:*
+
++7 (342) 298-40-30
++7 (982) 490-09-00
+
+📧 perm-par@mail.ru
+🌐 www.пермский-пар.рф
+
+Звоните или пишите — мы всегда рады помочь!"""
+            send_telegram_message_with_keyboard(bot_token, chat_id, contacts_text)
+            return {'statusCode': 200, 'body': json.dumps({'ok': True})}
+        
+        if text == '🌐 Сайт':
+            site_text = """🌐 *Наш сайт:*
+
+www.пермский-пар.рф
+
+Здесь вы можете:
+• Рассчитать смету
+• Посмотреть наши работы
+• Узнать больше о компании"""
+            send_telegram_message_with_keyboard(bot_token, chat_id, site_text)
+            return {'statusCode': 200, 'body': json.dumps({'ok': True})}
+        
+        # Обрабатываем команды /start, /заявка и кнопку "📄 Получить смету"
+        if not (text.startswith('/start') or text.startswith('/заявка') or text == '📄 Получить смету'):
             return {'statusCode': 200, 'body': json.dumps({'ok': True})}
         
         dsn = os.environ.get('DATABASE_URL')
@@ -446,7 +472,7 @@ def handle_telegram_webhook(update: Dict[str, Any]) -> Dict[str, Any]:
 
 Мы нашли {len(orders)} заявку(-ок) на расчёт сметы. Отправляем вам сметы прямо сейчас..."""
             
-            send_telegram_message(bot_token, chat_id, welcome_text)
+            send_telegram_message_with_keyboard(bot_token, chat_id, welcome_text)
             
             # Отправляем PDF каждой заявки
             for order_id, name, tg_username, pdf_data in orders:
@@ -491,7 +517,7 @@ def handle_telegram_webhook(update: Dict[str, Any]) -> Dict[str, Any]:
 📧 perm-par@mail.ru
 🌐 www.пермский-пар.рф"""
             
-            send_telegram_message(bot_token, chat_id, welcome_text)
+            send_telegram_message_with_keyboard(bot_token, chat_id, welcome_text)
         
         cur.close()
         conn.close()
@@ -536,6 +562,38 @@ def send_telegram_message(bot_token: str, chat_id: int, text: str) -> bool:
                 return False
     except Exception as e:
         print(f"Send message error: {type(e).__name__}: {str(e)}")
+        return False
+
+
+def send_telegram_message_with_keyboard(bot_token: str, chat_id: int, text: str) -> bool:
+    """Отправка текстового сообщения в Telegram с кастомной клавиатурой"""
+    try:
+        url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
+        data = json.dumps({
+            'chat_id': chat_id,
+            'text': text,
+            'parse_mode': 'Markdown',
+            'reply_markup': {
+                'keyboard': [
+                    [{'text': '📄 Получить смету'}],
+                    [{'text': '📞 Контакты'}, {'text': '🌐 Сайт'}]
+                ],
+                'resize_keyboard': True,
+                'one_time_keyboard': False
+            }
+        }).encode('utf-8')
+        
+        req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            result = json.loads(response.read().decode())
+            if result.get('ok'):
+                print(f"Message with keyboard sent to chat_id {chat_id}")
+                return True
+            else:
+                print(f"Telegram API error: {result}")
+                return False
+    except Exception as e:
+        print(f"Send message with keyboard error: {type(e).__name__}: {str(e)}")
         return False
 
 
