@@ -27,6 +27,10 @@ const Calculator = () => {
   const [length, setLength] = useState<string>('6');
   const [width, setWidth] = useState<string>('6');
   const [partitionLength, setPartitionLength] = useState<string>('6');
+  const [name, setName] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [sendMethod, setSendMethod] = useState<string>('telegram');
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -373,6 +377,85 @@ const Calculator = () => {
                     </Label>
                   </div>
                 </RadioGroup>
+              </div>
+
+              <div className="space-y-4 pt-4 border-t">
+                <Label className="text-base font-semibold">Контактные данные</Label>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-sm">
+                    Имя <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Ваше имя"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-sm">
+                    Телефон <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="+7 (___) ___-__-__"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <Label className="text-sm">Куда отправить смету:</Label>
+                  <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
+                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="email" id="sendEmail" />
+                      <Label htmlFor="sendEmail" className="cursor-pointer flex-1 text-sm">
+                        Email
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="telegram" id="sendTelegram" />
+                      <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
+                        Телеграм
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="whatsapp" id="sendWhatsapp" />
+                      <Label htmlFor="sendWhatsapp" className="cursor-pointer flex-1 text-sm">
+                        WhatsApp
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {sendMethod === 'email' && (
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm">
+                      Email <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="example@mail.ru"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                )}
+
+                <Button 
+                  className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                  disabled={!name || !phone || (sendMethod === 'email' && !email)}
+                >
+                  Отправить смету
+                </Button>
               </div>
 
               {totalPrice > 0 && (
