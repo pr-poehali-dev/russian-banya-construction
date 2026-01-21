@@ -32,6 +32,7 @@ const Calculator = () => {
   const [name, setName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [telegram, setTelegram] = useState<string>('');
   const [sendMethod, setSendMethod] = useState<string>('telegram');
   const [showValidation, setShowValidation] = useState<boolean>(false);
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
@@ -43,7 +44,7 @@ const Calculator = () => {
   const handleSendEstimate = async () => {
     setShowValidation(true);
     
-    if (!name || !phone || (sendMethod === 'email' && !email)) {
+    if (!name || !phone || (sendMethod === 'email' && !email) || ((sendMethod === 'telegram' || sendMethod === 'max') && !telegram)) {
       return;
     }
     
@@ -106,6 +107,7 @@ const Calculator = () => {
           name,
           phone,
           email,
+          telegram,
           messenger: sendMethod,
           material: wallMaterial,
           length,
@@ -126,6 +128,7 @@ const Calculator = () => {
         setName('');
         setPhone('');
         setEmail('');
+        setTelegram('');
         setShowValidation(false);
       } else {
         alert('Ошибка отправки: ' + (result.error || 'Неизвестная ошибка'));
@@ -581,6 +584,22 @@ const Calculator = () => {
                     required={sendMethod === 'email'}
                     className={showValidation && sendMethod === 'email' && !email ? 'border-red-500 border-2' : ''}
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="telegram" className="text-sm">
+                    Telegram username {(sendMethod === 'telegram' || sendMethod === 'max') && <span className="text-red-500">*</span>}
+                  </Label>
+                  <Input
+                    id="telegram"
+                    type="text"
+                    placeholder="@username"
+                    value={telegram}
+                    onChange={(e) => setTelegram(e.target.value)}
+                    required={sendMethod === 'telegram' || sendMethod === 'max'}
+                    className={showValidation && (sendMethod === 'telegram' || sendMethod === 'max') && !telegram ? 'border-red-500 border-2' : ''}
+                  />
+                  <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @)</p>
                 </div>
 
                 <div className="space-y-3">
