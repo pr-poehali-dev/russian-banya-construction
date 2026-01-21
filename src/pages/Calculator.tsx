@@ -31,6 +31,7 @@ interface EstimateSection {
 }
 
 const Calculator = () => {
+  const [step, setStep] = useState<number>(1);
   const [foundation, setFoundation] = useState<string>('');
   const [wallMaterial, setWallMaterial] = useState<string>('');
   const [floors, setFloors] = useState<string>('1.5');
@@ -49,6 +50,26 @@ const Calculator = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const estimateRef = useRef<HTMLDivElement>(null);
+
+  const goToNextStep = () => {
+    if (step === 1 && !foundation) {
+      alert('Пожалуйста, выберите тип фундамента');
+      return;
+    }
+    if (step === 2 && !wallMaterial) {
+      alert('Пожалуйста, выберите материал стен');
+      return;
+    }
+    if (step === 3 && (!length || !width)) {
+      alert('Пожалуйста, укажите размеры');
+      return;
+    }
+    setStep(step + 1);
+  };
+
+  const goToPrevStep = () => {
+    setStep(step - 1);
+  };
 
   const handleSendEstimate = async () => {
     setShowValidation(true);
@@ -439,7 +460,86 @@ const Calculator = () => {
               <CardTitle className="text-2xl text-center">Калькулятор бани</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 pt-6">
-              <div className="space-y-4">
+              {/* Индикатор шагов */}
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm font-semibold text-amber-900">Шаг {step} из 4</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-gradient-to-r from-amber-600 to-orange-600 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${(step / 4) * 100}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Шаг 1: Фундамент и материал */}
+              {step === 1 && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <Label className="text-base font-semibold">Выберите тип фундамента:</Label>
+                    <RadioGroup value={foundation} onValueChange={setFoundation}>
+                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                        <RadioGroupItem value="ленточный" id="lenточный" />
+                        <Label htmlFor="lenточный" className="cursor-pointer flex-1">
+                          Ленточный фундамент
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                        <RadioGroupItem value="сваи" id="svai" />
+                        <Label htmlFor="svai" className="cursor-pointer flex-1">
+                          Винтовые сваи
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                        <RadioGroupItem value="есть" id="est" />
+                        <Label htmlFor="est" className="cursor-pointer flex-1">
+                          Фундамент уже есть
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Label className="text-base font-semibold">Материал стен бани:</Label>
+                    <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
+                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                        <RadioGroupItem value="бревно" id="brevno" />
+                        <Label htmlFor="brevno" className="cursor-pointer flex-1">
+                          Оцилиндрованное бревно
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                        <RadioGroupItem value="брус" id="brus" />
+                        <Label htmlFor="brus" className="cursor-pointer flex-1">
+                          Брус естественной влажности
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                        <RadioGroupItem value="клееный" id="kleeniy" />
+                        <Label htmlFor="kleeniy" className="cursor-pointer flex-1">
+                          Клееный брус
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  <div className="flex justify-end pt-4">
+                    <Button 
+                      onClick={goToNextStep}
+                      className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                    >
+                      Далее
+                      <Icon name="ChevronRight" className="ml-2" size={20} />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* Шаг 2: Размеры */}
+              {step === 2 && (
+                <div className="space-y-6">
+                  <div className="space-y-4">
                 <Label className="text-base font-semibold">Размеры вашей бани</Label>
                 <div className="space-y-3">
                   <Label className="text-sm">Этажность:</Label>
@@ -501,54 +601,29 @@ const Calculator = () => {
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <Label className="text-base font-semibold">Выберите тип фундамента:</Label>
-                <RadioGroup value={foundation} onValueChange={setFoundation}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="ленточный" id="lenточный" />
-                    <Label htmlFor="lenточный" className="cursor-pointer flex-1">
-                      Ленточный фундамент
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="сваи" id="svai" />
-                    <Label htmlFor="svai" className="cursor-pointer flex-1">
-                      Винтовые сваи
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="есть" id="est" />
-                    <Label htmlFor="est" className="cursor-pointer flex-1">
-                      Фундамент уже есть
-                    </Label>
-                  </div>
-                </RadioGroup>
+              <div className="flex justify-between pt-4">
+                <Button 
+                  onClick={goToPrevStep}
+                  variant="outline"
+                  className="border-amber-300 text-amber-900 hover:bg-amber-50"
+                >
+                  <Icon name="ChevronLeft" className="mr-2" size={20} />
+                  Назад
+                </Button>
+                <Button 
+                  onClick={goToNextStep}
+                  className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                >
+                  Далее
+                  <Icon name="ChevronRight" className="ml-2" size={20} />
+                </Button>
               </div>
+            </div>
+          )}
 
-              <div className="space-y-3">
-                <Label className="text-base font-semibold">Материал стен бани:</Label>
-                <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="бревно" id="brevno" />
-                    <Label htmlFor="brevno" className="cursor-pointer flex-1">
-                      Оцилиндрованное бревно
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="брус" id="brus" />
-                    <Label htmlFor="brus" className="cursor-pointer flex-1">
-                      Брус естественной влажности
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="клееный" id="kleeniy" />
-                    <Label htmlFor="kleeniy" className="cursor-pointer flex-1">
-                      Клееный брус
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
-
+          {/* Шаг 3: Расстояние */}
+          {step === 3 && (
+            <div className="space-y-6">
               <div className="space-y-3">
                 <Label className="text-base font-semibold">Расстояние от Перми до объекта в одну сторону, км:</Label>
                 <RadioGroup value={distance} onValueChange={setDistance}>
@@ -578,6 +653,45 @@ const Calculator = () => {
                   </div>
                 </RadioGroup>
               </div>
+
+              <div className="flex justify-between pt-4">
+                <Button 
+                  onClick={goToPrevStep}
+                  variant="outline"
+                  className="border-amber-300 text-amber-900 hover:bg-amber-50"
+                >
+                  <Icon name="ChevronLeft" className="mr-2" size={20} />
+                  Назад
+                </Button>
+                <Button 
+                  onClick={goToNextStep}
+                  className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                >
+                  Далее
+                  <Icon name="ChevronRight" className="ml-2" size={20} />
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* Шаг 4: Контактные данные */}
+          {step === 4 && (
+            <div className="space-y-6">
+              {totalPrice > 0 && (
+                <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
+                  <CardContent className="pt-4 pb-4">
+                    <div className="text-center space-y-1">
+                      <p className="text-gray-600 text-sm">Общая стоимость:</p>
+                      <p className="text-3xl font-bold text-green-700">
+                        {totalPrice.toLocaleString('ru-RU')} ₽
+                      </p>
+                      <p className="text-xs text-gray-500 mt-2">
+                        * Окончательная цена после осмотра объекта
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
               <div className="space-y-4 pt-4 border-t">
                 <Label className="text-base font-semibold">Контактные данные</Label>
@@ -707,30 +821,26 @@ const Calculator = () => {
                   </RadioGroup>
                 </div>
 
-                <Button 
-                  className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
-                  onClick={handleSendEstimate}
-                  disabled={isSending || estimate.length === 0}
-                >
-                  {isSending ? 'Отправка...' : 'Отправить смету'}
-                </Button>
+                <div className="flex gap-3">
+                  <Button 
+                    onClick={goToPrevStep}
+                    variant="outline"
+                    className="border-amber-300 text-amber-900 hover:bg-amber-50"
+                  >
+                    <Icon name="ChevronLeft" className="mr-2" size={20} />
+                    Назад
+                  </Button>
+                  <Button 
+                    className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                    onClick={handleSendEstimate}
+                    disabled={isSending || estimate.length === 0}
+                  >
+                    {isSending ? 'Отправка...' : 'Отправить смету'}
+                  </Button>
+                </div>
               </div>
-
-              {totalPrice > 0 && (
-                <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
-                  <CardContent className="pt-4 pb-4">
-                    <div className="text-center space-y-1">
-                      <p className="text-gray-600 text-sm">Общая стоимость:</p>
-                      <p className="text-3xl font-bold text-green-700">
-                        {totalPrice.toLocaleString('ru-RU')} ₽
-                      </p>
-                      <p className="text-xs text-gray-500 mt-2">
-                        * Окончательная цена после осмотра объекта
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
+            </div>
+          )}
             </CardContent>
           </Card>
 
