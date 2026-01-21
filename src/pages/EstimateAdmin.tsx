@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -22,6 +22,7 @@ interface EstimateSection {
 }
 
 const EstimateAdmin = () => {
+  const [step, setStep] = useState<number>(1);
   const [foundation, setFoundation] = useState<string>('');
   const [wallMaterial, setWallMaterial] = useState<string>('');
   const [floors, setFloors] = useState<string>('1.5');
@@ -37,57 +38,6 @@ const EstimateAdmin = () => {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState<boolean>(false);
   const estimateRef = useRef<HTMLDivElement>(null);
 
-  const handleDownloadPDF = async () => {
-    if (!estimateRef.current) return;
-    
-    setIsGeneratingPDF(true);
-    
-    try {
-      const canvas = await html2canvas(estimateRef.current, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff'
-      });
-      
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-        format: 'a4',
-        hotfixes: ['px_scaling']
-      });
-      
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = canvas.width;
-      const imgHeight = canvas.height;
-      
-      const ratio = pdfWidth / imgWidth;
-      const scaledHeight = imgHeight * ratio;
-      
-      let heightLeft = scaledHeight;
-      let position = 0;
-      
-      pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, scaledHeight);
-      heightLeft -= pdfHeight;
-      
-      while (heightLeft > 0) {
-        position = heightLeft - scaledHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, scaledHeight);
-        heightLeft -= pdfHeight;
-      }
-      
-      const fileName = `Смета_${name || 'Баня'}_${new Date().toLocaleDateString('ru-RU')}.pdf`;
-      pdf.save(fileName);
-    } catch (error) {
-      console.error('Ошибка генерации PDF:', error);
-    } finally {
-      setIsGeneratingPDF(false);
-    }
-  };
-
   const calculateEstimate = () => {
     const l = length ? parseFloat(length) : 6;
     const w = width ? parseFloat(width) : 4;
@@ -101,7 +51,6 @@ const EstimateAdmin = () => {
 
     const sections: EstimateSection[] = [];
 
-    // Винтовые сваи - всегда показываем, но считаем только если выбраны
     const pilesCount = Math.ceil(perimeter / 2);
     const isPilesSelected = foundation === 'сваи';
     sections.push({
@@ -114,7 +63,6 @@ const EstimateAdmin = () => {
       subtotal: isPilesSelected ? pilesCount * 7600 : 0
     });
 
-    // Ленточный фундамент - всегда показываем, но считаем только если выбран
     const concrete = Math.ceil(perimeter * 0.4 * 100) / 100;
     const drainagePillow = Math.ceil(perimeter * 0.15);
     const reinforcement = Math.ceil(perimeter * 15 / 100) * 100;
@@ -281,429 +229,600 @@ const EstimateAdmin = () => {
   };
 
   useEffect(() => {
-    calculateEstimate();
+    if (foundation && wallMaterial && length && width) {
+      calculateEstimate();
+    }
   }, [foundation, wallMaterial, floors, distance, length, width, partitionLength]);
 
+  const handleDownloadPDF = async () => {
+    if (!estimateRef.current) return;
+    
+    setIsGeneratingPDF(true);
+    
+    try {
+      const canvas = await html2canvas(estimateRef.current, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff'
+      });
+      
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: 'a4',
+        hotfixes: ['px_scaling']
+      });
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      
+      const ratio = pdfWidth / imgWidth;
+      const scaledHeight = imgHeight * ratio;
+      
+      let heightLeft = scaledHeight;
+      let position = 0;
+      
+      pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, scaledHeight);
+      heightLeft -= pdfHeight;
+      
+      while (heightLeft > 0) {
+        position = heightLeft - scaledHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, scaledHeight);
+        heightLeft -= pdfHeight;
+      }
+      
+      const fileName = `Смета_${name || 'Баня'}_${new Date().toLocaleDateString('ru-RU')}.pdf`;
+      pdf.save(fileName);
+    } catch (error) {
+      console.error('Ошибка генерации PDF:', error);
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
+
+  const goToNextStep = () => {
+    if (step === 1 && !foundation) {
+      alert('Пожалуйста, выберите тип фундамента');
+      return;
+    }
+    if (step === 2 && !wallMaterial) {
+      alert('Пожалуйста, выберите материал стен');
+      return;
+    }
+    if (step === 3 && (!length || !width)) {
+      alert('Пожалуйста, укажите размеры');
+      return;
+    }
+    setStep(step + 1);
+  };
+
+  const goToPrevStep = () => {
+    setStep(step - 1);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4">
-      <div className="container max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-[400px,1fr] gap-8">
-          <Card className="shadow-xl h-fit lg:sticky lg:top-8">
-            <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-              <CardTitle className="text-2xl text-center">Админ: Редактор сметы</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6 pt-6">
-              <div className="space-y-4">
-                <Label className="text-base font-semibold">Размеры бани</Label>
-                <div className="space-y-3">
-                  <Label className="text-sm">Этажность:</Label>
-                  <RadioGroup value={floors} onValueChange={setFloors}>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                      <RadioGroupItem value="1" id="floor1" />
-                      <Label htmlFor="floor1" className="cursor-pointer flex-1 text-sm">
-                        1 этаж
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid lg:grid-cols-2 gap-8 items-start max-w-7xl mx-auto">
+          
+          {/* Левая часть - фото */}
+          <div className="hidden lg:block sticky top-8">
+            <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/fdb28716-700f-4ea1-9d17-a7a065d640a7.jpg"
+                alt="Строительство бани"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Правая часть - форма */}
+          <div className="space-y-6">
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl font-bold text-emerald-900 mb-2">
+                Рассчитайте стоимость вашей бани
+              </h1>
+              <p className="text-emerald-700">
+                Шаг {step} из 4
+              </p>
+            </div>
+
+            {/* Прогресс бар */}
+            <div className="w-full bg-emerald-200 rounded-full h-2">
+              <div 
+                className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(step / 4) * 100}%` }}
+              />
+            </div>
+
+            {/* Шаг 1: Фундамент */}
+            {step === 1 && (
+              <div className="space-y-6 animate-fade-in">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+                  <h2 className="text-2xl font-bold text-emerald-900 mb-6">Выберите тип фундамента</h2>
+                  
+                  <RadioGroup value={foundation} onValueChange={setFoundation} className="space-y-4">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
+                      <RadioGroupItem value="сваи" id="foundation-piles" />
+                      <Label htmlFor="foundation-piles" className="flex-1 cursor-pointer">
+                        <div className="font-semibold text-lg text-emerald-900">Винтовые сваи</div>
+                        <div className="text-sm text-emerald-600">Надежный и экономичный вариант</div>
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                      <RadioGroupItem value="1.5" id="floor1.5" />
-                      <Label htmlFor="floor1.5" className="cursor-pointer flex-1 text-sm">
-                        1,5 этажа (мансарда)
+                    
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
+                      <RadioGroupItem value="ленточный" id="foundation-strip" />
+                      <Label htmlFor="foundation-strip" className="flex-1 cursor-pointer">
+                        <div className="font-semibold text-lg text-emerald-900">Ленточный фундамент</div>
+                        <div className="text-sm text-emerald-600">Классическое решение повышенной прочности</div>
+                      </Label>
+                    </div>
+
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
+                      <RadioGroupItem value="есть" id="foundation-existing" />
+                      <Label htmlFor="foundation-existing" className="flex-1 cursor-pointer">
+                        <div className="font-semibold text-lg text-emerald-900">Фундамент уже есть</div>
+                        <div className="text-sm text-emerald-600">Строим на готовом основании</div>
                       </Label>
                     </div>
                   </RadioGroup>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="length" className="text-base font-semibold">
-                      Длина (м)
-                    </Label>
+
+                <div className="flex justify-end">
+                  <Button 
+                    onClick={goToNextStep}
+                    disabled={!foundation}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                  >
+                    Далее
+                    <Icon name="ChevronRight" className="ml-2" />
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {/* Шаг 2: Материал стен */}
+            {step === 2 && (
+              <div className="space-y-6 animate-fade-in">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+                  <h2 className="text-2xl font-bold text-emerald-900 mb-6">Материал стен</h2>
+                  
+                  <RadioGroup value={wallMaterial} onValueChange={setWallMaterial} className="space-y-4">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
+                      <RadioGroupItem value="брус" id="material-profiled" />
+                      <Label htmlFor="material-profiled" className="flex-1 cursor-pointer">
+                        <div className="font-semibold text-lg text-emerald-900">Профилированный брус</div>
+                        <div className="text-sm text-emerald-600">Натуральная древесина, легкость сборки</div>
+                      </Label>
+                    </div>
+                    
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
+                      <RadioGroupItem value="клееный" id="material-glued" />
+                      <Label htmlFor="material-glued" className="flex-1 cursor-pointer">
+                        <div className="font-semibold text-lg text-emerald-900">Клееный брус</div>
+                        <div className="text-sm text-emerald-600">Премиум класс, не дает усадку</div>
+                      </Label>
+                    </div>
+
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
+                      <RadioGroupItem value="бревно" id="material-log" />
+                      <Label htmlFor="material-log" className="flex-1 cursor-pointer">
+                        <div className="font-semibold text-lg text-emerald-900">Оцилиндрованное бревно</div>
+                        <div className="text-sm text-emerald-600">Традиционная русская баня</div>
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                <div className="flex justify-between">
+                  <Button 
+                    onClick={goToPrevStep}
+                    variant="outline"
+                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                  >
+                    <Icon name="ChevronLeft" className="mr-2" />
+                    Назад
+                  </Button>
+                  <Button 
+                    onClick={goToNextStep}
+                    disabled={!wallMaterial}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                  >
+                    Далее
+                    <Icon name="ChevronRight" className="ml-2" />
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {/* Шаг 3: Размеры */}
+            {step === 3 && (
+              <div className="space-y-6 animate-fade-in">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl space-y-6">
+                  <h2 className="text-2xl font-bold text-emerald-900 mb-6">Размеры и параметры</h2>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="length" className="text-emerald-900 font-semibold mb-2 block">Длина (м)</Label>
+                      <Input
+                        id="length"
+                        type="number"
+                        value={length}
+                        onChange={(e) => setLength(e.target.value)}
+                        className="border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="width" className="text-emerald-900 font-semibold mb-2 block">Ширина (м)</Label>
+                      <Input
+                        id="width"
+                        type="number"
+                        value={width}
+                        onChange={(e) => setWidth(e.target.value)}
+                        className="border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="partitionLength" className="text-emerald-900 font-semibold mb-2 block">Длина перегородок (м)</Label>
                     <Input
-                      id="length"
+                      id="partitionLength"
                       type="number"
-                      placeholder="6"
-                      value={length}
-                      onChange={(e) => setLength(e.target.value)}
-                      className="text-lg"
+                      value={partitionLength}
+                      onChange={(e) => setPartitionLength(e.target.value)}
+                      className="border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="width" className="text-base font-semibold">
-                      Ширина (м)
-                    </Label>
-                    <Input
-                      id="width"
-                      type="number"
-                      placeholder="4"
-                      value={width}
-                      onChange={(e) => setWidth(e.target.value)}
-                      className="text-lg"
-                    />
+
+                  <div>
+                    <Label className="text-emerald-900 font-semibold mb-3 block">Этажность</Label>
+                    <RadioGroup value={floors} onValueChange={setFloors} className="space-y-3">
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="1" id="floors-1" />
+                        <Label htmlFor="floors-1" className="cursor-pointer">Одноэтажная</Label>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="1.5" id="floors-1.5" />
+                        <Label htmlFor="floors-1.5" className="cursor-pointer">С мансардой</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  <div>
+                    <Label className="text-emerald-900 font-semibold mb-3 block">Расстояние от города (км)</Label>
+                    <RadioGroup value={distance} onValueChange={setDistance} className="space-y-3">
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="0-30" id="distance-30" />
+                        <Label htmlFor="distance-30" className="cursor-pointer">0-30 км</Label>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="30-60" id="distance-60" />
+                        <Label htmlFor="distance-60" className="cursor-pointer">30-60 км</Label>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="60-90" id="distance-90" />
+                        <Label htmlFor="distance-90" className="cursor-pointer">60-90 км</Label>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="90+" id="distance-90plus" />
+                        <Label htmlFor="distance-90plus" className="cursor-pointer">более 90 км</Label>
+                      </div>
+                    </RadioGroup>
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="partition" className="text-base font-semibold">
-                    Длина перегородок (м)
-                  </Label>
-                  <Input
-                    id="partition"
-                    type="number"
-                    placeholder="0"
-                    value={partitionLength}
-                    onChange={(e) => setPartitionLength(e.target.value)}
-                    className="text-lg"
-                  />
+
+                <div className="flex justify-between">
+                  <Button 
+                    onClick={goToPrevStep}
+                    variant="outline"
+                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                  >
+                    <Icon name="ChevronLeft" className="mr-2" />
+                    Назад
+                  </Button>
+                  <Button 
+                    onClick={goToNextStep}
+                    disabled={!length || !width}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                  >
+                    Далее
+                    <Icon name="ChevronRight" className="ml-2" />
+                  </Button>
                 </div>
               </div>
+            )}
 
-              <div className="space-y-3">
-                <Label className="text-base font-semibold">Тип фундамента:</Label>
-                <RadioGroup value={foundation} onValueChange={setFoundation}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="ленточный" id="lenточный" />
-                    <Label htmlFor="lenточный" className="cursor-pointer flex-1">
-                      Ленточный фундамент
-                    </Label>
+            {/* Шаг 4: Контакты и смета */}
+            {step === 4 && (
+              <div className="space-y-6 animate-fade-in">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+                  <div className="text-center mb-8">
+                    <div className="text-6xl font-bold text-emerald-900 mb-2">
+                      {totalPrice.toLocaleString('ru-RU')} ₽
+                    </div>
+                    <div className="text-emerald-600">Предварительная стоимость</div>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="сваи" id="svai" />
-                    <Label htmlFor="svai" className="cursor-pointer flex-1">
-                      Винтовые сваи
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="есть" id="est" />
-                    <Label htmlFor="est" className="cursor-pointer flex-1">
-                      Фундамент уже есть
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
 
-              <div className="space-y-3">
-                <Label className="text-base font-semibold">Материал стен:</Label>
-                <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="бревно" id="brevno" />
-                    <Label htmlFor="brevno" className="cursor-pointer flex-1">
-                      Оцилиндрованное бревно
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="брус" id="brus" />
-                    <Label htmlFor="brus" className="cursor-pointer flex-1">
-                      Брус естественной влажности
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="клееный" id="kleeniy" />
-                    <Label htmlFor="kleeniy" className="cursor-pointer flex-1">
-                      Клееный брус
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
+                  <h2 className="text-2xl font-bold text-emerald-900 mb-6">Скачать детальную смету (PDF)</h2>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="name" className="text-emerald-900 font-semibold mb-2 block">
+                        Имя
+                      </Label>
+                      <Input
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Введите ваше имя"
+                        className="border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
+                      />
+                    </div>
 
-              <div className="space-y-3">
-                <Label className="text-base font-semibold">Расстояние от Перми, км:</Label>
-                <RadioGroup value={distance} onValueChange={setDistance}>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="0-30" id="dist0-30" />
-                    <Label htmlFor="dist0-30" className="cursor-pointer flex-1">
-                      0-30 км
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="30-60" id="dist30-60" />
-                    <Label htmlFor="dist30-60" className="cursor-pointer flex-1">
-                      30-60 км
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="60-90" id="dist60-90" />
-                    <Label htmlFor="dist60-90" className="cursor-pointer flex-1">
-                      60-90 км
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
-                    <RadioGroupItem value="90+" id="dist90+" />
-                    <Label htmlFor="dist90+" className="cursor-pointer flex-1">
-                      более 90 км
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
+                    <div>
+                      <Label htmlFor="phone" className="text-emerald-900 font-semibold mb-2 block">
+                        Телефон
+                      </Label>
+                      <Input
+                        id="phone"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="+7 (___) ___-__-__"
+                        className="border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
+                      />
+                    </div>
 
-              <div className="space-y-4 pt-4 border-t">
-                <Label className="text-base font-semibold">Данные клиента (для PDF)</Label>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm">Имя</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Имя клиента"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
+                    <div>
+                      <Label htmlFor="email" className="text-emerald-900 font-semibold mb-2 block">
+                        Email
+                      </Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="example@mail.ru"
+                        className="border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
+                      />
+                    </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm">Телефон</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="+7 (___) ___-__-__"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="example@mail.ru"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                    <Button 
+                      onClick={handleDownloadPDF}
+                      disabled={isGeneratingPDF}
+                      className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-6 text-lg rounded-xl shadow-lg"
+                    >
+                      {isGeneratingPDF ? 'Генерация PDF...' : 'Скачать смету (PDF)'}
+                      <Icon name="Download" className="ml-2" />
+                    </Button>
+                  </div>
                 </div>
 
                 <Button 
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
-                  onClick={handleDownloadPDF}
-                  disabled={isGeneratingPDF || estimate.length === 0}
+                  onClick={goToPrevStep}
+                  variant="outline"
+                  className="w-full border-emerald-300 text-emerald-900 hover:bg-emerald-50 py-6 text-lg rounded-xl"
                 >
-                  {isGeneratingPDF ? 'Генерация...' : 'Скачать PDF'}
+                  <Icon name="ChevronLeft" className="mr-2" />
+                  Назад
                 </Button>
               </div>
+            )}
+          </div>
+        </div>
+      </div>
 
-              {totalPrice > 0 && (
-                <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
-                  <CardContent className="pt-4 pb-4">
-                    <div className="text-center space-y-1">
-                      <p className="text-gray-600 text-sm">Общая стоимость:</p>
-                      <p className="text-3xl font-bold text-green-700">
-                        {totalPrice.toLocaleString('ru-RU')} ₽
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-            </CardContent>
-          </Card>
+      {/* Скрытая смета для PDF */}
+      <div className="hidden">
+        <div ref={estimateRef} className="bg-white p-8">
+          <div className="bg-white border-2 border-black">
+            <div className="border-b-2 border-black p-3">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <h2 className="font-bold text-base">Предварительная примерная смета компании "Пермский Пар"</h2>
+                </div>
+                <div className="text-right text-xs">
+                  <div>тел. +7 (342) 298-40-30</div>
+                  <div>тел. +7(982) 490 09 00</div>
+                  <div>perm-par@mail.ru</div>
+                  <div>www.пермский-пар.рф</div>
+                </div>
+              </div>
+            </div>
 
-          <Card className="shadow-xl">
-              <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-                <CardTitle className="text-xl">Детальная смета</CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div ref={estimateRef} className="w-full">
-                <div className="bg-white border-2 border-black">
-                  <div className="border-b-2 border-black p-3">
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <h2 className="font-bold text-base">Предварительная примерная смета компании "Пермский Пар"</h2>
-                      </div>
-                      <div className="text-right text-xs">
-                        <div>тел. +7 (342) 298-40-30</div>
-                        <div>тел. +7(982) 490 09 00</div>
-                        <div>perm-par@mail.ru</div>
-                        <div>www.пермский-пар.рф</div>
-                      </div>
-                    </div>
-                  </div>
+            <table className="w-full text-[10px] border-collapse">
+              <tbody>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Заказчик</td>
+                  <td className="border-r border-black p-1.5" colSpan={3}>{name || '—'}</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Телефон</td>
+                  <td className="border-r border-black p-1.5" colSpan={3}>{phone || '—'}</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Email</td>
+                  <td className="p-1.5" colSpan={3}>{email || '—'}</td>
+                </tr>
+                <tr className="border-b border-black bg-gray-50">
+                  <td className="border-r border-black p-1.5 font-bold text-center" colSpan={5}>Данные объекта</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Параметры</td>
+                  <td className="border-r border-black p-1.5 font-bold text-center">Значения</td>
+                  <td className="border-r border-black p-1.5 font-bold text-center" colSpan={2}>Дополнительные значения</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}>Фундамент</td>
+                  <td className="border-r border-black p-1.5 text-center">
+                    {foundation === 'ленточный' ? 'Ленточный' : foundation === 'сваи' ? 'Винтовые сваи' : foundation === 'есть' ? 'Без фундамента' : '—'}
+                  </td>
+                  <td className="border-r border-black p-1.5">Периметр фундамента, м</td>
+                  <td className="p-1.5 text-right">
+                    {length && width ? (
+                      (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
+                    ).toFixed(2) : '—'}
+                  </td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}>Что хотите построить</td>
+                  <td className="border-r border-black p-1.5 text-center">Баня под крышу</td>
+                  <td className="border-r border-black p-1.5">Высота 1 этажа в чистоте, м</td>
+                  <td className="p-1.5 text-right">2,2</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}>Из чего хотите построить</td>
+                  <td className="border-r border-black p-1.5 text-center">
+                    {wallMaterial === 'бревно' ? 'Оцилиндрованное бревно' : wallMaterial === 'брус' ? 'Брус естественной влажности' : wallMaterial === 'клееный' ? 'Клееный брус' : '—'}
+                  </td>
+                  <td className="border-r border-black p-1.5">Высота сруба 1 этажа, м</td>
+                  <td className="p-1.5 text-right">{(2.2 + 0.6).toFixed(1)}</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
+                  <td className="border-r border-black p-1.5 text-center">{floors === '1' ? '1 этаж' : '1,5 этажа'}</td>
+                  <td className="border-r border-black p-1.5">Высота мансарды, м</td>
+                  <td className="p-1.5 text-right">
+                    {floors === '1' ? '0' : (width ? (1 + parseFloat(width) / 2.5).toFixed(1) : '—')}
+                  </td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
+                  <td className="border-r border-black p-1.5 text-center">{length || '—'}</td>
+                  <td className="border-r border-black p-1.5">Высота стен мансарды, м</td>
+                  <td className="p-1.5 text-right">{floors === '1' ? '0' : '1'}</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}>Ширина строения, м</td>
+                  <td className="border-r border-black p-1.5 text-center">{width || '—'}</td>
+                  <td className="border-r border-black p-1.5">Высота стен всего сруба, м</td>
+                  <td className="p-1.5 text-right">{((2.2 + 0.6) + (floors === '1' ? 0 : 1)).toFixed(1)}</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}>Длина перегородок 1 этажа, м</td>
+                  <td className="border-r border-black p-1.5 text-center">{partitionLength || '0'}</td>
+                  <td className="border-r border-black p-1.5">Площадь, м2</td>
+                  <td className="p-1.5 text-right">{length && width ? (parseFloat(length) * parseFloat(width)).toFixed(0) : '—'}</td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}>Расстояние до объекта в 1 сторону, км</td>
+                  <td className="border-r border-black p-1.5 text-center">
+                    {distance === '0-30' ? '0-30' : distance === '30-60' ? '30-60' : distance === '60-90' ? '60-90' : 'более 90'}
+                  </td>
+                  <td className="border-r border-black p-1.5">Высота крыши, м</td>
+                  <td className="p-1.5 text-right">
+                    {width ? (parseFloat(width) / 2.5).toFixed(1) : '—'}
+                  </td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}></td>
+                  <td className="border-r border-black p-1.5"></td>
+                  <td className="border-r border-black p-1.5">Длина конька, м</td>
+                  <td className="p-1.5 text-right">
+                    {length ? (parseFloat(length) + 1).toFixed(0) : '—'}
+                  </td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}></td>
+                  <td className="border-r border-black p-1.5"></td>
+                  <td className="border-r border-black p-1.5">Длина стропила, м</td>
+                  <td className="p-1.5 text-right">
+                    {width ? (() => {
+                      const w = parseFloat(width);
+                      const roofHeight = w / 2.5;
+                      return (Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1).toFixed(1);
+                    })() : '—'}
+                  </td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}></td>
+                  <td className="border-r border-black p-1.5"></td>
+                  <td className="border-r border-black p-1.5">Площадь кровли, м</td>
+                  <td className="p-1.5 text-right">
+                    {length && width ? (() => {
+                      const l = parseFloat(length);
+                      const w = parseFloat(width);
+                      const ridgeLength = l + 1;
+                      const roofHeight = w / 2.5;
+                      const rafterLength = Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1;
+                      const roofArea = ridgeLength * rafterLength * 2.2;
+                      return Math.ceil(roofArea / 10) * 10;
+                    })() : '—'}
+                  </td>
+                </tr>
+                <tr className="border-b border-black">
+                  <td className="border-r border-black p-1.5" colSpan={2}></td>
+                  <td className="border-r border-black p-1.5"></td>
+                  <td className="border-r border-black p-1.5">Количество стропильных пар, шт</td>
+                  <td className="p-1.5 text-right">
+                    {length ? (() => {
+                      const ridgeLength = parseFloat(length) + 1;
+                      return Math.round(ridgeLength / 0.64 + 4);
+                    })() : '—'}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <div className="border-y-2 border-black p-1.5 bg-gray-50">
+              <h3 className="font-bold text-sm text-center">Расчеты</h3>
+            </div>
 
-                  <table className="w-full text-[10px] border-collapse">
-                    <tbody>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Заказчик</td>
-                        <td className="border-r border-black p-1.5" colSpan={3}>{name || '—'}</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Телефон</td>
-                        <td className="border-r border-black p-1.5" colSpan={3}>{phone || '—'}</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Email</td>
-                        <td className="p-1.5" colSpan={3}>{email || '—'}</td>
-                      </tr>
-                      <tr className="border-b border-black bg-gray-50">
-                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={5}>Данные объекта</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Параметры</td>
-                        <td className="border-r border-black p-1.5 font-bold text-center">Значения</td>
-                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={2}>Дополнительные значения</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Фундамент</td>
-                        <td className="border-r border-black p-1.5 text-center">
-                          {foundation === 'ленточный' ? 'Ленточный' : foundation === 'сваи' ? 'Винтовые сваи' : foundation === 'есть' ? 'Без фундамента' : '—'}
-                        </td>
-                        <td className="border-r border-black p-1.5">Периметр фундамента, м</td>
-                        <td className="p-1.5 text-right">
-                          {length && width ? (
-                            (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
-                          ).toFixed(2) : '—'}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Что хотите построить</td>
-                        <td className="border-r border-black p-1.5 text-center">Баня под крышу</td>
-                        <td className="border-r border-black p-1.5">Высота 1 этажа в чистоте, м</td>
-                        <td className="p-1.5 text-right">2,2</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Из чего хотите построить</td>
-                        <td className="border-r border-black p-1.5 text-center">
-                          {wallMaterial === 'бревно' ? 'Оцилиндрованное бревно' : wallMaterial === 'брус' ? 'Брус естественной влажности' : wallMaterial === 'клееный' ? 'Клееный брус' : '—'}
-                        </td>
-                        <td className="border-r border-black p-1.5">Высота сруба 1 этажа, м</td>
-                        <td className="p-1.5 text-right">{(2.2 + 0.6).toFixed(1)}</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
-                        <td className="border-r border-black p-1.5 text-center">{floors === '1' ? '1 этаж' : '1,5 этажа'}</td>
-                        <td className="border-r border-black p-1.5">Высота мансарды, м</td>
-                        <td className="p-1.5 text-right">
-                          {floors === '1' ? '0' : (width ? (1 + parseFloat(width) / 2.5).toFixed(1) : '—')}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
-                        <td className="border-r border-black p-1.5 text-center">{length || '—'}</td>
-                        <td className="border-r border-black p-1.5">Высота стен мансарды, м</td>
-                        <td className="p-1.5 text-right">{floors === '1' ? '0' : '1'}</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Ширина строения, м</td>
-                        <td className="border-r border-black p-1.5 text-center">{width || '—'}</td>
-                        <td className="border-r border-black p-1.5">Высота стен всего сруба, м</td>
-                        <td className="p-1.5 text-right">{((2.2 + 0.6) + (floors === '1' ? 0 : 1)).toFixed(1)}</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Длина перегородок 1 этажа, м</td>
-                        <td className="border-r border-black p-1.5 text-center">{partitionLength || '0'}</td>
-                        <td className="border-r border-black p-1.5">Площадь, м2</td>
-                        <td className="p-1.5 text-right">{length && width ? (parseFloat(length) * parseFloat(width)).toFixed(0) : '—'}</td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Расстояние до объекта в 1 сторону, км</td>
-                        <td className="border-r border-black p-1.5 text-center">
-                          {distance === '0-30' ? '0-30' : distance === '30-60' ? '30-60' : distance === '60-90' ? '60-90' : 'более 90'}
-                        </td>
-                        <td className="border-r border-black p-1.5">Высота крыши, м</td>
-                        <td className="p-1.5 text-right">
-                          {width ? (parseFloat(width) / 2.5).toFixed(1) : '—'}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}></td>
-                        <td className="border-r border-black p-1.5"></td>
-                        <td className="border-r border-black p-1.5">Длина конька, м</td>
-                        <td className="p-1.5 text-right">
-                          {length ? (parseFloat(length) + 1).toFixed(0) : '—'}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}></td>
-                        <td className="border-r border-black p-1.5"></td>
-                        <td className="border-r border-black p-1.5">Длина стропила, м</td>
-                        <td className="p-1.5 text-right">
-                          {width ? (() => {
-                            const w = parseFloat(width);
-                            const roofHeight = w / 2.5;
-                            return (Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1).toFixed(1);
-                          })() : '—'}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}></td>
-                        <td className="border-r border-black p-1.5"></td>
-                        <td className="border-r border-black p-1.5">Площадь кровли, м</td>
-                        <td className="p-1.5 text-right">
-                          {length && width ? (() => {
-                            const l = parseFloat(length);
-                            const w = parseFloat(width);
-                            const ridgeLength = l + 1;
-                            const roofHeight = w / 2.5;
-                            const rafterLength = Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1;
-                            const roofArea = ridgeLength * rafterLength * 2.2;
-                            return Math.ceil(roofArea / 10) * 10;
-                          })() : '—'}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}></td>
-                        <td className="border-r border-black p-1.5"></td>
-                        <td className="border-r border-black p-1.5">Количество стропильных пар, шт</td>
-                        <td className="p-1.5 text-right">
-                          {length ? (() => {
-                            const ridgeLength = parseFloat(length) + 1;
-                            return Math.round(ridgeLength / 0.64 + 4);
-                          })() : '—'}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  
-                  <div className="border-y-2 border-black p-1.5 bg-gray-50">
-                    <h3 className="font-bold text-sm text-center">Расчеты</h3>
-                  </div>
-
-                {estimate.length > 0 && (
-                <div className="w-full">
-                  <table className="w-full text-[11px] border-collapse">
-                    <thead>
-                      <tr className="border-b border-black bg-gray-50">
-                        <th className="border-r border-black text-left py-1 px-1.5 font-bold">Наименование</th>
-                        <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '50px'}}>Ед.из</th>
-                        <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '60px'}}>Кол-во</th>
-                        <th className="border-r border-black text-right py-1 px-1.5 font-bold" style={{width: '80px'}}>Цена, ₽</th>
-                        <th className="text-right py-1 px-1.5 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
-                        <>
-                          <tr key={`header-${idx}`} className="border-b border-black">
-                            <td colSpan={5} className="bg-white py-1 px-1.5">
-                              <h3 className="font-bold text-xs">{section.title}</h3>
-                            </td>
+            {estimate.length > 0 && (
+              <div className="w-full">
+                <table className="w-full text-[11px] border-collapse">
+                  <thead>
+                    <tr className="border-b border-black bg-gray-50">
+                      <th className="border-r border-black text-left py-1 px-1.5 font-bold">Наименование</th>
+                      <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '50px'}}>Ед.из</th>
+                      <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '60px'}}>Кол-во</th>
+                      <th className="border-r border-black text-right py-1 px-1.5 font-bold" style={{width: '80px'}}>Цена, ₽</th>
+                      <th className="text-right py-1 px-1.5 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
+                      <>
+                        <tr key={`header-${idx}`} className="border-b border-black">
+                          <td colSpan={5} className="bg-white py-1 px-1.5">
+                            <h3 className="font-bold text-xs">{section.title}</h3>
+                          </td>
+                        </tr>
+                        {section.items.map((item, itemIdx) => (
+                          <tr key={`${idx}-${itemIdx}`} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
+                            <td className="border-r border-black py-0.5 px-1.5">{item.name}</td>
+                            <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '50px'}}>{item.unit}</td>
+                            <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '60px'}}>{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
+                            <td className="border-r border-black text-right py-0.5 px-1.5" style={{width: '80px'}}>{item.price.toLocaleString('ru-RU')}</td>
+                            <td className="text-right py-0.5 px-1.5 font-semibold" style={{width: '90px'}}>{item.total.toLocaleString('ru-RU')}</td>
                           </tr>
-                          {section.items.map((item, itemIdx) => (
-                            <tr key={`${idx}-${itemIdx}`} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
-                              <td className="border-r border-black py-0.5 px-1.5">{item.name}</td>
-                              <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '50px'}}>{item.unit}</td>
-                              <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '60px'}}>{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
-                              <td className="border-r border-black text-right py-0.5 px-1.5" style={{width: '80px'}}>{item.price.toLocaleString('ru-RU')}</td>
-                              <td className="text-right py-0.5 px-1.5 font-semibold" style={{width: '90px'}}>{item.total.toLocaleString('ru-RU')}</td>
-                            </tr>
-                          ))}
-                          <tr key={`subtotal-${idx}`} className="bg-gray-50 border-b-2 border-black">
-                            <td colSpan={4} className="border-r border-black py-1 px-1.5 text-right font-bold">Поэтапно:</td>
-                            <td className="py-1 px-1.5 text-right font-bold" style={{width: '90px'}}>{section.subtotal.toLocaleString('ru-RU')} ₽</td>
-                          </tr>
-                        </>
-                      ))}
-                    </tbody>
-                  </table>
-                  
-                  <div className="bg-gray-50 p-3 border-t-2 border-black">
-                    <div className="flex justify-between items-center">
-                      <span className="text-base font-bold">ИТОГО:</span>
-                      <span className="text-lg font-bold">
-                        {totalPrice.toLocaleString('ru-RU')} ₽
-                      </span>
-                    </div>
+                        ))}
+                        <tr key={`subtotal-${idx}`} className="bg-gray-50 border-b-2 border-black">
+                          <td colSpan={4} className="border-r border-black py-1 px-1.5 text-right font-bold">Поэтапно:</td>
+                          <td className="py-1 px-1.5 text-right font-bold" style={{width: '90px'}}>{section.subtotal.toLocaleString('ru-RU')} ₽</td>
+                        </tr>
+                      </>
+                    ))}
+                  </tbody>
+                </table>
+                
+                <div className="bg-gray-50 p-3 border-t-2 border-black">
+                  <div className="flex justify-between items-center">
+                    <span className="text-base font-bold">ИТОГО:</span>
+                    <span className="text-lg font-bold">
+                      {totalPrice.toLocaleString('ru-RU')} ₽
+                    </span>
                   </div>
                 </div>
-                )}
-                </div>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
