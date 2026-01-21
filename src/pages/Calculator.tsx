@@ -629,7 +629,7 @@ const Calculator = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="telegram" className="text-sm flex items-center gap-2">
-                    Telegram username {(sendMethod === 'telegram' || sendMethod === 'max') && <span className="text-red-500">*</span>}
+                    Telegram username {sendMethod === 'telegram' && <span className="text-red-500">*</span>}
                     <Dialog>
                       <DialogTrigger asChild>
                         <button type="button" className="text-gray-400 hover:text-gray-600 transition-colors">
@@ -684,7 +684,7 @@ const Calculator = () => {
                     placeholder="@username"
                     value={telegram}
                     onChange={(e) => setTelegram(e.target.value)}
-                    className={showValidation && (sendMethod === 'telegram' || sendMethod === 'max') && !telegram ? 'border-red-500 border-2' : ''}
+                    className={showValidation && sendMethod === 'telegram' && !telegram ? 'border-red-500 border-2' : ''}
                   />
                   <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @) тогда смета придет автоматически, или оставьте пустым и мы отправим вам смету в ближайшее время в ручном режиме</p>
                 </div>
@@ -702,12 +702,6 @@ const Calculator = () => {
                       <RadioGroupItem value="telegram" id="sendTelegram" />
                       <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
                         Телеграм
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
-                      <RadioGroupItem value="max" id="sendMax" />
-                      <Label htmlFor="sendMax" className="cursor-pointer flex-1 text-sm">
-                        Макс
                       </Label>
                     </div>
                   </RadioGroup>
