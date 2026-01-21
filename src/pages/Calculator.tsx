@@ -714,21 +714,24 @@ const Calculator = () => {
 
                 {estimate.length > 0 && (
                 <div className="w-full">
+                  <table className="w-full text-[11px] border-collapse">
+                    <thead>
+                      <tr className="border-b border-black bg-gray-50">
+                        <th className="border-r border-black text-left py-1 px-1.5 font-bold">Наименование</th>
+                        <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '50px'}}>Ед.из</th>
+                        <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '60px'}}>Кол-во</th>
+                        <th className="border-r border-black text-right py-1 px-1.5 font-bold" style={{width: '80px'}}>Цена, ₽</th>
+                        <th className="text-right py-1 px-1.5 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  
                   {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
                     <div key={idx}>
                       <div className="bg-white border-b border-black py-1 px-1.5">
                         <h3 className="font-bold text-xs">{section.title}</h3>
                       </div>
                       <table className="w-full text-[11px] border-collapse">
-                        <thead>
-                          <tr className="border-b border-black bg-gray-50">
-                            <th className="border-r border-black text-left py-1 px-1.5 font-bold">Наименование</th>
-                            <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '50px'}}>Ед.из</th>
-                            <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '60px'}}>Кол-во</th>
-                            <th className="border-r border-black text-right py-1 px-1.5 font-bold" style={{width: '80px'}}>Цена, ₽</th>
-                            <th className="text-right py-1 px-1.5 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
-                          </tr>
-                        </thead>
                         <tbody>
                           {section.items.map((item, itemIdx) => (
                             <tr key={itemIdx} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
