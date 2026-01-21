@@ -175,7 +175,7 @@ const Calculator = () => {
         { name: 'Пленка гидроизоляционная', unit: 'м2', quantity: plenka, price: 150, total: plenka * 150 },
         { name: 'Шпилька резьбовая оцинкованная(10х1000)мм', unit: 'м', quantity: shpilka, price: 100, total: shpilka * 100 },
         { name: 'Гайка оцинкованная(М10)', unit: 'шт', quantity: gayka, price: 6, total: gayka * 6 },
-        { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: 90, price: 6, total: 540 },
+        { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: gayka, price: 6, total: gayka * 6 },
         { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: 30, price: 30, total: 900 },
         { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: 60, price: 4, total: 240 },
         { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 3000, price: 60, total: 180000 },
