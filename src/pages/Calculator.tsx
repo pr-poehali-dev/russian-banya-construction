@@ -37,16 +37,105 @@ const Calculator = () => {
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState<boolean>(false);
+  const [isSending, setIsSending] = useState<boolean>(false);
   const estimateRef = useRef<HTMLDivElement>(null);
 
-  const handleSendEstimate = () => {
+  const handleSendEstimate = async () => {
     setShowValidation(true);
     
     if (!name || !phone || (sendMethod === 'email' && !email)) {
       return;
     }
     
-    console.log('Отправка сметы:', { name, phone, email, sendMethod });
+    setIsSending(true);
+    
+    try {
+      if (!estimateRef.current) {
+        alert('Ошибка: смета не найдена');
+        return;
+      }
+      
+      // Генерируем PDF
+      const canvas = await html2canvas(estimateRef.current, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff'
+      });
+      
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: 'a4',
+        hotfixes: ['px_scaling']
+      });
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      
+      const ratio = pdfWidth / imgWidth;
+      const scaledHeight = imgHeight * ratio;
+      
+      let heightLeft = scaledHeight;
+      let position = 0;
+      
+      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+      heightLeft -= pdfHeight;
+      
+      while (heightLeft > 0) {
+        position = heightLeft - scaledHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+        heightLeft -= pdfHeight;
+      }
+      
+      // Получаем PDF как base64
+      const pdfBase64 = pdf.output('datauristring').split(',')[1];
+      
+      // Отправляем на сервер
+      const response = await fetch('https://functions.poehali.dev/cba76a16-6247-4333-9605-62ab8c813235', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          messenger: sendMethod,
+          material: wallMaterial,
+          length,
+          width,
+          partitionsLength: partitionLength,
+          floors,
+          foundation,
+          location: distance,
+          pdfData: pdfBase64
+        })
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        alert('Смета успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+        // Очищаем форму
+        setName('');
+        setPhone('');
+        setEmail('');
+        setShowValidation(false);
+      } else {
+        alert('Ошибка отправки: ' + (result.error || 'Неизвестная ошибка'));
+      }
+      
+    } catch (error) {
+      console.error('Ошибка отправки сметы:', error);
+      alert('Ошибка отправки сметы. Попробуйте еще раз.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleDownloadPDF = async () => {
@@ -520,8 +609,9 @@ const Calculator = () => {
                 <Button 
                   className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
                   onClick={handleSendEstimate}
+                  disabled={isSending || estimate.length === 0}
                 >
-                  Отправить смету
+                  {isSending ? 'Отправка...' : 'Отправить смету'}
                 </Button>
               </div>
 

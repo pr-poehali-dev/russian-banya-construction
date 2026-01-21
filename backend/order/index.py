@@ -7,9 +7,12 @@ import psycopg2
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+import base64
 from typing import Dict, Any
 
-# Версия: 2.2 - исправлен SMTP_USER
+# Версия: 2.3 - добавлена поддержка PDF вложений
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -87,6 +90,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         email_client = body_data.get('email', '')
         messenger = body_data.get('messenger', '')
         comment = body_data.get('comment', '')
+        pdf_data = body_data.get('pdfData', '')  # Base64 encoded PDF
         
         material_names = {
             'ocilindrovannoe-brevno': 'Оцилиндрованное бревно',
@@ -207,6 +211,22 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             html_part = MIMEText(html_content, 'html', 'utf-8')
             msg.attach(html_part)
+            
+            # Прикрепляем PDF если он передан
+            if pdf_data:
+                try:
+                    pdf_bytes = base64.b64decode(pdf_data)
+                    pdf_attachment = MIMEBase('application', 'octet-stream')
+                    pdf_attachment.set_payload(pdf_bytes)
+                    encoders.encode_base64(pdf_attachment)
+                    pdf_attachment.add_header(
+                        'Content-Disposition',
+                        f'attachment; filename=Смета_{name.replace(" ", "_")}.pdf'
+                    )
+                    msg.attach(pdf_attachment)
+                    print("PDF attachment added successfully")
+                except Exception as pdf_error:
+                    print(f"Failed to attach PDF: {pdf_error}")
             
             print(f"Attempting to send email via {smtp_host}:{smtp_port}")
             print(f"SMTP_USER: {smtp_user}")
