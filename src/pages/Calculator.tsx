@@ -100,7 +100,7 @@ const Calculator = () => {
 
     const isBrusSelected = wallMaterial === 'брус' || wallMaterial === 'клееный';
     const isBrevnoSelected = wallMaterial === 'бревно';
-    const brusPrice = wallMaterial === 'клееный' ? 70000 : 0;
+    const brusPrice = wallMaterial === 'клееный' ? 70000 : wallMaterial === 'брус' ? 19500 : 0;
     
     sections.push({
       title: 'Сруб из бруса',
