@@ -4,17 +4,22 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { calculateEstimate, EstimateItem, EstimateSection } from '@/utils/estimateCalculator';
+
+interface EstimateItem {
+  name: string;
+  unit: string;
+  quantity: number;
+  price: number;
+  total: number;
+}
+
+interface EstimateSection {
+  title: string;
+  items: EstimateItem[];
+  subtotal: number;
+}
 
 const Calculator = () => {
   const [step, setStep] = useState<number>(1);
@@ -35,6 +40,113 @@ const Calculator = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isSending, setIsSending] = useState<boolean>(false);
   const estimateRef = useRef<HTMLDivElement>(null);
+
+  const calculateEstimate = () => {
+    const l = length ? parseFloat(length) : 6;
+    const w = width ? parseFloat(width) : 4;
+    const pl = partitionLength ? parseFloat(partitionLength) : 0;
+    const area = l * w;
+    const perimeter = 2 * (l + w) + pl;
+    const isOneFloor = floors === '1';
+    const mansardWallHeight = isOneFloor ? 0 : 1;
+    const roofHeight = w / 2.5;
+    const mansardHeight = isOneFloor ? 0 : mansardWallHeight + roofHeight;
+
+    const sections: EstimateSection[] = [];
+
+    const pilesCount = Math.ceil(perimeter / 2);
+    const isPilesSelected = foundation === 'сваи';
+    sections.push({
+      title: 'Фундамент из винтовых свай',
+      items: [
+        { name: 'Свая винтовая 89/6,5/300(2,5м)', unit: 'шт', quantity: pilesCount, price: 3000, total: isPilesSelected ? pilesCount * 3000 : 0 },
+        { name: 'Оголовки для свай съемные(150х150)мм', unit: 'шт', quantity: pilesCount, price: 600, total: isPilesSelected ? pilesCount * 600 : 0 },
+        { name: 'Монтаж свай', unit: 'шт', quantity: pilesCount, price: 4000, total: isPilesSelected ? pilesCount * 4000 : 0 },
+      ],
+      subtotal: isPilesSelected ? pilesCount * 7600 : 0
+    });
+
+    const concrete = Math.ceil(perimeter * 0.4 * 100) / 100;
+    const drainagePillow = Math.ceil(perimeter * 0.15);
+    const reinforcement = Math.ceil(perimeter * 15 / 100) * 100;
+    const bindingWire = Math.ceil(perimeter * 0.06);
+    const formworkBoard = Math.ceil(perimeter * 0.126);
+    const nails = Math.ceil(perimeter * 0.25);
+    const screws = Math.ceil(perimeter * 20 / 10) * 10;
+    const film = Math.ceil(perimeter * 1.6 / 10) * 10;
+    const staples = Math.ceil(perimeter * 35 / 1000) * 1000;
+    const fixators = Math.ceil(perimeter * 10 / 100) * 100;
+    const isStripSelected = foundation === 'ленточный';
+    sections.push({
+      title: 'Фундамент ленточный, с буронабивными сваями',
+      items: [
+        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: concrete, price: 8100, total: isStripSelected ? Math.ceil(concrete * 8100) : 0 },
+        { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: drainagePillow, price: 1000, total: isStripSelected ? drainagePillow * 1000 : 0 },
+        { name: 'Арматура металлическая(12мм)', unit: 'п.м', quantity: reinforcement, price: 100, total: isStripSelected ? reinforcement * 100 : 0 },
+        { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: bindingWire, price: 500, total: isStripSelected ? bindingWire * 500 : 0 },
+        { name: 'Доска для опалубки 1-й сорт(50х200х6000)мм', unit: 'м3', quantity: formworkBoard, price: 19500, total: isStripSelected ? formworkBoard * 19500 : 0 },
+        { name: 'Гвозди(4х100)мм', unit: 'кг', quantity: nails, price: 200, total: isStripSelected ? nails * 200 : 0 },
+        { name: 'Саморезы черные(4,2х90)мм', unit: 'шт', quantity: screws, price: 3, total: isStripSelected ? screws * 3 : 0 },
+        { name: 'Пленка полиэтиленовая(200мк)', unit: 'м2', quantity: film, price: 70, total: isStripSelected ? film * 70 : 0 },
+        { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: staples, price: 0.2, total: isStripSelected ? staples * 0.2 : 0 },
+        { name: 'Фиксаторы арматуры(35мм)', unit: 'шт', quantity: fixators, price: 10, total: isStripSelected ? fixators * 10 : 0 },
+        { name: 'Монтаж фундамента(с буронабивными сваями)', unit: 'м3', quantity: concrete, price: 10000, total: isStripSelected ? Math.ceil(concrete * 10000) : 0 },
+      ],
+      subtotal: 0
+    });
+    sections[sections.length - 1].subtotal = isStripSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
+
+    const bindingBrusVolume = Math.ceil(perimeter / 6) * 0.12;
+    const roofingFelt = Math.ceil(perimeter / 10) * 10;
+    const antiseptic = Math.ceil(perimeter * 0.166 / 10) * 10;
+    const clamps = Math.ceil(perimeter * 0.2);
+    sections.push({
+      title: 'Обвязка фундамента',
+      items: [
+        { name: 'Обвязочный брус(100х200х6000)мм', unit: 'м3', quantity: bindingBrusVolume, price: 19500, total: Math.ceil(bindingBrusVolume * 19500) },
+        { name: 'Рубероид РПП 300', unit: 'м2', quantity: roofingFelt, price: 65, total: roofingFelt * 65 },
+        { name: 'Антисептик', unit: 'л', quantity: antiseptic, price: 130, total: antiseptic * 130 },
+        { name: 'Скобы строительные(8х250)', unit: 'шт', quantity: clamps, price: 60, total: clamps * 60 },
+        { name: 'Монтаж обвязки', unit: 'м3', quantity: bindingBrusVolume, price: 10000, total: Math.ceil(bindingBrusVolume * 10000) },
+      ],
+      subtotal: 0
+    });
+    sections[sections.length - 1].subtotal = sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0);
+
+    const isBrusSelected = wallMaterial === 'брус' || wallMaterial === 'клееный';
+    const brusPrice = wallMaterial === 'клееный' ? 70000 : wallMaterial === 'брус' ? 19500 : 0;
+    const totalWallHeight = (2.2 + 0.6) + mansardWallHeight;
+    const brusVolume = perimeter * totalWallHeight * 0.15;
+    const jute = Math.ceil((brusVolume / 0.135 * 6.5) / 100) * 100;
+    const shkanty = Math.ceil((jute / 8) / 10) * 10;
+    const skobki = Math.ceil((jute * 5) / 1000) * 1000;
+    const skobyStroit = Math.ceil(brusVolume * 5);
+    
+    sections.push({
+      title: 'Сруб из бруса',
+      items: [
+        { name: 'Брус для сруба', unit: 'м3', quantity: parseFloat(brusVolume.toFixed(2)), price: brusPrice, total: isBrusSelected ? Math.ceil(brusVolume * brusPrice) : 0 },
+        { name: 'Джут(150мм)', unit: 'п.м', quantity: jute, price: 25, total: isBrusSelected ? jute * 25 : 0 },
+        { name: 'Шканты березовые(25х250)мм', unit: 'шт', quantity: shkanty, price: 10, total: isBrusSelected ? shkanty * 10 : 0 },
+        { name: 'Скобы для степпера(№10)', unit: 'шт', quantity: skobki, price: 0.2, total: isBrusSelected ? skobki * 0.2 : 0 },
+        { name: 'Скобы строительные(8х250)мм', unit: 'шт', quantity: skobyStroit, price: 60, total: isBrusSelected ? skobyStroit * 60 : 0 },
+        { name: 'Монтаж сруба', unit: 'м3', quantity: parseFloat(brusVolume.toFixed(2)), price: 17000, total: isBrusSelected ? Math.ceil(brusVolume * 17000) : 0 },
+      ],
+      subtotal: 0
+    });
+    sections[sections.length - 1].subtotal = isBrusSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
+
+    const total = sections.reduce((sum, section) => sum + section.subtotal, 0);
+    
+    setEstimate(sections);
+    setTotalPrice(total);
+  };
+
+  useEffect(() => {
+    if (foundation && wallMaterial && length && width) {
+      calculateEstimate();
+    }
+  }, [foundation, wallMaterial, floors, distance, length, width, partitionLength]);
 
   const handleSendEstimate = async () => {
     setShowValidation(true);
@@ -157,22 +269,6 @@ const Calculator = () => {
     }
   };
 
-  useEffect(() => {
-    if (foundation && wallMaterial && length && width) {
-      const result = calculateEstimate({
-        length: parseFloat(length),
-        width: parseFloat(width),
-        partitionLength: parseFloat(partitionLength || '0'),
-        floors: floors as '1' | '1.5',
-        foundation: foundation as 'сваи' | 'ленточный',
-        wallMaterial: wallMaterial as 'профилированный брус' | 'оцилиндрованное бревно' | 'каркас',
-        distance: distance as '0-30' | '30-60' | '60-90'
-      });
-      setEstimate(result.sections);
-      setTotalPrice(result.total);
-    }
-  }, [foundation, wallMaterial, floors, distance, length, width, partitionLength]);
-
   const goToNextStep = () => {
     if (step === 1 && !foundation) {
       alert('Пожалуйста, выберите тип фундамента');
@@ -274,7 +370,7 @@ const Calculator = () => {
                   
                   <RadioGroup value={wallMaterial} onValueChange={setWallMaterial} className="space-y-4">
                     <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
-                      <RadioGroupItem value="профилированный брус" id="material-profiled" />
+                      <RadioGroupItem value="брус" id="material-profiled" />
                       <Label htmlFor="material-profiled" className="flex-1 cursor-pointer">
                         <div className="font-semibold text-lg text-emerald-900">Профилированный брус</div>
                         <div className="text-sm text-emerald-600">Натуральная древесина, легкость сборки</div>
@@ -282,18 +378,10 @@ const Calculator = () => {
                     </div>
                     
                     <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
-                      <RadioGroupItem value="оцилиндрованное бревно" id="material-log" />
-                      <Label htmlFor="material-log" className="flex-1 cursor-pointer">
-                        <div className="font-semibold text-lg text-emerald-900">Оцилиндрованное бревно</div>
-                        <div className="text-sm text-emerald-600">Традиционный русский стиль</div>
-                      </Label>
-                    </div>
-                    
-                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-200 rounded-xl hover:border-emerald-400 hover:bg-emerald-50 transition-all cursor-pointer">
-                      <RadioGroupItem value="каркас" id="material-frame" />
-                      <Label htmlFor="material-frame" className="flex-1 cursor-pointer">
-                        <div className="font-semibold text-lg text-emerald-900">Каркасная технология</div>
-                        <div className="text-sm text-emerald-600">Быстрое строительство, энергоэффективность</div>
+                      <RadioGroupItem value="клееный" id="material-glued" />
+                      <Label htmlFor="material-glued" className="flex-1 cursor-pointer">
+                        <div className="font-semibold text-lg text-emerald-900">Клееный брус</div>
+                        <div className="text-sm text-emerald-600">Премиум класс, не дает усадку</div>
                       </Label>
                     </div>
                   </RadioGroup>
