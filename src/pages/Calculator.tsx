@@ -123,12 +123,13 @@ const Calculator = () => {
     sections[sections.length - 1].subtotal = isBrusSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
 
     const brevnoVolume = totalWallHeight / 0.17 * perimeter / 6 * 0.1885;
+    const juteBrevno = Math.ceil((totalWallHeight / 0.17 * perimeter * 1.2) / 100) * 100;
 
     sections.push({
       title: 'Сруб из бревна',
       items: [
         { name: 'Бревно сруба', unit: 'м3', quantity: parseFloat(brevnoVolume.toFixed(2)), price: 22000, total: isBrevnoSelected ? Math.ceil(brevnoVolume * 22000) : 0 },
-        { name: 'Джут(150мм)', unit: 'п.м', quantity: 1000, price: 25, total: isBrevnoSelected ? 25000 : 0 },
+        { name: 'Джут(150мм)', unit: 'п.м', quantity: juteBrevno, price: 25, total: isBrevnoSelected ? juteBrevno * 25 : 0 },
         { name: 'Шкант березовый(24х1200)мм', unit: 'шт', quantity: 130, price: 40, total: isBrevnoSelected ? 5200 : 0 },
         { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 5000, price: 0.2, total: isBrevnoSelected ? 1000 : 0 },
         { name: 'Монтаж сруба', unit: 'м3', quantity: 24.58, price: 10000, total: isBrevnoSelected ? 245789.2 : 0 },
