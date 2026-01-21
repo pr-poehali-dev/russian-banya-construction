@@ -59,7 +59,8 @@ const Calculator = () => {
         scale: 2,
         useCORS: true,
         logging: false,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        windowWidth: 1200
       });
       
       const imgData = canvas.toDataURL('image/png');
@@ -74,8 +75,35 @@ const Calculator = () => {
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
       const ratio = pdfWidth / imgWidth;
+      const scaledHeight = imgHeight * ratio;
       
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight * ratio);
+      let yPosition = 0;
+      let pageCount = 0;
+      
+      while (yPosition < scaledHeight) {
+        if (pageCount > 0) {
+          pdf.addPage();
+        }
+        
+        const sourceY = yPosition / ratio;
+        const sourceHeight = Math.min((pdfHeight / ratio), imgHeight - sourceY);
+        
+        pdf.addImage(
+          imgData, 
+          'PNG', 
+          0, 
+          0, 
+          pdfWidth, 
+          sourceHeight * ratio,
+          undefined,
+          'FAST',
+          0,
+          -yPosition
+        );
+        
+        yPosition += pdfHeight;
+        pageCount++;
+      }
       
       const fileName = `Смета_${name || 'Баня'}_${new Date().toLocaleDateString('ru-RU')}.pdf`;
       pdf.save(fileName);
