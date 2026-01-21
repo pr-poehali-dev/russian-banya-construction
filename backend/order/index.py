@@ -234,9 +234,83 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             print(f"SMTP_USER: {smtp_user}")
             print(f"SMTP_PASSWORD length: {len(smtp_password) if smtp_password else 0}")
             
-            # Подготавливаем письмо заказчику, если нужно
+            # Подготавливаем письмо заказчику
             customer_msg = None
-            if email_client and messenger == 'email' and pdf_data:
+            
+            # Если выбран Telegram - отправляем инструкцию (даже если нет email)
+            if email_client and (messenger == 'telegram' or messenger == 'max'):
+                customer_msg = MIMEMultipart('alternative')
+                customer_msg['Subject'] = 'Получите смету в Telegram - Пермский Пар'
+                customer_msg['From'] = smtp_user
+                customer_msg['To'] = email_client
+                
+                bot_link = 'https://t.me/permpar_smeta_bot'
+                customer_html = f"""
+                <html>
+                <head>
+                    <style>
+                        body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                        .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+                        .header {{ background-color: #FBB040; padding: 20px; text-align: center; }}
+                        .header h1 {{ margin: 0; color: #000; }}
+                        .content {{ background-color: #f9f9f9; padding: 20px; }}
+                        .footer {{ text-align: center; padding: 20px; font-size: 12px; color: #999; }}
+                        .button {{ display: inline-block; padding: 15px 30px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }}
+                        .steps {{ background: #fff; padding: 15px; border-left: 4px solid #FBB040; margin: 20px 0; }}
+                        .contacts {{ margin-top: 20px; padding: 15px; background: #fff; border-left: 4px solid #FBB040; }}
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>🏡 Пермский Пар</h1>
+                        </div>
+                        <div class="content">
+                            <p>Здравствуйте, {name}!</p>
+                            
+                            <p>Благодарим за обращение в компанию "Пермский Пар".</p>
+                            
+                            <p><strong>Ваша смета готова!</strong> Чтобы получить её в Telegram, выполните простые шаги:</p>
+                            
+                            <div class="steps">
+                                <p><strong>📱 Как получить смету:</strong></p>
+                                <ol>
+                                    <li>Откройте наш Telegram бот по ссылке ниже</li>
+                                    <li>Нажмите кнопку "СТАРТ"</li>
+                                    <li>PDF смета придёт автоматически за 1 секунду!</li>
+                                </ol>
+                            </div>
+                            
+                            <div style="text-align: center;">
+                                <a href="{bot_link}" class="button">🤖 Открыть бот и получить смету</a>
+                            </div>
+                            
+                            <p style="color: #666; font-size: 14px;">Или скопируйте ссылку: <strong>{bot_link}</strong></p>
+                            
+                            <div class="contacts">
+                                <strong>Наши контакты:</strong><br>
+                                Телефон: +7 (342) 298-40-30<br>
+                                Телефон: +7 (982) 490-09-00<br>
+                                Email: perm-par@mail.ru<br>
+                                Сайт: www.пермский-пар.рф
+                            </div>
+                            
+                            <p style="margin-top: 20px;">С уважением,<br>Команда "Пермский Пар"</p>
+                        </div>
+                        <div class="footer">
+                            <p>Письмо отправлено автоматически. Пожалуйста, не отвечайте на него.</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
+                """
+                
+                customer_html_part = MIMEText(customer_html, 'html', 'utf-8')
+                customer_msg.attach(customer_html_part)
+                print("Telegram instruction email prepared")
+            
+            # Если выбран Email - отправляем смету
+            elif email_client and messenger == 'email' and pdf_data:
                 customer_msg = MIMEMultipart('alternative')
                 customer_msg['Subject'] = 'Ваша смета от компании "Пермский Пар"'
                 customer_msg['From'] = smtp_user

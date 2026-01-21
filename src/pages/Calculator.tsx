@@ -139,28 +139,24 @@ const Calculator = () => {
           message += '✅ Смета отправлена на вашу почту\n';
         }
         
-        // Открываем бота ПЕРЕД alert, чтобы избежать блокировки popup
-        let botOpened = false;
+        // Для Telegram - показываем инструкцию
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
-          message += '\n🤖 Сейчас откроется Telegram бот\n';
-          message += 'Нажмите кнопку "📄 Получить смету" чтобы получить смету';
-          
-          // Открываем бота сразу (без setTimeout)
-          const botWindow = window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
-          if (botWindow) {
-            botOpened = true;
-          } else {
-            message += '\n\n⚠️ Не удалось открыть бота автоматически.\nОткройте @permpar_smeta_bot вручную';
+          if (email) {
+            message += '\n📧 На вашу почту отправлена инструкция по получению сметы в Telegram\n';
           }
+          message += '\n🤖 Чтобы получить смету в Telegram:\n';
+          message += '1. Откройте бот @permpar_smeta_bot\n';
+          message += '2. Нажмите СТАРТ\n';
+          message += '3. PDF придёт автоматически!';
         } else if (!result.email_sent) {
           message += '\nМы свяжемся с вами в ближайшее время.';
         }
         
         alert(message);
         
-        // Если бот не открылся - предлагаем открыть вручную
-        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max') && !botOpened) {
-          if (confirm('Открыть Telegram бота @permpar_smeta_bot?')) {
+        // Предлагаем открыть бота (но не принудительно)
+        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
+          if (confirm('Открыть Telegram бота сейчас?')) {
             window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
           }
         }
