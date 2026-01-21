@@ -141,12 +141,13 @@ const Calculator = () => {
     sections[sections.length - 1].subtotal = isBrevnoSelected ? sections[sections.length - 1].items.reduce((sum, item) => sum + item.total, 0) : 0;
 
     const brusLagi = Math.ceil(area * 0.25) * 0.18;
+    const montageLagi = Math.ceil(area * 0.25) * 2;
 
     sections.push({
       title: 'Лаги пола, балки перекрытия',
       items: [
         { name: 'Брус для лаг, балок(100х150)мм', unit: 'м3', quantity: parseFloat(brusLagi.toFixed(2)), price: 19500, total: Math.ceil(brusLagi * 19500) },
-        { name: 'Монтаж лаг', unit: 'шт', quantity: 26, price: 1000, total: 44000 },
+        { name: 'Монтаж лаг', unit: 'шт', quantity: montageLagi, price: 1000, total: montageLagi * 1000 },
       ],
       subtotal: 0
     });
