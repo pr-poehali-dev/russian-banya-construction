@@ -169,6 +169,7 @@ const Calculator = () => {
     const shurup = ugolok * 2;
     const skobkiRoof = Math.ceil((roofArea * 30) / 1000) * 1000;
     const gvozdi = Math.ceil(roofArea * 0.2);
+    const vetrovaya = Math.ceil(rafterLength * 4);
 
     sections.push({
       title: 'Крыша',
@@ -186,7 +187,7 @@ const Calculator = () => {
         { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: gvozdi, price: 200, total: gvozdi * 200 },
         { name: 'Металлочерепица', unit: 'м2', quantity: roofArea, price: 750, total: roofArea * 750 },
         { name: 'Конек плоский(200х200)мм', unit: 'п.м', quantity: ridgeLength, price: 240, total: ridgeLength * 240 },
-        { name: 'Ветровая планка', unit: 'п.м', quantity: 20, price: 240, total: 4800 },
+        { name: 'Ветровая планка', unit: 'п.м', quantity: vetrovaya, price: 240, total: vetrovaya * 240 },
         { name: 'Карнизная планка', unit: 'п.м', quantity: 14, price: 240, total: 3360 },
         { name: 'Кровельные саморезы(4,8*35)', unit: 'шт', quantity: 800, price: 5, total: 4000 },
         { name: 'Кровельные саморезы(4,8*50)', unit: 'шт', quantity: 240, price: 6, total: 1440 },
