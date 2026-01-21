@@ -140,13 +140,19 @@ const Calculator = () => {
         
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
           message += '\n🤖 Чтобы получить смету в Telegram:\n';
-          message += '1. Напишите нашему боту /start\n';
-          message += '2. Смета придёт автоматически в течение нескольких минут';
+          message += 'Нажмите на кнопку ниже или напишите боту команду /заявка';
         } else {
           message += '\nМы свяжемся с вами в ближайшее время.';
         }
         
         alert(message);
+        
+        // Открываем бота в Telegram, если выбран Telegram/Max
+        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
+          setTimeout(() => {
+            window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
+          }, 500);
+        }
         // Очищаем форму
         setName('');
         setPhone('');
@@ -643,10 +649,10 @@ const Calculator = () => {
                                 🤖 Для автоматической отправки сметы:
                               </p>
                               <ol className="text-xs text-blue-700 space-y-1 list-decimal list-inside">
-                                <li>Напишите нашему боту <a href="https://t.me/permpar_smeta_bot" target="_blank" rel="noopener noreferrer" className="font-mono bg-white px-1 rounded text-blue-600 hover:underline">@permpar_smeta_bot</a></li>
-                                <li>Отправьте команду <span className="font-mono bg-white px-1 rounded">/start</span></li>
                                 <li>Заполните калькулятор с вашим username</li>
-                                <li>Смета придёт автоматически в течение минуты!</li>
+                                <li>После отправки откроется бот <a href="https://t.me/permpar_smeta_bot" target="_blank" rel="noopener noreferrer" className="font-mono bg-white px-1 rounded text-blue-600 hover:underline">@permpar_smeta_bot</a></li>
+                                <li>Напишите команду <span className="font-mono bg-white px-1 rounded">/заявка</span></li>
+                                <li>Смета придёт автоматически в течение секунды! ⚡</li>
                               </ol>
                             </div>
                             <div className="bg-amber-50 p-3 rounded-lg border border-amber-200 mt-2">

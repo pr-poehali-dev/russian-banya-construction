@@ -410,8 +410,8 @@ def handle_telegram_webhook(update: Dict[str, Any]) -> Dict[str, Any]:
             print("ERROR: TELEGRAM_BOT_TOKEN not configured")
             return {'statusCode': 200, 'body': json.dumps({'ok': True})}
         
-        # Обрабатываем только /start
-        if not text.startswith('/start'):
+        # Обрабатываем команды /start и /заявка
+        if not (text.startswith('/start') or text.startswith('/заявка')):
             return {'statusCode': 200, 'body': json.dumps({'ok': True})}
         
         dsn = os.environ.get('DATABASE_URL')
