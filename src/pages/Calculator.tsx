@@ -4,6 +4,15 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -44,7 +53,7 @@ const Calculator = () => {
   const handleSendEstimate = async () => {
     setShowValidation(true);
     
-    if (!name || !phone || (sendMethod === 'email' && !email) || ((sendMethod === 'telegram' || sendMethod === 'max') && !telegram)) {
+    if (!name || !phone || (sendMethod === 'email' && !email)) {
       return;
     }
     
@@ -587,8 +596,44 @@ const Calculator = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="telegram" className="text-sm">
+                  <Label htmlFor="telegram" className="text-sm flex items-center gap-2">
                     Telegram username {(sendMethod === 'telegram' || sendMethod === 'max') && <span className="text-red-500">*</span>}
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <button type="button" className="text-gray-400 hover:text-gray-600 transition-colors">
+                          <Icon name="HelpCircle" size={16} />
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-md">
+                        <DialogHeader>
+                          <DialogTitle>Как найти свой Telegram username?</DialogTitle>
+                          <DialogDescription className="space-y-3 pt-2">
+                            <div className="space-y-2 text-sm text-gray-700">
+                              <p className="font-semibold">📱 В мобильном приложении:</p>
+                              <ol className="list-decimal list-inside space-y-1 pl-2">
+                                <li>Откройте Telegram</li>
+                                <li>Нажмите на меню (☰) → Настройки</li>
+                                <li>Ваш username указан под именем (начинается с @)</li>
+                              </ol>
+                            </div>
+                            <div className="space-y-2 text-sm text-gray-700">
+                              <p className="font-semibold">💻 В десктоп версии:</p>
+                              <ol className="list-decimal list-inside space-y-1 pl-2">
+                                <li>Откройте Telegram</li>
+                                <li>Нажмите на три полоски → Настройки</li>
+                                <li>Ваш username указан под именем (начинается с @)</li>
+                              </ol>
+                            </div>
+                            <div className="bg-amber-50 p-3 rounded-lg border border-amber-200 mt-3">
+                              <p className="text-xs text-amber-800">
+                                ℹ️ Если у вас нет username или вы не можете его найти — не переживайте! 
+                                Оставьте поле пустым, и мы отправим смету вам в ручном режиме в ближайшее время.
+                              </p>
+                            </div>
+                          </DialogDescription>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
                   </Label>
                   <Input
                     id="telegram"
@@ -596,7 +641,6 @@ const Calculator = () => {
                     placeholder="@username"
                     value={telegram}
                     onChange={(e) => setTelegram(e.target.value)}
-                    required={sendMethod === 'telegram' || sendMethod === 'max'}
                     className={showValidation && (sendMethod === 'telegram' || sendMethod === 'max') && !telegram ? 'border-red-500 border-2' : ''}
                   />
                   <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @)</p>
