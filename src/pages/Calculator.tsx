@@ -22,6 +22,7 @@ interface EstimateSection {
 const Calculator = () => {
   const [foundation, setFoundation] = useState<string>('');
   const [wallMaterial, setWallMaterial] = useState<string>('');
+  const [floors, setFloors] = useState<string>('1.5');
   const [length, setLength] = useState<string>('6');
   const [width, setWidth] = useState<string>('6');
   const [partitionLength, setPartitionLength] = useState<string>('6');
@@ -219,7 +220,7 @@ const Calculator = () => {
 
   useEffect(() => {
     calculateEstimate();
-  }, [foundation, wallMaterial, length, width, partitionLength]);
+  }, [foundation, wallMaterial, floors, length, width, partitionLength]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12 px-4">
@@ -232,6 +233,23 @@ const Calculator = () => {
             <CardContent className="space-y-6 pt-6">
               <div className="space-y-4">
                 <Label className="text-base font-semibold">Размеры вашей бани</Label>
+                <div className="space-y-3">
+                  <Label className="text-sm">Этажность:</Label>
+                  <RadioGroup value={floors} onValueChange={setFloors}>
+                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="1" id="floor1" />
+                      <Label htmlFor="floor1" className="cursor-pointer flex-1 text-sm">
+                        1 этаж
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3 p-2 border rounded-lg hover:bg-amber-50 transition-colors cursor-pointer">
+                      <RadioGroupItem value="1.5" id="floor1.5" />
+                      <Label htmlFor="floor1.5" className="cursor-pointer flex-1 text-sm">
+                        1,5 этажа (мансарда)
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="length" className="text-base font-semibold">
