@@ -165,6 +165,7 @@ const Calculator = () => {
     const plenka = Math.ceil((roofArea * 1.2) / 10) * 10;
     const shpilka = Math.ceil(stropilPairs / 2);
     const gayka = Math.ceil(stropilPairs * 6);
+    const ugolok = stropilPairs * 2;
 
     sections.push({
       title: 'Крыша',
@@ -176,7 +177,7 @@ const Calculator = () => {
         { name: 'Шпилька резьбовая оцинкованная(10х1000)мм', unit: 'м', quantity: shpilka, price: 100, total: shpilka * 100 },
         { name: 'Гайка оцинкованная(М10)', unit: 'шт', quantity: gayka, price: 6, total: gayka * 6 },
         { name: 'Шайба увеличенная оцинкованная(М10)', unit: 'шт', quantity: gayka, price: 6, total: gayka * 6 },
-        { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: 30, price: 30, total: 900 },
+        { name: 'Уголок крепежный оцинкованный(70х70)', unit: 'шт', quantity: ugolok, price: 30, total: ugolok * 30 },
         { name: 'Шуруп "глухарь"(8х40)мм', unit: 'шт', quantity: 60, price: 4, total: 240 },
         { name: 'Скобки для степпера(№10)', unit: 'шт', quantity: 3000, price: 60, total: 180000 },
         { name: 'Гвозди(4х120)мм', unit: 'кг', quantity: 16, price: 200, total: 3200 },
