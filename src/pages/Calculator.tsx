@@ -505,6 +505,8 @@ const Calculator = () => {
                       <div className="text-right text-xs">
                         <div>тел. +7 (342) 298-40-30</div>
                         <div>тел. +7(982) 490 09 00</div>
+                        <div>perm-par@mail.ru</div>
+                        <div>www.пермский-пар.рф</div>
                       </div>
                     </div>
                   </div>
