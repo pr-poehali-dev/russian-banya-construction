@@ -700,37 +700,36 @@ const Calculator = () => {
                 {estimate.length > 0 && (
                 <div className="space-y-6">
                   {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
-                    <div key={idx} className="border-b pb-4 last:border-b-0">
-                      <h3 className="font-bold text-lg mb-3 text-gray-800">{section.title}</h3>
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
-                          <thead>
-                            <tr className="bg-gray-100">
-                              <th className="text-left p-2 font-semibold">Наименование</th>
-                              <th className="text-center p-2 font-semibold w-20">Ед.из</th>
-                              <th className="text-center p-2 font-semibold w-24">Кол-во</th>
-                              <th className="text-right p-2 font-semibold w-28">Цена, ₽</th>
-                              <th className="text-right p-2 font-semibold w-32">Стоимость, ₽</th>
+                    <div key={idx} className="border-2 border-black">
+                      <div className="bg-white border-b-2 border-black p-2">
+                        <h3 className="font-bold text-base text-center">{section.title}</h3>
+                      </div>
+                      <table className="w-full text-[10px] border-collapse">
+                        <thead>
+                          <tr className="border-b border-black bg-gray-50">
+                            <th className="border-r border-black text-left p-1.5 font-bold">Наименование</th>
+                            <th className="border-r border-black text-center p-1.5 font-bold">Ед.из</th>
+                            <th className="border-r border-black text-center p-1.5 font-bold">Кол-во</th>
+                            <th className="border-r border-black text-right p-1.5 font-bold">Цена, ₽</th>
+                            <th className="text-right p-1.5 font-bold">Стоимость, ₽</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {section.items.map((item, itemIdx) => (
+                            <tr key={itemIdx} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
+                              <td className="border-r border-black p-1.5">{item.name}</td>
+                              <td className="border-r border-black text-center p-1.5">{item.unit}</td>
+                              <td className="border-r border-black text-center p-1.5">{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
+                              <td className="border-r border-black text-right p-1.5">{item.price.toLocaleString('ru-RU')}</td>
+                              <td className="text-right p-1.5 font-semibold">{item.total.toLocaleString('ru-RU')}</td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {section.items.map((item, itemIdx) => (
-                              <tr key={itemIdx} className={`border-t hover:bg-gray-50 ${item.total === 0 ? 'opacity-40' : ''}`}>
-                                <td className="p-2">{item.name}</td>
-                                <td className="text-center p-2">{item.unit}</td>
-                                <td className="text-center p-2">{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
-                                <td className="text-right p-2">{item.price.toLocaleString('ru-RU')}</td>
-                                <td className="text-right p-2 font-semibold">{item.total.toLocaleString('ru-RU')}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                      <div className="mt-2 text-right">
-                        <span className="text-lg font-bold text-blue-700">
-                          Поэтапно: {section.subtotal.toLocaleString('ru-RU')} ₽
-                        </span>
-                      </div>
+                          ))}
+                          <tr className="bg-gray-50">
+                            <td colSpan={4} className="border-r border-black p-1.5 text-right font-bold">Поэтапно:</td>
+                            <td className="p-1.5 text-right font-bold">{section.subtotal.toLocaleString('ru-RU')} ₽</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   ))}
                   
