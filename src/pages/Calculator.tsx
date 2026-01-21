@@ -524,12 +524,12 @@ const Calculator = () => {
                         <td className="p-1.5" colSpan={3}>{email || '—'}</td>
                       </tr>
                       <tr className="border-b border-black bg-gray-50">
-                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={4}>Данные объекта</td>
+                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={5}>Данные объекта</td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Параметры</td>
                         <td className="border-r border-black p-1.5 font-bold text-center">Значения</td>
-                        <td className="p-1.5 font-bold text-center">Дополнительные значения</td>
+                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={2}>Дополнительные значения</td>
                       </tr>
                       <tr className="border-b border-black">
                         <td className="border-r border-black p-1.5" colSpan={2}>Фундамент</td>
