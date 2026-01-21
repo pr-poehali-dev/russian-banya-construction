@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 interface EstimateItem {
   name: string;
@@ -34,6 +36,8 @@ const Calculator = () => {
   const [showValidation, setShowValidation] = useState<boolean>(false);
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState<boolean>(false);
+  const estimateRef = useRef<HTMLDivElement>(null);
 
   const handleSendEstimate = () => {
     setShowValidation(true);
@@ -42,8 +46,46 @@ const Calculator = () => {
       return;
     }
     
-    // Здесь будет логика отправки сметы
     console.log('Отправка сметы:', { name, phone, email, sendMethod });
+  };
+
+  const handleDownloadPDF = async () => {
+    if (!estimateRef.current) return;
+    
+    setIsGeneratingPDF(true);
+    
+    try {
+      const canvas = await html2canvas(estimateRef.current, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff'
+      });
+      
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 10;
+      
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      
+      const fileName = `Смета_${name || 'Баня'}_${new Date().toLocaleDateString('ru-RU')}.pdf`;
+      pdf.save(fileName);
+    } catch (error) {
+      console.error('Ошибка генерации PDF:', error);
+    } finally {
+      setIsGeneratingPDF(false);
+    }
   };
 
   const calculateEstimate = () => {
@@ -491,9 +533,20 @@ const Calculator = () => {
 
           <Card className="shadow-xl">
               <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-                <CardTitle className="text-xl text-center">Детальная смета</CardTitle>
+                <div className="flex justify-between items-center">
+                  <CardTitle className="text-xl">Детальная смета</CardTitle>
+                  <Button 
+                    onClick={handleDownloadPDF}
+                    disabled={isGeneratingPDF || estimate.length === 0}
+                    variant="secondary"
+                    className="bg-white text-blue-600 hover:bg-gray-100"
+                  >
+                    {isGeneratingPDF ? 'Генерация...' : 'Скачать PDF'}
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent className="pt-6">
+                <div ref={estimateRef}>
                 <div className="bg-white border-2 border-black mb-6">
                   <div className="border-b-2 border-black p-3">
                     <div className="flex justify-between items-start">
@@ -691,6 +744,7 @@ const Calculator = () => {
                   </div>
                 </div>
                 )}
+                </div>
               </CardContent>
             </Card>
         </div>
