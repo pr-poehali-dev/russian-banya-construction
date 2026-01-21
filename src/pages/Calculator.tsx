@@ -460,12 +460,12 @@ const Calculator = () => {
             {/* Индикатор шагов */}
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-semibold text-emerald-900">Шаг {step} из 4</span>
+                <span className="text-sm font-semibold text-emerald-900">Шаг {step} из 5</span>
               </div>
               <div className="w-full bg-emerald-200 rounded-full h-2">
                 <div 
                   className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${(step / 4) * 100}%` }}
+                  style={{ width: `${(step / 5) * 100}%` }}
                 />
               </div>
             </div>
@@ -533,8 +533,8 @@ const Calculator = () => {
               </div>
             )}
 
-            {/* Шаг 2: Размеры */}
-            {step === 2 && (
+            {/* Шаг 3: Размеры и этажность */}
+            {step === 3 && (
               <div className="space-y-6">
                 <div className="space-y-4">
                   <Label className="text-base font-semibold text-emerald-900">Размеры вашей бани</Label>
@@ -618,8 +618,8 @@ const Calculator = () => {
               </div>
             )}
 
-            {/* Шаг 3: Расстояние */}
-            {step === 3 && (
+            {/* Шаг 4: Расстояние */}
+            {step === 4 && (
               <div className="space-y-6">
                 <div className="space-y-3">
                   <Label className="text-base font-semibold text-emerald-900">Расстояние от Перми до объекта в одну сторону, км:</Label>
@@ -671,8 +671,8 @@ const Calculator = () => {
             </div>
           )}
 
-            {/* Шаг 4: Контактные данные */}
-            {step === 4 && (
+            {/* Шаг 5: Контактные данные */}
+            {step === 5 && (
               <div className="space-y-6">
                 {totalPrice > 0 && (
                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-6 shadow-lg">
