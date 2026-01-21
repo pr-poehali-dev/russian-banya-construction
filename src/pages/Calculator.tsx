@@ -160,30 +160,20 @@ const Calculator = () => {
           message += '✅ Смета отправлена на вашу почту\n';
         }
         
-        // Открываем бота ПЕРЕД alert, чтобы избежать блокировки popup
-        let botOpened = false;
+        // Формируем сообщение для Telegram
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
-          message += '\n🤖 Сейчас откроется Telegram бот\n';
+          message += '\n🤖 После закрытия этого окна откроется Telegram бот\n';
           message += 'Нажмите кнопку "📄 Получить смету" чтобы получить смету';
-          
-          // Открываем бота сразу (без setTimeout)
-          const botWindow = window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
-          if (botWindow) {
-            botOpened = true;
-          } else {
-            message += '\n\n⚠️ Не удалось открыть бота автоматически.\nОткройте @permpar_smeta_bot вручную';
-          }
         } else if (!result.email_sent) {
           message += '\nМы свяжемся с вами в ближайшее время.';
         }
         
+        // Показываем сообщение СНАЧАЛА
         alert(message);
         
-        // Если бот не открылся - предлагаем открыть вручную
-        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max') && !botOpened) {
-          if (confirm('Открыть Telegram бота @permpar_smeta_bot?')) {
-            window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
-          }
+        // ПОСЛЕ закрытия alert открываем бота
+        if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
+          window.open('https://t.me/permpar_smeta_bot?start=order', '_blank');
         }
         
         // Очищаем форму
