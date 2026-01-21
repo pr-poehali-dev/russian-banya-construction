@@ -103,7 +103,7 @@ const Calculator = () => {
     const brusPrice = wallMaterial === 'клееный' ? 70000 : wallMaterial === 'брус' ? 19500 : 0;
     const totalWallHeight = (2.2 + 0.6) + 1; // Высота стен всего сруба (1 этаж + мансарда)
     const brusVolume = perimeter * totalWallHeight * 0.15;
-    const jute = Math.ceil((brusVolume / 0.8) / 100) * 100; // Округление вверх до сотен
+    const jute = Math.ceil((brusVolume / 0.135 * 6.5) / 100) * 100; // Округление вверх до сотен
     
     sections.push({
       title: 'Сруб из бруса',
