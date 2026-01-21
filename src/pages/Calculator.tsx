@@ -158,7 +158,8 @@ const Calculator = () => {
     const doskaSropil = Math.ceil(stropilPairs * 0.1125 * 10) / 10;
     const roofHeight = w / 2.5;
     const rafterLength = Math.sqrt(roofHeight * roofHeight + (w / 2) * (w / 2)) + 1;
-    const roofArea = ridgeLength * rafterLength * 2.2;
+    const roofAreaRaw = ridgeLength * rafterLength * 2.2;
+    const roofArea = Math.ceil(roofAreaRaw / 10) * 10;
     const doskaObreshetka = parseFloat((roofArea * 0.02).toFixed(2));
 
     sections.push({
