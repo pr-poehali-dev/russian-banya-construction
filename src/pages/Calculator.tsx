@@ -1077,7 +1077,6 @@ const Calculator = () => {
                 )}
                 </div>
               </div>
-            </div>
       </div>
     </div>
   );
