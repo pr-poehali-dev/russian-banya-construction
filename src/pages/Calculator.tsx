@@ -194,7 +194,7 @@ const Calculator = () => {
         { name: 'Карнизная планка', unit: 'п.м', quantity: karniznaya, price: 240, total: karniznaya * 240 },
         { name: 'Кровельные саморезы(4,8*35)', unit: 'шт', quantity: samorez35, price: 5, total: samorez35 * 5 },
         { name: 'Кровельные саморезы(4,8*50)', unit: 'шт', quantity: samorez50, price: 6, total: samorez50 * 6 },
-        { name: 'Монтаж крыши', unit: 'м2', quantity: 80, price: 3000, total: 240000 },
+        { name: 'Монтаж крыши', unit: 'м2', quantity: roofArea, price: 3000, total: roofArea * 3000 },
       ],
       subtotal: 590600
     });
