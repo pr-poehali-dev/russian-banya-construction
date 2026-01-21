@@ -59,50 +59,36 @@ const Calculator = () => {
         scale: 2,
         useCORS: true,
         logging: false,
-        backgroundColor: '#ffffff',
-        windowWidth: 1200
+        backgroundColor: '#ffffff'
       });
       
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
         orientation: 'portrait',
-        unit: 'mm',
-        format: 'a4'
+        unit: 'px',
+        format: 'a4',
+        hotfixes: ['px_scaling']
       });
       
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
+      
       const ratio = pdfWidth / imgWidth;
       const scaledHeight = imgHeight * ratio;
       
-      let yPosition = 0;
-      let pageCount = 0;
+      let heightLeft = scaledHeight;
+      let position = 0;
       
-      while (yPosition < scaledHeight) {
-        if (pageCount > 0) {
-          pdf.addPage();
-        }
-        
-        const sourceY = yPosition / ratio;
-        const sourceHeight = Math.min((pdfHeight / ratio), imgHeight - sourceY);
-        
-        pdf.addImage(
-          imgData, 
-          'PNG', 
-          0, 
-          0, 
-          pdfWidth, 
-          sourceHeight * ratio,
-          undefined,
-          'FAST',
-          0,
-          -yPosition
-        );
-        
-        yPosition += pdfHeight;
-        pageCount++;
+      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+      heightLeft -= pdfHeight;
+      
+      while (heightLeft > 0) {
+        position = heightLeft - scaledHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, scaledHeight);
+        heightLeft -= pdfHeight;
       }
       
       const fileName = `Смета_${name || 'Баня'}_${new Date().toLocaleDateString('ru-RU')}.pdf`;
