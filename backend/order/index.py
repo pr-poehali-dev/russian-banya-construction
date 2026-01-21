@@ -1,9 +1,8 @@
 """
-Сохранение заявки с калькулятора бани в базу данных и отправка на email
+Отправка заявки с калькулятора бани на email с PDF-сметой
 """
 import json
 import os
-import psycopg2
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -12,7 +11,7 @@ from email import encoders
 import base64
 from typing import Dict, Any
 
-# Версия: 2.3 - добавлена поддержка PDF вложений
+# Версия: 3.0 - убрано сохранение в БД, только отправка email
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -30,42 +29,6 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'body': '',
             'isBase64Encoded': False
         }
-    
-    if method == 'GET':
-        try:
-            database_url = os.environ.get('DATABASE_URL')
-            conn = psycopg2.connect(database_url)
-            cursor = conn.cursor()
-            
-            cursor.execute("""
-                SELECT id, name, phone, email, messenger, material, length, width, 
-                       partitions_length, floors, foundation, location, created_at, status
-                FROM orders 
-                ORDER BY created_at DESC
-            """)
-            
-            columns = [desc[0] for desc in cursor.description]
-            orders = []
-            for row in cursor.fetchall():
-                orders.append(dict(zip(columns, row)))
-            
-            cursor.close()
-            conn.close()
-            
-            return {
-                'statusCode': 200,
-                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'orders': orders}, default=str),
-                'isBase64Encoded': False
-            }
-        except Exception as e:
-            print(f"ERROR getting orders: {type(e).__name__}: {str(e)}")
-            return {
-                'statusCode': 500,
-                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'error': str(e)}),
-                'isBase64Encoded': False
-            }
     
     if method != 'POST':
         return {
@@ -111,24 +74,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'perm-100km': '50-100 км от Перми'
         }
         
-        database_url = os.environ.get('DATABASE_URL')
+        # Генерируем ID для письма (без сохранения в БД)
+        from datetime import datetime
+        order_id = f"{datetime.now().strftime('%Y%m%d%H%M%S')}"
         
-        conn = psycopg2.connect(database_url)
-        cursor = conn.cursor()
-        
-        cursor.execute("""
-            INSERT INTO orders 
-            (name, phone, email, messenger, material, length, width, partitions_length, floors, foundation, location, status)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'new')
-            RETURNING id
-        """, (name, phone, email_client, messenger, material, length, width, partitions_length, floors, foundation, location))
-        
-        order_id = cursor.fetchone()[0]
-        conn.commit()
-        cursor.close()
-        conn.close()
-        
-        print(f"Order saved successfully with ID: {order_id}")
+        print(f"Processing order ID: {order_id}")
         
         # Отправка email
         email_sent = False
