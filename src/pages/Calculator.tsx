@@ -14,20 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-
-interface EstimateItem {
-  name: string;
-  unit: string;
-  quantity: number;
-  price: number;
-  total: number;
-}
-
-interface EstimateSection {
-  title: string;
-  items: EstimateItem[];
-  subtotal: number;
-}
+import { calculateEstimate, EstimateItem, EstimateSection } from '@/utils/estimateCalculator';
 
 const Calculator = () => {
   const [step, setStep] = useState<number>(1);
@@ -170,79 +157,19 @@ const Calculator = () => {
     }
   };
 
-  const calculateEstimate = () => {
-    const l = length ? parseFloat(length) : 6;
-    const w = width ? parseFloat(width) : 4;
-    const pl = partitionLength ? parseFloat(partitionLength) : 0;
-    const area = l * w;
-    const perimeter = 2 * (l + w) + pl;
-    const isOneFloor = floors === '1';
-    const mansardWallHeight = isOneFloor ? 0 : 1;
-    const roofHeight = w / 2.5;
-    const mansardHeight = isOneFloor ? 0 : mansardWallHeight + roofHeight;
-
-    const sections: EstimateSection[] = [];
-
-    const pilesCount = Math.ceil(perimeter / 2);
-    const isPilesSelected = foundation === 'сваи';
-    sections.push({
-      title: 'Фундамент из винтовых свай',
-      items: [
-        { name: 'Свая винтовая 89/6,5/300(2,5м)', unit: 'шт', quantity: pilesCount, price: 3000, total: isPilesSelected ? pilesCount * 3000 : 0 },
-        { name: 'Оголовки для свай съемные(150х150)мм', unit: 'шт', quantity: pilesCount, price: 600, total: isPilesSelected ? pilesCount * 600 : 0 },
-        { name: 'Монтаж свай', unit: 'шт', quantity: pilesCount, price: 4000, total: isPilesSelected ? pilesCount * 4000 : 0 },
-      ],
-      subtotal: isPilesSelected ? pilesCount * 7600 : 0
-    });
-
-    const concrete = Math.ceil(perimeter * 0.4 * 100) / 100;
-    const drainagePillow = Math.ceil(perimeter * 0.15);
-    const reinforcement = Math.ceil(perimeter * 15 / 100) * 100;
-    const bindingWire = Math.ceil(perimeter * 0.06);
-    const formworkBoard = Math.ceil(perimeter * 0.126);
-    const nails = Math.ceil(perimeter * 0.25);
-    const screws = Math.ceil(perimeter * 20 / 10) * 10;
-    const film = Math.ceil(perimeter * 1.6 / 10) * 10;
-    const staples = Math.ceil(perimeter * 35 / 1000) * 1000;
-    const fixators = Math.ceil(perimeter * 10 / 100) * 100;
-    const isStripSelected = foundation === 'ленточный';
-    sections.push({
-      title: 'Фундамент ленточный, с буронабивными сваями',
-      items: [
-        { name: 'Бетон B20 M250(на щебне)', unit: 'м3', quantity: concrete, price: 8100, total: isStripSelected ? Math.ceil(concrete * 8100) : 0 },
-        { name: 'Дренажная подушка(ПГС)', unit: 'т', quantity: drainagePillow, price: 1000, total: isStripSelected ? drainagePillow * 1000 : 0 },
-        { name: 'Арматура металлическая(12мм)', unit: 'п.м', quantity: reinforcement, price: 100, total: isStripSelected ? reinforcement * 100 : 0 },
-        { name: 'Проволока вязальная(0,4мм)', unit: 'кг', quantity: bindingWire, price: 500, total: isStripSelected ? bindingWire * 500 : 0 },
-        { name: 'Доска для опалубки(3м)(25х200мм)', unit: 'м3', quantity: formworkBoard, price: 9000, total: isStripSelected ? Math.ceil(formworkBoard * 9000) : 0 },
-        { name: 'Гвозди 100мм', unit: 'кг', quantity: nails, price: 300, total: isStripSelected ? nails * 300 : 0 },
-        { name: 'Саморезы 50мм', unit: 'шт', quantity: screws, price: 3, total: isStripSelected ? screws * 3 : 0 },
-        { name: 'Пленка п/э 200 микрон', unit: 'м2', quantity: film, price: 17, total: isStripSelected ? film * 17 : 0 },
-        { name: 'Скобы для степлера', unit: 'шт', quantity: staples, price: 1, total: isStripSelected ? staples * 1 : 0 },
-        { name: 'Фиксатор защитного слоя арматуры (стульчик)', unit: 'шт', quantity: fixators, price: 3, total: isStripSelected ? fixators * 3 : 0 },
-      ],
-      subtotal: isStripSelected ? (
-        Math.ceil(concrete * 8100) + 
-        drainagePillow * 1000 + 
-        reinforcement * 100 + 
-        bindingWire * 500 + 
-        Math.ceil(formworkBoard * 9000) + 
-        nails * 300 + 
-        screws * 3 + 
-        film * 17 + 
-        staples * 1 + 
-        fixators * 3
-      ) : 0
-    });
-
-    const total = sections.reduce((sum, section) => sum + section.subtotal, 0);
-    
-    setEstimate(sections);
-    setTotalPrice(total);
-  };
-
   useEffect(() => {
     if (foundation && wallMaterial && length && width) {
-      calculateEstimate();
+      const result = calculateEstimate({
+        length: parseFloat(length),
+        width: parseFloat(width),
+        partitionLength: parseFloat(partitionLength || '0'),
+        floors: floors as '1' | '1.5',
+        foundation: foundation as 'сваи' | 'ленточный',
+        wallMaterial: wallMaterial as 'профилированный брус' | 'оцилиндрованное бревно' | 'каркас',
+        distance: distance as '0-30' | '30-60' | '60-90'
+      });
+      setEstimate(result.sections);
+      setTotalPrice(result.total);
     }
   }, [foundation, wallMaterial, floors, distance, length, width, partitionLength]);
 
