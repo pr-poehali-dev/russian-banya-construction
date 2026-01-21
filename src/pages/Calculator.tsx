@@ -453,10 +453,22 @@ const Calculator = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 py-12 px-4">
-      <div className="container max-w-4xl mx-auto">
-        <div className="space-y-8">
+      <div className="container max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Левая часть - фото */}
+          <div className="hidden lg:block sticky top-8">
+            <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/8c178ae9-f0f9-4e9e-9310-add7692090fb.jpg"
+                alt="Строительство бани"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Правая часть - калькулятор */}
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-emerald-900 text-center">Калькулятор бани</h1>
+            <h1 className="text-4xl font-bold text-emerald-900 text-center lg:text-left">Калькулятор бани</h1>
             {/* Индикатор шагов */}
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
@@ -495,16 +507,16 @@ const Calculator = () => {
                         </Label>
                       </div>
                     </RadioGroup>
+                </div>
 
-                  <div className="flex justify-end pt-4">
-                    <Button 
-                      onClick={goToNextStep}
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
-                    >
-                      Далее
-                      <Icon name="ChevronRight" className="ml-2" size={20} />
-                    </Button>
-                  </div>
+                <div className="flex justify-end pt-4">
+                  <Button 
+                    onClick={goToNextStep}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                  >
+                    Далее
+                    <Icon name="ChevronRight" className="ml-2" size={20} />
+                  </Button>
                 </div>
               </div>
             )}
@@ -534,24 +546,24 @@ const Calculator = () => {
                         </Label>
                       </div>
                     </RadioGroup>
+                </div>
 
-                  <div className="flex justify-between pt-4">
-                    <Button 
-                      onClick={goToPrevStep}
-                      variant="outline"
-                      className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
-                    >
-                      <Icon name="ChevronLeft" className="mr-2" size={20} />
-                      Назад
-                    </Button>
-                    <Button 
-                      onClick={goToNextStep}
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
-                    >
-                      Далее
-                      <Icon name="ChevronRight" className="ml-2" size={20} />
-                    </Button>
-                  </div>
+                <div className="flex justify-between pt-4">
+                  <Button 
+                    onClick={goToPrevStep}
+                    variant="outline"
+                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                  >
+                    <Icon name="ChevronLeft" className="mr-2" size={20} />
+                    Назад
+                  </Button>
+                  <Button 
+                    onClick={goToNextStep}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                  >
+                    Далее
+                    <Icon name="ChevronRight" className="ml-2" size={20} />
+                  </Button>
                 </div>
               </div>
             )}
@@ -619,6 +631,7 @@ const Calculator = () => {
                     className="text-lg border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
                   />
                 </div>
+                </div>
 
                 <div className="flex justify-between pt-4">
                   <Button 
@@ -636,7 +649,6 @@ const Calculator = () => {
                     Далее
                     <Icon name="ChevronRight" className="ml-2" size={20} />
                   </Button>
-                </div>
                 </div>
               </div>
             )}
@@ -672,6 +684,7 @@ const Calculator = () => {
                     </Label>
                   </div>
                 </RadioGroup>
+                </div>
 
                 <div className="flex justify-between pt-4">
                   <Button 
@@ -689,7 +702,6 @@ const Calculator = () => {
                     Далее
                     <Icon name="ChevronRight" className="ml-2" size={20} />
                   </Button>
-                </div>
                 </div>
               </div>
             )}
@@ -846,19 +858,21 @@ const Calculator = () => {
               </div>
             )}
           </div>
+        </div>
 
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-emerald-900">Детальная смета</h2>
-              <Button 
-                onClick={handleDownloadPDF}
-                disabled={isGeneratingPDF || estimate.length === 0}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white"
-              >
-                {isGeneratingPDF ? 'Генерация...' : 'Скачать PDF'}
-              </Button>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+        {/* Детальная смета - вне grid */}
+        <div className="mt-12 space-y-4">
+          <div className="flex justify-between items-center">
+            <h2 className="text-2xl font-bold text-emerald-900">Детальная смета</h2>
+            <Button 
+              onClick={handleDownloadPDF}
+              disabled={isGeneratingPDF || estimate.length === 0}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+            >
+              {isGeneratingPDF ? 'Генерация...' : 'Скачать PDF'}
+            </Button>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
                 <div ref={estimateRef} className="w-full">
                 <div className="bg-white border-2 border-black">
                   <div className="border-b-2 border-black p-3">
@@ -1064,8 +1078,6 @@ const Calculator = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </div>
   );
