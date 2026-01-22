@@ -56,6 +56,7 @@ const Calculator = () => {
   const [telegramRedirectUrl, setTelegramRedirectUrl] = useState<string>('');
   const [showValidationDialog, setShowValidationDialog] = useState<boolean>(false);
   const [validationMessage, setValidationMessage] = useState<string>('');
+  const [estimateSent, setEstimateSent] = useState<boolean>(false);
   const estimateRef = useRef<HTMLDivElement>(null);
 
   const goToNextStep = () => {
@@ -877,6 +878,24 @@ const Calculator = () => {
                 </div>
               </div>
             )}
+
+            {/* Кнопка "На главную" после успешной отправки */}
+            {estimateSent && (
+              <div className="mt-8 text-center animate-fade-in">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-4">
+                  <p className="text-lg text-emerald-900 font-semibold">
+                    ✅ Смета успешно отправлена!
+                  </p>
+                  <Button 
+                    onClick={() => window.location.href = '/'}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg rounded-xl shadow-lg"
+                  >
+                    <Icon name="Home" className="mr-2" size={20} />
+                    Вернуться на главную
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -1092,7 +1111,10 @@ const Calculator = () => {
       </div>
 
       {/* Модальное окно успешной отправки */}
-      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+      <Dialog open={showSuccessDialog} onOpenChange={(open) => {
+        setShowSuccessDialog(open);
+        if (!open) setEstimateSent(true);
+      }}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-emerald-900 text-xl">✅ Заявка отправлена!</DialogTitle>
@@ -1100,20 +1122,11 @@ const Calculator = () => {
               {successMessage}
             </DialogDescription>
           </DialogHeader>
-          <div className="flex justify-between gap-3 pt-4">
+          <div className="flex justify-end gap-3 pt-4">
             <Button
               onClick={() => {
                 setShowSuccessDialog(false);
-                window.location.href = '/';
-              }}
-              variant="outline"
-              className="border-emerald-600 text-emerald-900 hover:bg-emerald-50 px-6"
-            >
-              На главную
-            </Button>
-            <Button
-              onClick={() => {
-                setShowSuccessDialog(false);
+                setEstimateSent(true);
                 if (telegramRedirectUrl) {
                   window.location.href = telegramRedirectUrl;
                 }
