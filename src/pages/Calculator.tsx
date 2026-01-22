@@ -476,19 +476,19 @@ const Calculator = () => {
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-3">
                   <Label className="text-base font-semibold text-emerald-900">Выберите тип фундамента:</Label>
                   <RadioGroup value={foundation} onValueChange={setFoundation}>
-                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                         <RadioGroupItem value="ленточный" id="lenточный" />
                         <Label htmlFor="lenточный" className="cursor-pointer flex-1">
                           Ленточный фундамент
                         </Label>
                       </div>
-                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="сваи" id="svai" />
                         <Label htmlFor="svai" className="cursor-pointer flex-1">
                           Винтовые сваи
                         </Label>
                       </div>
-                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="есть" id="est" />
                         <Label htmlFor="est" className="cursor-pointer flex-1">
                           Фундамент уже есть
@@ -515,19 +515,19 @@ const Calculator = () => {
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-3">
                   <Label className="text-base font-semibold text-emerald-900">Материал стен бани:</Label>
                   <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
-                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                         <RadioGroupItem value="бревно" id="brevno" />
                         <Label htmlFor="brevno" className="cursor-pointer flex-1">
                           Оцилиндрованное бревно
                         </Label>
                       </div>
-                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="брус" id="brus" />
                         <Label htmlFor="brus" className="cursor-pointer flex-1">
                           Брус естественной влажности
                         </Label>
                       </div>
-                    <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="клееный" id="kleeniy" />
                         <Label htmlFor="kleeniy" className="cursor-pointer flex-1">
                           Клееный брус
@@ -564,13 +564,13 @@ const Calculator = () => {
                 <div className="space-y-3">
                   <Label className="text-sm text-emerald-900">Этажность:</Label>
                   <RadioGroup value={floors} onValueChange={setFloors}>
-                    <div className="flex items-center space-x-3 p-2 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="1" id="floor1" />
                       <Label htmlFor="floor1" className="cursor-pointer flex-1 text-sm">
                         1 этаж
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-3 p-2 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="1.5" id="floor1.5" />
                       <Label htmlFor="floor1.5" className="cursor-pointer flex-1 text-sm">
                         1,5 этажа (мансарда)
@@ -647,25 +647,25 @@ const Calculator = () => {
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-3">
                   <Label className="text-base font-semibold text-emerald-900">Расстояние от Перми до объекта в одну сторону, км:</Label>
                 <RadioGroup value={distance} onValueChange={setDistance}>
-                  <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                     <RadioGroupItem value="0-30" id="dist0-30" />
                     <Label htmlFor="dist0-30" className="cursor-pointer flex-1">
                       0-30 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                     <RadioGroupItem value="30-60" id="dist30-60" />
                     <Label htmlFor="dist30-60" className="cursor-pointer flex-1">
                       30-60 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                     <RadioGroupItem value="60-90" id="dist60-90" />
                     <Label htmlFor="dist60-90" className="cursor-pointer flex-1">
                       60-90 км
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                  <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                     <RadioGroupItem value="90+" id="dist90+" />
                     <Label htmlFor="dist90+" className="cursor-pointer flex-1">
                       более 90 км
@@ -810,13 +810,13 @@ const Calculator = () => {
                 <div className="space-y-3">
                   <Label className="text-sm text-emerald-900">Куда отправить смету:</Label>
                   <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
-                    <div className="flex items-center space-x-3 p-2 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="email" id="sendEmail" />
                       <Label htmlFor="sendEmail" className="cursor-pointer flex-1 text-sm">
                         Email
                       </Label>
                     </div>
-                    <div className="flex items-center space-x-3 p-2 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="telegram" id="sendTelegram" />
                       <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
                         Телеграм
