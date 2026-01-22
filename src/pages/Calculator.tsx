@@ -880,18 +880,8 @@ const Calculator = () => {
           </div>
         </div>
 
-        {/* Детальная смета - вне grid */}
-        <div className="mt-12 space-y-4">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-emerald-900">Детальная смета</h2>
-            <Button 
-              onClick={handleDownloadPDF}
-              disabled={isGeneratingPDF || estimate.length === 0}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white"
-            >
-              {isGeneratingPDF ? 'Генерация...' : 'Скачать PDF'}
-            </Button>
-          </div>
+        {/* Детальная смета - скрыта от посетителей, но используется для генерации PDF */}
+        <div className="hidden">
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
                 <div ref={estimateRef} className="w-full">
                 <div className="bg-white border-2 border-black">
