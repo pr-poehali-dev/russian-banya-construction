@@ -158,19 +158,20 @@ const Calculator = () => {
       if (result.success) {
         // Для Telegram показываем модальное окно с переходом в бот
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
-          const message = 'Смета отправлена в ваш Telegram!\n\nНажмите "Перейти в Telegram", затем в следующем окне нажмите "Открыть приложение" для получения сметы';
-          setSuccessMessage(message);
+          setSuccessMessage('Смета отправлена в ваш Telegram!\n\nНажмите "Перейти в Telegram", затем в следующем окне нажмите "Открыть приложение" для получения сметы');
           setTelegramRedirectUrl('tg://resolve?domain=permpar_smeta_bot&start=order');
           setShowSuccessDialog(true);
         } else {
-          // Для email показываем alert
+          // Для email тоже показываем модальное окно
           let message = 'Заявка успешно отправлена!\n\n';
           if (result.email_sent && sendMethod === 'email') {
             message += '✅ Смета отправлена на вашу почту';
           } else {
             message += 'Мы свяжемся с вами в ближайшее время.';
           }
-          alert(message);
+          setSuccessMessage(message);
+          setTelegramRedirectUrl(''); // Без перехода для email
+          setShowSuccessDialog(true);
         }
         
         // Очищаем форму
@@ -1068,12 +1069,12 @@ const Calculator = () => {
           </div>
       </div>
 
-      {/* Модальное окно успешной отправки в Telegram */}
+      {/* Модальное окно успешной отправки */}
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-emerald-900 text-xl">✅ Заявка отправлена!</DialogTitle>
-            <DialogDescription className="text-base pt-2">
+            <DialogDescription className="text-base pt-2 whitespace-pre-line">
               {successMessage}
             </DialogDescription>
           </DialogHeader>
@@ -1087,7 +1088,7 @@ const Calculator = () => {
               }}
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-6"
             >
-              Перейти в Telegram
+              {telegramRedirectUrl ? 'Перейти в Telegram' : 'Закрыть'}
             </Button>
           </div>
         </DialogContent>
