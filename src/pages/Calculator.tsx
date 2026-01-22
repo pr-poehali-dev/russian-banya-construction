@@ -1100,7 +1100,17 @@ const Calculator = () => {
               {successMessage}
             </DialogDescription>
           </DialogHeader>
-          <div className="flex justify-end gap-3 pt-4">
+          <div className="flex justify-between gap-3 pt-4">
+            <Button
+              onClick={() => {
+                setShowSuccessDialog(false);
+                window.location.href = '/';
+              }}
+              variant="outline"
+              className="border-emerald-600 text-emerald-900 hover:bg-emerald-50 px-6"
+            >
+              На главную
+            </Button>
             <Button
               onClick={() => {
                 setShowSuccessDialog(false);
