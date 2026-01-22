@@ -183,6 +183,11 @@ const Calculator = () => {
       const result = await response.json();
       
       if (result.success) {
+        // Отправляем цель в Яндекс Метрику
+        if (typeof window !== 'undefined' && (window as any).ym) {
+          (window as any).ym(105711132, 'reachGoal', 'OTPRAVKA_ZAYAVKI');
+        }
+
         // Для Telegram показываем модальное окно с переходом в бот
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
           setSuccessMessage('Смета отправлена в ваш Telegram!\n\n1. Нажмите "Перейти в Telegram"\n2. В следующем окне нажмите "Открыть приложение"\n3. После перехода в Telegram, нажмите "Старт/start", придет сообщение с вашей сметой');
