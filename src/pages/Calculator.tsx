@@ -608,9 +608,9 @@ const Calculator = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3 md:gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="length" className="text-base font-semibold text-emerald-900">
+                    <Label htmlFor="length" className="text-sm md:text-base font-semibold text-emerald-900">
                       Длина (м)
                     </Label>
                     <Input
@@ -619,11 +619,11 @@ const Calculator = () => {
                       placeholder="6"
                       value={length}
                       onChange={(e) => setLength(e.target.value)}
-                      className="text-lg border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
+                      className="text-base md:text-lg border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="width" className="text-base font-semibold text-emerald-900">
+                    <Label htmlFor="width" className="text-sm md:text-base font-semibold text-emerald-900">
                       Ширина (м)
                     </Label>
                     <Input
@@ -632,7 +632,7 @@ const Calculator = () => {
                       placeholder="4"
                       value={width}
                       onChange={(e) => setWidth(e.target.value)}
-                      className="text-lg border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
+                      className="text-base md:text-lg border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                   </div>
                 </div>
@@ -880,17 +880,17 @@ const Calculator = () => {
                   </RadioGroup>
                 </div>
 
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 md:gap-3">
                     <Button 
                       onClick={goToPrevStep}
                       variant="outline"
-                      className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl"
+                      className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-3 sm:px-4 md:px-8 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg rounded-xl flex-shrink-0"
                     >
-                      <Icon name="ChevronLeft" className="mr-1 md:mr-2" size={20} />
+                      <Icon name="ChevronLeft" className="mr-1 md:mr-2" size={18} />
                       Назад
                     </Button>
                     <Button 
-                      className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-4 md:py-6 text-base md:text-lg rounded-xl shadow-lg"
+                      className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white px-3 sm:px-4 py-3 sm:py-4 md:py-6 text-sm sm:text-base md:text-lg rounded-xl shadow-lg min-w-0"
                       onClick={handleSendEstimate}
                       disabled={isSending || estimate.length === 0}
                     >
