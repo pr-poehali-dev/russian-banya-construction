@@ -817,7 +817,7 @@ const Calculator = () => {
                               </p>
                               <ol className="text-xs text-blue-700 space-y-1 list-decimal list-inside">
                                 <li>Заполните калькулятор с вашим username</li>
-                                <li>После отправки откроется бот <a href="https://t.me/permpar_smeta_bot" target="_blank" rel="noopener noreferrer" className="font-mono bg-white px-1 rounded text-blue-600 hover:underline">@permpar_smeta_bot</a></li>
+                                <li>После отправки откроется бот <a href="https://t.me/permpar_smeta_bot" target="_blank" rel="noopener noreferrer" className="font-mono bg-white px-1 rounded text-blue-600 hover:underline">Смета от "СК Пермский Пар"</a></li>
                                 <li>Напишите команду <span className="font-mono bg-white px-1 rounded">/заявка</span></li>
                                 <li>Смета придёт автоматически в течение секунды! ⚡</li>
                               </ol>
