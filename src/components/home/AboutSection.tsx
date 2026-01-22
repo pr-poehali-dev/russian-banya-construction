@@ -117,9 +117,9 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
           </div>
         </div>
 
-        <div id="services" className="mt-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-4">Что я умею и могу предложить</h2>
-          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start px-4 md:px-0">
+        <div id="services" className="mt-20 px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Что я умею и могу предложить</h2>
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start max-w-full">
             <div className="w-full space-y-4">
               <img
                 src="https://cdn.poehali.dev/files/1a2c671f_20260118_152414_9991d4e8_req_b74b5eeb.jpg"
@@ -129,10 +129,10 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
               <Button 
                 size="lg" 
                 onClick={() => window.location.href = '/calculator'} 
-                className="w-full text-base md:text-lg px-6 py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95"
+                className="w-full text-sm sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal leading-tight"
               >Рассчитать стоимость бани за 2 минуты</Button>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 max-w-full">
               <div className="flex items-start gap-3">
                 <Icon name="MessageSquare" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
                 <p className="text-base sm:text-lg text-black">Бесплатные консультации по строительству, ремонту и технологиям парения в русских банях</p>
