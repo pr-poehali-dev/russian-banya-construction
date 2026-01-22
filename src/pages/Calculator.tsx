@@ -455,8 +455,8 @@ const Calculator = () => {
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 py-12 px-4">
       <div className="container max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-8 items-start">
-          {/* Левая часть - фото */}
-          <div className="hidden lg:block sticky top-8">
+          {/* Левая часть - фото и кнопка на главную */}
+          <div className="hidden lg:block sticky top-8 space-y-6">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img 
                 src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/229aa613-72f3-45bd-b793-7dcc13bd5a4e.jpg"
@@ -464,6 +464,24 @@ const Calculator = () => {
                 className="w-full h-auto object-cover"
               />
             </div>
+            
+            {/* Кнопка "На главную" после успешной отправки */}
+            {estimateSent && (
+              <div className="animate-fade-in">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-4">
+                  <p className="text-lg text-emerald-900 font-semibold text-center">
+                    ✅ Смета успешно отправлена!
+                  </p>
+                  <Button 
+                    onClick={() => window.location.href = '/'}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 text-lg rounded-xl shadow-lg"
+                  >
+                    <Icon name="Home" className="mr-2" size={20} />
+                    Вернуться на главную
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Правая часть - калькулятор */}
@@ -875,24 +893,6 @@ const Calculator = () => {
                       {isSending ? 'Отправка...' : 'Отправить смету'}
                     </Button>
                   </div>
-                </div>
-              </div>
-            )}
-
-            {/* Кнопка "На главную" после успешной отправки */}
-            {estimateSent && (
-              <div className="mt-8 text-center animate-fade-in">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-4">
-                  <p className="text-lg text-emerald-900 font-semibold">
-                    ✅ Смета успешно отправлена!
-                  </p>
-                  <Button 
-                    onClick={() => window.location.href = '/'}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg rounded-xl shadow-lg"
-                  >
-                    <Icon name="Home" className="mr-2" size={20} />
-                    Вернуться на главную
-                  </Button>
                 </div>
               </div>
             )}
