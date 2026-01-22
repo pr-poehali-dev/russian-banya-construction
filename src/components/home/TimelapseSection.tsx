@@ -81,7 +81,7 @@ const TimelapseSection = ({ scrollToSection }: TimelapseSectionProps) => {
 
         <div className="text-center">
           <button
-            onClick={() => scrollToSection?.('order')}
+            onClick={() => window.location.href = '/calculator'}
             className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg text-lg transition-transform hover:scale-105 active:scale-95"
           >
             Рассчитать стоимость вашей бани
