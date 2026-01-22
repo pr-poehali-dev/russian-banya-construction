@@ -922,103 +922,103 @@ const Calculator = () => {
                     </div>
                   </div>
 
-                  <table className="w-full text-[10px] border-collapse">
+                  <table className="w-full text-[10px] border-collapse border border-black">
                     <tbody>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Заказчик</td>
-                        <td className="border-r border-black p-1.5" colSpan={3}>{name || '—'}</td>
+                        <td className="border-r border-black p-2 font-bold" colSpan={2}>Заказчик</td>
+                        <td className="border-r border-black p-2" colSpan={3}>{name || '—'}</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Телефон</td>
-                        <td className="border-r border-black p-1.5" colSpan={3}>{phone || '—'}</td>
+                        <td className="border-r border-black p-2 font-bold" colSpan={2}>Телефон</td>
+                        <td className="border-r border-black p-2" colSpan={3}>{phone || '—'}</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Email</td>
-                        <td className="p-1.5" colSpan={3}>{email || '—'}</td>
+                        <td className="border-r border-black p-2 font-bold" colSpan={2}>Email</td>
+                        <td className="border-r border-black p-2" colSpan={3}>{email || '—'}</td>
                       </tr>
                       <tr className="border-b border-black bg-gray-50">
-                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={5}>Данные объекта</td>
+                        <td className="border-r border-black p-2 font-bold text-center" colSpan={5}>Данные объекта</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5 font-bold" colSpan={2}>Параметры</td>
-                        <td className="border-r border-black p-1.5 font-bold text-center">Значения</td>
-                        <td className="border-r border-black p-1.5 font-bold text-center" colSpan={2}>Дополнительные значения</td>
+                        <td className="border-r border-black p-2 font-bold" colSpan={2}>Параметры</td>
+                        <td className="border-r border-black p-2 font-bold text-center">Значения</td>
+                        <td className="border-r border-black p-2 font-bold text-center" colSpan={2}>Дополнительные значения</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Фундамент</td>
-                        <td className="border-r border-black p-1.5 text-center">
+                        <td className="border-r border-black p-2" colSpan={2}>Фундамент</td>
+                        <td className="border-r border-black p-2 text-center">
                           {foundation === 'ленточный' ? 'Ленточный' : foundation === 'сваи' ? 'Винтовые сваи' : foundation === 'есть' ? 'Без фундамента' : '—'}
                         </td>
-                        <td className="border-r border-black p-1.5">Периметр фундамента, м</td>
-                        <td className="p-1.5 text-right">
+                        <td className="border-r border-black p-2">Периметр фундамента, м</td>
+                        <td className="border-r border-black p-2 text-right">
                           {length && width ? (
                             (parseFloat(length) + parseFloat(width)) * 2 + (partitionLength ? parseFloat(partitionLength) : 0)
                           ).toFixed(2) : '—'}
                         </td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Что хотите построить</td>
-                        <td className="border-r border-black p-1.5 text-center">Баня под крышу</td>
-                        <td className="border-r border-black p-1.5">Высота 1 этажа в чистоте, м</td>
-                        <td className="p-1.5 text-right">2,2</td>
+                        <td className="border-r border-black p-2" colSpan={2}>Что хотите построить</td>
+                        <td className="border-r border-black p-2 text-center">Баня под крышу</td>
+                        <td className="border-r border-black p-2">Высота 1 этажа в чистоте, м</td>
+                        <td className="border-r border-black p-2 text-right">2,2</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Из чего хотите построить</td>
-                        <td className="border-r border-black p-1.5 text-center">
+                        <td className="border-r border-black p-2" colSpan={2}>Из чего хотите построить</td>
+                        <td className="border-r border-black p-2 text-center">
                           {wallMaterial === 'бревно' ? 'Оцилиндрованное бревно' : wallMaterial === 'брус' ? 'Брус естественной влажности' : wallMaterial === 'клееный' ? 'Клееный брус' : '—'}
                         </td>
-                        <td className="border-r border-black p-1.5">Высота сруба 1 этажа, м</td>
-                        <td className="p-1.5 text-right">{(2.2 + 0.6).toFixed(1)}</td>
+                        <td className="border-r border-black p-2">Высота сруба 1 этажа, м</td>
+                        <td className="border-r border-black p-2 text-right">{(2.2 + 0.6).toFixed(1)}</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Этажность</td>
-                        <td className="border-r border-black p-1.5 text-center">{floors === '1' ? '1 этаж' : '1,5 этажа'}</td>
-                        <td className="border-r border-black p-1.5">Высота мансарды, м</td>
-                        <td className="p-1.5 text-right">
+                        <td className="border-r border-black p-2" colSpan={2}>Этажность</td>
+                        <td className="border-r border-black p-2 text-center">{floors === '1' ? '1 этаж' : '1,5 этажа'}</td>
+                        <td className="border-r border-black p-2">Высота мансарды, м</td>
+                        <td className="border-r border-black p-2 text-right">
                           {floors === '1' ? '0' : (width ? (1 + parseFloat(width) / 2.5).toFixed(1) : '—')}
                         </td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Длина строения, м</td>
-                        <td className="border-r border-black p-1.5 text-center">{length || '—'}</td>
-                        <td className="border-r border-black p-1.5">Высота стен мансарды, м</td>
-                        <td className="p-1.5 text-right">{floors === '1' ? '0' : '1'}</td>
+                        <td className="border-r border-black p-2" colSpan={2}>Длина строения, м</td>
+                        <td className="border-r border-black p-2 text-center">{length || '—'}</td>
+                        <td className="border-r border-black p-2">Высота стен мансарды, м</td>
+                        <td className="border-r border-black p-2 text-right">{floors === '1' ? '0' : '1'}</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Ширина строения, м</td>
-                        <td className="border-r border-black p-1.5 text-center">{width || '—'}</td>
-                        <td className="border-r border-black p-1.5">Высота стен всего сруба, м</td>
-                        <td className="p-1.5 text-right">{((2.2 + 0.6) + (floors === '1' ? 0 : 1)).toFixed(1)}</td>
+                        <td className="border-r border-black p-2" colSpan={2}>Ширина строения, м</td>
+                        <td className="border-r border-black p-2 text-center">{width || '—'}</td>
+                        <td className="border-r border-black p-2">Высота стен всего сруба, м</td>
+                        <td className="border-r border-black p-2 text-right">{((2.2 + 0.6) + (floors === '1' ? 0 : 1)).toFixed(1)}</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Длина перегородок 1 этажа, м</td>
-                        <td className="border-r border-black p-1.5 text-center">{partitionLength || '0'}</td>
-                        <td className="border-r border-black p-1.5">Площадь, м2</td>
-                        <td className="p-1.5 text-right">{length && width ? (parseFloat(length) * parseFloat(width)).toFixed(0) : '—'}</td>
+                        <td className="border-r border-black p-2" colSpan={2}>Длина перегородок 1 этажа, м</td>
+                        <td className="border-r border-black p-2 text-center">{partitionLength || '0'}</td>
+                        <td className="border-r border-black p-2">Площадь, м2</td>
+                        <td className="border-r border-black p-2 text-right">{length && width ? (parseFloat(length) * parseFloat(width)).toFixed(0) : '—'}</td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}>Расстояние до объекта в 1 сторону, км</td>
-                        <td className="border-r border-black p-1.5 text-center">
+                        <td className="border-r border-black p-2" colSpan={2}>Расстояние до объекта в 1 сторону, км</td>
+                        <td className="border-r border-black p-2 text-center">
                           {distance === '0-30' ? '0-30' : distance === '30-60' ? '30-60' : distance === '60-90' ? '60-90' : 'более 90'}
                         </td>
-                        <td className="border-r border-black p-1.5">Высота крыши, м</td>
-                        <td className="p-1.5 text-right">
+                        <td className="border-r border-black p-2">Высота крыши, м</td>
+                        <td className="border-r border-black p-2 text-right">
                           {width ? (parseFloat(width) / 2.5).toFixed(1) : '—'}
                         </td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}></td>
-                        <td className="border-r border-black p-1.5"></td>
-                        <td className="border-r border-black p-1.5">Длина конька, м</td>
-                        <td className="p-1.5 text-right">
+                        <td className="border-r border-black p-2" colSpan={2}></td>
+                        <td className="border-r border-black p-2"></td>
+                        <td className="border-r border-black p-2">Длина конька, м</td>
+                        <td className="border-r border-black p-2 text-right">
                           {length ? (parseFloat(length) + 1).toFixed(0) : '—'}
                         </td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}></td>
-                        <td className="border-r border-black p-1.5"></td>
-                        <td className="border-r border-black p-1.5">Длина стропила, м</td>
-                        <td className="p-1.5 text-right">
+                        <td className="border-r border-black p-2" colSpan={2}></td>
+                        <td className="border-r border-black p-2"></td>
+                        <td className="border-r border-black p-2">Длина стропила, м</td>
+                        <td className="border-r border-black p-2 text-right">
                           {width ? (() => {
                             const w = parseFloat(width);
                             const roofHeight = w / 2.5;
@@ -1027,10 +1027,10 @@ const Calculator = () => {
                         </td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}></td>
-                        <td className="border-r border-black p-1.5"></td>
-                        <td className="border-r border-black p-1.5">Площадь кровли, м</td>
-                        <td className="p-1.5 text-right">
+                        <td className="border-r border-black p-2" colSpan={2}></td>
+                        <td className="border-r border-black p-2"></td>
+                        <td className="border-r border-black p-2">Площадь кровли, м</td>
+                        <td className="border-r border-black p-2 text-right">
                           {length && width ? (() => {
                             const l = parseFloat(length);
                             const w = parseFloat(width);
@@ -1043,10 +1043,10 @@ const Calculator = () => {
                         </td>
                       </tr>
                       <tr className="border-b border-black">
-                        <td className="border-r border-black p-1.5" colSpan={2}></td>
-                        <td className="border-r border-black p-1.5"></td>
-                        <td className="border-r border-black p-1.5">Количество стропильных пар, шт</td>
-                        <td className="p-1.5 text-right">
+                        <td className="border-r border-black p-2" colSpan={2}></td>
+                        <td className="border-r border-black p-2"></td>
+                        <td className="border-r border-black p-2">Количество стропильных пар, шт</td>
+                        <td className="border-r border-black p-2 text-right">
                           {length ? (() => {
                             const ridgeLength = parseFloat(length) + 1;
                             return Math.round(ridgeLength / 0.64 + 4);
@@ -1056,42 +1056,42 @@ const Calculator = () => {
                     </tbody>
                   </table>
                   
-                  <div className="border-y-2 border-black p-1.5 bg-gray-50">
+                  <div className="border-y border-black p-2 bg-gray-50">
                     <h3 className="font-bold text-sm text-center">Расчеты</h3>
                   </div>
 
                 {estimate.length > 0 && (
                 <div className="w-full">
-                  <table className="w-full text-[11px] border-collapse">
+                  <table className="w-full text-[11px] border-collapse border-l border-r border-b border-black">
                     <thead>
                       <tr className="border-b border-black bg-gray-50">
-                        <th className="border-r border-black text-left py-1 px-1.5 font-bold">Наименование</th>
-                        <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '50px'}}>Ед.из</th>
-                        <th className="border-r border-black text-center py-1 px-1.5 font-bold" style={{width: '60px'}}>Кол-во</th>
-                        <th className="border-r border-black text-right py-1 px-1.5 font-bold" style={{width: '80px'}}>Цена, ₽</th>
-                        <th className="text-right py-1 px-1.5 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
+                        <th className="border-r border-black text-left py-2 px-2 font-bold">Наименование</th>
+                        <th className="border-r border-black text-center py-2 px-2 font-bold" style={{width: '50px'}}>Ед.из</th>
+                        <th className="border-r border-black text-center py-2 px-2 font-bold" style={{width: '60px'}}>Кол-во</th>
+                        <th className="border-r border-black text-right py-2 px-2 font-bold" style={{width: '80px'}}>Цена, ₽</th>
+                        <th className="border-r border-black text-right py-2 px-2 font-bold" style={{width: '90px'}}>Стоимость, ₽</th>
                       </tr>
                     </thead>
                     <tbody>
                       {estimate.filter(section => section.subtotal > 0).map((section, idx) => (
                         <>
                           <tr key={`header-${idx}`} className="border-b border-black">
-                            <td colSpan={5} className="bg-white py-1 px-1.5">
+                            <td colSpan={5} className="border-r border-black bg-white py-2 px-2">
                               <h3 className="font-bold text-xs">{section.title}</h3>
                             </td>
                           </tr>
                           {section.items.map((item, itemIdx) => (
                             <tr key={`${idx}-${itemIdx}`} className={`border-b border-black ${item.total === 0 ? 'opacity-40' : ''}`}>
-                              <td className="border-r border-black py-0.5 px-1.5">{item.name}</td>
-                              <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '50px'}}>{item.unit}</td>
-                              <td className="border-r border-black text-center py-0.5 px-1.5" style={{width: '60px'}}>{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
-                              <td className="border-r border-black text-right py-0.5 px-1.5" style={{width: '80px'}}>{item.price.toLocaleString('ru-RU')}</td>
-                              <td className="text-right py-0.5 px-1.5 font-semibold" style={{width: '90px'}}>{item.total.toLocaleString('ru-RU')}</td>
+                              <td className="border-r border-black py-1.5 px-2">{item.name}</td>
+                              <td className="border-r border-black text-center py-1.5 px-2" style={{width: '50px'}}>{item.unit}</td>
+                              <td className="border-r border-black text-center py-1.5 px-2" style={{width: '60px'}}>{item.quantity > 0 ? item.quantity.toFixed(2) : '—'}</td>
+                              <td className="border-r border-black text-right py-1.5 px-2" style={{width: '80px'}}>{item.price.toLocaleString('ru-RU')}</td>
+                              <td className="border-r border-black text-right py-1.5 px-2 font-semibold" style={{width: '90px'}}>{item.total.toLocaleString('ru-RU')}</td>
                             </tr>
                           ))}
-                          <tr key={`subtotal-${idx}`} className="bg-gray-50 border-b-2 border-black">
-                            <td colSpan={4} className="border-r border-black py-1 px-1.5 text-right font-bold">Поэтапно:</td>
-                            <td className="py-1 px-1.5 text-right font-bold" style={{width: '90px'}}>{section.subtotal.toLocaleString('ru-RU')} ₽</td>
+                          <tr key={`subtotal-${idx}`} className="bg-gray-50 border-b border-black">
+                            <td colSpan={4} className="border-r border-black py-2 px-2 text-right font-bold">Поэтапно:</td>
+                            <td className="border-r border-black py-2 px-2 text-right font-bold" style={{width: '90px'}}>{section.subtotal.toLocaleString('ru-RU')} ₽</td>
                           </tr>
                         </>
                       ))}
