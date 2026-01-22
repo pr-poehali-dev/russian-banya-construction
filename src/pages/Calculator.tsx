@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import InputMask from 'react-input-mask';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -726,15 +727,22 @@ const Calculator = () => {
                   <Label htmlFor="phone" className="text-sm text-emerald-900">
                     Телефон <span className="text-red-500">*</span>
                   </Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="+7 (___) ___-__-__"
+                  <InputMask
+                    mask="+7 (999) 999-99-99"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    required
-                    className={showValidation && !phone ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
-                  />
+                  >
+                    {(inputProps: any) => (
+                      <Input
+                        {...inputProps}
+                        id="phone"
+                        type="tel"
+                        placeholder="+7 (___) ___-__-__"
+                        required
+                        className={showValidation && !phone ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
+                      />
+                    )}
+                  </InputMask>
                 </div>
 
                 <div className="space-y-2">
