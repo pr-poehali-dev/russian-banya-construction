@@ -456,7 +456,7 @@ const Calculator = () => {
 
           {/* Правая часть - калькулятор */}
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-emerald-900 text-center lg:text-left">Калькулятор бани</h1>
+            <h1 className="text-4xl font-bold text-emerald-900 text-center lg:text-left">Калькулятор стоимости бани</h1>
             {/* Индикатор шагов */}
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
