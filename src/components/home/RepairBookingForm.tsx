@@ -103,7 +103,7 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
             </div>
 
             <div>
-              <Label htmlFor="contact">Почта (Телеграм или WhatsApp)</Label>
+              <Label htmlFor="contact">Почта (или Телеграмм)</Label>
               <Input
                 id="contact"
                 value={formData.contact}
