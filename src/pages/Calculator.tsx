@@ -881,7 +881,7 @@ const Calculator = () => {
         </div>
 
         {/* Детальная смета - скрыта от посетителей, но используется для генерации PDF */}
-        <div className="hidden">
+        <div className="fixed -left-[9999px] top-0">
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
                 <div ref={estimateRef} className="w-full">
                 <div className="bg-white border-2 border-black">
