@@ -858,41 +858,42 @@ const Calculator = () => {
                   </RadioGroup>
                 </div>
 
-                  <div className="flex gap-3">
-                    <Button 
-                      onClick={goToPrevStep}
-                      variant="outline"
-                      className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
-                    >
-                      <Icon name="ChevronLeft" className="mr-2" size={20} />
-                      Назад
-                    </Button>
-                    <Button 
-                      className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-6 text-lg rounded-xl shadow-lg"
-                      onClick={handleSendEstimate}
-                      disabled={isSending || estimate.length === 0}
-                    >
-                      {isSending ? 'Отправка...' : 'Отправить смету'}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Кнопка "На главную" после успешной отправки */}
-            {estimateSent && (
-              <div className="mt-8 text-center animate-fade-in">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-4">
-                  <p className="text-lg text-emerald-900 font-semibold">
-                    ✅ Смета успешно отправлена!
-                  </p>
-                  <Button 
-                    onClick={() => window.location.href = '/'}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg rounded-xl shadow-lg"
-                  >
-                    <Icon name="Home" className="mr-2" size={20} />
-                    Вернуться на главную
-                  </Button>
+                  {/* Кнопки навигации и отправки */}
+                  {!estimateSent ? (
+                    <div className="flex gap-3">
+                      <Button 
+                        onClick={goToPrevStep}
+                        variant="outline"
+                        className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                      >
+                        <Icon name="ChevronLeft" className="mr-2" size={20} />
+                        Назад
+                      </Button>
+                      <Button 
+                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-6 text-lg rounded-xl shadow-lg"
+                        onClick={handleSendEstimate}
+                        disabled={isSending || estimate.length === 0}
+                      >
+                        {isSending ? 'Отправка...' : 'Отправить смету'}
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-3 animate-fade-in">
+                      <div className="flex-1 bg-emerald-50 border-2 border-emerald-300 rounded-xl px-6 py-4 flex items-center justify-center">
+                        <p className="text-emerald-900 font-semibold flex items-center gap-2">
+                          <span className="text-2xl">✅</span>
+                          Смета успешно отправлена!
+                        </p>
+                      </div>
+                      <Button 
+                        onClick={() => window.location.href = '/'}
+                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg whitespace-nowrap"
+                      >
+                        <Icon name="Home" className="mr-2" size={20} />
+                        На главную
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
