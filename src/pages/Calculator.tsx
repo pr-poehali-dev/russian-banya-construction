@@ -158,7 +158,7 @@ const Calculator = () => {
       if (result.success) {
         // Для Telegram показываем модальное окно с переходом в бот
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
-          setSuccessMessage('Смета отправлена в ваш Telegram!\n\nНажмите "Перейти в Telegram", затем в следующем окне нажмите "Открыть приложение" для получения сметы');
+          setSuccessMessage('Смета отправлена в ваш Telegram!\n\n1. Нажмите "Перейти в Telegram"\n2. В следующем окне нажмите "Открыть приложение"\n3. После перехода в Telegram, нажмите "Старт/start", придет сообщение с вашей сметой');
           setTelegramRedirectUrl('tg://resolve?domain=permpar_smeta_bot&start=order');
           setShowSuccessDialog(true);
         } else {
