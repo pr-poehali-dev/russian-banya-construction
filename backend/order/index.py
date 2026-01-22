@@ -444,26 +444,47 @@ www.пермский-пар.рф
             return {'statusCode': 200, 'body': json.dumps({'ok': True})}
         
         dsn = os.environ.get('DATABASE_URL')
-        if not dsn or not username:
+        if not dsn:
             send_telegram_message(bot_token, chat_id, 
                 f"Здравствуйте, {first_name}! Спасибо за обращение. Наш специалист свяжется с вами в ближайшее время.")
             return {'statusCode': 200, 'body': json.dumps({'ok': True})}
+        
+        # Извлекаем order_id из команды /start (например: /start order_B6DEADBF)
+        order_id_from_link = None
+        if text.startswith('/start order_'):
+            order_id_from_link = text.replace('/start order_', '').strip()
+            print(f"Deep link detected: order_id={order_id_from_link}")
         
         # Подключаемся к БД и ищем заявки
         conn = psycopg2.connect(dsn)
         cur = conn.cursor()
         
-        # Ищем заявки с этим username без chat_id
-        cur.execute("""
-            SELECT order_id, name, telegram_username, pdf_data 
-            FROM calculator_orders 
-            WHERE telegram_username ILIKE %s 
-            AND telegram_chat_id IS NULL
-            AND pdf_sent_telegram = FALSE
-            ORDER BY created_at DESC
-        """, (f'%{username}%',))
+        orders = []
         
-        orders = cur.fetchall()
+        # Если есть order_id из deep link - ищем конкретную заявку
+        if order_id_from_link:
+            cur.execute("""
+                SELECT order_id, name, telegram_username, pdf_data 
+                FROM calculator_orders 
+                WHERE order_id = %s 
+                AND telegram_chat_id IS NULL
+                AND pdf_sent_telegram = FALSE
+            """, (order_id_from_link,))
+            orders = cur.fetchall()
+            print(f"Deep link search: found {len(orders)} orders for order_id={order_id_from_link}")
+        
+        # Если нет deep link и есть username - ищем по username
+        elif username:
+            cur.execute("""
+                SELECT order_id, name, telegram_username, pdf_data 
+                FROM calculator_orders 
+                WHERE telegram_username ILIKE %s 
+                AND telegram_chat_id IS NULL
+                AND pdf_sent_telegram = FALSE
+                ORDER BY created_at DESC
+            """, (f'%{username}%',))
+            orders = cur.fetchall()
+            print(f"Username search: found {len(orders)} orders for @{username}")
         
         if orders:
             # Отправляем приветственное сообщение БЕЗ кнопок (смета отправляется автоматически)

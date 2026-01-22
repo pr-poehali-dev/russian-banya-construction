@@ -169,7 +169,9 @@ const Calculator = () => {
         // Для Telegram показываем модальное окно с переходом в бот
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
           setSuccessMessage('Смета отправлена в ваш Telegram!\n\n1. Нажмите "Перейти в Telegram"\n2. В следующем окне нажмите "Открыть приложение"\n3. После перехода в Telegram, нажмите "Старт/start", придет сообщение с вашей сметой');
-          setTelegramRedirectUrl('tg://resolve?domain=permpar_smeta_bot&start=order');
+          // Добавляем order_id в deep link для пользователей без username
+          const orderId = result.order_id || '';
+          setTelegramRedirectUrl(`tg://resolve?domain=permpar_smeta_bot&start=order_${orderId}`);
           setShowSuccessDialog(true);
         } else {
           // Для email тоже показываем модальное окно
