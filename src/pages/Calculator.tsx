@@ -451,9 +451,9 @@ const Calculator = () => {
   }, [foundation, wallMaterial, floors, distance, length, width, partitionLength]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 py-4 md:py-12 px-4">
       <div className="container max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-start max-w-full overflow-hidden">
           {/* Левая часть - фото */}
           <div className="hidden lg:block sticky top-8">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
@@ -466,8 +466,8 @@ const Calculator = () => {
           </div>
 
           {/* Правая часть - калькулятор */}
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-emerald-900 text-center lg:text-left">Калькулятор стоимости бани</h1>
+          <div className="space-y-4 md:space-y-6 w-full max-w-full overflow-hidden">
+            <h1 className="text-2xl md:text-4xl font-bold text-emerald-900 text-center lg:text-left">Калькулятор стоимости бани</h1>
             {/* Индикатор шагов */}
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
@@ -483,8 +483,8 @@ const Calculator = () => {
 
             {/* Шаг 1: Фундамент */}
             {step === 1 && (
-              <div className="space-y-6">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-3">
+              <div className="space-y-4 md:space-y-6 w-full">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg space-y-3 w-full">
                   <Label className="text-base font-semibold text-emerald-900">Выберите тип фундамента:</Label>
                   <RadioGroup value={foundation} onValueChange={setFoundation}>
                     <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
@@ -511,7 +511,7 @@ const Calculator = () => {
                 <div className="flex justify-end pt-4">
                   <Button 
                     onClick={goToNextStep}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl shadow-lg"
                   >
                     Далее
                     <Icon name="ChevronRight" className="ml-2" size={20} />
@@ -522,8 +522,8 @@ const Calculator = () => {
 
             {/* Шаг 2: Материал стен */}
             {step === 2 && (
-              <div className="space-y-6">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-3">
+              <div className="space-y-4 md:space-y-6 w-full">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg space-y-3 w-full">
                   <Label className="text-base font-semibold text-emerald-900">Материал стен бани:</Label>
                   <RadioGroup value={wallMaterial} onValueChange={setWallMaterial}>
                     <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
@@ -547,21 +547,21 @@ const Calculator = () => {
                     </RadioGroup>
                 </div>
 
-                <div className="flex justify-between pt-4">
+                <div className="flex justify-between pt-4 gap-2">
                   <Button 
                     onClick={goToPrevStep}
                     variant="outline"
-                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl"
                   >
-                    <Icon name="ChevronLeft" className="mr-2" size={20} />
+                    <Icon name="ChevronLeft" className="mr-1 md:mr-2" size={20} />
                     Назад
                   </Button>
                   <Button 
                     onClick={goToNextStep}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl shadow-lg"
                   >
                     Далее
-                    <Icon name="ChevronRight" className="ml-2" size={20} />
+                    <Icon name="ChevronRight" className="ml-1 md:ml-2" size={20} />
                   </Button>
                 </div>
               </div>
@@ -569,8 +569,8 @@ const Calculator = () => {
 
             {/* Шаг 3: Размеры и этажность */}
             {step === 3 && (
-              <div className="space-y-6">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-4">
+              <div className="space-y-4 md:space-y-6 w-full">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg space-y-4 w-full">
                   <Label className="text-base font-semibold text-emerald-900">Размеры вашей бани</Label>
                 <div className="space-y-3">
                   <Label className="text-sm text-emerald-900">Этажность:</Label>
@@ -632,21 +632,21 @@ const Calculator = () => {
                 </div>
                 </div>
 
-                <div className="flex justify-between pt-4">
+                <div className="flex justify-between pt-4 gap-2">
                   <Button 
                     onClick={goToPrevStep}
                     variant="outline"
-                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl"
                   >
-                    <Icon name="ChevronLeft" className="mr-2" size={20} />
+                    <Icon name="ChevronLeft" className="mr-1 md:mr-2" size={20} />
                     Назад
                   </Button>
                   <Button 
                     onClick={goToNextStep}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl shadow-lg"
                   >
                     Далее
-                    <Icon name="ChevronRight" className="ml-2" size={20} />
+                    <Icon name="ChevronRight" className="ml-1 md:ml-2" size={20} />
                   </Button>
                 </div>
               </div>
@@ -654,8 +654,8 @@ const Calculator = () => {
 
             {/* Шаг 4: Расстояние */}
             {step === 4 && (
-              <div className="space-y-6">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-3">
+              <div className="space-y-4 md:space-y-6 w-full">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg space-y-3 w-full">
                   <Label className="text-base font-semibold text-emerald-900">Расстояние от Перми до объекта в одну сторону, км:</Label>
                 <RadioGroup value={distance} onValueChange={setDistance}>
                   <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
@@ -685,21 +685,21 @@ const Calculator = () => {
                 </RadioGroup>
                 </div>
 
-                <div className="flex justify-between pt-4">
+                <div className="flex justify-between pt-4 gap-2">
                   <Button 
                     onClick={goToPrevStep}
                     variant="outline"
-                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                    className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl"
                   >
-                    <Icon name="ChevronLeft" className="mr-2" size={20} />
+                    <Icon name="ChevronLeft" className="mr-1 md:mr-2" size={20} />
                     Назад
                   </Button>
                   <Button 
                     onClick={goToNextStep}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl shadow-lg"
                   >
                     Далее
-                    <Icon name="ChevronRight" className="ml-2" size={20} />
+                    <Icon name="ChevronRight" className="ml-1 md:ml-2" size={20} />
                   </Button>
                 </div>
               </div>
@@ -707,8 +707,8 @@ const Calculator = () => {
 
             {/* Шаг 5: Контактные данные */}
             {step === 5 && (
-              <div className="space-y-6">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-4">
+              <div className="space-y-4 md:space-y-6 w-full">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg space-y-4 w-full">
                   <Label className="text-base font-semibold text-emerald-900">Контактные данные</Label>
                 
                 <div className="space-y-2">
@@ -857,21 +857,21 @@ const Calculator = () => {
                   </RadioGroup>
                 </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex gap-2">
                     <Button 
                       onClick={goToPrevStep}
                       variant="outline"
-                      className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-8 py-6 text-lg rounded-xl"
+                      className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 px-4 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-xl"
                     >
-                      <Icon name="ChevronLeft" className="mr-2" size={20} />
+                      <Icon name="ChevronLeft" className="mr-1 md:mr-2" size={20} />
                       Назад
                     </Button>
                     <Button 
-                      className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-6 text-lg rounded-xl shadow-lg"
+                      className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-4 md:py-6 text-base md:text-lg rounded-xl shadow-lg"
                       onClick={handleSendEstimate}
                       disabled={isSending || estimate.length === 0}
                     >
-                      {isSending ? 'Отправка...' : 'Отправить смету'}
+                      {isSending ? 'Отправка...' : 'Отправить'}
                     </Button>
                   </div>
                 </div>
