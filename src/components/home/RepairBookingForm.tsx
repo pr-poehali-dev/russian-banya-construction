@@ -68,7 +68,7 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
       <Dialog open={open} onOpenChange={onClose}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold">Забронировать выезд для ремонта бани</DialogTitle>
+            <DialogTitle className="text-2xl font-bold">Забронировать выезд для осмотра бани</DialogTitle>
           </DialogHeader>
           
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
