@@ -44,6 +44,7 @@ const Calculator = () => {
   const [phone, setPhone] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [telegram, setTelegram] = useState<string>('');
+  const [comment, setComment] = useState<string>('');
   const [sendMethod, setSendMethod] = useState<string>('telegram');
   const [showValidation, setShowValidation] = useState<boolean>(false);
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
@@ -149,6 +150,7 @@ const Calculator = () => {
           phone,
           email,
           telegram,
+          comment,
           messenger: sendMethod,
           material: wallMaterial,
           length,
@@ -187,6 +189,7 @@ const Calculator = () => {
         setPhone('');
         setEmail('');
         setTelegram('');
+        setComment('');
         setShowValidation(false);
       } else {
         alert('Ошибка отправки: ' + (result.error || 'Неизвестная ошибка'));
@@ -820,6 +823,20 @@ const Calculator = () => {
                     className={showValidation && sendMethod === 'telegram' && !telegram ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
                   />
                   <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @) тогда смета придет автоматически, или оставьте пустым и мы отправим вам смету в ближайшее время в ручном режиме</p>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="comment" className="text-sm text-emerald-900">
+                    Комментарии
+                  </Label>
+                  <textarea
+                    id="comment"
+                    placeholder="Дополнительные пожелания или вопросы"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    rows={3}
+                    className="w-full px-3 py-2 border-2 border-emerald-300 rounded-lg focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none resize-none"
+                  />
                 </div>
 
                 <div className="space-y-3">
