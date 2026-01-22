@@ -479,6 +479,7 @@ www.пермский-пар.рф
             
             # Отправляем PDF каждой заявки
             for order_id, name, tg_username, pdf_data in orders:
+                print(f"Processing order {order_id}: name={name}, pdf_data={'present (' + str(len(pdf_data)) + ' bytes)' if pdf_data else 'MISSING'}")
                 if pdf_data:
                     # Отправляем PDF документ
                     success = send_telegram_document(bot_token, chat_id, pdf_data, name, order_id)
@@ -494,8 +495,9 @@ www.пермский-пар.рф
                         print(f"Failed to send order {order_id} via Telegram")
                 else:
                     # PDF не найден - отправляем уведомление
+                    print(f"WARNING: Order {order_id} has NO PDF data!")
                     send_telegram_message(bot_token, chat_id, 
-                        f"⚠️ Смета для заявки #{order_id} не найдена. Мы отправим её вам на почту.")
+                        f"⚠️ Смета для заявки #{order_id} не найдена. Наш специалист свяжется с вами в ближайшее время.")
                     cur.execute("""
                         UPDATE calculator_orders 
                         SET telegram_chat_id = %s
