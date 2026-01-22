@@ -234,9 +234,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             print(f"SMTP_USER: {smtp_user}")
             print(f"SMTP_PASSWORD length: {len(smtp_password) if smtp_password else 0}")
             
-            # Подготавливаем письмо заказчику, если нужно
+            # Подготавливаем письмо заказчику ТОЛЬКО если выбран способ "email"
             customer_msg = None
             if email_client and messenger == 'email' and pdf_data:
+                print(f"Preparing customer email for {email_client} (messenger={messenger})")
                 customer_msg = MIMEMultipart('alternative')
                 customer_msg['Subject'] = 'Ваша смета от компании "Пермский Пар"'
                 customer_msg['From'] = smtp_user
@@ -308,6 +309,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 except Exception as pdf_err:
                     print(f"Failed to prepare customer PDF: {pdf_err}")
                     customer_msg = None
+            else:
+                print(f"Customer email NOT sent: messenger={messenger}, email_client={bool(email_client)}, pdf_data={'present' if pdf_data else 'missing'}")
             
             # Отправляем оба письма через одно соединение
             if smtp_port == 465:
