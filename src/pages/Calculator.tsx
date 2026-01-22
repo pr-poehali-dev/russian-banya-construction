@@ -447,8 +447,8 @@ const Calculator = () => {
           <div className="hidden lg:block sticky top-8">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <img 
-                src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/8c178ae9-f0f9-4e9e-9310-add7692090fb.jpg"
-                alt="Строительство бани"
+                src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/229aa613-72f3-45bd-b793-7dcc13bd5a4e.jpg"
+                alt="Строительство бани - Пермский Пар"
                 className="w-full h-auto object-cover"
               />
             </div>
