@@ -49,6 +49,9 @@ const Calculator = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [telegramRedirectUrl, setTelegramRedirectUrl] = useState<string>('');
   const estimateRef = useRef<HTMLDivElement>(null);
 
   const goToNextStep = () => {
@@ -153,18 +156,12 @@ const Calculator = () => {
       const result = await response.json();
       
       if (result.success) {
-        // Для Telegram показываем сообщение и переходим в бот
+        // Для Telegram показываем модальное окно с переходом в бот
         if (telegram && (sendMethod === 'telegram' || sendMethod === 'max')) {
-          let message = '✅ Заявка успешно отправлена!\n\n';
-          if (result.email_sent) {
-            message += '📧 Смета отправлена на вашу почту\n\n';
-          }
-          message += '🤖 Нажмите ОК для перехода в Telegram бот\nи получения сметы автоматически';
-          
-          alert(message);
-          
-          // Используем tg:// deep link - откроет бота напрямую в приложении
-          window.location.href = 'tg://resolve?domain=permpar_smeta_bot&start=order';
+          const message = 'Смета отправлена в ваш Telegram, сейчас откроется окно для перехода в мессенджер';
+          setSuccessMessage(message);
+          setTelegramRedirectUrl('tg://resolve?domain=permpar_smeta_bot&start=order');
+          setShowSuccessDialog(true);
         } else {
           // Для email показываем alert
           let message = 'Заявка успешно отправлена!\n\n';
@@ -1070,6 +1067,31 @@ const Calculator = () => {
             </div>
           </div>
       </div>
+
+      {/* Модальное окно успешной отправки в Telegram */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-emerald-900 text-xl">✅ Заявка отправлена!</DialogTitle>
+            <DialogDescription className="text-base pt-2">
+              {successMessage}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end gap-3 pt-4">
+            <Button
+              onClick={() => {
+                setShowSuccessDialog(false);
+                if (telegramRedirectUrl) {
+                  window.location.href = telegramRedirectUrl;
+                }
+              }}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-6"
+            >
+              Перейти в Telegram
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
