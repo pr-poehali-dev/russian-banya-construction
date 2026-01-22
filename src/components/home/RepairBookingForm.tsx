@@ -38,6 +38,11 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
       });
 
       if (response.ok) {
+        // Отправляем цель в Яндекс Метрику
+        if (typeof window !== 'undefined' && (window as any).ym) {
+          (window as any).ym(105711132, 'reachGoal', 'form_submit');
+        }
+
         setFormData({
           name: "",
           phone: "",

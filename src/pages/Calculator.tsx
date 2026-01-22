@@ -185,7 +185,7 @@ const Calculator = () => {
       if (result.success) {
         // Отправляем цель в Яндекс Метрику
         if (typeof window !== 'undefined' && (window as any).ym) {
-          (window as any).ym(105711132, 'reachGoal', 'OTPRAVKA_ZAYAVKI');
+          (window as any).ym(105711132, 'reachGoal', 'form_submit');
         }
 
         // Для Telegram показываем модальное окно с переходом в бот
