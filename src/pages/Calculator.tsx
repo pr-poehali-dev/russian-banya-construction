@@ -1115,15 +1115,7 @@ const Calculator = () => {
       </div>
 
       {/* Модальное окно успешной отправки */}
-      <Dialog open={showSuccessDialog} onOpenChange={(open) => {
-        if (!open) {
-          // При закрытии модалки - переход на главную через 500мс
-          setTimeout(() => {
-            window.location.href = '/';
-          }, 500);
-        }
-        setShowSuccessDialog(open);
-      }}>
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-emerald-900 text-xl">✅ Заявка отправлена!</DialogTitle>
@@ -1136,21 +1128,16 @@ const Calculator = () => {
               onClick={() => {
                 setShowSuccessDialog(false);
                 if (telegramRedirectUrl) {
+                  // Переходим в Telegram
                   window.location.href = telegramRedirectUrl;
-                  // После перехода в Telegram, через 2 секунды переход на главную
-                  setTimeout(() => {
-                    window.location.href = '/';
-                  }, 2000);
                 } else {
-                  // Если без Telegram - сразу на главную
-                  setTimeout(() => {
-                    window.location.href = '/';
-                  }, 500);
+                  // Для email - переход на главную
+                  window.location.href = '/';
                 }
               }}
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-6"
             >
-              {telegramRedirectUrl ? 'Перейти в Telegram' : 'Закрыть'}
+              {telegramRedirectUrl ? 'Перейти в Telegram' : 'На главную'}
             </Button>
           </div>
         </DialogContent>
