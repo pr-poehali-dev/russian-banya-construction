@@ -118,8 +118,8 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
         </div>
 
         <div id="services" className="mt-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-2">Что я умею и могу предложить</h2>
-          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 px-4">Что я умею и могу предложить</h2>
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start px-4 md:px-0">
             <div className="w-full space-y-4">
               <img
                 src="https://cdn.poehali.dev/files/1a2c671f_20260118_152414_9991d4e8_req_b74b5eeb.jpg"
