@@ -170,9 +170,24 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                             <div class="field-value">{phone}</div>
                         </div>
                         {f'<div class="field"><div class="field-label">Email:</div><div class="field-value">{email_client}</div></div>' if email_client else ''}
+                        {f'<div class="field"><div class="field-label">Telegram:</div><div class="field-value">{telegram_username}</div></div>' if telegram_username else ''}
                         <div class="field">
                             <div class="field-label">Предпочтительный способ связи:</div>
                             <div class="field-value">{messenger}</div>
+                        </div>
+                        
+                        <h2>Статус отправки сметы:</h2>
+                        <div class="field">
+                            <div class="field-label">Email заказчику:</div>
+                            <div class="field-value" style="color: {'green' if messenger == 'email' and email_client else 'gray'};">
+                                {'✅ Будет отправлено' if messenger == 'email' and email_client else '➖ Не требуется'}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="field-label">Telegram заказчику:</div>
+                            <div class="field-value" style="color: {'green' if messenger == 'telegram' and telegram_username else 'gray'};">
+                                {'✅ Отправится автоматически при переходе в бот' if messenger == 'telegram' and telegram_username else '➖ Не требуется'}
+                            </div>
                         </div>
                         
                         <h2>Параметры бани:</h2>

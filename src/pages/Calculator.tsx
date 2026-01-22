@@ -84,7 +84,24 @@ const Calculator = () => {
   const handleSendEstimate = async () => {
     setShowValidation(true);
     
-    if (!name || !phone || (sendMethod === 'email' && !email)) {
+    // Валидация обязательных полей
+    if (!name || !phone) {
+      setValidationMessage('Пожалуйста, укажите имя и телефон');
+      setShowValidationDialog(true);
+      return;
+    }
+    
+    // Проверка email для способа отправки "Email"
+    if (sendMethod === 'email' && !email) {
+      setValidationMessage('Пожалуйста, укажите Email для отправки сметы');
+      setShowValidationDialog(true);
+      return;
+    }
+    
+    // Проверка telegram для способа отправки "Телеграм"
+    if (sendMethod === 'telegram' && !telegram) {
+      setValidationMessage('Пожалуйста, укажите Telegram username для отправки сметы');
+      setShowValidationDialog(true);
       return;
     }
     
@@ -805,10 +822,9 @@ const Calculator = () => {
                                 <li>Смета придёт автоматически в течение секунды! ⚡</li>
                               </ol>
                             </div>
-                            <div className="bg-amber-50 p-3 rounded-lg border border-amber-200 mt-2">
-                              <p className="text-xs text-amber-800">
-                                ℹ️ Если не хотите использовать бота — оставьте поле пустым. 
-                                Мы отправим смету вручную в ближайшее время.
+                            <div className="bg-green-50 p-3 rounded-lg border border-green-200 mt-2">
+                              <p className="text-xs text-green-800">
+                                ✅ После перехода в бот смета придёт автоматически в течение нескольких секунд!
                               </p>
                             </div>
                           </DialogDescription>
@@ -822,9 +838,14 @@ const Calculator = () => {
                     placeholder="@username"
                     value={telegram}
                     onChange={(e) => setTelegram(e.target.value)}
+                    required={sendMethod === 'telegram'}
                     className={showValidation && sendMethod === 'telegram' && !telegram ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
                   />
-                  <p className="text-xs text-gray-500">Укажите ваш username из Telegram (начинается с @) тогда смета придет автоматически, или оставьте пустым и мы отправим вам смету в ближайшее время в ручном режиме</p>
+                  <p className="text-xs text-gray-500">
+                    {sendMethod === 'telegram' 
+                      ? 'Укажите ваш username из Telegram (начинается с @) — смета придет автоматически после перехода в бот' 
+                      : 'Укажите ваш username из Telegram (начинается с @), или оставьте пустым'}
+                  </p>
                 </div>
 
                 <div className="space-y-2">
