@@ -52,19 +52,24 @@ const Calculator = () => {
   const [showSuccessDialog, setShowSuccessDialog] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>('');
   const [telegramRedirectUrl, setTelegramRedirectUrl] = useState<string>('');
+  const [showValidationDialog, setShowValidationDialog] = useState<boolean>(false);
+  const [validationMessage, setValidationMessage] = useState<string>('');
   const estimateRef = useRef<HTMLDivElement>(null);
 
   const goToNextStep = () => {
     if (step === 1 && !foundation) {
-      alert('Пожалуйста, выберите тип фундамента');
+      setValidationMessage('Пожалуйста, выберите тип фундамента');
+      setShowValidationDialog(true);
       return;
     }
     if (step === 2 && !wallMaterial) {
-      alert('Пожалуйста, выберите материал стен');
+      setValidationMessage('Пожалуйста, выберите материал стен');
+      setShowValidationDialog(true);
       return;
     }
     if (step === 3 && (!length || !width)) {
-      alert('Пожалуйста, укажите размеры');
+      setValidationMessage('Пожалуйста, укажите размеры');
+      setShowValidationDialog(true);
       return;
     }
     setStep(step + 1);
@@ -85,7 +90,9 @@ const Calculator = () => {
     
     try {
       if (!estimateRef.current) {
-        alert('Ошибка: смета не найдена');
+        setValidationMessage('Ошибка: смета не найдена');
+        setShowValidationDialog(true);
+        setIsSending(false);
         return;
       }
       
@@ -1089,6 +1096,26 @@ const Calculator = () => {
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-6"
             >
               {telegramRedirectUrl ? 'Перейти в Telegram' : 'Закрыть'}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Модальное окно валидации */}
+      <Dialog open={showValidationDialog} onOpenChange={setShowValidationDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-emerald-900 text-xl">⚠️ Внимание</DialogTitle>
+            <DialogDescription className="text-base pt-2">
+              {validationMessage}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end pt-4">
+            <Button
+              onClick={() => setShowValidationDialog(false)}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-6"
+            >
+              Понятно
             </Button>
           </div>
         </DialogContent>
