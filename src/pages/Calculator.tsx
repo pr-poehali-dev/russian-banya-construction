@@ -905,8 +905,8 @@ const Calculator = () => {
                           const newSize = newFiles.reduce((sum, f) => sum + f.size, 0);
                           const totalSize = existingSize + newSize;
                           
-                          if (totalSize > 10 * 1024 * 1024) {
-                            alert(`Общий размер файлов не должен превышать 10 МБ.\nТекущий размер: ${(existingSize / 1024 / 1024).toFixed(2)} МБ\nДобавляете: ${(newSize / 1024 / 1024).toFixed(2)} МБ`);
+                          if (totalSize > 20 * 1024 * 1024) {
+                            alert(`Общий размер файлов не должен превышать 20 МБ.\nТекущий размер: ${(existingSize / 1024 / 1024).toFixed(2)} МБ\nДобавляете: ${(newSize / 1024 / 1024).toFixed(2)} МБ`);
                             e.target.value = '';
                             return;
                           }
@@ -919,7 +919,7 @@ const Calculator = () => {
                     <label htmlFor="files" className="flex flex-col items-center gap-2 cursor-pointer">
                       <Icon name="Upload" size={32} className="text-emerald-600" />
                       <span className="text-sm text-gray-600">Нажмите или перетащите файлы</span>
-                      <span className="text-xs text-gray-400">Макс. 10 МБ (JPG, PNG, PDF, DOC, DWG)</span>
+                      <span className="text-xs text-gray-400">Макс. 20 МБ (JPG, PNG, PDF, DOC, DWG)</span>
                     </label>
                   </div>
                   {attachedFiles.length > 0 && (
