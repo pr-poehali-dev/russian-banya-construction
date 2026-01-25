@@ -104,10 +104,21 @@ def handler(event: dict, context) -> dict:
             file_type = attachment.get('type', 'application/octet-stream')
             
             if file_data:
-                part = MIMEBase('application', 'octet-stream')
+                # Определяем MIME тип по расширению файла
+                main_type = 'application'
+                sub_type = 'octet-stream'
+                
+                if file_type.startswith('image/'):
+                    main_type = 'image'
+                    sub_type = file_type.split('/')[-1]
+                elif file_type == 'application/pdf':
+                    main_type = 'application'
+                    sub_type = 'pdf'
+                
+                part = MIMEBase(main_type, sub_type)
                 part.set_payload(base64.b64decode(file_data))
                 encoders.encode_base64(part)
-                part.add_header('Content-Disposition', f'attachment; filename={file_name}')
+                part.add_header('Content-Disposition', f'attachment; filename=\"{file_name}\"')
                 msg.attach(part)
         
         with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
