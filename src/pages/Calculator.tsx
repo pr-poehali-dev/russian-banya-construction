@@ -901,12 +901,17 @@ const Calculator = () => {
                       onChange={(e) => {
                         if (e.target.files) {
                           const newFiles = Array.from(e.target.files);
-                          const totalSize = [...attachedFiles, ...newFiles].reduce((sum, f) => sum + f.size, 0);
+                          const existingSize = attachedFiles.reduce((sum, f) => sum + f.size, 0);
+                          const newSize = newFiles.reduce((sum, f) => sum + f.size, 0);
+                          const totalSize = existingSize + newSize;
+                          
                           if (totalSize > 10 * 1024 * 1024) {
-                            alert('Общий размер файлов не должен превышать 10 МБ');
+                            alert(`Общий размер файлов не должен превышать 10 МБ.\nТекущий размер: ${(existingSize / 1024 / 1024).toFixed(2)} МБ\nДобавляете: ${(newSize / 1024 / 1024).toFixed(2)} МБ`);
+                            e.target.value = '';
                             return;
                           }
                           setAttachedFiles([...attachedFiles, ...newFiles]);
+                          e.target.value = '';
                         }
                       }}
                       className="hidden"
