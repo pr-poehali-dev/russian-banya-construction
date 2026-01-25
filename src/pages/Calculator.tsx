@@ -82,6 +82,79 @@ const Calculator = () => {
     setStep(step - 1);
   };
 
+  // Функция сжатия изображений
+  const compressImage = async (file: File, maxSizeMB: number = 2): Promise<File> => {
+    // Если файл не изображение или уже достаточно маленький, возвращаем как есть
+    if (!file.type.startsWith('image/') || file.size <= maxSizeMB * 1024 * 1024) {
+      return file;
+    }
+
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          // Уменьшаем размер, если изображение слишком большое
+          const maxDimension = 2048;
+          if (width > maxDimension || height > maxDimension) {
+            if (width > height) {
+              height = (height * maxDimension) / width;
+              width = maxDimension;
+            } else {
+              width = (width * maxDimension) / height;
+              height = maxDimension;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Пробуем разные уровни качества, пока не достигнем нужного размера
+            let quality = 0.85;
+            const tryCompress = () => {
+              canvas.toBlob(
+                (blob) => {
+                  if (blob) {
+                    if (blob.size <= maxSizeMB * 1024 * 1024 || quality <= 0.3) {
+                      // Достигли нужного размера или минимального качества
+                      const compressedFile = new File([blob], file.name, {
+                        type: 'image/jpeg',
+                        lastModified: Date.now(),
+                      });
+                      resolve(compressedFile);
+                    } else {
+                      // Нужно сжать сильнее
+                      quality -= 0.1;
+                      tryCompress();
+                    }
+                  } else {
+                    resolve(file);
+                  }
+                },
+                'image/jpeg',
+                quality
+              );
+            };
+
+            tryCompress();
+          } else {
+            resolve(file);
+          }
+        };
+        img.src = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleSendEstimate = async () => {
     setShowValidation(true);
     
@@ -157,20 +230,23 @@ const Calculator = () => {
       // Получаем PDF как base64
       const pdfBase64 = pdf.output('datauristring').split(',')[1];
       
-      // Конвертируем прикреплённые файлы в base64
+      // Сжимаем изображения и конвертируем файлы в base64
       const filesBase64 = await Promise.all(
         attachedFiles.map(async (file) => {
+          // Сжимаем изображение если нужно (макс 2 МБ на файл)
+          const processedFile = await compressImage(file, 2);
+          
           return new Promise<{name: string, data: string, type: string}>((resolve) => {
             const reader = new FileReader();
             reader.onload = () => {
               const base64 = (reader.result as string).split(',')[1];
               resolve({
-                name: file.name,
+                name: processedFile.name,
                 data: base64,
-                type: file.type
+                type: processedFile.type
               });
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(processedFile);
           });
         })
       );
