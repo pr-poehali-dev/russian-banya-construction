@@ -1,8 +1,11 @@
 import json
 import os
 import smtplib
+import base64
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 
 def handler(event: dict, context) -> dict:
     '''API для отправки заявок на бронирование выезда для ремонта бани'''
@@ -42,6 +45,7 @@ def handler(event: dict, context) -> dict:
         date = body.get('date', '')
         time = body.get('time', '')
         comments = body.get('comments', '')
+        attachments = body.get('attachments', [])
         
         if not all([name, phone, address, date, time]):
             return {
@@ -92,6 +96,19 @@ def handler(event: dict, context) -> dict:
         '''
         
         msg.attach(MIMEText(email_body, 'html'))
+        
+        # Прикрепляем файлы, если они есть
+        for attachment in attachments:
+            file_name = attachment.get('name', 'file')
+            file_data = attachment.get('data', '')
+            file_type = attachment.get('type', 'application/octet-stream')
+            
+            if file_data:
+                part = MIMEBase('application', 'octet-stream')
+                part.set_payload(base64.b64decode(file_data))
+                encoders.encode_base64(part)
+                part.add_header('Content-Disposition', f'attachment; filename={file_name}')
+                msg.attach(part)
         
         with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
             server.login(email_user, email_password)

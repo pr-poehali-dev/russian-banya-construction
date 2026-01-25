@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import InputMask from "react-input-mask";
+import Icon from "@/components/ui/icon";
 
 interface RepairBookingFormProps {
   open: boolean;
@@ -16,6 +17,7 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -26,15 +28,146 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
     comments: ""
   });
 
+  // Функция сжатия изображений
+  const compressImage = async (file: File, maxSizeMB: number = 2): Promise<File> => {
+    // Если файл не изображение, проверяем его размер
+    if (!file.type.startsWith('image/')) {
+      // PDF и другие файлы не должны превышать 3 МБ
+      if (file.size > 3 * 1024 * 1024) {
+        const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
+        throw new Error(
+          `Файл "${file.name}" слишком большой (${fileSizeMB} МБ).\n\n` +
+          `📄 Для PDF-файлов максимум 3 МБ.\n\n` +
+          `💡 Что сделать:\n` +
+          `• Сожмите PDF онлайн (например, ilovepdf.com)\n` +
+          `• Или конвертируйте PDF в JPEG изображения\n` +
+          `• Или отправьте меньше страниц за раз`
+        );
+      }
+      return file;
+    }
+    
+    // Если изображение уже достаточно маленькое, возвращаем как есть
+    if (file.size <= maxSizeMB * 1024 * 1024) {
+      return file;
+    }
+
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          // Уменьшаем размер, если изображение слишком большое
+          const maxDimension = 2048;
+          if (width > maxDimension || height > maxDimension) {
+            if (width > height) {
+              height = (height * maxDimension) / width;
+              width = maxDimension;
+            } else {
+              width = (width * maxDimension) / height;
+              height = maxDimension;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Пробуем разные уровни качества, пока не достигнем нужного размера
+            let quality = 0.85;
+            const tryCompress = () => {
+              canvas.toBlob(
+                (blob) => {
+                  if (blob) {
+                    if (blob.size <= maxSizeMB * 1024 * 1024 || quality <= 0.3) {
+                      // Достигли нужного размера или минимального качества
+                      const compressedFile = new File([blob], file.name, {
+                        type: 'image/jpeg',
+                        lastModified: Date.now(),
+                      });
+                      resolve(compressedFile);
+                    } else {
+                      // Нужно сжать сильнее
+                      quality -= 0.1;
+                      tryCompress();
+                    }
+                  } else {
+                    resolve(file);
+                  }
+                },
+                'image/jpeg',
+                quality
+              );
+            };
+
+            tryCompress();
+          } else {
+            resolve(file);
+          }
+        };
+        img.src = e.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
+      // Сжимаем изображения и конвертируем файлы в base64
+      const filesBase64 = await Promise.all(
+        attachedFiles.map(async (file) => {
+          // Сжимаем изображение если нужно (макс 1.5 МБ на файл для надёжности)
+          const processedFile = await compressImage(file, 1.5);
+          
+          // Проверка размера после сжатия
+          if (processedFile.size > 3 * 1024 * 1024) {
+            throw new Error(`Файл "${file.name}" слишком большой (${(processedFile.size / 1024 / 1024).toFixed(1)} МБ). Максимум 3 МБ на файл после сжатия.`);
+          }
+          
+          return new Promise<{name: string, data: string, type: string}>((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const base64 = (reader.result as string).split(',')[1];
+              resolve({
+                name: processedFile.name,
+                data: base64,
+                type: processedFile.type
+              });
+            };
+            reader.readAsDataURL(processedFile);
+          });
+        })
+      );
+      
+      // Проверка общего размера перед отправкой
+      const totalSize = filesBase64.reduce((sum, f) => sum + (f.data.length * 0.75 / 1024 / 1024), 0);
+      if (totalSize > 8) {
+        toast({
+          title: "Файлы слишком большие",
+          description: `Общий размер ${totalSize.toFixed(1)} МБ. Максимум 8 МБ. Удалите некоторые файлы.`,
+          variant: "destructive"
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       const response = await fetch("https://functions.poehali.dev/524c52bf-6818-4c61-bc6f-3845447c12d5", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          attachments: filesBase64
+        })
       });
 
       if (response.ok) {
@@ -52,15 +185,20 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
           time: "",
           comments: ""
         });
+        setAttachedFiles([]);
         onClose();
         setShowSuccess(true);
       } else {
         throw new Error("Ошибка отправки");
       }
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      
       toast({
         title: "Ошибка",
-        description: "Не удалось отправить заявку. Попробуйте позже.",
+        description: errorMessage.includes('слишком большой') 
+          ? errorMessage 
+          : "Не удалось отправить заявку. Попробуйте позже.",
         variant: "destructive"
       });
     } finally {
@@ -161,6 +299,64 @@ const RepairBookingForm = ({ open, onClose }: RepairBookingFormProps) => {
                 placeholder="Опишите проблему или работы, которые нужно выполнить"
                 rows={4}
               />
+            </div>
+
+            <div>
+              <Label htmlFor="files">Прикрепить файлы (фото, чертежи)</Label>
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-green-500 transition-colors">
+                <input
+                  id="files"
+                  type="file"
+                  multiple
+                  accept="image/*,.pdf,.doc,.docx,.dwg"
+                  onChange={(e) => {
+                    if (e.target.files) {
+                      const newFiles = Array.from(e.target.files);
+                      const existingSize = attachedFiles.reduce((sum, f) => sum + f.size, 0);
+                      const newSize = newFiles.reduce((sum, f) => sum + f.size, 0);
+                      const totalSize = existingSize + newSize;
+                      
+                      if (totalSize > 20 * 1024 * 1024) {
+                        toast({
+                          title: "Файлы слишком большие",
+                          description: `Общий размер не должен превышать 20 МБ.\nТекущий: ${(existingSize / 1024 / 1024).toFixed(2)} МБ\nДобавляете: ${(newSize / 1024 / 1024).toFixed(2)} МБ`,
+                          variant: "destructive"
+                        });
+                        e.target.value = '';
+                        return;
+                      }
+                      setAttachedFiles([...attachedFiles, ...newFiles]);
+                      e.target.value = '';
+                    }
+                  }}
+                  className="hidden"
+                />
+                <label htmlFor="files" className="flex flex-col items-center gap-2 cursor-pointer">
+                  <Icon name="Upload" size={32} className="text-green-600" />
+                  <span className="text-sm text-gray-600">Нажмите или перетащите файлы</span>
+                  <span className="text-xs text-gray-400">Макс. 20 МБ (JPG, PNG, PDF, DOC, DWG)</span>
+                </label>
+              </div>
+              {attachedFiles.length > 0 && (
+                <div className="space-y-2 mt-2">
+                  {attachedFiles.map((file, index) => (
+                    <div key={index} className="flex items-center justify-between bg-green-50 p-2 rounded-lg">
+                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                        <Icon name="FileText" size={16} className="text-green-600 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 truncate">{file.name}</span>
+                        <span className="text-xs text-gray-400 flex-shrink-0">({(file.size / 1024).toFixed(0)} КБ)</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setAttachedFiles(attachedFiles.filter((_, i) => i !== index))}
+                        className="text-red-500 hover:text-red-700 flex-shrink-0 ml-2"
+                      >
+                        <Icon name="X" size={16} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="flex gap-3 pt-4">
