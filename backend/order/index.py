@@ -64,6 +64,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         messenger = body_data.get('messenger', '')
         comment = body_data.get('comment', '')
         pdf_data = body_data.get('pdfData', '')  # Base64 encoded PDF
+        attachments = body_data.get('attachments', [])  # Прикреплённые файлы
         
         material_names = {
             'ocilindrovannoe-brevno': 'Оцилиндрованное бревно',
@@ -209,6 +210,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                             <div class="field-value">{location_names.get(location, location)}</div>
                         </div>
                         {f'<div class="field"><div class="field-label">Комментарий:</div><div class="field-value">{comment}</div></div>' if comment else ''}
+                        {f'<div class="field"><div class="field-label">Прикреплённые файлы:</div><div class="field-value">{len(attachments)} шт. (см. вложения)</div></div>' if attachments else ''}
                     </div>
                     <div class="footer">
                         <p>Заявка отправлена автоматически с сайта perm-par.ru</p>
@@ -244,6 +246,28 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     print("PDF attachment added successfully")
                 except Exception as pdf_error:
                     print(f"Failed to attach PDF: {pdf_error}")
+            
+            # Прикрепляем дополнительные файлы от клиента
+            if attachments:
+                for idx, file_data in enumerate(attachments):
+                    try:
+                        file_bytes = base64.b64decode(file_data.get('data', ''))
+                        file_name = file_data.get('name', f'attachment_{idx}')
+                        file_type = file_data.get('type', 'application/octet-stream')
+                        
+                        maintype, subtype = file_type.split('/', 1) if '/' in file_type else ('application', 'octet-stream')
+                        file_attachment = MIMEBase(maintype, subtype)
+                        file_attachment.set_payload(file_bytes)
+                        encoders.encode_base64(file_attachment)
+                        file_attachment.add_header(
+                            'Content-Disposition',
+                            'attachment',
+                            filename=('utf-8', '', file_name)
+                        )
+                        msg.attach(file_attachment)
+                        print(f"Attached file: {file_name}")
+                    except Exception as attach_error:
+                        print(f"Failed to attach file {file_name}: {attach_error}")
             
             print(f"Attempting to send email via {smtp_host}:{smtp_port}")
             print(f"SMTP_USER: {smtp_user}")

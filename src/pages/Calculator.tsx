@@ -56,6 +56,7 @@ const Calculator = () => {
   const [telegramRedirectUrl, setTelegramRedirectUrl] = useState<string>('');
   const [showValidationDialog, setShowValidationDialog] = useState<boolean>(false);
   const [validationMessage, setValidationMessage] = useState<string>('');
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const estimateRef = useRef<HTMLDivElement>(null);
 
   const goToNextStep = () => {
@@ -156,6 +157,24 @@ const Calculator = () => {
       // Получаем PDF как base64
       const pdfBase64 = pdf.output('datauristring').split(',')[1];
       
+      // Конвертируем прикреплённые файлы в base64
+      const filesBase64 = await Promise.all(
+        attachedFiles.map(async (file) => {
+          return new Promise<{name: string, data: string, type: string}>((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const base64 = (reader.result as string).split(',')[1];
+              resolve({
+                name: file.name,
+                data: base64,
+                type: file.type
+              });
+            };
+            reader.readAsDataURL(file);
+          });
+        })
+      );
+      
       // Отправляем на сервер
       const response = await fetch('https://functions.poehali.dev/cba76a16-6247-4333-9605-62ab8c813235', {
         method: 'POST',
@@ -176,7 +195,8 @@ const Calculator = () => {
           floors,
           foundation,
           location: distance,
-          pdfData: pdfBase64
+          pdfData: pdfBase64,
+          attachments: filesBase64
         })
       });
       
@@ -214,6 +234,7 @@ const Calculator = () => {
         setEmail('');
         setTelegram('');
         setComment('');
+        setAttachedFiles([]);
         setShowValidation(false);
       } else {
         alert('Ошибка отправки: ' + (result.error || 'Неизвестная ошибка'));
@@ -865,6 +886,57 @@ const Calculator = () => {
                     rows={3}
                     className="w-full px-3 py-2 border-2 border-emerald-300 rounded-lg focus:border-emerald-500 focus:ring-emerald-500 focus:outline-none resize-none"
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="files" className="text-sm text-emerald-900">
+                    Прикрепить файлы (чертежи, планировки, фото)
+                  </Label>
+                  <div className="border-2 border-dashed border-emerald-300 rounded-lg p-4 hover:border-emerald-500 transition-colors">
+                    <input
+                      id="files"
+                      type="file"
+                      multiple
+                      accept="image/*,.pdf,.doc,.docx,.dwg"
+                      onChange={(e) => {
+                        if (e.target.files) {
+                          const newFiles = Array.from(e.target.files);
+                          const totalSize = [...attachedFiles, ...newFiles].reduce((sum, f) => sum + f.size, 0);
+                          if (totalSize > 10 * 1024 * 1024) {
+                            alert('Общий размер файлов не должен превышать 10 МБ');
+                            return;
+                          }
+                          setAttachedFiles([...attachedFiles, ...newFiles]);
+                        }
+                      }}
+                      className="hidden"
+                    />
+                    <label htmlFor="files" className="flex flex-col items-center gap-2 cursor-pointer">
+                      <Icon name="Upload" size={32} className="text-emerald-600" />
+                      <span className="text-sm text-gray-600">Нажмите или перетащите файлы</span>
+                      <span className="text-xs text-gray-400">Макс. 10 МБ (JPG, PNG, PDF, DOC, DWG)</span>
+                    </label>
+                  </div>
+                  {attachedFiles.length > 0 && (
+                    <div className="space-y-2 mt-2">
+                      {attachedFiles.map((file, index) => (
+                        <div key={index} className="flex items-center justify-between bg-emerald-50 p-2 rounded-lg">
+                          <div className="flex items-center gap-2 flex-1 min-w-0">
+                            <Icon name="FileText" size={16} className="text-emerald-600 flex-shrink-0" />
+                            <span className="text-sm text-gray-700 truncate">{file.name}</span>
+                            <span className="text-xs text-gray-400 flex-shrink-0">({(file.size / 1024).toFixed(0)} КБ)</span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setAttachedFiles(attachedFiles.filter((_, i) => i !== index))}
+                            className="text-red-500 hover:text-red-700 flex-shrink-0 ml-2"
+                          >
+                            <Icon name="X" size={16} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-3">
