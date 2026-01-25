@@ -84,8 +84,17 @@ const Calculator = () => {
 
   // Функция сжатия изображений
   const compressImage = async (file: File, maxSizeMB: number = 2): Promise<File> => {
-    // Если файл не изображение или уже достаточно маленький, возвращаем как есть
-    if (!file.type.startsWith('image/') || file.size <= maxSizeMB * 1024 * 1024) {
+    // Если файл не изображение, проверяем его размер
+    if (!file.type.startsWith('image/')) {
+      // PDF и другие файлы не должны превышать 3 МБ
+      if (file.size > 3 * 1024 * 1024) {
+        throw new Error(`Файл "${file.name}" слишком большой (${(file.size / 1024 / 1024).toFixed(1)} МБ). PDF и документы должны быть не более 3 МБ.`);
+      }
+      return file;
+    }
+    
+    // Если изображение уже достаточно маленькое, возвращаем как есть
+    if (file.size <= maxSizeMB * 1024 * 1024) {
       return file;
     }
 
@@ -233,8 +242,13 @@ const Calculator = () => {
       // Сжимаем изображения и конвертируем файлы в base64
       const filesBase64 = await Promise.all(
         attachedFiles.map(async (file) => {
-          // Сжимаем изображение если нужно (макс 2 МБ на файл)
-          const processedFile = await compressImage(file, 2);
+          // Сжимаем изображение если нужно (макс 1.5 МБ на файл для надёжности)
+          const processedFile = await compressImage(file, 1.5);
+          
+          // Проверка размера после сжатия
+          if (processedFile.size > 3 * 1024 * 1024) {
+            throw new Error(`Файл "${file.name}" слишком большой (${(processedFile.size / 1024 / 1024).toFixed(1)} МБ). Максимум 3 МБ на файл после сжатия.`);
+          }
           
           return new Promise<{name: string, data: string, type: string}>((resolve) => {
             const reader = new FileReader();
@@ -250,6 +264,15 @@ const Calculator = () => {
           });
         })
       );
+      
+      // Проверка общего размера перед отправкой
+      const totalSize = filesBase64.reduce((sum, f) => sum + (f.data.length * 0.75 / 1024 / 1024), 0); // base64 ~1.33x больше
+      if (totalSize > 8) {
+        setValidationMessage(`Общий размер файлов слишком большой (${totalSize.toFixed(1)} МБ). Максимум 8 МБ всего. Попробуйте удалить некоторые файлы.`);
+        setShowValidationDialog(true);
+        setIsSending(false);
+        return;
+      }
       
       // Отправляем на сервер
       const response = await fetch('https://functions.poehali.dev/cba76a16-6247-4333-9605-62ab8c813235', {
