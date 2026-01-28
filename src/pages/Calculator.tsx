@@ -34,8 +34,8 @@ interface EstimateSection {
 const Calculator = () => {
   const [step, setStep] = useState<number>(1);
   const [foundation, setFoundation] = useState<string>('сваи');
-  const [wallMaterial, setWallMaterial] = useState<string>('');
-  const [floors, setFloors] = useState<string>('1.5');
+  const [wallMaterial, setWallMaterial] = useState<string>('бревно');
+  const [floors, setFloors] = useState<string>('1');
   const [distance, setDistance] = useState<string>('0-30');
   const [length, setLength] = useState<string>('6');
   const [width, setWidth] = useState<string>('6');
