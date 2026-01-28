@@ -45,7 +45,7 @@ const Calculator = () => {
   const [email, setEmail] = useState<string>('');
   const [telegram, setTelegram] = useState<string>('');
   const [comment, setComment] = useState<string>('');
-  const [sendMethod, setSendMethod] = useState<string>('telegram');
+  const [sendMethod, setSendMethod] = useState<string>('email');
   const [showValidation, setShowValidation] = useState<boolean>(false);
   const [estimate, setEstimate] = useState<EstimateSection[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -950,71 +950,71 @@ const Calculator = () => {
                   </RadioGroup>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="telegram" className="text-sm text-emerald-900 flex items-center gap-2">
-                    Telegram username {sendMethod === 'telegram' && <span className="text-red-500">*</span>}
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <button type="button" className="text-gray-400 hover:text-gray-600 transition-colors">
-                          <Icon name="HelpCircle" size={16} />
-                        </button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-md">
-                        <DialogHeader>
-                          <DialogTitle>Как найти свой Telegram username?</DialogTitle>
-                          <DialogDescription className="space-y-3 pt-2">
-                            <div className="space-y-2 text-sm text-gray-700">
-                              <p className="font-semibold">📱 В мобильном приложении:</p>
-                              <ol className="list-decimal list-inside space-y-1 pl-2">
-                                <li>Откройте Telegram</li>
-                                <li>Нажмите на меню (☰) → Настройки</li>
-                                <li>Ваш username указан под именем (начинается с @)</li>
-                              </ol>
-                            </div>
-                            <div className="space-y-2 text-sm text-gray-700">
-                              <p className="font-semibold">💻 В десктоп версии:</p>
-                              <ol className="list-decimal list-inside space-y-1 pl-2">
-                                <li>Откройте Telegram</li>
-                                <li>Нажмите на три полоски → Настройки</li>
-                                <li>Ваш username указан под именем (начинается с @)</li>
-                              </ol>
-                            </div>
-                            <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 mt-3">
-                              <p className="text-xs text-blue-800 font-semibold mb-2">
-                                🤖 Для автоматической отправки сметы:
-                              </p>
-                              <ol className="text-xs text-blue-700 space-y-1 list-decimal list-inside">
-                                <li>Заполните калькулятор с вашим username</li>
-                                <li>После отправки откроется бот <a href="https://t.me/permpar_smeta_bot" target="_blank" rel="noopener noreferrer" className="font-mono bg-white px-1 rounded text-blue-600 hover:underline">Смета от "СК Пермский Пар"</a></li>
-                                <li>Напишите команду <span className="font-mono bg-white px-1 rounded">/заявка</span></li>
-                                <li>Смета придёт автоматически в течение секунды! ⚡</li>
-                              </ol>
-                            </div>
-                            <div className="bg-green-50 p-3 rounded-lg border border-green-200 mt-2">
-                              <p className="text-xs text-green-800">
-                                ✅ После перехода в бот смета придёт автоматически в течение нескольких секунд!
-                              </p>
-                            </div>
-                          </DialogDescription>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog>
-                  </Label>
-                  <Input
-                    id="telegram"
-                    type="text"
-                    placeholder="@username"
-                    value={telegram}
-                    onChange={(e) => setTelegram(e.target.value)}
-                    required={sendMethod === 'telegram'}
-                    className={showValidation && sendMethod === 'telegram' && !telegram ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
-                  />
-                  <p className="text-xs text-gray-500">
-                    {sendMethod === 'telegram' 
-                      ? 'Укажите ваш username из Telegram (начинается с @) — смета придет автоматически после перехода в бот' 
-                      : 'Укажите ваш username из Telegram (начинается с @), или оставьте пустым'}
-                  </p>
-                </div>
+                {sendMethod === 'telegram' && (
+                  <div className="space-y-2">
+                    <Label htmlFor="telegram" className="text-sm text-emerald-900 flex items-center gap-2">
+                      Telegram username <span className="text-red-500">*</span>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <button type="button" className="text-gray-400 hover:text-gray-600 transition-colors">
+                            <Icon name="HelpCircle" size={16} />
+                          </button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-md">
+                          <DialogHeader>
+                            <DialogTitle>Как найти свой Telegram username?</DialogTitle>
+                            <DialogDescription className="space-y-3 pt-2">
+                              <div className="space-y-2 text-sm text-gray-700">
+                                <p className="font-semibold">📱 В мобильном приложении:</p>
+                                <ol className="list-decimal list-inside space-y-1 pl-2">
+                                  <li>Откройте Telegram</li>
+                                  <li>Нажмите на меню (☰) → Настройки</li>
+                                  <li>Ваш username указан под именем (начинается с @)</li>
+                                </ol>
+                              </div>
+                              <div className="space-y-2 text-sm text-gray-700">
+                                <p className="font-semibold">💻 В десктоп версии:</p>
+                                <ol className="list-decimal list-inside space-y-1 pl-2">
+                                  <li>Откройте Telegram</li>
+                                  <li>Нажмите на три полоски → Настройки</li>
+                                  <li>Ваш username указан под именем (начинается с @)</li>
+                                </ol>
+                              </div>
+                              <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 mt-3">
+                                <p className="text-xs text-blue-800 font-semibold mb-2">
+                                  🤖 Для автоматической отправки сметы:
+                                </p>
+                                <ol className="text-xs text-blue-700 space-y-1 list-decimal list-inside">
+                                  <li>Заполните калькулятор с вашим username</li>
+                                  <li>После отправки откроется бот <a href="https://t.me/permpar_smeta_bot" target="_blank" rel="noopener noreferrer" className="font-mono bg-white px-1 rounded text-blue-600 hover:underline">Смета от "СК Пермский Пар"</a></li>
+                                  <li>Напишите команду <span className="font-mono bg-white px-1 rounded">/заявка</span></li>
+                                  <li>Смета придёт автоматически в течение секунды! ⚡</li>
+                                </ol>
+                              </div>
+                              <div className="bg-green-50 p-3 rounded-lg border border-green-200 mt-2">
+                                <p className="text-xs text-green-800">
+                                  ✅ После перехода в бот смета придёт автоматически в течение нескольких секунд!
+                                </p>
+                              </div>
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                    </Label>
+                    <Input
+                      id="telegram"
+                      type="text"
+                      placeholder="@username"
+                      value={telegram}
+                      onChange={(e) => setTelegram(e.target.value)}
+                      required
+                      className={showValidation && !telegram ? 'border-red-500 border-2' : 'border-emerald-300 focus:border-emerald-500 focus:ring-emerald-500'}
+                    />
+                    <p className="text-xs text-gray-500">
+                      Укажите ваш username из Telegram (начинается с @) — смета придет автоматически после перехода в бот
+                    </p>
+                  </div>
+                )}
 
                 <div className="space-y-2">
                   <Label htmlFor="comment" className="text-sm text-emerald-900">
