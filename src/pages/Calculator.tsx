@@ -933,6 +933,24 @@ const Calculator = () => {
                   />
                 </div>
 
+                <div className="space-y-3">
+                  <Label className="text-sm text-emerald-900">Куда отправить смету:</Label>
+                  <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
+                      <RadioGroupItem value="email" id="sendEmail" />
+                      <Label htmlFor="sendEmail" className="cursor-pointer flex-1 text-sm">
+                        Email
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
+                      <RadioGroupItem value="telegram" id="sendTelegram" />
+                      <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
+                        Телеграм
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="telegram" className="text-sm text-emerald-900 flex items-center gap-2">
                     Telegram username {sendMethod === 'telegram' && <span className="text-red-500">*</span>}
@@ -1067,24 +1085,6 @@ const Calculator = () => {
                       ))}
                     </div>
                   )}
-                </div>
-
-                <div className="space-y-3">
-                  <Label className="text-sm text-emerald-900">Куда отправить смету:</Label>
-                  <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
-                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
-                      <RadioGroupItem value="email" id="sendEmail" />
-                      <Label htmlFor="sendEmail" className="cursor-pointer flex-1 text-sm">
-                        Email
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
-                      <RadioGroupItem value="telegram" id="sendTelegram" />
-                      <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
-                        Телеграм
-                      </Label>
-                    </div>
-                  </RadioGroup>
                 </div>
 
                   <div className="flex gap-2 md:gap-3">
