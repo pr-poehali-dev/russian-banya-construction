@@ -33,7 +33,7 @@ interface EstimateSection {
 
 const Calculator = () => {
   const [step, setStep] = useState<number>(1);
-  const [foundation, setFoundation] = useState<string>('');
+  const [foundation, setFoundation] = useState<string>('сваи');
   const [wallMaterial, setWallMaterial] = useState<string>('');
   const [floors, setFloors] = useState<string>('1.5');
   const [distance, setDistance] = useState<string>('0-30');
@@ -658,15 +658,15 @@ const Calculator = () => {
                   <Label className="text-base font-semibold text-emerald-900">Выберите тип фундамента:</Label>
                   <RadioGroup value={foundation} onValueChange={setFoundation}>
                     <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
-                        <RadioGroupItem value="ленточный" id="lenточный" />
-                        <Label htmlFor="lenточный" className="cursor-pointer flex-1">
-                          Ленточный фундамент
-                        </Label>
-                      </div>
-                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="сваи" id="svai" />
                         <Label htmlFor="svai" className="cursor-pointer flex-1">
                           Винтовые сваи
+                        </Label>
+                      </div>
+                    <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
+                        <RadioGroupItem value="ленточный" id="lenточный" />
+                        <Label htmlFor="lenточный" className="cursor-pointer flex-1">
+                          Ленточный фундамент
                         </Label>
                       </div>
                     <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
