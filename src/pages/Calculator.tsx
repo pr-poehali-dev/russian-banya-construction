@@ -879,7 +879,12 @@ const Calculator = () => {
             {step === 5 && (
               <div className="space-y-4 md:space-y-6 w-full">
                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg space-y-4 w-full">
-                  <Label className="text-base font-semibold text-emerald-900">Контактные данные</Label>
+                  <div>
+                    <Label className="text-base font-semibold text-emerald-900">Контактные данные</Label>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Я уважаю своих Заказчиков и соблюдаю Федеральный закон от 27.07.2006 №152-ФЗ «О персональных данных». Я не рассылаю рекламу и не передаю Ваши данные третьим лицам.
+                    </p>
+                  </div>
                 
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-sm text-emerald-900">
