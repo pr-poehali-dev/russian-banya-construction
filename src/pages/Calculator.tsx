@@ -934,18 +934,17 @@ const Calculator = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-sm text-emerald-900">Куда отправить смету:</Label>
                   <RadioGroup value={sendMethod} onValueChange={setSendMethod}>
                     <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="email" id="sendEmail" />
                       <Label htmlFor="sendEmail" className="cursor-pointer flex-1 text-sm">
-                        Email
+                        Отправить смету на Email
                       </Label>
                     </div>
                     <div className="flex items-center space-x-3 p-4 border-2 border-emerald-300 rounded-lg hover:border-emerald-500 hover:bg-emerald-100 transition-colors cursor-pointer">
                       <RadioGroupItem value="telegram" id="sendTelegram" />
                       <Label htmlFor="sendTelegram" className="cursor-pointer flex-1 text-sm">
-                        Телеграм
+                        Отправить смету в Telegram
                       </Label>
                     </div>
                   </RadioGroup>
