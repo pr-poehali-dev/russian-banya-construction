@@ -633,16 +633,18 @@ const Calculator = () => {
                 className="w-full h-auto object-cover"
               />
             </div>
-            <div className="text-center">
-              <h2 className="text-xl font-semibold text-emerald-900 mb-3">Ваша смета готова</h2>
-              <div className="rounded-2xl overflow-hidden shadow-2xl" style={{maxHeight: '600px'}}>
-                <img 
-                  src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/482e1d12-02e5-46db-8d44-cd57d1894ef0.jpg"
-                  alt="Пример сметы"
-                  className="w-full h-full object-cover blur-sm"
-                />
+            {step === 5 && (
+              <div className="text-center">
+                <h2 className="text-xl font-semibold text-emerald-900 mb-3">Ваша смета готова</h2>
+                <div className="rounded-2xl overflow-hidden shadow-2xl" style={{maxHeight: '600px'}}>
+                  <img 
+                    src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/482e1d12-02e5-46db-8d44-cd57d1894ef0.jpg"
+                    alt="Пример сметы"
+                    className="w-full h-full object-cover blur-sm"
+                  />
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Правая часть - калькулятор */}
