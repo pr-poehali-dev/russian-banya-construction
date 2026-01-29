@@ -536,7 +536,7 @@ www.пермский-пар.рф
         # Если есть order_id из deep link - ищем конкретную заявку
         if order_id_from_link:
             cur.execute("""
-                SELECT order_id, name, telegram_username, pdf_data, guide_url 
+                SELECT order_id, name, telegram_username, pdf_data 
                 FROM calculator_orders 
                 WHERE order_id = %s 
                 AND telegram_chat_id IS NULL
