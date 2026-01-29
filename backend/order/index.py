@@ -123,12 +123,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     INSERT INTO calculator_orders 
                     (order_id, name, phone, email, telegram_username, messenger, 
                      material, length, width, partitions_length, floors, foundation, location,
-                     pdf_sent_email, pdf_sent_telegram, pdf_data, guide_url)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                     pdf_sent_email, pdf_sent_telegram, pdf_data)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (
                     order_id, name, phone, email_client, telegram_username, messenger,
                     material, length, width, partitions_length, floors, foundation, location,
-                    False, False, pdf_bytes, guide_url
+                    False, False, pdf_bytes
                 ))
                 
                 conn.commit()
@@ -258,25 +258,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 except Exception as pdf_error:
                     print(f"Failed to attach PDF: {pdf_error}")
             
-            # Прикрепляем PDF-гайд если передан URL
-            if guide_url:
-                try:
-                    guide_bytes = download_pdf_from_url(guide_url)
-                    if guide_bytes:
-                        guide_attachment = MIMEBase('application', 'pdf')
-                        guide_attachment.set_payload(guide_bytes)
-                        encoders.encode_base64(guide_attachment)
-                        guide_filename = 'Топ-10_ошибок_при_строительстве_бани.pdf'
-                        guide_attachment.add_header(
-                            'Content-Disposition',
-                            'attachment',
-                            filename=('utf-8', '', guide_filename)
-                        )
-                        guide_attachment.add_header('Content-Type', 'application/pdf', name=guide_filename)
-                        msg.attach(guide_attachment)
-                        print("PDF guide attached successfully")
-                except Exception as guide_error:
-                    print(f"Failed to attach PDF guide: {guide_error}")
+            # Гайд НЕ прикрепляется к письму владельцу - только клиенту
             
             # Прикрепляем дополнительные файлы от клиента
             if attachments:
@@ -566,7 +548,7 @@ www.пермский-пар.рф
         # Если нет deep link и есть username - ищем по username
         elif username:
             cur.execute("""
-                SELECT order_id, name, telegram_username, pdf_data, guide_url 
+                SELECT order_id, name, telegram_username, pdf_data 
                 FROM calculator_orders 
                 WHERE telegram_username ILIKE %s 
                 AND telegram_chat_id IS NULL
@@ -589,21 +571,21 @@ www.пермский-пар.рф
             send_telegram_message(bot_token, chat_id, welcome_text)
             
             # Отправляем PDF каждой заявки
-            for order_id, name, tg_username, pdf_data, order_guide_url in orders:
-                print(f"Processing order {order_id}: name={name}, pdf_data={'present (' + str(len(pdf_data)) + ' bytes)' if pdf_data else 'MISSING'}, guide_url={order_guide_url}")
+            for order_id, name, tg_username, pdf_data in orders:
+                print(f"Processing order {order_id}: name={name}, pdf_data={'present (' + str(len(pdf_data)) + ' bytes)' if pdf_data else 'MISSING'}")
                 if pdf_data:
                     # Отправляем PDF документ (смету)
                     success = send_telegram_document(bot_token, chat_id, pdf_data, name, order_id)
                     if success:
-                        # Отправляем PDF-гайд если есть URL
-                        if order_guide_url:
-                            import time
-                            time.sleep(1)  # Небольшая задержка между отправками
-                            guide_success = send_telegram_guide(bot_token, chat_id, order_guide_url)
-                            if guide_success:
-                                print(f"Guide sent for order {order_id}")
-                            else:
-                                print(f"Failed to send guide for order {order_id}")
+                        # Отправляем PDF-гайд (константная ссылка)
+                        guide_url = 'https://cdn.poehali.dev/projects/c61a16fb-ce04-4e80-89c0-ef5e833732da/bucket/top-10-oshibok.pdf'
+                        import time
+                        time.sleep(1)  # Небольшая задержка между отправками
+                        guide_success = send_telegram_guide(bot_token, chat_id, guide_url)
+                        if guide_success:
+                            print(f"Guide sent for order {order_id}")
+                        else:
+                            print(f"Failed to send guide for order {order_id}")
                         
                         # Обновляем статус отправки
                         cur.execute("""
