@@ -626,23 +626,24 @@ const Calculator = () => {
         <div className="grid lg:grid-cols-2 gap-8 items-start max-w-full overflow-hidden">
           {/* Левая часть - фото */}
           <div className="hidden lg:block sticky top-8 space-y-4">
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/229aa613-72f3-45bd-b793-7dcc13bd5a4e.jpg"
-                alt="Строительство бани - Пермский Пар"
-                className="w-full h-auto object-cover"
-              />
-            </div>
-            {step === 5 && (
+            {step === 5 ? (
               <div className="text-center">
-                <h2 className="text-xl font-semibold text-emerald-900 mb-3">Ваша смета готова</h2>
-                <div className="rounded-2xl overflow-hidden shadow-2xl" style={{maxHeight: '600px'}}>
+                <h2 className="text-2xl font-bold text-emerald-900 mb-4">Ваша смета готова</h2>
+                <div className="rounded-2xl overflow-hidden shadow-2xl">
                   <img 
                     src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/482e1d12-02e5-46db-8d44-cd57d1894ef0.jpg"
                     alt="Пример сметы"
-                    className="w-full h-full object-cover blur-sm"
+                    className="w-full h-auto object-cover blur-sm"
                   />
                 </div>
+              </div>
+            ) : (
+              <div className="rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/229aa613-72f3-45bd-b793-7dcc13bd5a4e.jpg"
+                  alt="Строительство бани - Пермский Пар"
+                  className="w-full h-auto object-cover"
+                />
               </div>
             )}
           </div>
