@@ -639,7 +639,7 @@ const Calculator = () => {
                   </div>
                 </div>
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-emerald-900 mb-3">Гайд: Топ-10 ошибок при строительстве бани</h3>
+                  <h3 className="text-xl font-bold text-emerald-900 mb-3">Гайд: Топ-10 ошибок при строительстве бани в подарок!</h3>
                   <div className="rounded-2xl overflow-hidden shadow-2xl">
                     <img 
                       src="https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/ee4ddd93-8a9d-4e9d-9987-d959baa8bbea.png"
