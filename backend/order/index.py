@@ -258,7 +258,25 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 except Exception as pdf_error:
                     print(f"Failed to attach PDF: {pdf_error}")
             
-            # Гайд НЕ прикрепляется к письму владельцу - только клиенту
+            # Прикрепляем PDF-гайд к письму владельцу
+            if guide_url:
+                try:
+                    guide_bytes = download_pdf_from_url(guide_url)
+                    if guide_bytes:
+                        guide_attachment = MIMEBase('application', 'pdf')
+                        guide_attachment.set_payload(guide_bytes)
+                        encoders.encode_base64(guide_attachment)
+                        guide_filename = 'Топ-10_ошибок_при_строительстве_бани.pdf'
+                        guide_attachment.add_header(
+                            'Content-Disposition',
+                            'attachment',
+                            filename=('utf-8', '', guide_filename)
+                        )
+                        guide_attachment.add_header('Content-Type', 'application/pdf', name=guide_filename)
+                        msg.attach(guide_attachment)
+                        print("PDF guide attached to owner email successfully")
+                except Exception as guide_error:
+                    print(f"Failed to attach PDF guide to owner email: {guide_error}")
             
             # Прикрепляем дополнительные файлы от клиента
             if attachments:
@@ -577,11 +595,11 @@ www.пермский-пар.рф
                     # Отправляем PDF документ (смету)
                     success = send_telegram_document(bot_token, chat_id, pdf_data, name, order_id)
                     if success:
-                        # Отправляем PDF-гайд (константная ссылка)
-                        guide_url = 'https://cdn.poehali.dev/projects/c61a16fb-ce04-4e80-89c0-ef5e833732da/bucket/top-10-oshibok.pdf'
+                        # Отправляем PDF-гайд (используем тот же URL что и для email)
+                        telegram_guide_url = 'https://drive.usercontent.google.com/uc?id=1yz1lJ9oVDMnfH3JI_2-_3-nzVZ0iS_Gg&export=download'
                         import time
                         time.sleep(1)  # Небольшая задержка между отправками
-                        guide_success = send_telegram_guide(bot_token, chat_id, guide_url)
+                        guide_success = send_telegram_guide(bot_token, chat_id, telegram_guide_url)
                         if guide_success:
                             print(f"Guide sent for order {order_id}")
                         else:
