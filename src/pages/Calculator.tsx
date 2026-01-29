@@ -309,7 +309,8 @@ const Calculator = () => {
           foundation,
           location: distance,
           pdfData: pdfBase64,
-          attachments: filesBase64
+          attachments: filesBase64,
+          guideUrl: 'https://drive.usercontent.google.com/uc?id=1yz1lJ9oVDMnfH3JI_2-_3-nzVZ0iS_Gg&export=download'
         })
       });
       
