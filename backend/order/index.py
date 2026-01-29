@@ -14,7 +14,17 @@ import urllib.request
 import psycopg2
 import uuid
 
-# Версия: 8.0 - объединенная функция: заявки с калькулятора + Telegram бот webhook
+# Версия: 8.1 - добавлена поддержка скачивания и прикрепления PDF-гайда
+
+
+def download_pdf_from_url(url: str) -> bytes:
+    """Скачивает PDF по URL и возвращает байты"""
+    try:
+        with urllib.request.urlopen(url, timeout=10) as response:
+            return response.read()
+    except Exception as e:
+        print(f"Ошибка скачивания PDF: {e}")
+        return b''
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -65,6 +75,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         comment = body_data.get('comment', '')
         pdf_data = body_data.get('pdfData', '')  # Base64 encoded PDF
         attachments = body_data.get('attachments', [])  # Прикреплённые файлы
+        guide_url = body_data.get('guideUrl', '')  # URL гайда для скачивания
         
         material_names = {
             'ocilindrovannoe-brevno': 'Оцилиндрованное бревно',
@@ -112,12 +123,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     INSERT INTO calculator_orders 
                     (order_id, name, phone, email, telegram_username, messenger, 
                      material, length, width, partitions_length, floors, foundation, location,
-                     pdf_sent_email, pdf_sent_telegram, pdf_data)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                     pdf_sent_email, pdf_sent_telegram, pdf_data, guide_url)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (
                     order_id, name, phone, email_client, telegram_username, messenger,
                     material, length, width, partitions_length, floors, foundation, location,
-                    False, False, pdf_bytes
+                    False, False, pdf_bytes, guide_url
                 ))
                 
                 conn.commit()
@@ -247,6 +258,26 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 except Exception as pdf_error:
                     print(f"Failed to attach PDF: {pdf_error}")
             
+            # Прикрепляем PDF-гайд если передан URL
+            if guide_url:
+                try:
+                    guide_bytes = download_pdf_from_url(guide_url)
+                    if guide_bytes:
+                        guide_attachment = MIMEBase('application', 'pdf')
+                        guide_attachment.set_payload(guide_bytes)
+                        encoders.encode_base64(guide_attachment)
+                        guide_filename = 'Топ-10_ошибок_при_строительстве_бани.pdf'
+                        guide_attachment.add_header(
+                            'Content-Disposition',
+                            'attachment',
+                            filename=('utf-8', '', guide_filename)
+                        )
+                        guide_attachment.add_header('Content-Type', 'application/pdf', name=guide_filename)
+                        msg.attach(guide_attachment)
+                        print("PDF guide attached successfully")
+                except Exception as guide_error:
+                    print(f"Failed to attach PDF guide: {guide_error}")
+            
             # Прикрепляем дополнительные файлы от клиента
             if attachments:
                 for idx, file_data in enumerate(attachments):
@@ -330,7 +361,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 customer_html_part = MIMEText(customer_html, 'html', 'utf-8')
                 customer_msg.attach(customer_html_part)
                 
-                # Прикрепляем PDF
+                # Прикрепляем PDF сметы
                 try:
                     pdf_bytes = base64.b64decode(pdf_data)
                     pdf_attachment = MIMEBase('application', 'pdf')
@@ -344,10 +375,30 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     )
                     pdf_attachment.add_header('Content-Type', 'application/pdf', name=filename)
                     customer_msg.attach(pdf_attachment)
-                    print("Customer email prepared successfully")
+                    print("Customer email PDF estimate attached")
                 except Exception as pdf_err:
                     print(f"Failed to prepare customer PDF: {pdf_err}")
                     customer_msg = None
+                
+                # Прикрепляем PDF-гайд клиенту
+                if customer_msg and guide_url:
+                    try:
+                        guide_bytes = download_pdf_from_url(guide_url)
+                        if guide_bytes:
+                            guide_attachment = MIMEBase('application', 'pdf')
+                            guide_attachment.set_payload(guide_bytes)
+                            encoders.encode_base64(guide_attachment)
+                            guide_filename = 'Топ-10_ошибок_при_строительстве_бани.pdf'
+                            guide_attachment.add_header(
+                                'Content-Disposition',
+                                'attachment',
+                                filename=('utf-8', '', guide_filename)
+                            )
+                            guide_attachment.add_header('Content-Type', 'application/pdf', name=guide_filename)
+                            customer_msg.attach(guide_attachment)
+                            print("Customer email PDF guide attached")
+                    except Exception as guide_err:
+                        print(f"Failed to attach guide to customer email: {guide_err}")
             else:
                 print(f"Customer email NOT sent: messenger={messenger}, email_client={bool(email_client)}, pdf_data={'present' if pdf_data else 'missing'}")
             
@@ -503,7 +554,7 @@ www.пермский-пар.рф
         # Если есть order_id из deep link - ищем конкретную заявку
         if order_id_from_link:
             cur.execute("""
-                SELECT order_id, name, telegram_username, pdf_data 
+                SELECT order_id, name, telegram_username, pdf_data, guide_url 
                 FROM calculator_orders 
                 WHERE order_id = %s 
                 AND telegram_chat_id IS NULL
@@ -515,7 +566,7 @@ www.пермский-пар.рф
         # Если нет deep link и есть username - ищем по username
         elif username:
             cur.execute("""
-                SELECT order_id, name, telegram_username, pdf_data 
+                SELECT order_id, name, telegram_username, pdf_data, guide_url 
                 FROM calculator_orders 
                 WHERE telegram_username ILIKE %s 
                 AND telegram_chat_id IS NULL
@@ -538,12 +589,22 @@ www.пермский-пар.рф
             send_telegram_message(bot_token, chat_id, welcome_text)
             
             # Отправляем PDF каждой заявки
-            for order_id, name, tg_username, pdf_data in orders:
-                print(f"Processing order {order_id}: name={name}, pdf_data={'present (' + str(len(pdf_data)) + ' bytes)' if pdf_data else 'MISSING'}")
+            for order_id, name, tg_username, pdf_data, order_guide_url in orders:
+                print(f"Processing order {order_id}: name={name}, pdf_data={'present (' + str(len(pdf_data)) + ' bytes)' if pdf_data else 'MISSING'}, guide_url={order_guide_url}")
                 if pdf_data:
-                    # Отправляем PDF документ
+                    # Отправляем PDF документ (смету)
                     success = send_telegram_document(bot_token, chat_id, pdf_data, name, order_id)
                     if success:
+                        # Отправляем PDF-гайд если есть URL
+                        if order_guide_url:
+                            import time
+                            time.sleep(1)  # Небольшая задержка между отправками
+                            guide_success = send_telegram_guide(bot_token, chat_id, order_guide_url)
+                            if guide_success:
+                                print(f"Guide sent for order {order_id}")
+                            else:
+                                print(f"Failed to send guide for order {order_id}")
+                        
                         # Обновляем статус отправки
                         cur.execute("""
                             UPDATE calculator_orders 
@@ -738,6 +799,81 @@ def send_telegram_document(bot_token: str, chat_id: int, pdf_bytes: bytes, name:
                 return False
     except Exception as e:
         print(f"Send document error: {type(e).__name__}: {str(e)}")
+        import traceback
+        print(traceback.format_exc())
+        return False
+
+
+def send_telegram_guide(bot_token: str, chat_id: int, guide_url: str) -> bool:
+    """Отправка PDF-гайда в Telegram по URL"""
+    try:
+        # Скачиваем PDF
+        guide_bytes = download_pdf_from_url(guide_url)
+        if not guide_bytes:
+            print("Failed to download guide PDF")
+            return False
+        
+        message_text = """🎁 *Бонус: Топ-10 ошибок при строительстве русской бани*
+
+Мы подготовили для вас полезный гайд, который поможет избежать типичных ошибок при строительстве бани.
+
+С уважением,
+Команда "Пермский Пар" 🏡"""
+        
+        # Формируем multipart/form-data запрос
+        boundary = '----WebKitFormBoundary' + os.urandom(16).hex()
+        body = []
+        
+        # chat_id
+        body.append(f'--{boundary}'.encode())
+        body.append(b'Content-Disposition: form-data; name="chat_id"')
+        body.append(b'')
+        body.append(str(chat_id).encode())
+        
+        # caption
+        body.append(f'--{boundary}'.encode())
+        body.append(b'Content-Disposition: form-data; name="caption"')
+        body.append(b'')
+        body.append(message_text.encode('utf-8'))
+        
+        # parse_mode
+        body.append(f'--{boundary}'.encode())
+        body.append(b'Content-Disposition: form-data; name="parse_mode"')
+        body.append(b'')
+        body.append(b'Markdown')
+        
+        # document (PDF)
+        filename = 'Топ-10_ошибок_при_строительстве_бани.pdf'
+        body.append(f'--{boundary}'.encode())
+        body.append(f'Content-Disposition: form-data; name="document"; filename="{filename}"'.encode())
+        body.append(b'Content-Type: application/pdf')
+        body.append(b'')
+        body.append(guide_bytes)
+        
+        body.append(f'--{boundary}--'.encode())
+        
+        body_bytes = b'\r\n'.join(body)
+        
+        url = f'https://api.telegram.org/bot{bot_token}/sendDocument'
+        req = urllib.request.Request(
+            url,
+            data=body_bytes,
+            headers={
+                'Content-Type': f'multipart/form-data; boundary={boundary}',
+                'Content-Length': str(len(body_bytes))
+            }
+        )
+        
+        with urllib.request.urlopen(req, timeout=30) as response:
+            result = json.loads(response.read().decode())
+            if result.get('ok'):
+                print(f"Guide sent to chat_id {chat_id}")
+                return True
+            else:
+                print(f"Telegram API error: {result}")
+                return False
+    except Exception as e:
+        print(f"Send guide error: {type(e).__name__}: {str(e)}")
         import traceback
         print(traceback.format_exc())
         return False
