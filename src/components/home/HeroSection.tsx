@@ -24,7 +24,7 @@ const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
           Современные парные с эффектом "русской бани"
         </p>
         <div className="mt-12 sm:mt-16 md:mt-20">
-          <Button size="lg" onClick={() => window.location.href = '/calculator'} className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw]">Получить подробный расчет стоимости бани за 2 минуты</Button>
+          <Button size="lg" onClick={() => window.location.href = '/calculator'} className="text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-12 bg-orange-500 hover:bg-orange-600 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-4 leading-tight max-w-[90vw] rounded-full">Получить подробный расчет стоимости бани за 2 минуты</Button>
         </div>
       </div>
     </section>
