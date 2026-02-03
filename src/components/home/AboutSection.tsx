@@ -47,7 +47,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 size="lg" 
                 onClick={() => window.location.href = '/calculator'} 
                 className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
-              >Стоимость бани за 2 минуты + Гайд "ТОП-10 ошибок строительства бани" в подарок</Button>
+              >Рассчитать стоимость новой бани за 2 минуты</Button>
               
               <Button 
                 size="lg" 
@@ -129,8 +129,8 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
               <Button 
                 size="lg" 
                 onClick={() => window.location.href = '/calculator'} 
-                className="w-full text-sm sm:text-base md:text-lg px-4 sm:px-6 py-5 sm:py-6 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal leading-relaxed h-auto min-h-[80px] sm:min-h-[70px]"
-              >Стоимость бани за 2 минуты + Гайд "ТОП-10 ошибок строительства бани" в подарок</Button>
+                className="w-full text-sm sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal leading-tight"
+              >Рассчитать стоимость бани за 2 минуты</Button>
             </div>
             <div className="space-y-4 max-w-full">
               <div className="flex items-start gap-3">

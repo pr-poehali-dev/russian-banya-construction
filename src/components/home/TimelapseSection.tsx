@@ -84,7 +84,7 @@ const TimelapseSection = ({ scrollToSection }: TimelapseSectionProps) => {
             onClick={() => window.location.href = '/calculator'}
             className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg text-lg transition-transform hover:scale-105 active:scale-95"
           >
-            Стоимость бани за 2 минуты + Гайд "ТОП-10 ошибок строительства бани" в подарок
+            Рассчитать стоимость вашей бани за 2 минуты
           </button>
         </div>
       </div>
