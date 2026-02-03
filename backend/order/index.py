@@ -123,12 +123,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     INSERT INTO calculator_orders 
                     (order_id, name, phone, email, telegram_username, messenger, 
                      material, length, width, partitions_length, floors, foundation, location,
-                     pdf_sent_email, pdf_sent_telegram, pdf_data)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                     pdf_sent_email, pdf_sent_telegram, pdf_data, guide_url)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (
                     order_id, name, phone, email_client, telegram_username, messenger,
                     material, length, width, partitions_length, floors, foundation, location,
-                    False, False, pdf_bytes
+                    False, False, pdf_bytes, guide_url
                 ))
                 
                 conn.commit()
@@ -258,7 +258,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 except Exception as pdf_error:
                     print(f"Failed to attach PDF: {pdf_error}")
             
-            # Прикрепляем PDF-гайд к письму владельцу
+            # Прикрепляем PDF-гайд если передан URL
             if guide_url:
                 try:
                     guide_bytes = download_pdf_from_url(guide_url)
@@ -274,9 +274,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         )
                         guide_attachment.add_header('Content-Type', 'application/pdf', name=guide_filename)
                         msg.attach(guide_attachment)
-                        print("PDF guide attached to owner email successfully")
+                        print("PDF guide attached successfully")
                 except Exception as guide_error:
-                    print(f"Failed to attach PDF guide to owner email: {guide_error}")
+                    print(f"Failed to attach PDF guide: {guide_error}")
             
             # Прикрепляем дополнительные файлы от клиента
             if attachments:
@@ -554,7 +554,7 @@ www.пермский-пар.рф
         # Если есть order_id из deep link - ищем конкретную заявку
         if order_id_from_link:
             cur.execute("""
-                SELECT order_id, name, telegram_username, pdf_data 
+                SELECT order_id, name, telegram_username, pdf_data, guide_url 
                 FROM calculator_orders 
                 WHERE order_id = %s 
                 AND telegram_chat_id IS NULL
@@ -566,7 +566,7 @@ www.пермский-пар.рф
         # Если нет deep link и есть username - ищем по username
         elif username:
             cur.execute("""
-                SELECT order_id, name, telegram_username, pdf_data 
+                SELECT order_id, name, telegram_username, pdf_data, guide_url 
                 FROM calculator_orders 
                 WHERE telegram_username ILIKE %s 
                 AND telegram_chat_id IS NULL
@@ -589,21 +589,21 @@ www.пермский-пар.рф
             send_telegram_message(bot_token, chat_id, welcome_text)
             
             # Отправляем PDF каждой заявки
-            for order_id, name, tg_username, pdf_data in orders:
-                print(f"Processing order {order_id}: name={name}, pdf_data={'present (' + str(len(pdf_data)) + ' bytes)' if pdf_data else 'MISSING'}")
+            for order_id, name, tg_username, pdf_data, order_guide_url in orders:
+                print(f"Processing order {order_id}: name={name}, pdf_data={'present (' + str(len(pdf_data)) + ' bytes)' if pdf_data else 'MISSING'}, guide_url={order_guide_url}")
                 if pdf_data:
                     # Отправляем PDF документ (смету)
                     success = send_telegram_document(bot_token, chat_id, pdf_data, name, order_id)
                     if success:
-                        # Отправляем PDF-гайд (используем тот же URL что и для email)
-                        telegram_guide_url = 'https://drive.usercontent.google.com/uc?id=1yz1lJ9oVDMnfH3JI_2-_3-nzVZ0iS_Gg&export=download'
-                        import time
-                        time.sleep(1)  # Небольшая задержка между отправками
-                        guide_success = send_telegram_guide(bot_token, chat_id, telegram_guide_url)
-                        if guide_success:
-                            print(f"Guide sent for order {order_id}")
-                        else:
-                            print(f"Failed to send guide for order {order_id}")
+                        # Отправляем PDF-гайд если есть URL
+                        if order_guide_url:
+                            import time
+                            time.sleep(1)  # Небольшая задержка между отправками
+                            guide_success = send_telegram_guide(bot_token, chat_id, order_guide_url)
+                            if guide_success:
+                                print(f"Guide sent for order {order_id}")
+                            else:
+                                print(f"Failed to send guide for order {order_id}")
                         
                         # Обновляем статус отправки
                         cur.execute("""
