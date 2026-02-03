@@ -624,9 +624,9 @@ const Calculator = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-emerald-100 py-4 md:py-12 px-4">
       <div className="container max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8 items-start max-w-full overflow-hidden">
+        <div className="grid md:grid-cols-2 gap-8 items-start max-w-full overflow-hidden">
           {/* Левая часть - фото */}
-          <div className="hidden lg:block sticky top-8 space-y-4">
+          <div className="hidden md:block sticky top-8 space-y-4">
             {step === 5 ? (
               <div className="space-y-4">
                 <div className="text-center">
@@ -663,7 +663,7 @@ const Calculator = () => {
 
           {/* Правая часть - калькулятор */}
           <div className="space-y-4 md:space-y-6 w-full max-w-full overflow-hidden">
-            <h1 className="text-2xl md:text-4xl font-bold text-emerald-900 text-center lg:text-left">Калькулятор стоимости бани</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-emerald-900 text-center md:text-left">Калькулятор стоимости бани</h1>
             {/* Индикатор шагов */}
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
