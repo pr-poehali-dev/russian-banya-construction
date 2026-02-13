@@ -52,9 +52,8 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                     Провожу курс для заказчиков "Строительство правильной русской бани"
                   </p>
                 </div>
-                <p className="text-sm sm:text-base text-black ml-10">
-                  В курсе вы узнаете все тонкости строительства бани и ощутите на себе все прелести парения от пар-мастеров
-                </p>
+                <p className="text-sm sm:text-base text-black ml-10">В курсе вы узнаете все тонкости строительства бани и ощутите на себе все прелести парения от пар-мастеров. 
+Обучение проходит в реальной бане с индивидуальным парением каждого участника</p>
               </div>
 
               <div className="flex items-center justify-center gap-3 flex-wrap mt-4">
