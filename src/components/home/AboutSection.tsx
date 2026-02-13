@@ -45,6 +45,18 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
               
               <p className="text-sm sm:text-base md:text-lg text-black font-semibold mt-4">Бесплатная консультация по строительству, ремонту или модернизации Вашей бани</p>
 
+              <div className="mt-6 p-4 bg-orange-50 border-2 border-orange-500 rounded-lg">
+                <div className="flex items-start gap-3 mb-2">
+                  <Icon name="GraduationCap" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
+                  <p className="text-base sm:text-lg font-bold text-black">
+                    Провожу курс для заказчиков "Строительство правильной русской бани"
+                  </p>
+                </div>
+                <p className="text-sm sm:text-base text-black ml-10">
+                  В курсе вы узнаете все тонкости строительства бани и ощутите на себе все прелести парения от пар-мастеров
+                </p>
+              </div>
+
               <div className="flex items-center justify-center gap-3 flex-wrap mt-4">
               <a href="tel:+79824900900" className="text-xl sm:text-2xl font-bold text-black hover:text-primary transition-colors">
                 +7 (982) 490-09-00
