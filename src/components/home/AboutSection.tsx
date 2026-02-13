@@ -125,7 +125,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
               <Button 
                 size="lg" 
                 onClick={() => window.location.href = '/calculator'} 
-                className="w-full text-sm sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal leading-tight"
+                className="w-full text-sm sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal leading-tight h-auto min-h-[60px]"
               >Узнай стоимость бани за 2 минуты + Гайд "ТОП-10 ошибок строительства бани"</Button>
               <Button 
                 size="lg" 
