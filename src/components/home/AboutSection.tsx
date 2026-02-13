@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import RepairBookingForm from "./RepairBookingForm";
+import CourseForm from "./CourseForm";
 
 interface AboutSectionProps {
   scrollToSection: (id: string) => void;
@@ -12,6 +13,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showRepairForm, setShowRepairForm] = useState(false);
+  const [showCourseForm, setShowCourseForm] = useState(false);
 
   const galleryImages = [
     "https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg",
@@ -74,7 +76,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 <div className="flex justify-center">
                   <Button 
                     size="lg" 
-                    onClick={() => window.open('https://t.me/+79824900900', '_blank')} 
+                    onClick={() => setShowCourseForm(true)} 
                     className="text-sm sm:text-base px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold transition-transform hover:scale-105 active:scale-95"
                   >
                     Узнать подробности
@@ -306,6 +308,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
         </Dialog>
 
         <RepairBookingForm open={showRepairForm} onClose={() => setShowRepairForm(false)} />
+        <CourseForm open={showCourseForm} onClose={() => setShowCourseForm(false)} />
       </div>
     </section>
   );
