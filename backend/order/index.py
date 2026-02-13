@@ -49,7 +49,14 @@ def handle_course_request(body_data):
     smtp_password = os.environ.get('SMTP_PASSWORD')
     recipient_admin = os.environ.get('RECIPIENT_EMAIL')
 
-    image_bytes = download_pdf_from_url(SEMINAR_IMAGE_URL)
+    image_bytes = b''
+    try:
+        req = urllib.request.Request(SEMINAR_IMAGE_URL, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            image_bytes = resp.read()
+        print(f"Image downloaded: {len(image_bytes)} bytes")
+    except Exception as img_err:
+        print(f"Image download FAILED: {img_err}")
 
     msg_client = MIMEMultipart()
     msg_client['From'] = smtp_user
@@ -126,13 +133,15 @@ def handle_course_request(body_data):
     """
     msg_admin.attach(MIMEText(html_admin, 'html'))
 
+    print(f"Sending seminar email to {email_to}, image attached: {len(image_bytes) > 0}, image size: {len(image_bytes)}")
+
     with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
         server.login(smtp_user, smtp_password)
         server.send_message(msg_client)
+        print(f"Client email sent to {email_to}")
         if recipient_admin:
             server.send_message(msg_admin)
-
-    print(f"Seminar info sent to {email_to}, admin notified")
+            print(f"Admin email sent to {recipient_admin}")
 
     return {
         'statusCode': 200,
