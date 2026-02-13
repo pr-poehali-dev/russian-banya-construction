@@ -65,40 +65,58 @@ def handle_course_request(body_data):
 
     html_client = f"""
     <html>
-    <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; margin: 0; padding: 0; background-color: #f5f5f5;">
-        <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #1a1a2e; text-align: center;">{name}, спасибо за интерес к семинару!</h2>
-            <p style="text-align: center;">Во вложении — афиша с программой семинара</p>
-            <div style="background: #1a1a2e; padding: 30px; border-radius: 12px; color: #fff; margin: 20px 0;">
-                <h1 style="color: #d4a64e; text-align: center; margin-top: 0;">Строительство правильной Русской бани</h1>
-                <p style="text-align: center; color: #f0d78c; font-size: 16px; font-weight: bold;">10 марта 2025 (вторник) | 18:00 — 24:00</p>
-                <p style="text-align: center; color: #ccc;">Банный комплекс «Другая баня»</p>
-                <hr style="border: none; border-top: 1px solid #d4a64e; margin: 20px 40px;">
-                <p style="color: #d4a64e; font-weight: bold;">Ведущие семинара:</p>
-                <p style="margin: 5px 0;"><b>Александр Савинов</b> — строитель, 15 лет опыта</p>
-                <p style="margin: 5px 0;"><b>Александр Власов и Оливер Рахе</b> — пар-мастера</p>
-                <hr style="border: none; border-top: 1px solid #d4a64e; margin: 20px 40px;">
-                <p style="color: #d4a64e; font-weight: bold; text-align: center;">Программа семинара:</p>
-                <p style="margin: 8px 0;">1. История, философия и дух русской бани</p>
-                <p style="margin: 8px 0;">2. Проектирование, планировки, материалы</p>
-                <p style="margin: 8px 0;">3. Выбор печи, дымоход, вентиляция — без ошибок новичков</p>
-                <p style="margin: 8px 0;">4. Электрика, свет, вода и слив</p>
-                <p style="margin: 8px 0;">5. Безопасность и физиология парения</p>
-                <hr style="border: none; border-top: 1px solid #d4a64e; margin: 20px 40px;">
-                <div style="background: #0f3460; padding: 15px; border-radius: 8px; border: 1px solid #d4a64e;">
-                    <p style="color: #d4a64e; font-weight: bold; margin-top: 0;">Бонус для участников:</p>
-                    <p style="margin: 5px 0;">&#8226; Живая практика парения с мастерами</p>
-                    <p style="margin: 5px 0;">&#8226; Памятный подарок каждому участнику</p>
-                    <p style="margin: 5px 0;">&#8226; Чай, угощения и банные байки у камина</p>
+    <body style="font-family: 'Segoe UI', Arial, sans-serif; color: #2c2c2c; line-height: 1.7; margin: 0; padding: 0; background-color: #faf8f5;">
+        <div style="max-width: 620px; margin: 0 auto; padding: 24px;">
+            <h2 style="color: #3a3a3a; text-align: center; margin-bottom: 4px;">{name}, \u0441\u043f\u0430\u0441\u0438\u0431\u043e \u0437\u0430 \u0438\u043d\u0442\u0435\u0440\u0435\u0441 \u043a \u0441\u0435\u043c\u0438\u043d\u0430\u0440\u0443!</h2>
+            <p style="text-align: center; color: #777; font-size: 14px;">\u0412\u043e \u0432\u043b\u043e\u0436\u0435\u043d\u0438\u0438 — \u0430\u0444\u0438\u0448\u0430 \u0441 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043e\u0439 \u0441\u0435\u043c\u0438\u043d\u0430\u0440\u0430</p>
+
+            <div style="background: #ffffff; padding: 32px; border-radius: 16px; margin: 20px 0; border: 1px solid #e8e2d9; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                <h1 style="color: #b8860b; text-align: center; margin-top: 0; font-size: 24px;">\U0001f525 \u0421\u0442\u0440\u043e\u0438\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u043e \u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e\u0439 \u0420\u0443\u0441\u0441\u043a\u043e\u0439 \u0431\u0430\u043d\u0438</h1>
+                <p style="text-align: center; color: #b8860b; font-size: 17px; font-weight: bold;">\U0001f4c5 10 \u043c\u0430\u0440\u0442\u0430 2026 \u0433. (\u0432\u0442\u043e\u0440\u043d\u0438\u043a) | \u23f0 18:00 — 24:00</p>
+                <p style="text-align: center; color: #666; font-size: 15px;">\U0001f3e0 \u0411\u0430\u043d\u043d\u044b\u0439 \u043a\u043e\u043c\u043f\u043b\u0435\u043a\u0441 \u00ab\u0414\u0440\u0443\u0433\u0430\u044f \u0431\u0430\u043d\u044f\u00bb</p>
+
+                <hr style="border: none; border-top: 1px solid #e8e2d9; margin: 20px 30px;">
+
+                <p style="color: #b8860b; font-weight: bold; font-size: 15px;">\U0001f9d1\u200d\U0001f3eb \u0412\u0435\u0434\u0443\u0449\u0438\u0435 \u0441\u0435\u043c\u0438\u043d\u0430\u0440\u0430:</p>
+                <p style="margin: 6px 0; color: #333;"><b>\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440 \u0421\u0430\u0432\u0438\u043d\u043e\u0432</b> — \u0441\u0442\u0440\u043e\u0438\u0442\u0435\u043b\u044c, 15 \u043b\u0435\u0442 \u043e\u043f\u044b\u0442\u0430</p>
+                <p style="margin: 6px 0; color: #333;"><b>\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440 \u0412\u043b\u0430\u0441\u043e\u0432 \u0438 \u041e\u043b\u0438\u0432\u0435\u0440 \u0420\u0430\u0445\u0435</b> — \u043f\u0430\u0440-\u043c\u0430\u0441\u0442\u0435\u0440\u0430</p>
+
+                <hr style="border: none; border-top: 1px solid #e8e2d9; margin: 20px 30px;">
+
+                <p style="color: #b8860b; font-weight: bold; text-align: center; font-size: 16px;">\U0001f4cb \u041f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 \u0441\u0435\u043c\u0438\u043d\u0430\u0440\u0430:</p>
+                <p style="margin: 10px 0; color: #333;">1\u20e3 \u0418\u0441\u0442\u043e\u0440\u0438\u044f, \u0444\u0438\u043b\u043e\u0441\u043e\u0444\u0438\u044f \u0438 \u0434\u0443\u0445 \u0440\u0443\u0441\u0441\u043a\u043e\u0439 \u0431\u0430\u043d\u0438</p>
+                <p style="margin: 10px 0; color: #333;">2\u20e3 \u041f\u0440\u043e\u0435\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435, \u043f\u043b\u0430\u043d\u0438\u0440\u043e\u0432\u043a\u0438, \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u044b</p>
+                <p style="margin: 10px 0; color: #333;">3\u20e3 \u0412\u044b\u0431\u043e\u0440 \u043f\u0435\u0447\u0438, \u0434\u044b\u043c\u043e\u0445\u043e\u0434, \u0432\u0435\u043d\u0442\u0438\u043b\u044f\u0446\u0438\u044f — \u0431\u0435\u0437 \u043e\u0448\u0438\u0431\u043e\u043a \u043d\u043e\u0432\u0438\u0447\u043a\u043e\u0432</p>
+                <p style="margin: 10px 0; color: #333;">4\u20e3 \u042d\u043b\u0435\u043a\u0442\u0440\u0438\u043a\u0430, \u0441\u0432\u0435\u0442, \u0432\u043e\u0434\u0430 \u0438 \u0441\u043b\u0438\u0432</p>
+                <p style="margin: 10px 0; color: #333;">5\u20e3 \u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c \u0438 \u0444\u0438\u0437\u0438\u043e\u043b\u043e\u0433\u0438\u044f \u043f\u0430\u0440\u0435\u043d\u0438\u044f</p>
+
+                <hr style="border: none; border-top: 1px solid #e8e2d9; margin: 20px 30px;">
+
+                <div style="background: #fdf6e3; padding: 18px; border-radius: 10px; border: 1px solid #e8dcc8;">
+                    <p style="color: #b8860b; font-weight: bold; margin-top: 0;">\U0001f381 \u0411\u043e\u043d\u0443\u0441 \u0434\u043b\u044f \u0443\u0447\u0430\u0441\u0442\u043d\u0438\u043a\u043e\u0432:</p>
+                    <p style="margin: 6px 0; color: #444;">\U0001f9d6 \u0416\u0438\u0432\u0430\u044f \u043f\u0440\u0430\u043a\u0442\u0438\u043a\u0430 \u043f\u0430\u0440\u0435\u043d\u0438\u044f \u0441 \u043c\u0430\u0441\u0442\u0435\u0440\u0430\u043c\u0438</p>
+                    <p style="margin: 6px 0; color: #444;">\U0001f381 \u041f\u0430\u043c\u044f\u0442\u043d\u044b\u0439 \u043f\u043e\u0434\u0430\u0440\u043e\u043a \u043a\u0430\u0436\u0434\u043e\u043c\u0443 \u0443\u0447\u0430\u0441\u0442\u043d\u0438\u043a\u0443</p>
+                    <p style="margin: 6px 0; color: #444;">\u2615 \u0427\u0430\u0439, \u0443\u0433\u043e\u0449\u0435\u043d\u0438\u044f \u0438 \u0431\u0430\u043d\u043d\u044b\u0435 \u0431\u0430\u0439\u043a\u0438 \u0443 \u043a\u0430\u043c\u0438\u043d\u0430</p>
                 </div>
-                <p style="text-align: center; margin-top: 20px;"><b style="color: #d4a64e;">Формат:</b> мини-группа 4–6 человек</p>
-                <p style="text-align: center;"><b style="color: #d4a64e;">Стоимость:</b> 10 000 руб.</p>
-                <p style="text-align: center; color: #ccc; font-size: 12px;">Семинар состоится при наборе от 4 участников</p>
+
+                <p style="text-align: center; margin-top: 22px; color: #333;"><b style="color: #b8860b;">\U0001f465 \u0424\u043e\u0440\u043c\u0430\u0442:</b> \u043c\u0438\u043d\u0438-\u0433\u0440\u0443\u043f\u043f\u0430 4\u20136 \u0447\u0435\u043b\u043e\u0432\u0435\u043a</p>
+                <p style="text-align: center; color: #333;"><b style="color: #b8860b;">\U0001f4b0 \u0421\u0442\u043e\u0438\u043c\u043e\u0441\u0442\u044c:</b> 10 000 \u0440\u0443\u0431.</p>
+                <p style="text-align: center; color: #888; font-size: 13px;">\u0421\u0435\u043c\u0438\u043d\u0430\u0440 \u0441\u043e\u0441\u0442\u043e\u0438\u0442\u0441\u044f \u043f\u0440\u0438 \u043d\u0430\u0431\u043e\u0440\u0435 \u043e\u0442 4 \u0443\u0447\u0430\u0441\u0442\u043d\u0438\u043a\u043e\u0432</p>
             </div>
-            <p style="text-align: center; font-weight: bold; color: #d4a64e;">Запись и вопросы — в личные сообщения Оливеру Рахе</p>
-            <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+
+            <div style="text-align: center; margin: 20px 0; padding: 16px; background: #fff; border-radius: 12px; border: 1px solid #e8e2d9;">
+                <p style="font-weight: bold; color: #333; font-size: 15px; margin-top: 0;">\u270d\ufe0f \u0417\u0430\u043f\u0438\u0441\u044c \u0438 \u0432\u043e\u043f\u0440\u043e\u0441\u044b — \u0422\u041e\u041b\u042c\u041a\u041e \u0432 \u043b\u0438\u0447\u043d\u044b\u0435 \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f \u041e\u043b\u0438\u0432\u0435\u0440\u0443 \u0420\u0430\u0445\u0435</p>
+                <p style="margin: 8px 0;">
+                    <a href="https://t.me/oliverrahe" style="color: #0088cc; text-decoration: none; font-weight: bold; font-size: 15px;">\U0001f4ac Telegram: @oliverrahe</a>
+                </p>
+                <p style="margin: 8px 0;">
+                    <a href="https://vk.com/oliverpar" style="color: #4a76a8; text-decoration: none; font-weight: bold; font-size: 15px;">\U0001f310 \u0412\u041a: vk.com/oliverpar</a>
+                </p>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #e8e2d9; margin: 16px 0;">
             <p style="font-size: 12px; color: #999; text-align: center;">
-                Пермский Пар — строительная компания г. Пермь<br>
+                \u041f\u0435\u0440\u043c\u0441\u043a\u0438\u0439 \u041f\u0430\u0440 — \u0441\u0442\u0440\u043e\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u043a\u043e\u043c\u043f\u0430\u043d\u0438\u044f \u0433. \u041f\u0435\u0440\u043c\u044c<br>
                 +7 (342) 298-40-30 | +7 (982) 490-09-00
             </p>
         </div>
