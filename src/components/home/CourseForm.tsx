@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import InputMask from "react-input-mask";
 import Icon from "@/components/ui/icon";
-import { generateSeminarPdf } from "@/utils/generateSeminarPdf";
 
 interface CourseFormProps {
   open: boolean;
@@ -30,15 +29,12 @@ const CourseForm = ({ open, onClose }: CourseFormProps) => {
     setIsSubmitting(true);
 
     try {
-      const pdfBase64 = await generateSeminarPdf();
-
       const response = await fetch(ORDER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          type: "course",
-          pdfData: pdfBase64
+          type: "course"
         })
       });
 

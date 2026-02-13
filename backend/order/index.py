@@ -27,11 +27,13 @@ def download_pdf_from_url(url: str) -> bytes:
         return b''
 
 
+SEMINAR_IMAGE_URL = "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/files/6876d2a0-9219-4357-bf1d-b362d4a1aeac.jpg"
+
+
 def handle_course_request(body_data):
     name = body_data.get('name', '').strip()
     phone = body_data.get('phone', '').strip()
     email_to = body_data.get('email', '').strip()
-    pdf_base64 = body_data.get('pdfData', '')
 
     if not name or not phone or not email_to:
         return {
@@ -47,6 +49,8 @@ def handle_course_request(body_data):
     smtp_password = os.environ.get('SMTP_PASSWORD')
     recipient_admin = os.environ.get('RECIPIENT_EMAIL')
 
+    image_bytes = download_pdf_from_url(SEMINAR_IMAGE_URL)
+
     msg_client = MIMEMultipart()
     msg_client['From'] = smtp_user
     msg_client['To'] = email_to
@@ -54,16 +58,39 @@ def handle_course_request(body_data):
 
     html_client = f"""
     <html>
-    <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+    <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; margin: 0; padding: 0; background-color: #f5f5f5;">
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #1a1a2e;">{name}, спасибо за интерес к семинару!</h2>
-            <p>Во вложении — подробная программа семинара <b>«Строительство правильной Русской бани»</b>.</p>
-            <p><b>Дата:</b> 10 марта (вторник), 18:00 — 24:00<br>
-            <b>Место:</b> Банный комплекс «Другая баня»<br>
-            <b>Стоимость:</b> 10 000 руб.</p>
-            <p>Для записи и уточнения деталей — напишите Оливеру Рахе в личные сообщения.</p>
+            <h2 style="color: #1a1a2e; text-align: center;">{name}, спасибо за интерес к семинару!</h2>
+            <p style="text-align: center;">Во вложении — афиша с программой семинара</p>
+            <div style="background: #1a1a2e; padding: 30px; border-radius: 12px; color: #fff; margin: 20px 0;">
+                <h1 style="color: #d4a64e; text-align: center; margin-top: 0;">Строительство правильной Русской бани</h1>
+                <p style="text-align: center; color: #f0d78c; font-size: 16px; font-weight: bold;">10 марта 2025 (вторник) | 18:00 — 24:00</p>
+                <p style="text-align: center; color: #ccc;">Банный комплекс «Другая баня»</p>
+                <hr style="border: none; border-top: 1px solid #d4a64e; margin: 20px 40px;">
+                <p style="color: #d4a64e; font-weight: bold;">Ведущие семинара:</p>
+                <p style="margin: 5px 0;"><b>Александр Савинов</b> — строитель, 15 лет опыта</p>
+                <p style="margin: 5px 0;"><b>Александр Власов и Оливер Рахе</b> — пар-мастера</p>
+                <hr style="border: none; border-top: 1px solid #d4a64e; margin: 20px 40px;">
+                <p style="color: #d4a64e; font-weight: bold; text-align: center;">Программа семинара:</p>
+                <p style="margin: 8px 0;">1. История, философия и дух русской бани</p>
+                <p style="margin: 8px 0;">2. Проектирование, планировки, материалы</p>
+                <p style="margin: 8px 0;">3. Выбор печи, дымоход, вентиляция — без ошибок новичков</p>
+                <p style="margin: 8px 0;">4. Электрика, свет, вода и слив</p>
+                <p style="margin: 8px 0;">5. Безопасность и физиология парения</p>
+                <hr style="border: none; border-top: 1px solid #d4a64e; margin: 20px 40px;">
+                <div style="background: #0f3460; padding: 15px; border-radius: 8px; border: 1px solid #d4a64e;">
+                    <p style="color: #d4a64e; font-weight: bold; margin-top: 0;">Бонус для участников:</p>
+                    <p style="margin: 5px 0;">&#8226; Живая практика парения с мастерами</p>
+                    <p style="margin: 5px 0;">&#8226; Памятный подарок каждому участнику</p>
+                    <p style="margin: 5px 0;">&#8226; Чай, угощения и банные байки у камина</p>
+                </div>
+                <p style="text-align: center; margin-top: 20px;"><b style="color: #d4a64e;">Формат:</b> мини-группа 4–6 человек</p>
+                <p style="text-align: center;"><b style="color: #d4a64e;">Стоимость:</b> 10 000 руб.</p>
+                <p style="text-align: center; color: #ccc; font-size: 12px;">Семинар состоится при наборе от 4 участников</p>
+            </div>
+            <p style="text-align: center; font-weight: bold; color: #d4a64e;">Запись и вопросы — в личные сообщения Оливеру Рахе</p>
             <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
-            <p style="font-size: 12px; color: #999;">
+            <p style="font-size: 12px; color: #999; text-align: center;">
                 Пермский Пар — строительная компания г. Пермь<br>
                 +7 (342) 298-40-30 | +7 (982) 490-09-00
             </p>
@@ -73,13 +100,12 @@ def handle_course_request(body_data):
     """
     msg_client.attach(MIMEText(html_client, 'html'))
 
-    if pdf_base64:
-        pdf_bytes = base64.b64decode(pdf_base64)
-        pdf_part = MIMEBase('application', 'pdf')
-        pdf_part.set_payload(pdf_bytes)
-        encoders.encode_base64(pdf_part)
-        pdf_part.add_header('Content-Disposition', 'attachment; filename="Seminar_Russkaya_Banya.pdf"')
-        msg_client.attach(pdf_part)
+    if image_bytes:
+        img_part = MIMEBase('image', 'jpeg')
+        img_part.set_payload(image_bytes)
+        encoders.encode_base64(img_part)
+        img_part.add_header('Content-Disposition', 'attachment; filename="Seminar_Russkaya_Banya.jpg"')
+        msg_client.attach(img_part)
 
     msg_admin = MIMEMultipart()
     msg_admin['From'] = smtp_user
@@ -94,7 +120,7 @@ def handle_course_request(body_data):
         <p><b>Телефон:</b> {phone}</p>
         <p><b>Email:</b> {email_to}</p>
         <hr>
-        <p style="color: #999; font-size: 12px;">PDF с программой отправлен заказчику автоматически.</p>
+        <p style="color: #999; font-size: 12px;">Афиша семинара отправлена заказчику автоматически.</p>
     </body>
     </html>
     """
@@ -106,12 +132,12 @@ def handle_course_request(body_data):
         if recipient_admin:
             server.send_message(msg_admin)
 
-    print(f"Seminar PDF sent to {email_to}, admin notified")
+    print(f"Seminar info sent to {email_to}, admin notified")
 
     return {
         'statusCode': 200,
         'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-        'body': json.dumps({'success': True, 'message': 'PDF отправлен на email'}),
+        'body': json.dumps({'success': True, 'message': 'Программа отправлена на email'}),
         'isBase64Encoded': False
     }
 
