@@ -45,17 +45,6 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
               
               <p className="text-sm sm:text-base md:text-lg text-black font-semibold mt-4">Бесплатная консультация по строительству, ремонту или модернизации Вашей бани</p>
 
-              <div className="mt-6 p-4 bg-orange-50 border-2 border-orange-500 rounded-lg">
-                <div className="flex items-start gap-3 mb-2">
-                  <Icon name="GraduationCap" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                  <p className="text-base sm:text-lg font-bold text-black">
-                    Провожу курс для заказчиков "Строительство правильной русской бани"
-                  </p>
-                </div>
-                <p className="text-sm sm:text-base text-black ml-10">В курсе вы узнаете все тонкости строительства бани и ощутите на себе все прелести парения от пар-мастеров. 
-Обучение проходит в реальной бане с индивидуальным парением каждого участника</p>
-              </div>
-
               <div className="flex items-center justify-center gap-3 flex-wrap mt-4">
               <a href="tel:+79824900900" className="text-xl sm:text-2xl font-bold text-black hover:text-primary transition-colors">
                 +7 (982) 490-09-00
@@ -70,6 +59,26 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 <img src="https://cdn.poehali.dev/files/IlwnOob3_b8V56ug0ufBKQPFI6Di_pNsKHZUm7_yDwj0wSGwJVIhHVATvJ5AhTO56sg4PhSTOS7DvQ5swJRUSIh8.jpg" alt="МАКС" className="w-full h-full object-cover" />
               </a>
             </div>
+
+              <div className="mt-6 p-4 bg-orange-50 border-2 border-orange-500 rounded-lg">
+                <div className="flex items-start gap-3 mb-2">
+                  <Icon name="GraduationCap" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
+                  <p className="text-base sm:text-lg font-bold text-black">
+                    Провожу курс для заказчиков "Строительство правильной русской бани"
+                  </p>
+                </div>
+                <p className="text-sm sm:text-base text-black ml-10 mb-4">В курсе вы узнаете все тонкости строительства бани и ощутите на себе все прелести парения от пар-мастеров. 
+Обучение проходит в реальной бане с индивидуальным парением каждого участника</p>
+                <div className="flex justify-center">
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://t.me/+79824900900', '_blank')} 
+                    className="text-sm sm:text-base px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold transition-transform hover:scale-105 active:scale-95"
+                  >
+                    Узнать подробности
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
           <div className="w-full max-w-full overflow-hidden space-y-4">
