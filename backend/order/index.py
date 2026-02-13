@@ -27,6 +27,95 @@ def download_pdf_from_url(url: str) -> bytes:
         return b''
 
 
+def handle_course_request(body_data):
+    name = body_data.get('name', '').strip()
+    phone = body_data.get('phone', '').strip()
+    email_to = body_data.get('email', '').strip()
+    pdf_base64 = body_data.get('pdfData', '')
+
+    if not name or not phone or not email_to:
+        return {
+            'statusCode': 400,
+            'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({'error': 'Заполните имя, телефон и email'}),
+            'isBase64Encoded': False
+        }
+
+    smtp_host = os.environ.get('SMTP_HOST', 'smtp.mail.ru')
+    smtp_port = int(os.environ.get('SMTP_PORT', '465'))
+    smtp_user = os.environ.get('SMTP_USER')
+    smtp_password = os.environ.get('SMTP_PASSWORD')
+    recipient_admin = os.environ.get('RECIPIENT_EMAIL')
+
+    msg_client = MIMEMultipart()
+    msg_client['From'] = smtp_user
+    msg_client['To'] = email_to
+    msg_client['Subject'] = 'Программа семинара «Строительство правильной Русской бани»'
+
+    html_client = f"""
+    <html>
+    <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #1a1a2e;">{name}, спасибо за интерес к семинару!</h2>
+            <p>Во вложении — подробная программа семинара <b>«Строительство правильной Русской бани»</b>.</p>
+            <p><b>Дата:</b> 10 марта (вторник), 18:00 — 24:00<br>
+            <b>Место:</b> Банный комплекс «Другая баня»<br>
+            <b>Стоимость:</b> 10 000 руб.</p>
+            <p>Для записи и уточнения деталей — напишите Оливеру Рахе в личные сообщения.</p>
+            <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+            <p style="font-size: 12px; color: #999;">
+                Пермский Пар — строительная компания г. Пермь<br>
+                +7 (342) 298-40-30 | +7 (982) 490-09-00
+            </p>
+        </div>
+    </body>
+    </html>
+    """
+    msg_client.attach(MIMEText(html_client, 'html'))
+
+    if pdf_base64:
+        pdf_bytes = base64.b64decode(pdf_base64)
+        pdf_part = MIMEBase('application', 'pdf')
+        pdf_part.set_payload(pdf_bytes)
+        encoders.encode_base64(pdf_part)
+        pdf_part.add_header('Content-Disposition', 'attachment; filename="Seminar_Russkaya_Banya.pdf"')
+        msg_client.attach(pdf_part)
+
+    msg_admin = MIMEMultipart()
+    msg_admin['From'] = smtp_user
+    msg_admin['To'] = recipient_admin
+    msg_admin['Subject'] = f'Заявка на семинар от {name}'
+
+    html_admin = f"""
+    <html>
+    <body style="font-family: Arial, sans-serif;">
+        <h2>Новая заявка на семинар «Строительство правильной Русской бани»</h2>
+        <p><b>Имя:</b> {name}</p>
+        <p><b>Телефон:</b> {phone}</p>
+        <p><b>Email:</b> {email_to}</p>
+        <hr>
+        <p style="color: #999; font-size: 12px;">PDF с программой отправлен заказчику автоматически.</p>
+    </body>
+    </html>
+    """
+    msg_admin.attach(MIMEText(html_admin, 'html'))
+
+    with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
+        server.login(smtp_user, smtp_password)
+        server.send_message(msg_client)
+        if recipient_admin:
+            server.send_message(msg_admin)
+
+    print(f"Seminar PDF sent to {email_to}, admin notified")
+
+    return {
+        'statusCode': 200,
+        'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+        'body': json.dumps({'success': True, 'message': 'PDF отправлен на email'}),
+        'isBase64Encoded': False
+    }
+
+
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     method = event.get('httpMethod', 'GET')
     
@@ -56,9 +145,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         # Определяем тип запроса: Telegram webhook или заявка калькулятора
         if 'message' in body_data or 'update_id' in body_data:
-            # Это webhook от Telegram бота
             return handle_telegram_webhook(body_data)
-        
+
+        if body_data.get('type') == 'course':
+            return handle_course_request(body_data)
+
         # Это заявка с калькулятора
         material = body_data.get('material', '')
         length = body_data.get('length', '')

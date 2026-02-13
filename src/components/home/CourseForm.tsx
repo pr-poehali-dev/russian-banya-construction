@@ -6,11 +6,14 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import InputMask from "react-input-mask";
 import Icon from "@/components/ui/icon";
+import { generateSeminarPdf } from "@/utils/generateSeminarPdf";
 
 interface CourseFormProps {
   open: boolean;
   onClose: () => void;
 }
+
+const ORDER_URL = "https://functions.poehali.dev/cba76a16-6247-4333-9605-62ab8c813235";
 
 const CourseForm = ({ open, onClose }: CourseFormProps) => {
   const { toast } = useToast();
@@ -27,12 +30,15 @@ const CourseForm = ({ open, onClose }: CourseFormProps) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://functions.poehali.dev/524c52bf-6818-4c61-bc6f-3845447c12d5", {
+      const pdfBase64 = await generateSeminarPdf();
+
+      const response = await fetch(ORDER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          type: "course"
+          type: "course",
+          pdfData: pdfBase64
         })
       });
 
@@ -41,17 +47,13 @@ const CourseForm = ({ open, onClose }: CourseFormProps) => {
           (window as unknown as {ym: (...args: unknown[]) => void}).ym(105711132, 'reachGoal', 'course_form_submit');
         }
 
-        setFormData({
-          name: "",
-          phone: "",
-          email: ""
-        });
+        setFormData({ name: "", phone: "", email: "" });
         onClose();
         setShowSuccess(true);
       } else {
-        throw new Error("Ошибка отправки");
+        throw new Error("Server error");
       }
-    } catch (error) {
+    } catch {
       toast({
         title: "Ошибка",
         description: "Не удалось отправить заявку. Попробуйте позже.",
@@ -115,12 +117,16 @@ const CourseForm = ({ open, onClose }: CourseFormProps) => {
               />
             </div>
 
+            <p className="text-xs text-muted-foreground text-center">
+              На указанный email будет отправлена программа семинара в формате PDF
+            </p>
+
             <Button
               type="submit"
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Отправка..." : "Отправить заявку"}
+              {isSubmitting ? "Генерируем PDF и отправляем..." : "Получить программу на email"}
             </Button>
           </form>
         </DialogContent>
@@ -134,9 +140,9 @@ const CourseForm = ({ open, onClose }: CourseFormProps) => {
                 <Icon name="Check" size={32} className="text-green-600" />
               </div>
             </div>
-            <DialogTitle className="text-2xl font-bold mb-4">Заявка отправлена!</DialogTitle>
+            <DialogTitle className="text-2xl font-bold mb-4">Программа отправлена!</DialogTitle>
             <p className="text-muted-foreground mb-6">
-              Спасибо за интерес к курсу! Я свяжусь с вами в ближайшее время и расскажу все подробности.
+              PDF с программой семинара «Строительство правильной Русской бани» отправлен на ваш email. Проверьте почту!
             </p>
             <Button onClick={() => setShowSuccess(false)} className="bg-orange-500 hover:bg-orange-600">
               Закрыть
