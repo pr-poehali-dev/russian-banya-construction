@@ -88,6 +88,8 @@ def handle_course_request(body_data):
                 <p style="margin: 8px 0; color: #333;">✅ Водоснабжение и водоотведение</p>
                 <p style="margin: 8px 0; color: #333;">✅ Электрика</p>
                 <p style="margin: 8px 0; color: #333;">✅ Безопасность в бане</p>
+                <p style="margin: 8px 0; color: #333;">✅ Индивидуальное парение каждого участника пар-мастерами «Другой бани»</p>
+                <p style="margin: 8px 0; color: #333;">✅ Разбор возникших вопросов, эмоции от парения, фирменные чаи и напитки, угощения и интересные истории</p>
 
                 <hr style="border: none; border-top: 1px solid #e8e2d9; margin: 20px 30px;">
 
