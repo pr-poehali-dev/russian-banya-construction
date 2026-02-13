@@ -43,18 +43,6 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
               
               <p className="text-base sm:text-lg font-bold text-black">Моя цель — построить Вам новую баню, отремонтировать или модернизировать существующую так, чтобы Вы получали удовольствие, полезные процедуры и настоящее парение в русской бане.</p>
               
-              <Button 
-                size="lg" 
-                onClick={() => window.location.href = '/calculator'} 
-                className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
-              >Узнай стоимость бани за 2 минуты + Гайд "ТОП-10 ошибок строительства бани"</Button>
-              
-              <Button 
-                size="lg" 
-                onClick={() => setShowRepairForm(true)} 
-                className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-white hover:bg-green-600 text-black hover:text-white font-bold border-2 border-green-600 transition-all hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw] mt-2"
-              >Нужен ремонт или модернизация бани</Button>
-              
               <p className="text-sm sm:text-base md:text-lg text-black font-semibold mt-4">Бесплатная консультация по строительству, ремонту или модернизации Вашей бани</p>
 
               <div className="flex items-center justify-center gap-3 flex-wrap mt-4">
@@ -117,6 +105,14 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
           </div>
         </div>
 
+        <div className="flex justify-center mt-12 mb-8">
+          <Button 
+            size="lg" 
+            onClick={() => window.location.href = '/calculator'} 
+            className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal h-auto py-3 leading-tight max-w-[90vw]"
+          >Узнай стоимость бани за 2 минуты + Гайд "ТОП-10 ошибок строительства бани"</Button>
+        </div>
+
         <div id="services" className="mt-20 px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Что я умею и могу предложить</h2>
           <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start max-w-full">
@@ -131,6 +127,11 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
                 onClick={() => window.location.href = '/calculator'} 
                 className="w-full text-sm sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-4 bg-green-600 hover:bg-green-700 text-white font-bold transition-transform hover:scale-105 active:scale-95 whitespace-normal leading-tight"
               >Узнай стоимость бани за 2 минуты + Гайд "ТОП-10 ошибок строительства бани"</Button>
+              <Button 
+                size="lg" 
+                onClick={() => setShowRepairForm(true)} 
+                className="w-full text-sm sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-4 bg-white hover:bg-green-600 text-black hover:text-white font-bold border-2 border-green-600 transition-all hover:scale-105 active:scale-95 whitespace-normal leading-tight"
+              >Нужен ремонт или модернизация бани</Button>
             </div>
             <div className="space-y-4 max-w-full">
               <div className="flex items-start gap-3">
