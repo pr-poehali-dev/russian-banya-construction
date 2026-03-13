@@ -17,6 +17,8 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
 
   const galleryImages = [
     "https://cdn.poehali.dev/files/IMG_20251211_114315 (2).jpg",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/95221fa3-0900-4b4b-9018-f9fc4727ecce.png",
+    "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/bb171ed1-be82-49b5-b03a-0bb51536c0c9.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/d32c5f9f-865c-4357-bb41-34c5ae4ef2b5.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/7522f3bd-f2c8-47f4-bd45-94b6c88048bf.jpg",
     "https://cdn.poehali.dev/projects/d33cb4c1-0952-4afa-b115-887b4c7da346/bucket/a868d28d-88f2-4a01-883f-3f7ca93bd6e0.jpg",
