@@ -66,9 +66,7 @@ const AboutSection = ({ scrollToSection }: AboutSectionProps) => {
               <div className="mt-6 p-4 bg-orange-50 border-2 border-orange-500 rounded-lg">
                 <div className="flex items-start gap-3 mb-2">
                   <Icon name="GraduationCap" size={28} className="text-orange-500 flex-shrink-0 mt-1" />
-                  <p className="text-base sm:text-lg font-bold text-black">
-                    Провожу курс для заказчиков "Строительство правильной русской бани"
-                  </p>
+                  <p className="text-base sm:text-lg font-bold text-black">Провожу семинары для заказчиков "Строительство правильной русской бани" в реальной бане с парением каджого участника пар-мастерами</p>
                 </div>
                 <p className="text-sm sm:text-base text-black ml-10 mb-4">
                   В курсе вы узнаете все тонкости строительства бани и ощутите на себе все прелести парения от пар-мастеров.<br />
